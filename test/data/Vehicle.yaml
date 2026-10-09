@@ -1,0 +1,37 @@
+---
+# Vehicle.yaml -- a synthetic fixture, NOT transcribed from the
+# rulebook: no worked Vehicle (Mecha) example exists in any of the 12
+# sample characters or the 3 player books (PLAN.md's optional-vs-
+# required audit / "Vehicle (Mecha) may need its own nested combat
+# sub-block"). Exercises the `vehicle:` key, structurally identical to
+# `companion:` (rulebook p. 63-64, "Vehicle (Mecha)": granted
+# Abilities/Weaknesses aren't necessarily cumulative with the pilot's,
+# and it has its own separate Health/Endurance -- the same shape
+# Companion already has, confirmed against the actual rules text
+# rather than assumed).
+
+- name: Test Pilot
+  abilities:
+    - name: Vehicle
+      level: 3
+      detail: Thunderhawk
+      vehicle:
+        name: Thunderhawk
+        abilities:
+          - name: Flight
+            level: 2
+          - name: Tough
+            level: 3
+        weaknesses:
+          - name: Awkward Size
+            level: -2
+        combat:
+          defense: 3
+          health: 60
+          endurance: 40
+          attacks:
+            - name: Missile Barrage
+              roll: 5
+              dx: 4
+              endurance: 10
+...

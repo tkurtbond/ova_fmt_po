@@ -1,0 +1,182 @@
+Unsorted
+========
+
+*"Nothing here is in alphabetical order, and that's the point."*
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 46
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +3
+   .TD
+   Attack (Sword) [Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon]
+   .TR
+   .TD hal=r +1
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +1
+   .TD
+   Companion (Sidekick) — see below
+   .TR
+   .TD hal=r +2
+   .TD
+   Magic, Testing
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='30% 70%'
+   .CPTN val=b "Magic, Testing — Spells"
+   .TR
+   .TH Name
+   .TH Detail
+   .TR
+   .TD
+   Zephyr Blast
+   .TD
+   Attack +2; 5 Endurance
+   .TR
+   .TD
+   Aegis Ward
+   .TD
+   Combat Expert +1; 3 Endurance
+   .ETB
+   .TR
+   .TD hal=r +2
+   .TD
+   Quick
+   .TR
+   .TD hal=r +1
+   .TD
+   Transformation
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='15% 85%'
+   .CPTN val=b "Transformation — Grants (Abilities)"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Armored
+   .TR
+   .TD hal=r +1
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +2
+   .TD
+   Strong
+   .ETB
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='15% 85%'
+   .CPTN val=b "Transformation — Grants (Weaknesses)"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Bizarre Appearance
+   .TR
+   .TD hal=r −1
+   .TD
+   Slow
+   .ETB
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Clumsy
+   .TR
+   .TD hal=r −2
+   .TD
+   Obsession (Winning)
+   .TR
+   .TD hal=r −1
+   .TD
+   Short-Tempered
+   .ETB
+   .ETB
+   .ne 18
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (UNSORTED)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBWild Swing\fP
+   .TD hal=c 4
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon]
+   .TR
+   .TD
+   \fBFirst Strike\fP
+   .TD hal=c 3
+   .TD hal=c
+   2
+   .TD hal=c 0
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB4\fP
+   .TD hal=c \fB20\fP
+   .TD hal=c \fB15\fP
+   .TD hal=c \fB5\fP
+   .ETB
+   .ne 12
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b "Companion: Sidekick — Abilities"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Agile
+   .TR
+   .TD hal=r +1
+   .TD
+   Tough
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b "Companion: Sidekick — Weaknesses"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Frail
+   .TR
+   .TD hal=r −1
+   .TD
+   Quirk
+   .ETB
+   .ETB
+

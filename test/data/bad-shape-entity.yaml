@@ -1,0 +1,3 @@
+# An entity that isn't a mapping.  The Ada version dies with an
+# assertion failure; the port reports it.
+- foo

@@ -1,0 +1,361 @@
+Karis (Hotheaded Space-Trekking Bounty Hunter)
+==============================================
+
+*"I'm every bit as tough as my father was, and I'll prove it by avenging his death!"*
+
+*A bounty hunter avenging her father's death, aided by her GPL-issued robotic partner Arasuni.*
+
+**Background**
+
+Karis is the daughter of Dromar d'Ori, a renowned bounty hunter
+for the Galactic Peace Legion. When the elusive criminal
+Shadowman killed her father, Karis dedicated herself to hunting
+him down, eventually tracking him to an unfamiliar, underdeveloped
+world: Earth. She's accompanied by Arasuni, a GPL-issued
+assistant robot.
+
+**Personality**
+
+Quick-witted and sharp-tongued, Karis tends to act before she
+thinks. Earth's customs leave her thoroughly out of her depth,
+and she has a short fuse -- especially when teased about her
+appearance.
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 26
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +3
+   .TD
+   Agile
+   .TR
+   .TD hal=r +3
+   .TD
+   Attack (Boomerang)
+   .TR
+   .TD hal=r +1
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +2
+   .TD
+   Companion (Arasuni) — see below
+   .TR
+   .TD hal=r +1
+   .TD
+   Cute!
+   .TR
+   .TD hal=r +1
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +1
+   .TD
+   Intuitive
+   .TR
+   .TD hal=r +1
+   .TD
+   Perceptive
+   .TR
+   .TD hal=r +3
+   .TD
+   Quick
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Bizarre Appearance (Strange Ears)
+   .TR
+   .TD hal=r −1
+   .TD
+   Impulsive
+   .TR
+   .TD hal=r −3
+   .TD
+   Obsession (Kill Shadowman)
+   .TR
+   .TD hal=r −2
+   .TD
+   Quirk (Stranger in a Strange Land)
+   .TR
+   .TD hal=r −2
+   .TD
+   Sensitivity (Chest)
+   .TR
+   .TD hal=r −1
+   .TD
+   Short-Tempered
+   .TR
+   .TD hal=r −1
+   .TD
+   Soft Spot (Stuffed Animals)
+   .ETB
+   .ETB
+   .ne 36
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (KARIS)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBKinetic Boomerang\fP
+   .TD hal=c 6
+   .TD hal=c
+   4
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Armor Piercing, Ranged; Flaws: Weapon]
+   .TR
+   .TD colspan=4
+   \fIKaris's signature weapon can be wielded versatilely, both as a blade and a boomerang.\fP
+   .TR
+   .TD
+   \fBTrick Shot\fP
+   .TD hal=c 6
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Disarming, Ranged; Flaws: Ineffective, Weapon]
+   .TR
+   .TD colspan=4
+   \fIWith finesse, Karis throws her weapon in a tight arc to disarm opponents.\fP
+   .TR
+   .TD
+   \fBSweeping Strike\fP
+   .TD hal=c 6
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Multiple Targets, Ranged; Flaws: Ineffective, Weapon]
+   .TR
+   .TD colspan=4
+   \fITake down multiple foes in a single throw!\fP
+   .TR
+   .TD
+   \fBFlex-Steel Cable\fP
+   .TD hal=c 6
+   .TD hal=c
+   1
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Paralyzing x2, Ranged; Flaws: Ineffective x3, Weapon]
+   .TR
+   .TD colspan=4
+   \fIHer weapon can release a super-strong cable to entangle foes, among other creative uses.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB6\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB16\fP
+   .ETB
+   .ne 32
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='25% 75%'
+   .CPTN val=b "Other Statistics"
+   .TR
+   .TD \fBConcept\fP
+   .TD
+   Hotheaded Space-Trekking Bounty Hunter
+   .TR
+   .TD \fBBirthday\fP
+   .TD
+   March 23
+   .TR
+   .TD \fBAge\fP
+   .TD
+   18
+   .TR
+   .TD \fBGender\fP
+   .TD
+   Female
+   .TR
+   .TD \fBHeight\fP
+   .TD
+   5'1"
+   .TR
+   .TD \fBWeight\fP
+   .TD
+   108 lbs.
+   .TR
+   .TD \fBHair\fP
+   .TD
+   Reddish-Pink
+   .TR
+   .TD \fBEyes\fP
+   .TD
+   Green
+   .TR
+   .TD \fBAssociation\fP
+   .TD
+   Galactic Peace Legion Contract
+   .TR
+   .TD \fBHobbies\fP
+   .TD
+   Collecting Stuffed Animals
+   .TR
+   .TD \fBFave Food\fP
+   .TD
+   Milkshakes
+   .TR
+   .TD \fBAllies\fP
+   .TD
+   Arasuni
+   .TR
+   .TD \fBEnemies\fP
+   .TD
+   Shadowman
+   .ETB
+   .ne 24
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b "Companion: Arasuni — Abilities"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Armored
+   .TR
+   .TD hal=r +1
+   .TD
+   Attack
+   .TR
+   .TD hal=r +1
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +1
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +3
+   .TD
+   Life Support
+   .TR
+   .TD hal=r +3
+   .TD
+   Strong
+   .TR
+   .TD hal=r +2
+   .TD
+   Tough
+   .TR
+   .TD hal=r +1
+   .TD
+   Unique Ability (Computerized Brain)
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b "Companion: Arasuni — Weaknesses"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Awkward Size (Large)
+   .TR
+   .TD hal=r −2
+   .TD
+   Bizarre Appearance
+   .TR
+   .TD hal=r −2
+   .TD
+   Emotionless
+   .TR
+   .TD hal=r −1
+   .TD
+   Quirk (Quoting Earth)
+   .TR
+   .TD hal=r −3
+   .TD
+   Servitude (Karis)
+   .TR
+   .TD hal=r −1
+   .TD
+   Slow
+   .TR
+   .TD hal=r −2
+   .TD
+   Vulnerability (Electricity)
+   .ETB
+   .ETB
+   .ne 24
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (ARASUNI)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBIron Knuckle\fP
+   .TD hal=c 3
+   .TD hal=c
+   5
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Mighty Robot]
+   .TR
+   .TD colspan=4
+   \fIArasuni's immense size and strength allow him to deal a crushing blow.\fP
+   .TR
+   .TD
+   \fBStun Pulse Rifle\fP
+   .TD hal=c 2
+   .TD hal=c
+   2
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Impairing, Ranged; Flaws: Inaccurate, Weapon]
+   .TR
+   .TD colspan=4
+   \fIWhile not the most powerful of weapons, it is useful for subduing stubborn foes.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB2\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB20\fP
+   .TD hal=c \fB10\fP
+   .ETB
+

@@ -1,0 +1,4 @@
+# An ability that isn't a mapping.  The Ada version dies with an
+# assertion failure; the port reports it.
+- name: X
+  abilities: [foo]

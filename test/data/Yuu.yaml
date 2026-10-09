@@ -1,0 +1,193 @@
+---
+# Yuu (OVA rulebook, "Sample Characters" chapter, p. 42-43).
+# ova-rulebook.txt lines 1690-1815 -- note this stretch of the source
+# text has the PDF's two-column layout visibly interleaved (ability
+# Levels and names split across lines, e.g. "+1 / +1" then
+# "Unique Ability (Trust)" / "Vigorous" several lines later);
+# reconstructed carefully below. See Karis.yaml's header comment for
+# the general policy.
+#
+# Second full nested-Companion example (Fenrir), confirming Karis/
+# Arasuni's pattern (PLAN.md §2.3) generalizes rather than being a
+# one-off. Also a second, richer example of the `detail`+`cost` Flaw
+# shape: Fenrir's Requirement Flaw appears three times at escalating
+# cost, each keyed to a Level of Yuu's own Trust Ability ("Trust +1"
+# at -5, "Trust +2" at -10, "Trust +3" at -15) -- i.e. a Flaw whose
+# `detail` names a *specific Level of another Ability* as a
+# precondition, not just a short phrase (contrast Ai's `Cancel:
+# Unliving` and Raine's `Requirement: Must Be Outside`, both
+# open-ended qualifiers with no Ability reference).
+#
+# One value is uncertain: Fenrir's `endurance` in the source text
+# reads "502" where every other character's combat row is two clean
+# numbers -- almost certainly an extraction artifact (the "40" health
+# column bleeding into "50", then a stray "2"), so `endurance: 50` is
+# used here as the best reading, not a confirmed transcription.
+
+- name: Yuu
+  tagline: I will do anything for my sister! And with Fenrir at my side, there's nothing I can't do!
+  summary: A monster-loving boy searching for his missing sister, aided by a mysterious wolf-like companion.
+  background: |
+    Yuu's beloved older sister vanished without a trace -- and,
+    stranger still, everyone around him seems to have forgotten she
+    ever existed. Chasing a shadowy figure fleeing the scene, Yuu
+    instead found a caged, wolf-like creature left behind: Fenrir.
+    Certain it was fate, Yuu freed him, and the two have been
+    inseparable since, determined to find Yuu's sister together.
+  personality: |
+    Endlessly curious and unable to leave a wrong unrighted, Yuu's
+    good nature gets him into trouble as often as it wins him
+    friends -- Fenrir very much included.
+  abilities:
+    - name: Companion
+      level: 4
+      detail: Fenrir
+      companion:
+        name: Fenrir
+        abilities:
+          - name: Attack
+            level: 3
+          - name: Combat Expert
+            level: 2
+          - name: Quick
+            level: 3
+          - name: Tough
+            level: 2
+          - name: Vigorous
+            level: 3
+        weaknesses:
+          - name: Bizarre Appearance
+            level: -2
+          - name: Fear
+            level: -2
+            detail: Enclosed Spaces
+          - name: Guardian
+            level: -1
+            detail: Yuu
+          - name: Mute
+            level: -2
+          - name: Servitude
+            level: -1
+            detail: Yuu
+          - name: Short-Tempered
+            level: -1
+        combat:
+          defense: 5
+          health: 40
+          endurance: 50
+          threat-value: 14
+          attacks:
+            - name: Maul
+              affinity: Normal Type
+              description: Fenrir leaps at the target and attacks with beastly fury.
+              roll: 4
+              dx: 4
+              endurance: 0
+            - name: Quick Attack
+              perks:
+                - Stunning
+              flaws:
+                - name: Requirement
+                  detail: Trust +1
+                  cost: -5
+              description: Fenrir strikes repeatedly in the blink of an eye.
+              roll: 4
+              dx: 4
+              endurance: 5
+            - name: Lance
+              perks:
+                - name: Armor Piercing
+                  counts-as: 2
+                - name: Effective
+                  counts-as: 3
+              flaws:
+                - Delayed
+                - name: Requirement
+                  detail: Trust +2
+                  cost: -10
+              description: Fenrir charges up a skewering headbutt.
+              roll: 4
+              dx: 7
+              endurance: 10
+            - name: Lightning Rod
+              perks:
+                - name: Effective
+                  counts-as: 6
+              affinity: Lightning
+              flaws:
+                - name: Requirement
+                  detail: Trust +3
+                  cost: -15
+              description: A bolt of lightning comes down from above, charging Fenrir's horn with power.
+              roll: 4
+              dx: 10
+              endurance: 15
+    - name: Evasive
+      level: 1
+    - name: Intuitive
+      level: 1
+    - name: Iron-Willed
+      level: 1
+    - name: Knowledge
+      level: 3
+      detail: Monsters
+    - name: Knowledge
+      level: 3
+      detail: Video Games
+    - name: Quick
+      level: 2
+    - name: Unique Ability
+      level: 1
+      detail: Trust
+    - name: Vigorous
+      level: 1
+  weaknesses:
+    - name: Ageism
+      level: -2
+    - name: Compulsion
+      level: -2
+      detail: Finding Things Out
+    - name: Guardian
+      level: -2
+      detail: Sister
+    - name: Impulsive
+      level: -1
+    - name: Kind-Hearted
+      level: -1
+    - name: Wanted
+      level: -3
+      detail: Men in Black
+  combat:
+    defense: 5
+    health: 40
+    endurance: 50
+    threat-value: 9
+    attacks:
+      - name: Struggle
+        affinity: Normal Type
+        description: Though he doesn't have any special moves, Yuu can still put up a fight if he needs to.
+        roll: 2
+        dx: 1
+        endurance: 0
+  notes:
+    - header: Fenrir and Trust
+      text: |
+        Fenrir has several Attacks Yuu can only use as he earns
+        Fenrir's trust (raising his Trust Ability). Trust may also be
+        rolled when directing Fenrir through especially complicated
+        or dangerous tasks.
+  fluff:
+    concept: Plucky Pocket Monster Master
+    birthday: September 28
+    age: 11
+    gender: Male
+    height: 4'8"
+    weight: 78 lbs.
+    hair: Pink
+    eyes: Lavender
+    association: Elementary School
+    hobbies: Monsters!
+    favorite-food: Pocky
+    allies: Fenrir
+    enemies: Men in Black
+...

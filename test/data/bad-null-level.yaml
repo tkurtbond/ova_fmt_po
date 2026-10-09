@@ -1,0 +1,5 @@
+# A required level with no value: an empty scalar, not a valid integer.
+- name: X
+  abilities:
+    - name: Q
+      level:

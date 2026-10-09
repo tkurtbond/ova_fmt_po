@@ -1,0 +1,3 @@
+# Malformed YAML: libfyaml's error ends the file.
+- name: X
+  abilities: [ 

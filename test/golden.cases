@@ -1,0 +1,65 @@
+# Golden-output cases for test/golden.sh.
+#
+# One case per line: REF[:MODE...] ID FIXTURES FLAGS...
+#   REF       the program whose output is the reference: "ada", the Ada
+#             ova_fmt ($ADA_OVA_FMT), the only one
+#   MODE      how the program is run and what is compared, as many as
+#             apply:
+#               stdout  standard output only
+#               all     every matching fixture in one run, as several
+#                       file arguments; the golden file is ID.out
+#               stdin   the fixture on standard input, not as an
+#                       argument
+#               file    with -o, to a scratch file; the golden file
+#                       holds standard output and error, a
+#                       "==== -o file ====" line, then the file
+#   ID        names the golden files: test/golden/FIXTURE.ID.out
+#   FIXTURES  a shell glob in test/data, without ".yaml" (extglob is
+#             on, so @(a|b) works); several files in "all" mode are
+#             given in the glob's (sorted) order
+#   FLAGS     the command-line options, before the fixtures' paths
+# Blank lines and lines starting with # are ignored.  Golden files hold
+# standard output and standard error together unless the mode says
+# otherwise, and end with a "==== exit N ====" line if the status
+# wasn't 0.
+#
+# The character fixtures are the capitalized ones ([A-Z]*), from the
+# Ada repo's test-data; bad-* and edge-* are the port's.  Cases where
+# the Ada version dies with an assertion failure (bad-shape-*) aren't
+# here: test/cli.sh checks what the port says instead (PLAN.md,
+# "Differences from the Ada version").
+
+# ---- Every format, on every character fixture ----
+ada    terse       [A-Z]*
+ada    gemtext     [A-Z]*   -g
+ada    gemtext-e   [A-Z]*   -g -e
+ada    markdown    [A-Z]*   -M
+ada    html        [A-Z]*   -H
+ada    groff       [A-Z]*   -G
+ada    hmm         [A-Z]*   -m
+ada    hmm-c       [A-Z]*   -m -c
+ada    hmm-p       [A-Z]*   -m -p
+
+# ---- Options ----
+ada    terse-O     [A-Z]*   -O
+ada    terse-n     [A-Z]*   -n
+ada    html-O-n    [A-Z]*   -H -O -n
+ada    groff-O     [A-Z]*   -G -O
+ada    hmm-O-L     [A-Z]*   -m -O -L 2
+ada    hmm-c-p-O   [A-Z]*   -m -c -p -O
+ada    gemtext-O   [A-Z]*   -g -O
+ada    markdown-O  [A-Z]*   -M -O -n
+ada    underline   [A-Z]*   -u - -U ~
+
+# ---- Several files in one run: entity numbers restart in each ----
+ada:all    all-terse   [A-Z]*   -U ~
+ada:all    all-hmm     [A-Z]*   -m
+
+# ---- Standard input and -o ----
+ada:stdin  stdin       @(Karis|Options|edge-multi-document)   -U ~
+ada:file   o-file      @(Karis|Fragment)   -G
+
+# ---- Errors and edge cases ----
+ada    errors      @(bad-!(shape-*)|edge-*|Broken)
+ada    errors-m    @(bad-!(shape-*)|edge-*|Broken)   -m
+ada:all    errors-all  @(Options|Broken|bad-yaml|Fragment)

@@ -1,0 +1,3 @@
+# An optional string whose value is a sequence: ends the file.
+- name: X
+  tagline: [a]

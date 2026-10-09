@@ -1,0 +1,55 @@
+All Options
+===========
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 10
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Quick
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Clumsy
+   .ETB
+   .ETB
+
+**Creation Rules:** Base Zero (±5), Power Ceiling (15), Scaled Cost, Combined Effectiveness.
+
+One Option
+==========
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 10
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +3
+   .TD
+   Strong
+   .ETB
+
+**Creation Rules:** Power Ceiling (20).
+

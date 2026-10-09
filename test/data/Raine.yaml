@@ -1,0 +1,180 @@
+---
+# Raine (OVA rulebook, "Sample Characters" chapter, p. 23-25).
+#
+# Transcribed from the primary rulebook (ova-rulebook.txt lines
+# 652-765) per PLAN.md's build order (§9 step 1), following the
+# schema conventions established by test-data/Karis.yaml and
+# test-data/Ai.yaml (see Karis.yaml's header comment for the general
+# copyright/transcription policy).
+#
+# New things this file exercises:
+#
+#   - `notes[]` tied to a *Weakness*, not an Ability: Raine's
+#     "Nightmares" callout box on the sheet is keyed to his
+#     `Unique Weakness (Nightmares)` entry, generalizing beyond
+#     Fukiko's Transformation-tied note (an Ability) and Azyrus's
+#     Companion-tied note (also an Ability) -- so these headed
+#     callouts attach to notable Abilities *or* Weaknesses, not just
+#     Abilities. Paraphrased, not verbatim, same policy as
+#     background/personality.
+#   - A second real example of the `detail`+`cost` Flaw shape
+#     introduced by Ai.yaml's `Cancel`: Electrical Storm's
+#     `Requirement` Flaw ("must be outside", -10) -- `Requirement` is
+#     also a variable-range Flaw per `ova-ref.pdf` ("-5 to -20"),
+#     confirming the pattern generalizes beyond one Flaw name.
+#   - `affinity:` kept as its own dedicated field (not folded into the
+#     `perks:` list as prose), matching `Fukiko.yaml`'s existing
+#     convention -- the player-book rendering convention of showing
+#     "Affinity: X" inline within the Perks list (PLAN.md §2.1) is a
+#     *display* choice for the formatter to apply, not something the
+#     YAML author should have to hand-fold into a string themselves.
+
+- name: Raine
+  tagline: I will atone for the sins of my past by helping those who cannot help themselves!
+  summary: A wandering swordsman seeking atonement for his years as an assassin.
+  background: |
+    Once a skilled assassin for the Clan Cave Fox, Raine broke from
+    the clan after discovering that a contract kill was, in fact, his
+    own estranged father. Disgusted with himself, he abandoned that
+    life -- but the clan doesn't let members leave, and dispatched
+    his old comrade Shou to hunt him down. Raine now wanders, trying
+    to atone by helping those he can.
+  personality: |
+    Reserved and thoughtful, Raine speaks only when he has something
+    worth saying, and his mind often wanders even when he's paying
+    close attention -- a habit that leads people to underestimate
+    him. He practices swordsmanship and origami in his spare time,
+    often folding paper to help himself think.
+  abilities:
+    - name: Agile
+      level: 1
+    - name: Art of Invisibility
+      level: 2
+    - name: Attack
+      level: 3
+      detail: Kaze Satsujinsha
+    - name: Beautiful
+      level: 4
+    - name: Combat Expert
+      level: 4
+    - name: Evasive
+      level: 2
+    - name: Intuitive
+      level: 1
+    - name: Iron-Willed
+      level: 1
+    - name: Knowledge
+      level: 2
+      detail: Origami
+    - name: Knowledge
+      level: 2
+      detail: Wilderness
+    - name: Quick
+      level: 1
+    - name: Sixth Sense
+      level: 2
+    - name: Vigorous
+      level: 2
+  weaknesses:
+    - name: Airhead
+      level: -1
+    - name: Code of Conduct
+      level: -2
+      detail: Will Not Fight Surprised or Defenseless Opponents
+    - name: Guardian
+      level: -2
+      detail: Those in Need
+    - name: Ineptitude
+      level: -3
+      detail: Home Economics
+    - name: Pacifist
+      level: -1
+    - name: Poor
+      level: -3
+    - name: Rival
+      level: -2
+      detail: Shou
+    - name: Secret
+      level: -2
+      detail: Past as an Assassin
+    - name: Sensitivity
+      level: -1
+      detail: Sexual Misidentification
+    - name: Unique Weakness
+      level: -1
+      detail: Nightmares
+    - name: Wanted
+      level: -3
+      detail: Clan Cave Fox
+  combat:
+    defense: 5
+    health: 40
+    endurance: 60
+    threat-value: 18
+    attacks:
+      - name: Kaze Satsujinsha
+        perks:
+          - Armor Piercing
+        flaws:
+          - Weapon
+        description: Raine's skill with a sword is extraordinary. His legendary katana is a suitable companion.
+        roll: 7
+        dx: 4
+        endurance: 0
+      - name: Raging Thunder Slash
+        perks:
+          - name: Effective
+            counts-as: 3
+        affinity: Electricity
+        flaws:
+          - Weapon
+        description: Raine whispers across his blade before striking with crackling electrical energy.
+        roll: 7
+        dx: 7
+        endurance: 10
+      - name: Electrical Storm
+        perks:
+          - name: Area Effect
+            counts-as: 2
+          - Effective
+        affinity: Electricity
+        flaws:
+          - name: Requirement
+            detail: Must Be Outside
+            cost: -10
+          - Weapon
+        description: Raine summons the power of nature to cut swaths through legions of enemies.
+        roll: 7
+        dx: 5
+        endurance: 10
+      - name: Mist Touch
+        perks:
+          - Continued Effect
+          - Fatiguing
+          - Will Attack
+        affinity: Spirit
+        description: Raine concentrates his energies to project his very spirit into the opponent's mind.
+        roll: 7
+        dx: 4
+        endurance: 10
+  notes:
+    - header: Nightmares
+      text: |
+        Raine is plagued by nightmares of his violent past, especially
+        his father's death, and rarely sleeps soundly -- his sudden
+        awakenings can startle anyone nearby.
+  fluff:
+    concept: Ambiguously Sexed Sword Master
+    birthday: January 31
+    age: 23
+    gender: Male
+    height: 5'9"
+    weight: 140 lbs.
+    hair: Brown
+    eyes: Brown
+    association: Previously of Clan Cave Fox
+    hobbies: Origami
+    favorite-food: Miso Soup
+    allies: None
+    enemies: Shou, Clan Cave Fox
+...

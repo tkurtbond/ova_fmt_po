@@ -1,0 +1,45 @@
+# Shou (Scarily Playful Ninja Hitman)
+
+*"Olly olly oxen free! Watch out now, here I come! This is going to be the best!"*
+
+*A playful, dangerously skilled assassin hunting down his former best friend.*
+
+**Background**
+
+Raised from childhood by the assassins of Clan Cave Fox, Shou
+never had to grow up -- his skill let him treat killing as a
+game. He spent years close to his fellow assassin Raine, until
+Raine broke from the Clan. Now Shou has been sent to track his
+old friend down, and he's treating the hunt as the best game yet.
+
+**Personality**
+
+Cheerful, playful, and utterly without remorse, Shou brings a
+childlike energy to a very adult occupation. He's easily won over
+by food, at least for a little while.
+
+- **Abilities:** Agile +2, Art of Invisibility +3, Attack (Ninjutsu) +2, Combat Expert +1, Evasive +2, Knowledge (Food) +2, Perceptive +2, Quick +3, Strong +1, Teleport +3, Tough +2.
+
+- **Weaknesses:** Easily Distracted −1, Impulsive −2, Infamous (Assassin) −2, Overconfident −2, Quirk (Playfulness at All Times) −2, Rival (Raine) −2, Rude −2, Servitude (Clan Cave Fox) −2, Soft Spot (Food) −2, Vulnerability (Light) −2.
+
+- **Health:** 60 | **Endurance:** 40 | **Defense:** 7 | **Threat Value (TV):** 18
+
+- **Attacks:**
+
+  - **Bladed Tonfas:** Roll **5 dice** | **DX 4** | **Endurance Cost: 0** (Perks: Defensive; Flaws: Weapon). *The addition of a gleaming edge makes these otherwise humble weapons deadly.*
+  - **Sweep Kick:** Roll **5 dice** | **DX 2** | **Endurance Cost: 0** (Perks: Stunning; Flaws: Ineffective x2). *Shou unbalances his opponent with a swift, low kick.*
+  - **Pressure Strike:** Roll **5 dice** | **DX 2** | **Endurance Cost: 0** (Perks: Impairing; Flaws: Ineffective x2). *A precise blow that impedes the opponent's ability to fight.*
+  - **Dark Spark:** Roll **5 dice** | **DX 5** | **Endurance Cost: 0** (Affinity: Darkness; Perks: Effective x2, Ranged; Flaws: Backlash x2). *By focusing dark magics and striking his blades together, Shou sends out a bolt of energy that devours light in its path.*
+
+**Notes**
+
+**Dark World** -- A dead elder of Clan Cave Fox once trained Shou in shadow
+magic -- letting him become living shadow, cross distances in
+an instant, and strike with darkness-empowered blows. The
+bargain that granted these powers left his soul tainted, and
+he's vulnerable to light.
+
+**Fluff**
+
+**Concept:** Scarily Playful Ninja Hitman, **Birthday:** April 1, **Age:** 22, **Gender:** Male, **Height:** 6'1", **Weight:** 184 lbs., **Hair:** Bone, **Eyes:** Indigo, **Association:** Clan Cave Fox, **Hobbies:** Eating, **Favorite Food:** Tempura, **Allies:** The Clan, **Enemies:** Too Numerous to Count.
+

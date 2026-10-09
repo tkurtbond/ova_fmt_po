@@ -1,0 +1,3 @@
+test/data/bad-required-big-int.yaml:4:13: error: /0/abilities/0/level: integer out of range: "99999999999"
+ova_fmt: 1 error(s) in test/data/bad-required-big-int.yaml; no output produced
+==== exit 1 ====

@@ -1,0 +1,34 @@
+All Options
+===========
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Quick</td><td>+2</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Clumsy</td><td>-1</td><td></td></tr>
+   </table>
+
+
+**Creation Rules:** Base Zero (±5), Power Ceiling (15), Scaled Cost, Combined Effectiveness.
+
+One Option
+==========
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Strong</td><td>+3</td><td></td><td></td></tr>
+   </table>
+
+
+**Creation Rules:** Power Ceiling (20).
+

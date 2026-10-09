@@ -1,0 +1,84 @@
+Auren (Time Skipping Sorcerer)
+==============================
+
+*"It is my duty to protect this world, even if its future makes me doubt why I should bother…"*
+
+*A centuries-old sorcerer, accidentally de-aged and stranded in the wrong era while investigating a dark omen.*
+
+**Background**
+
+A young but gifted sorcerer of the secretive Order of the Fallen
+Star, Auren volunteered to use forbidden Time Magic to
+investigate a dire omen glimpsed by the Order's seer. The spell
+stranded him in 21st-century Japan and left him with the body of
+a teenager, unable to reverse the effect. With no way home, Auren
+has resolved to hunt down whatever threat he was sent to find.
+
+**Personality**
+
+Serious and stubborn, Auren struggles with the indignity of being
+treated as a mere teenager despite his true age, and often acts
+with an old-fashioned sense of authority he hasn't earned in this
+era. He's awkward around women and, for reasons of his own,
+deeply distrustful of animals.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Armored</td><td>+1</td><td>Medieval Armor</td><td></td></tr>
+   <tr><td>Attack</td><td>+3</td><td>Sword &amp; Sorcery</td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Evasive</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+4</td><td>Magic</td><td></td></tr>
+   <tr><td>Magic, Arcane</td><td>+3</td><td></td><td></td>
+     <td>
+       <table>
+       <caption>Magic, Arcane — Spells</caption>
+       <tr><th>Name</th><th>Ability</th><th>Level</th><th>Endurance</th></tr>
+       <tr><td>Mana Shield</td><td>Barrier</td><td>+2</td><td>10+</td></tr>
+       <tr><td>Wings of Dezantis</td><td>Flight</td><td>+2</td><td>10</td></tr>
+       <tr><td>Feeblemind</td><td>Intimidating</td><td>+2</td><td>10</td></tr>
+       <tr><td>Breath</td><td>Life Support</td><td>+2</td><td>10</td></tr>
+       <tr><td>Hasten</td><td>Quick</td><td>+3</td><td>20</td></tr>
+       <tr><td>Atlas Arm</td><td>Strong</td><td>+3</td><td>20</td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Smart</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Vigorous</td><td>+2</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Ageism</td><td>−1</td><td></td></tr>
+   <tr><td>Arrogant</td><td>−1</td><td></td></tr>
+   <tr><td>Code of Conduct</td><td>−1</td><td>Protecting Women… Begrudgingly</td></tr>
+   <tr><td>Easily Distracted</td><td>−2</td><td></td></tr>
+   <tr><td>Hatred</td><td>−1</td><td>Animals</td></tr>
+   <tr><td>Ineptitude</td><td>−3</td><td>Modern Technology</td></tr>
+   <tr><td>Quirk</td><td>−1</td><td>Antiquated Language</td></tr>
+   <tr><td>Quirk</td><td>−2</td><td>Stranger in a Strange Land</td></tr>
+   <tr><td>Stubborn</td><td>−2</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>60</td><td>4</td><td>18</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Orion</td><td>5</td><td>4</td><td>0</td><td>Perks: Armor Piercing; Flaws: Weapon</td><td>Auren's sword, crafted from unbreakable adamantite, is as beautiful as it is deadly.</td></tr>
+   <tr><td>Fireball</td><td>5</td><td>6</td><td>20</td><td>Affinity: Fire; Perks: Continued Effect, Effective x2, Ranged</td><td>Auren sends forth a spiralling blast of flame. Its magic continues to burn after it hits.</td></tr>
+   <tr><td>Ice Spire Array</td><td>5</td><td>3</td><td>20</td><td>Affinity: Ice; Perks: Area Effect, Armor Piercing, Overwhelming, Ranged; Flaws: Feather Blow, Ineffective</td><td>A prismatic array of frozen shards bombards multiple enemies, piercing any defenses.</td></tr>
+   <tr><td>Thunder Godspell</td><td>7</td><td>5</td><td>20</td><td>Affinity: Lightning; Perks: Accurate x2, Effective, Ranged, Stunning; Flaws: Delayed</td><td>Auren summons a bolt of electrical energy that stuns its target. It rarely misses.</td></tr>
+   </table>
+
+**Fluff**
+
+**Concept:** Time Skipping Sorcerer, **Birthday:** June 24, **Age:** 44 (Appears 16), **Gender:** Male, **Height:** 5'10", **Weight:** 152 lbs., **Hair:** Grey-Blue, **Eyes:** Grey, **Association:** Order of the Fallen Star, **Hobbies:** Fencing, **Favorite Food:** Mutton, **Allies:** None, **Enemies:** Mysterious Evil from the Future.
+

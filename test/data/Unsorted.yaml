@@ -1,0 +1,101 @@
+---
+# Unsorted.yaml -- a synthetic fixture, NOT transcribed from the
+# rulebook (no copyright concerns; every name/value here is invented
+# for this test). Every Ability/Weakness/Perk/Flaw/Companion-and-
+# Transformation-linked sub-Ability/sub-Weakness list below is
+# deliberately given out of alphabetical order, to exercise
+# Ova_Fmt.Entities' sorting (PLAN.md's optional-vs-required audit --
+# every other test-data/*.yaml file happens to already be transcribed
+# in alphabetical order, which is why the missing sort went unnoticed
+# until this file was added). The Attacks and Spells lists below are
+# ALSO deliberately out of alphabetical order, but on purpose in the
+# opposite sense: they should be left as given, NOT sorted, since
+# besm2_fmt/ova_fmt only alphabetize Ability/Weakness/Perk/Flaw name
+# lists, confirmed from existing sample characters (Karis's Attacks,
+# Auren's spells) preserving their given order.
+
+- name: Unsorted
+  tagline: Nothing here is in alphabetical order, and that's the point.
+  abilities:
+    - name: Quick
+      level: 2
+    - name: Attack
+      level: 3
+      detail: Sword
+      perks:
+        - Ranged
+        - Armor Piercing
+      flaws:
+        - Weapon
+        - Ineffective
+    - name: Combat Expert
+      level: 1
+    - name: Magic, Testing
+      level: 2
+      spells:
+        - name: Zephyr Blast
+          ability: Attack
+          level: 2
+          endurance: 5
+        - name: Aegis Ward
+          ability: Combat Expert
+          level: 1
+          endurance: 3
+    - name: Transformation
+      level: 1
+      abilities:
+        - name: Strong
+          level: 2
+        - name: Evasive
+          level: 1
+        - name: Armored
+          level: 1
+      weaknesses:
+        - name: Slow
+          level: -1
+        - name: Bizarre Appearance
+          level: -1
+    - name: Companion
+      level: 1
+      detail: Sidekick
+      companion:
+        name: Sidekick
+        abilities:
+          - name: Tough
+            level: 1
+          - name: Agile
+            level: 1
+        weaknesses:
+          - name: Quirk
+            level: -1
+          - name: Frail
+            level: -1
+  weaknesses:
+    - name: Short-Tempered
+      level: -1
+    - name: Obsession
+      level: -2
+      detail: Winning
+    - name: Clumsy
+      level: -1
+  combat:
+    defense: 4
+    health: 20
+    endurance: 15
+    threat-value: 5
+    attacks:
+      - name: Wild Swing
+        perks:
+          - Ranged
+          - Armor Piercing
+        flaws:
+          - Weapon
+          - Ineffective
+        roll: 4
+        dx: 3
+        endurance: 0
+      - name: First Strike
+        roll: 3
+        dx: 2
+        endurance: 0
+...

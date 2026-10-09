@@ -1,0 +1,223 @@
+---
+# Karis (OVA rulebook, "Sample Characters" chapter, p. 28-29).
+#
+# Transcribed from the primary rulebook (ova-rulebook.txt lines
+# 874-1012) per PLAN.md's build order (§9 step 1). Game-mechanical
+# data (abilities, weaknesses, levels, combat stats, attacks, fluff)
+# is transcribed faithfully. `background` and `personality` are
+# short ORIGINAL paraphrases, not verbatim reproductions of the
+# book's prose -- see PLAN.md §2's copyright note: this repo has a
+# public remote, so substantial verbatim narrative text isn't
+# committed here even though the source material is legitimately
+# owned. The short one-sentence attack flavor descriptions are kept
+# close to the source (they're brief captions, not narrative prose).
+#
+# Schema notes established by this file (first use of each):
+#   - Top-level document is a YAML *sequence* of entities (matching
+#     Auren.yaml/Acacia.yaml and besm2_fmt's convention, and the
+#     ova-rst.scm/besm2-rst.scm loader's `for entity in entities`
+#     iteration model), NOT a bare top-level mapping the way the
+#     existing Fukiko.yaml is -- see PLAN.md §6's note on this
+#     inconsistency in the pre-existing test data.
+#   - `tagline` and `summary` (PLAN.md §4, added this session):
+#     `tagline` is the in-character quote under the name; `summary`
+#     is a short author-written non-diegetic one-liner.
+#   - Karis's Companion Ability (Arasuni) is Karis's first confirmed
+#     example of a full nested sub-entity companion (PLAN.md §2.3),
+#     as opposed to Fukiko's Azyrus, who is only a prose summary.
+#     Nested here as a `companion:` mapping *under the Companion
+#     ability list item itself* -- the same place Transformation's
+#     granted sub-abilities/sub-weaknesses nest (see Fukiko.yaml) --
+#     rather than as a sibling top-level field, so linked-ability
+#     content stays in one consistent place regardless of which
+#     Ability (Transformation, Magic, Companion, ...) grants it.
+#   - Arasuni's own `Servitude (Karis)` Weakness is transcribed as-is
+#     (a plain weakness with a `detail`), not as a cross-reference
+#     back to Karis -- the schema has no dedicated
+#     "linked back to this other entity" mechanism yet, and doesn't
+#     obviously need one just for this.
+
+- name: Karis
+  tagline: I'm every bit as tough as my father was, and I'll prove it by avenging his death!
+  summary: A bounty hunter avenging her father's death, aided by her GPL-issued robotic partner Arasuni.
+  background: |
+    Karis is the daughter of Dromar d'Ori, a renowned bounty hunter
+    for the Galactic Peace Legion. When the elusive criminal
+    Shadowman killed her father, Karis dedicated herself to hunting
+    him down, eventually tracking him to an unfamiliar, underdeveloped
+    world: Earth. She's accompanied by Arasuni, a GPL-issued
+    assistant robot.
+  personality: |
+    Quick-witted and sharp-tongued, Karis tends to act before she
+    thinks. Earth's customs leave her thoroughly out of her depth,
+    and she has a short fuse -- especially when teased about her
+    appearance.
+  abilities:
+    - name: Agile
+      level: 3
+    - name: Attack
+      level: 3
+      detail: Boomerang
+    - name: Combat Expert
+      level: 1
+    - name: Companion
+      level: 2
+      detail: Arasuni
+      companion:
+        name: Arasuni
+        abilities:
+          - name: Armored
+            level: 2
+          - name: Attack
+            level: 1
+          - name: Combat Expert
+            level: 1
+          - name: Evasive
+            level: 1
+          - name: Life Support
+            level: 3
+          - name: Strong
+            level: 3
+          - name: Tough
+            level: 2
+          - name: Unique Ability
+            level: 1
+            detail: Computerized Brain
+        weaknesses:
+          - name: Awkward Size
+            level: -1
+            detail: Large
+          - name: Bizarre Appearance
+            level: -2
+          - name: Emotionless
+            level: -2
+          - name: Quirk
+            level: -1
+            detail: Quoting Earth
+          - name: Servitude
+            level: -3
+            detail: Karis
+          - name: Slow
+            level: -1
+          - name: Vulnerability
+            level: -2
+            detail: Electricity
+        combat:
+          defense: 2
+          health: 40
+          endurance: 20
+          threat-value: 10
+          attacks:
+            - name: Iron Knuckle
+              affinity: Mighty Robot
+              description: Arasuni's immense size and strength allow him to deal a crushing blow.
+              roll: 3
+              dx: 5
+              endurance: 0
+            - name: Stun Pulse Rifle
+              perks:
+                - Impairing
+                - Ranged
+              flaws:
+                - Inaccurate
+                - Weapon
+              description: While not the most powerful of weapons, it is useful for subduing stubborn foes.
+              roll: 2
+              dx: 2
+              endurance: 0
+    - name: Cute!
+      level: 1
+    - name: Evasive
+      level: 1
+    - name: Intuitive
+      level: 1
+    - name: Perceptive
+      level: 1
+    - name: Quick
+      level: 3
+  weaknesses:
+    - name: Bizarre Appearance
+      level: -1
+      detail: Strange Ears
+    - name: Impulsive
+      level: -1
+    - name: Obsession
+      level: -3
+      detail: Kill Shadowman
+    - name: Quirk
+      level: -2
+      detail: Stranger in a Strange Land
+    - name: Sensitivity
+      level: -2
+      detail: Chest
+    - name: Short-Tempered
+      level: -1
+    - name: Soft Spot
+      level: -1
+      detail: Stuffed Animals
+  combat:
+    defense: 6
+    health: 40
+    endurance: 40
+    threat-value: 16
+    attacks:
+      - name: Kinetic Boomerang
+        perks:
+          - Armor Piercing
+          - Ranged
+        flaws:
+          - Weapon
+        description: Karis's signature weapon can be wielded versatilely, both as a blade and a boomerang.
+        roll: 6
+        dx: 4
+        endurance: 0
+      - name: Trick Shot
+        perks:
+          - Disarming
+          - Ranged
+        flaws:
+          - Ineffective
+          - Weapon
+        description: With finesse, Karis throws her weapon in a tight arc to disarm opponents.
+        roll: 6
+        dx: 3
+        endurance: 0
+      - name: Sweeping Strike
+        perks:
+          - Multiple Targets
+          - Ranged
+        flaws:
+          - Ineffective
+          - Weapon
+        description: Take down multiple foes in a single throw!
+        roll: 6
+        dx: 3
+        endurance: 0
+      - name: Flex-Steel Cable
+        perks:
+          - name: Paralyzing
+            counts-as: 2
+          - Ranged
+        flaws:
+          - name: Ineffective
+            counts-as: 3
+          - Weapon
+        description: Her weapon can release a super-strong cable to entangle foes, among other creative uses.
+        roll: 6
+        dx: 1
+        endurance: 0
+  fluff:
+    concept: Hotheaded Space-Trekking Bounty Hunter
+    birthday: March 23
+    age: 18
+    gender: Female
+    height: 5'1"
+    weight: 108 lbs.
+    hair: Reddish-Pink
+    eyes: Green
+    association: Galactic Peace Legion Contract
+    hobbies: Collecting Stuffed Animals
+    favorite-food: Milkshakes
+    allies: Arasuni
+    enemies: Shadowman
+...

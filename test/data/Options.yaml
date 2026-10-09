@@ -1,0 +1,31 @@
+---
+# Options.yaml -- a synthetic fixture, NOT transcribed from the
+# rulebook, exercising the options: block (character-creation limiting
+# rules, rulebook p. 20-21, "Limiting the Character") and the
+# -O/--options flag that gates rendering it. Confirms all four rules
+# render together with -O, and that nothing options-related appears
+# without it (the default).
+
+- name: All Options
+  options:
+    base-zero: 5
+    power-ceiling: 15
+    scaled-cost: true
+    combined-effectiveness: true
+  abilities:
+    - name: Quick
+      level: 2
+  weaknesses:
+    - name: Clumsy
+      level: -1
+
+# A second entity with only one of the four rules set, to confirm a
+# partial options: block renders just that one rule, not placeholders
+# for the other three.
+- name: One Option
+  options:
+    power-ceiling: 20
+  abilities:
+    - name: Strong
+      level: 3
+...

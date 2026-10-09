@@ -1,0 +1,263 @@
+Shou (Scarily Playful Ninja Hitman)
+===================================
+
+*"Olly olly oxen free! Watch out now, here I come! This is going to be the best!"*
+
+*A playful, dangerously skilled assassin hunting down his former best friend.*
+
+**Background**
+
+Raised from childhood by the assassins of Clan Cave Fox, Shou
+never had to grow up -- his skill let him treat killing as a
+game. He spent years close to his fellow assassin Raine, until
+Raine broke from the Clan. Now Shou has been sent to track his
+old friend down, and he's treating the hunt as the best game yet.
+
+**Personality**
+
+Cheerful, playful, and utterly without remorse, Shou brings a
+childlike energy to a very adult occupation. He's easily won over
+by food, at least for a little while.
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 30
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Agile
+   .TR
+   .TD hal=r +3
+   .TD
+   Art of Invisibility
+   .TR
+   .TD hal=r +2
+   .TD
+   Attack (Ninjutsu)
+   .TR
+   .TD hal=r +1
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +2
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +2
+   .TD
+   Knowledge (Food)
+   .TR
+   .TD hal=r +2
+   .TD
+   Perceptive
+   .TR
+   .TD hal=r +3
+   .TD
+   Quick
+   .TR
+   .TD hal=r +1
+   .TD
+   Strong
+   .TR
+   .TD hal=r +3
+   .TD
+   Teleport
+   .TR
+   .TD hal=r +2
+   .TD
+   Tough
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Easily Distracted
+   .TR
+   .TD hal=r −2
+   .TD
+   Impulsive
+   .TR
+   .TD hal=r −2
+   .TD
+   Infamous (Assassin)
+   .TR
+   .TD hal=r −2
+   .TD
+   Overconfident
+   .TR
+   .TD hal=r −2
+   .TD
+   Quirk (Playfulness at All Times)
+   .TR
+   .TD hal=r −2
+   .TD
+   Rival (Raine)
+   .TR
+   .TD hal=r −2
+   .TD
+   Rude
+   .TR
+   .TD hal=r −2
+   .TD
+   Servitude (Clan Cave Fox)
+   .TR
+   .TD hal=r −2
+   .TD
+   Soft Spot (Food)
+   .TR
+   .TD hal=r −2
+   .TD
+   Vulnerability (Light)
+   .ETB
+   .ETB
+   .ne 36
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (SHOU)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBBladed Tonfas\fP
+   .TD hal=c 5
+   .TD hal=c
+   4
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Defensive; Flaws: Weapon]
+   .TR
+   .TD colspan=4
+   \fIThe addition of a gleaming edge makes these otherwise humble weapons deadly.\fP
+   .TR
+   .TD
+   \fBSweep Kick\fP
+   .TD hal=c 5
+   .TD hal=c
+   2
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Stunning; Flaws: Ineffective x2]
+   .TR
+   .TD colspan=4
+   \fIShou unbalances his opponent with a swift, low kick.\fP
+   .TR
+   .TD
+   \fBPressure Strike\fP
+   .TD hal=c 5
+   .TD hal=c
+   2
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Impairing; Flaws: Ineffective x2]
+   .TR
+   .TD colspan=4
+   \fIA precise blow that impedes the opponent's ability to fight.\fP
+   .TR
+   .TD
+   \fBDark Spark\fP
+   .TD hal=c 5
+   .TD hal=c
+   5
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Darkness; Perks: Effective x2, Ranged; Flaws: Backlash x2]
+   .TR
+   .TD colspan=4
+   \fIBy focusing dark magics and striking his blades together, Shou sends out a bolt of energy that devours light in its path.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB7\fP
+   .TD hal=c \fB60\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB18\fP
+   .ETB
+   .ne 32
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='25% 75%'
+   .CPTN val=b "Other Statistics"
+   .TR
+   .TD \fBConcept\fP
+   .TD
+   Scarily Playful Ninja Hitman
+   .TR
+   .TD \fBBirthday\fP
+   .TD
+   April 1
+   .TR
+   .TD \fBAge\fP
+   .TD
+   22
+   .TR
+   .TD \fBGender\fP
+   .TD
+   Male
+   .TR
+   .TD \fBHeight\fP
+   .TD
+   6'1"
+   .TR
+   .TD \fBWeight\fP
+   .TD
+   184 lbs.
+   .TR
+   .TD \fBHair\fP
+   .TD
+   Bone
+   .TR
+   .TD \fBEyes\fP
+   .TD
+   Indigo
+   .TR
+   .TD \fBAssociation\fP
+   .TD
+   Clan Cave Fox
+   .TR
+   .TD \fBHobbies\fP
+   .TD
+   Eating
+   .TR
+   .TD \fBFave Food\fP
+   .TD
+   Tempura
+   .TR
+   .TD \fBAllies\fP
+   .TD
+   The Clan
+   .TR
+   .TD \fBEnemies\fP
+   .TD
+   Too Numerous to Count
+   .ETB
+
+**Notes**
+
+**Dark World** -- A dead elder of Clan Cave Fox once trained Shou in shadow
+magic -- letting him become living shadow, cross distances in
+an instant, and strike with darkness-empowered blows. The
+bargain that granted these powers left his soul tainted, and
+he's vulnerable to light.
+

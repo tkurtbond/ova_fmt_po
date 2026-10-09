@@ -1,0 +1,118 @@
+---
+# Daisuke (OVA rulebook, "Sample Characters" chapter, p. 43-45).
+# ova-rulebook.txt lines 1819-1911. See Karis.yaml's header comment
+# for the general policy.
+#
+# The "Black Bunny!" callout describes an alternate-form stat delta
+# (which Abilities/Weaknesses change while transformed) in prose,
+# similar in spirit to Fukiko's Transformation-description callout
+# but for an *involuntary*, weakness-driven transformation
+# (`Accidental Transformation`) rather than a chosen Ability. Kept as
+# paraphrased prose in `notes[]`, not structured data -- no schema
+# precedent yet for "this is what changes while transformed" as
+# anything other than narrative text.
+
+- name: Daisuke
+  tagline: This -- this is totally cramping my style! I have to find that old bag fast!
+  summary: A shallow celebrity singer cursed to transform into a rabbit at a woman's romantic touch.
+  background: |
+    A wealthy, womanizing pop idol, Daisuke rudely dismissed an
+    elderly fan who asked for an autograph -- and she cursed him on
+    the spot. Now any woman's amorous touch turns him into a
+    handsome black rabbit until he escapes her sight, clothes and
+    all left behind. Chastened but hardly reformed, he's determined
+    to track the old woman down and get the curse lifted.
+  personality: |
+    Lecherous, self-absorbed, and far too famous for his own good,
+    Daisuke's biggest problems are entirely of his own making -- when
+    he isn't chasing girls, he's complaining about his food.
+  abilities:
+    - name: Agile
+      level: 2
+    - name: Attack
+      level: 1
+      detail: Kung Faux
+    - name: Beautiful
+      level: 2
+    - name: Combat Expert
+      level: 1
+    - name: Famous
+      level: 3
+    - name: Knowledge
+      level: 2
+      detail: Motorcycles
+    - name: Performer
+      level: 3
+    - name: Quick
+      level: 1
+    - name: Vigorous
+      level: 1
+    - name: Wealthy
+      level: 3
+  weaknesses:
+    - name: Accidental Transformation
+      level: -3
+      detail: Black Bunny
+    - name: Impulsive
+      level: -1
+    - name: Lecherous
+      level: -2
+    - name: Love Interest
+      level: -1
+      detail: Himself
+    - name: Love Magnet
+      level: -3
+    - name: Overconfident
+      level: -1
+    - name: Quirk
+      level: -1
+      detail: Odd Food Demands
+    - name: Rude
+      level: -1
+    - name: Weak-Willed
+      level: -1
+  combat:
+    defense: 3
+    health: 40
+    endurance: 50
+    threat-value: 11
+    attacks:
+      - name: Crouching Rabbit, Hidden Bunny
+        affinity: Martial Arts
+        description: Daisuke's fondness for martial arts movies has led to spending megabucks on tutors.
+        roll: 5
+        dx: 2
+        endurance: 0
+      - name: This Axe Goes to 11!
+        perks:
+          - name: Effective
+            counts-as: 3
+        flaws:
+          - name: Ammunition
+            counts-as: 3
+        description: In desperation, Daisuke can sacrifice his guitar to save his hide…
+        roll: 5
+        dx: 5
+        endurance: 0
+  notes:
+    - header: Black Bunny!
+      text: |
+        While transformed, Daisuke loses nearly all his Abilities but
+        gains Quick +2 and Awkward Size -2. He reverts to human form
+        once he's out of the sight of the woman who triggered the
+        change -- his clothes, unfortunately, do not come with him.
+  fluff:
+    concept: Cursed Singing Lech
+    birthday: August 7
+    age: 24
+    gender: Male
+    height: 5'9"
+    weight: 146 lbs.
+    hair: Black
+    eyes: Red
+    association: Soh-nii Records
+    hobbies: Chasing Girls
+    favorite-food: Chicken and Waffles (…and Glazed Carrots)
+    allies: He, Himself, and Him
+    enemies: A Mean Ol' Bag
+...

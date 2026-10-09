@@ -1,0 +1,13 @@
+	Test Pilot
+		Abilities
+			Vehicle (Thunderhawk) +3
+		Vehicle: Thunderhawk
+			Abilities
+				Flight +2
+				Tough +3
+			Weaknesses
+				Awkward Size −2
+			Combat
+				Health: 60 | Endurance: 40 | Defense: 3 | Threat Value (TV): —
+				Attacks
+					Missile Barrage: Roll 5 dice | DX 4 | Endurance Cost: 10.

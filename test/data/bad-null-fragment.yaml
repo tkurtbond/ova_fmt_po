@@ -1,0 +1,3 @@
+# A fragment: with no value: an empty scalar, not a valid boolean.
+- name: X
+  fragment:

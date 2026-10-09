@@ -1,0 +1,279 @@
+Natsuki (Manipulative Mecha-Gloved Millionaire)
+===============================================
+
+*"No one will get in the way of what is rightfully mine!"*
+
+*A ruthless corporate CEO determined to prove her superiority over every man she meets.*
+
+**Background**
+
+Natsuki fought her way up the corporate ladder at Malicron only
+to find herself treated as a trophy rather than a talent. Once
+she finally seized control of the company, she purged its male
+staff entirely and built a gauntlet capable of enforcing her will
+by force, determined that no man would ever hold power over her
+again.
+
+**Personality**
+
+Commanding, intimidating, and openly contemptuous of men,
+Natsuki carries herself with an air of intense, calculated
+authority.
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 34
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Agile
+   .TR
+   .TD hal=r +2
+   .TD
+   Attack (Iron Fist)
+   .TR
+   .TD hal=r +2
+   .TD
+   Beautiful
+   .TR
+   .TD hal=r +2
+   .TD
+   Intimidating
+   .TR
+   .TD hal=r +4
+   .TD
+   Knowledge (Business)
+   .TR
+   .TD hal=r +2
+   .TD
+   Knowledge (Flowers)
+   .TR
+   .TD hal=r +2
+   .TD
+   Minions
+   .TR
+   .TD hal=r +3
+   .TD
+   Position of Power (Malicron President)
+   .TR
+   .TD hal=r +2
+   .TD
+   Quick
+   .TR
+   .TD hal=r +3
+   .TD
+   Strong
+   .TR
+   .TD hal=r +5
+   .TD
+   Wealthy
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −2
+   .TD
+   Arrogant
+   .TR
+   .TD hal=r −2
+   .TD
+   Fear (Being Held Against Will)
+   .TR
+   .TD hal=r −1
+   .TD
+   Focus (Strong Requires Gauntlet)
+   .TR
+   .TD hal=r −1
+   .TD
+   Greedy
+   .TR
+   .TD hal=r −2
+   .TD
+   Hatred (The Y Chromosome)
+   .TR
+   .TD hal=r −2
+   .TD
+   Infamous (Ruthless Man-Hater)
+   .TR
+   .TD hal=r −1
+   .TD
+   Loner
+   .TR
+   .TD hal=r −2
+   .TD
+   Obsession (Proving Her Superiority)
+   .TR
+   .TD hal=r −2
+   .TD
+   Overconfident
+   .TR
+   .TD hal=r −1
+   .TD
+   Quirk (Obnoxious Laugh)
+   .TR
+   .TD hal=r −2
+   .TD
+   Short-Tempered
+   .TR
+   .TD hal=r −1
+   .TD
+   Soft Spot (Flowers)
+   .TR
+   .TD hal=r −2
+   .TD
+   Stubborn
+   .ETB
+   .ETB
+   .ne 36
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (NATSUKI)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBGauntlet Bull\fP
+   .TD hal=c 3
+   .TD hal=c
+   6
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Stunning; Flaws: Inaccurate, Weapon]
+   .TR
+   .TD colspan=4
+   \fIA fierce punch with speed and power can bowl over even stalwart foes.\fP
+   .TR
+   .TD
+   \fBGauntlet Bear\fP
+   .TD hal=c 4
+   .TD hal=c
+   5
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Paralyzing; Flaws: Ineffective, Weapon]
+   .TR
+   .TD colspan=4
+   \fINatsuki grasps her opponent in her clutches and doesn't let go.\fP
+   .TR
+   .TD
+   \fBGauntlet Crash\fP
+   .TD hal=c 4
+   .TD hal=c
+   5
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Perks: Area Effect, Stunning; Flaws: Ineffective, Weapon]
+   .TR
+   .TD colspan=4
+   \fINatsuki pounds the ground, sending out a shockwave of destruction all around her.\fP
+   .TR
+   .TD
+   \fBStiletto Kick\fP
+   .TD hal=c 4
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Martial Arts]
+   .TR
+   .TD colspan=4
+   \fIEven without her signature gauntlet, Natsuki proves a formidable fighter.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB4\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB14\fP
+   .ETB
+   .ne 32
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='25% 75%'
+   .CPTN val=b "Other Statistics"
+   .TR
+   .TD \fBConcept\fP
+   .TD
+   Manipulative Mecha-Gloved Millionaire
+   .TR
+   .TD \fBBirthday\fP
+   .TD
+   October 30
+   .TR
+   .TD \fBAge\fP
+   .TD
+   31
+   .TR
+   .TD \fBGender\fP
+   .TD
+   Female
+   .TR
+   .TD \fBHeight\fP
+   .TD
+   5'10"
+   .TR
+   .TD \fBWeight\fP
+   .TD
+   135 lbs.
+   .TR
+   .TD \fBHair\fP
+   .TD
+   Platinum
+   .TR
+   .TD \fBEyes\fP
+   .TD
+   Blue
+   .TR
+   .TD \fBAssociation\fP
+   .TD
+   Malicron Corporation CEO
+   .TR
+   .TD \fBHobbies\fP
+   .TD
+   Working in Her Flower Garden
+   .TR
+   .TD \fBFave Food\fP
+   .TD
+   Filet au Poivre
+   .TR
+   .TD \fBAllies\fP
+   .TD
+   None
+   .TR
+   .TD \fBEnemies\fP
+   .TD
+   Men
+   .ETB
+
+**Notes**
+
+**Malicron Corporation** -- As head of a military-technology powerhouse, Natsuki can call
+on a wide range of vehicles, equipment, and arms, and can
+summon trained security officers (armed guards with a modest
+Ranged Attack bonus) to her side at will.
+
+**A Secret Garden** -- Atop Malicron's headquarters, Natsuki keeps a hidden flower
+garden -- a private sanctuary where she can set aside her
+public persona, known to almost no one.
+

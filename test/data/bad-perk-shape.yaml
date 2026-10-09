@@ -1,0 +1,7 @@
+# A Perk that is neither a scalar nor a mapping: ends the file.
+- name: X
+  abilities:
+    - name: Q
+      level: 1
+      perks:
+        - [a, b]

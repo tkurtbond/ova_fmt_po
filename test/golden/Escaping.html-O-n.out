@@ -1,0 +1,29 @@
+Rock & Roll <Star>
+==================
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Attack</td><td>+2</td><td>Sword &amp; Shield &lt;Reinforced&gt;</td><td></td></tr>
+   <tr><td>Knowledge</td><td>+3</td><td>Tom &amp; Jerry &lt;Cartoons&gt;</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Obsession</td><td>-2</td><td>Cats &amp; Dogs</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>30</td><td>20</td><td>4</td><td>—</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Slash &amp; Burn</td><td>4</td><td>3</td><td>5</td><td></td><td>A wild &lt;swing&gt; that cuts &amp; burns everything nearby.</td></tr>
+   </table>
+

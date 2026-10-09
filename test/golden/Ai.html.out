@@ -1,0 +1,66 @@
+Ai (Amnesiatic ESPer)
+=====================
+
+*"I have to believe that someone out there cares about me. I have to be strong for their sake!"*
+
+*An amnesiac psychic evading the mysterious men in black who hunt her.*
+
+**Background**
+
+Ai awoke in an alley with no memory of who she was. As she
+wandered Tokyo trying to survive, she discovered she could sense
+others' thoughts and emotions, and even move objects with her
+mind. Worse, she found herself doggedly pursued by strange,
+unsettling men in black suits.
+
+**Personality**
+
+Shy and withdrawn, Ai struggles to connect with people and finds
+it hard to put her feelings into words. She'd rather avoid a
+problem than face it -- though her real trouble is that she has
+nowhere left to run.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Art of Invisibility</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+1</td><td>Telekinetic Power</td><td></td></tr>
+   <tr><td>Barrier</td><td>+3</td><td></td><td> [Perks: No Gesture]</td></tr>
+   <tr><td>Dexterous</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+1</td><td>String Games</td><td></td></tr>
+   <tr><td>Psychic</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Quick</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Sixth Sense</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Telekinesis</td><td>+3</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Amnesia</td><td>−3</td><td></td></tr>
+   <tr><td>Fear</td><td>−2</td><td>Men in Black Suits</td></tr>
+   <tr><td>Frail</td><td>−2</td><td></td></tr>
+   <tr><td>Pacifist</td><td>−1</td><td></td></tr>
+   <tr><td>Shy</td><td>−3</td><td></td></tr>
+   <tr><td>Wanted</td><td>−3</td><td>Men in Black</td></tr>
+   <tr><td>Weak</td><td>−1</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>20</td><td>40</td><td>4/5</td><td>10</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Telekinetic Push</td><td>2</td><td>4</td><td>5</td><td>Perks: No Gesture, Ranged, Stunning; Flaws: Ineffective, Low Penetration</td><td>Ai lashes out with her telekinetic powers, pushing the target away.</td></tr>
+   <tr><td>Mind Break</td><td>2</td><td>5</td><td>5</td><td>Perks: Armor Piercing, Fatiguing, No Gesture, Ranged, Will Attack; Flaws: Cancel: Unliving (−5)</td><td>Ai fills another's mind with a confusing din of psychic energy, draining the opponent.</td></tr>
+   </table>
+
+**Fluff**
+
+**Concept:** Amnesiatic ESPer, **Birthday:** May 13, **Age:** 17, **Gender:** Female, **Height:** 5'4", **Weight:** 111 lbs., **Hair:** Pink, **Eyes:** Lavender, **Association:** Unknown, **Hobbies:** String Games, **Favorite Food:** Taiyaki, **Allies:** None, **Enemies:** Men in Black.
+

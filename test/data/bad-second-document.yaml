@@ -1,0 +1,5 @@
+# A second document whose top level isn't a sequence: the first document's entity isn't written either.
+- name: X
+...
+---
+foo: 1

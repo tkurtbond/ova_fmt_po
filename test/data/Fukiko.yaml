@@ -1,0 +1,209 @@
+---
+# Fukiko (OVA rulebook, "Sample Characters" chapter, p. 36-37; also
+# the character built step by step in "Creating a Character," p. 17-19).
+# See Karis.yaml's header comment for the general transcription/
+# copyright policy.
+#
+# This supersedes the original test-data/Fukiko.yaml from the old
+# Scheme project (~/current/RPG/Tools/OVA/test-data/Fukiko.yaml,
+# left untouched there) -- the first file transcribed for this
+# project, before the schema conventions in this comment existed.
+# Changes made to bring it in line with test-data/Karis.yaml through
+# Cora.yaml:
+#
+#   - Top-level document is now a YAML sequence, not a bare mapping.
+#   - `tagline` and `summary` added (didn't exist as fields yet when
+#     this file was first written).
+#   - `detail`/`details` inconsistency normalized to `detail`
+#     everywhere; `afinity` typo on Neko Neko Catnip Cantrip fixed to
+#     `affinity`; a Perk/Flaw's repeat count moved from `level:` to
+#     `counts-as:` (Effective/Area Effect on the attacks).
+#   - `background`/`personality`, and the two `notes[]` entries'
+#     text, replaced with short original paraphrases -- the old file
+#     had (near-)verbatim book prose, written before the no-verbatim
+#     policy (confirmed by the user, this session) was settled; the
+#     empty `appearance:` field is dropped rather than kept as an
+#     empty key, matching how the other eleven files omit absent
+#     optional fields entirely.
+#   - **Azyrus, Fukiko's Companion, is now given a structured
+#     `companion:` sub-block** (abilities/weaknesses, using the exact
+#     Levels the book actually gives him: Flight +2, Quick +1, Smart
+#     +2; Awkward Size (Small) -1, Frail -1, Short-Tempered -1) rather
+#     than only the prose `attributes:` line the old file had. This
+#     refines PLAN.md §2.3's "two different Companion shapes" finding:
+#     it's really **one shape with optional depth** -- every Companion
+#     gets a `companion:` sub-block with `abilities:`/`weaknesses:`,
+#     and a `combat:` block is added only when the source actually
+#     gives the companion its own attacks/Defense/Health/Endurance/TV
+#     (Karis's Arasuni, Yuu's Fenrir) -- rather than truly two
+#     unrelated shapes (one structured, one prose-only). Azyrus's own
+#     personality blurb stays in `notes[]` as prose, same place a
+#     main entity's own personality lives outside its stat block.
+#   - **Barrier's `note:` field, implementing the decided Defense-
+#     pairing design (PLAN.md §2.2), finally applied here** -- this
+#     was the original Barrier-via-Transformation example that
+#     motivated that design, but the note was only actually added to
+#     Ai.yaml until now.
+#   - **Azyrus's `companion:` block now also sets `fragment: true`**
+#     (added this session, first use of the key): a short Abilities/
+#     Weaknesses list with no `combat:` block of his own is exactly
+#     the "simple companion" case this flag exists for, per the user
+#     -- renders flat, NPC-Fragment-style, in every backend instead of
+#     the full separate-section treatment Karis's Arasuni (a genuine
+#     full sub-entity, combat stats and all) still gets.
+
+- name: Fukiko
+  tagline: In the memory of my mother, I'll be just like my favorite magical girls!
+  summary: A young magical girl channeling her late mother's power, guided by her feline companion Azyrus.
+  background: |
+    Raised on shoujo manga, Fukiko never expected her own fantasies
+    to come true -- until a strange winged cat named Azyrus appeared
+    at her window one night and revealed that her late mother had
+    secretly been a magical crime fighter. Fukiko's locket, a
+    keepsake from her mother, turned out to hold that same power,
+    and so the heroine Lovely Savior Myu Myu was born.
+  personality: |
+    Strong-willed and naive, Fukiko expects the world to play fair by
+    her own rules. That same faith lets her see the good in bad
+    situations, though her childish streak can also mean a fair
+    amount of whining.
+  abilities:
+    - name: Companion
+      level: 2
+      detail: Azyrus
+      companion:
+        name: Azyrus
+        fragment: true
+        abilities:
+          - name: Flight
+            level: 2
+          - name: Quick
+            level: 1
+          - name: Smart
+            level: 2
+        weaknesses:
+          - name: Awkward Size
+            level: -1
+            detail: Small
+          - name: Frail
+            level: -1
+          - name: Short-Tempered
+            level: -1
+    - name: Cute!
+      level: 2
+    - name: Iron-Willed
+      level: 1
+    - name: Knowledge
+      level: 2
+      detail: Shoujo Manga
+    - name: Quick
+      level: 2
+    - name: Shape-Shifter
+      level: 2
+    - name: Transformation
+      level: 4
+      abilities:
+        - name: Attack
+          level: 2
+        - name: Barrier
+          level: 3
+          perks:
+            - Area Effect
+          flaws:
+            - Elaborate Gestures
+          endurance: 5
+          note: provides an alternate Defense Roll (the second Defense value in Combat, below)
+        - name: Combat Expert
+          level: 2
+        - name: Healer
+          level: 2
+      weaknesses:
+        - name: Bizarre Appearance
+          level: -1
+          detail: Cat Features
+  weaknesses:
+    - name: Ageism
+      level: -2
+    - name: Crybaby
+      level: -2
+    - name: Easily Distracted
+      level: -1
+    - name: Focus
+      level: -2
+      detail: Powers Require Neko Transformation Locket
+    - name: Frail
+      level: -1
+    - name: Naive
+      level: -1
+  combat:
+    defense: 4/5
+    health: 30
+    endurance: 40
+    threat-value: 12
+    attacks:
+      - name: Neko Neko Catnip Cantrip
+        perks:
+          - Ranged
+        affinity: Love
+        description: In her magical girl form, Fukiko can perform a variety of mystical attacks of love.
+        roll: 4
+        dx: 3
+        endurance: 0
+      - name: Neko Neko Heart Burst
+        perks:
+          - name: Effective
+            counts-as: 2
+          - Ranged
+        affinity: Love
+        description: Fukiko forms her hands into the shape of a heart over her chest and emits a barrage of magical heart-shaped bursts.
+        roll: 4
+        dx: 5
+        endurance: 10
+      - name: Neko Neko Wave
+        perks:
+          - name: Area Effect
+            counts-as: 2
+          - Stunning
+        flaws:
+          - No Damage
+        affinity: Love
+        description: With a waving motion of her arms, Fukiko pushes away all opponents around her.
+        roll: 4
+        dx: 0
+        endurance: 10
+      - name: Neko Neko Yarn Entangle
+        perks:
+          - Paralyzing
+        affinity: Love
+        description: A ball of yarn magically appears and wraps around her target.
+        roll: 4
+        dx: 3
+        endurance: 10
+  notes:
+    - header: Lovely Savior Myu Myu
+      text: |
+        Clutching her locket and shouting her transformation phrase
+        turns Fukiko into her cat-themed magical-girl form, right
+        down to a bell collar and a whole new outfit -- villains seem
+        oddly willing to wait out the sequence. She can also use this
+        power just to change her appearance, but not while also using
+        Shape-Shifter.
+    - header: Azyrus
+      text: |
+        Beneath his cute exterior, Azyrus is a steady source of
+        advice for Fukiko, even when her naivete exasperates him.
+  fluff:
+    concept: Magical Meow Meow Girl
+    birthday: July 26
+    age: 12
+    gender: Female
+    height: 4'10"
+    weight: 85 lbs.
+    hair: Blonde
+    eyes: Blue
+    association: Middle School
+    hobbies: Shoujo Manga
+    favorite-food: Chocolate
+    allies: Azyrus
+    enemies: Sinister Folk and Their Minions™
+...

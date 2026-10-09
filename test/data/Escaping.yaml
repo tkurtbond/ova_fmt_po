@@ -1,0 +1,33 @@
+---
+# Escaping.yaml -- a synthetic fixture, NOT transcribed from the
+# rulebook, exercising HTML escaping (&/</>) in every field the
+# -H/--html backend places inside a raw <table> cell (PLAN.md's build
+# order §9 step 4). None of the other test-data/*.yaml files happen to
+# contain these characters, so this is the only regression coverage
+# for Html_Escape actually firing. Terse/Gemtext output is unaffected
+# by this fixture (no escaping concern there -- plain text passes
+# through as-is), so this is really only interesting under -H.
+
+- name: Rock & Roll <Star>
+  abilities:
+    - name: Attack
+      level: 2
+      detail: Sword & Shield <Reinforced>
+    - name: Knowledge
+      level: 3
+      detail: Tom & Jerry <Cartoons>
+  weaknesses:
+    - name: Obsession
+      level: -2
+      detail: Cats & Dogs
+  combat:
+    defense: 4
+    health: 30
+    endurance: 20
+    attacks:
+      - name: Slash & Burn
+        roll: 4
+        dx: 3
+        endurance: 5
+        description: A wild <swing> that cuts & burns everything nearby.
+...

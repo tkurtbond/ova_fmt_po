@@ -1,0 +1,22 @@
+# Valgrind suppressions for poc's conservative garbage collector, beyond
+# polibfyaml's test/poc-gc.supp, which make valgrind also uses.  The
+# same file as pobesm2_fmt2's.
+#
+# GarbageCollectedHeap.Collect scans every word of the machine stack for
+# things that look like heap pointers, including words that were never
+# written.  polibfyaml's file suppresses the uninitialised-value errors
+# that raises in MarkCandidate.  This program's bigger frames also hand
+# such a word on to the mark stack when it happens to point into a
+# block, and DrainMarkStack then traces from it: "Use of uninitialised
+# value of size 8" with DrainMarkStack as the top frame.  Without this
+# file, `po_ova_fmt -H test/data/Yuu.yaml` gets 37 of them and nothing
+# else (2026-10-09, poc 0.5.0).  That is how a conservative collector
+# works, not a bug in the program.
+#
+# Only that error kind, and only when that function is the top frame.
+
+{
+   poc-gc-drainmarkstack-value8
+   Memcheck:Value8
+   fun:GarbageCollectedHeap.DrainMarkStack
+}

@@ -1,0 +1,78 @@
+Unsorted
+========
+
+*"Nothing here is in alphabetical order, and that's the point."*
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Attack</td><td>+3</td><td>Sword</td><td> [Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon]</td></tr>
+   <tr><td>Combat Expert</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Companion</td><td>+1</td><td>Sidekick</td><td></td>
+     <td>
+       <table>
+       <caption>Companion: Sidekick — Abilities</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Agile</td><td>+1</td><td></td><td></td></tr>
+       <tr><td>Tough</td><td>+1</td><td></td><td></td></tr>
+       </table>
+       <table>
+       <caption>Companion: Sidekick — Weaknesses</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Frail</td><td>-1</td><td></td><td></td></tr>
+       <tr><td>Quirk</td><td>-1</td><td></td><td></td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Magic, Testing</td><td>+2</td><td></td><td></td>
+     <td>
+       <table>
+       <caption>Magic, Testing — Spells</caption>
+       <tr><th>Name</th><th>Ability</th><th>Level</th><th>Endurance</th></tr>
+       <tr><td>Zephyr Blast</td><td>Attack</td><td>+2</td><td>5</td></tr>
+       <tr><td>Aegis Ward</td><td>Combat Expert</td><td>+1</td><td>3</td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Quick</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Transformation</td><td>+1</td><td></td><td></td>
+     <td>
+       <table>
+       <caption>Transformation — Grants (Abilities)</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Armored</td><td>+1</td><td></td><td></td></tr>
+       <tr><td>Evasive</td><td>+1</td><td></td><td></td></tr>
+       <tr><td>Strong</td><td>+2</td><td></td><td></td></tr>
+       </table>
+       <table>
+       <caption>Transformation — Grants (Weaknesses)</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Bizarre Appearance</td><td>-1</td><td></td><td></td></tr>
+       <tr><td>Slow</td><td>-1</td><td></td><td></td></tr>
+       </table>
+     </td>
+   </tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Clumsy</td><td>-1</td><td></td></tr>
+   <tr><td>Obsession</td><td>-2</td><td>Winning</td></tr>
+   <tr><td>Short-Tempered</td><td>-1</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>20</td><td>15</td><td>4</td><td>5</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Wild Swing</td><td>4</td><td>3</td><td>0</td><td>Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon</td><td></td></tr>
+   <tr><td>First Strike</td><td>3</td><td>2</td><td>0</td><td></td><td></td></tr>
+   </table>
+

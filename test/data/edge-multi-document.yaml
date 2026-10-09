@@ -1,0 +1,4 @@
+# Two documents: entity numbers run on across them (-U applies to the second).
+- name: X
+---
+- name: Y

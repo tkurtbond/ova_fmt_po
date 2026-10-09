@@ -1,0 +1,150 @@
+---
+# Natsuki (OVA rulebook, "Sample Characters" chapter, p. 33-35).
+# ova-rulebook.txt lines 1249-1358. See Karis.yaml's header comment
+# for the general policy.
+
+- name: Natsuki
+  tagline: No one will get in the way of what is rightfully mine!
+  summary: A ruthless corporate CEO determined to prove her superiority over every man she meets.
+  background: |
+    Natsuki fought her way up the corporate ladder at Malicron only
+    to find herself treated as a trophy rather than a talent. Once
+    she finally seized control of the company, she purged its male
+    staff entirely and built a gauntlet capable of enforcing her will
+    by force, determined that no man would ever hold power over her
+    again.
+  personality: |
+    Commanding, intimidating, and openly contemptuous of men,
+    Natsuki carries herself with an air of intense, calculated
+    authority.
+  abilities:
+    - name: Agile
+      level: 2
+    - name: Attack
+      level: 2
+      detail: Iron Fist
+    - name: Beautiful
+      level: 2
+    - name: Intimidating
+      level: 2
+    - name: Knowledge
+      level: 4
+      detail: Business
+    - name: Knowledge
+      level: 2
+      detail: Flowers
+    - name: Minions
+      level: 2
+    - name: Position of Power
+      level: 3
+      detail: Malicron President
+    - name: Quick
+      level: 2
+    - name: Strong
+      level: 3
+    - name: Wealthy
+      level: 5
+  weaknesses:
+    - name: Arrogant
+      level: -2
+    - name: Fear
+      level: -2
+      detail: Being Held Against Will
+    - name: Focus
+      level: -1
+      detail: Strong Requires Gauntlet
+    - name: Greedy
+      level: -1
+    - name: Hatred
+      level: -2
+      detail: The Y Chromosome
+    - name: Infamous
+      level: -2
+      detail: Ruthless Man-Hater
+    - name: Loner
+      level: -1
+    - name: Obsession
+      level: -2
+      detail: Proving Her Superiority
+    - name: Overconfident
+      level: -2
+    - name: Quirk
+      level: -1
+      detail: Obnoxious Laugh
+    - name: Short-Tempered
+      level: -2
+    - name: Soft Spot
+      level: -1
+      detail: Flowers
+    - name: Stubborn
+      level: -2
+  combat:
+    defense: 4
+    health: 40
+    endurance: 40
+    threat-value: 14
+    attacks:
+      - name: Gauntlet Bull
+        perks:
+          - Stunning
+        flaws:
+          - Inaccurate
+          - Weapon
+        description: A fierce punch with speed and power can bowl over even stalwart foes.
+        roll: 3
+        dx: 6
+        endurance: 0
+      - name: Gauntlet Bear
+        perks:
+          - Paralyzing
+        flaws:
+          - Ineffective
+          - Weapon
+        description: Natsuki grasps her opponent in her clutches and doesn't let go.
+        roll: 4
+        dx: 5
+        endurance: 0
+      - name: Gauntlet Crash
+        perks:
+          - Area Effect
+          - Stunning
+        flaws:
+          - Ineffective
+          - Weapon
+        description: Natsuki pounds the ground, sending out a shockwave of destruction all around her.
+        roll: 4
+        dx: 5
+        endurance: 10
+      - name: Stiletto Kick
+        affinity: Martial Arts
+        description: Even without her signature gauntlet, Natsuki proves a formidable fighter.
+        roll: 4
+        dx: 3
+        endurance: 0
+  notes:
+    - header: Malicron Corporation
+      text: |
+        As head of a military-technology powerhouse, Natsuki can call
+        on a wide range of vehicles, equipment, and arms, and can
+        summon trained security officers (armed guards with a modest
+        Ranged Attack bonus) to her side at will.
+    - header: A Secret Garden
+      text: |
+        Atop Malicron's headquarters, Natsuki keeps a hidden flower
+        garden -- a private sanctuary where she can set aside her
+        public persona, known to almost no one.
+  fluff:
+    concept: Manipulative Mecha-Gloved Millionaire
+    birthday: October 30
+    age: 31
+    gender: Female
+    height: 5'10"
+    weight: 135 lbs.
+    hair: Platinum
+    eyes: Blue
+    association: Malicron Corporation CEO
+    hobbies: Working in Her Flower Garden
+    favorite-food: Filet au Poivre
+    allies: None
+    enemies: Men
+...

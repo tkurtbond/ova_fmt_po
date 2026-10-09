@@ -1,0 +1,6 @@
+# An optional integer that isn't one: ends the file.
+- name: X
+  abilities:
+    - name: Q
+      level: 1
+      endurance: zz

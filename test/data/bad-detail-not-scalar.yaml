@@ -1,0 +1,6 @@
+# An item's optional detail whose value is a sequence: ends the file.
+- name: X
+  abilities:
+    - name: Q
+      level: 1
+      detail: [a]

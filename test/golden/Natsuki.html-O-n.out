@@ -1,0 +1,87 @@
+Natsuki (Manipulative Mecha-Gloved Millionaire)
+===============================================
+
+*"No one will get in the way of what is rightfully mine!"*
+
+*A ruthless corporate CEO determined to prove her superiority over every man she meets.*
+
+**Background**
+
+Natsuki fought her way up the corporate ladder at Malicron only
+to find herself treated as a trophy rather than a talent. Once
+she finally seized control of the company, she purged its male
+staff entirely and built a gauntlet capable of enforcing her will
+by force, determined that no man would ever hold power over her
+again.
+
+**Personality**
+
+Commanding, intimidating, and openly contemptuous of men,
+Natsuki carries herself with an air of intense, calculated
+authority.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Agile</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+2</td><td>Iron Fist</td><td></td></tr>
+   <tr><td>Beautiful</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Intimidating</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+4</td><td>Business</td><td></td></tr>
+   <tr><td>Knowledge</td><td>+2</td><td>Flowers</td><td></td></tr>
+   <tr><td>Minions</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Position of Power</td><td>+3</td><td>Malicron President</td><td></td></tr>
+   <tr><td>Quick</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Strong</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Wealthy</td><td>+5</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Arrogant</td><td>-2</td><td></td></tr>
+   <tr><td>Fear</td><td>-2</td><td>Being Held Against Will</td></tr>
+   <tr><td>Focus</td><td>-1</td><td>Strong Requires Gauntlet</td></tr>
+   <tr><td>Greedy</td><td>-1</td><td></td></tr>
+   <tr><td>Hatred</td><td>-2</td><td>The Y Chromosome</td></tr>
+   <tr><td>Infamous</td><td>-2</td><td>Ruthless Man-Hater</td></tr>
+   <tr><td>Loner</td><td>-1</td><td></td></tr>
+   <tr><td>Obsession</td><td>-2</td><td>Proving Her Superiority</td></tr>
+   <tr><td>Overconfident</td><td>-2</td><td></td></tr>
+   <tr><td>Quirk</td><td>-1</td><td>Obnoxious Laugh</td></tr>
+   <tr><td>Short-Tempered</td><td>-2</td><td></td></tr>
+   <tr><td>Soft Spot</td><td>-1</td><td>Flowers</td></tr>
+   <tr><td>Stubborn</td><td>-2</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>40</td><td>4</td><td>14</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Gauntlet Bull</td><td>3</td><td>6</td><td>0</td><td>Perks: Stunning; Flaws: Inaccurate, Weapon</td><td>A fierce punch with speed and power can bowl over even stalwart foes.</td></tr>
+   <tr><td>Gauntlet Bear</td><td>4</td><td>5</td><td>0</td><td>Perks: Paralyzing; Flaws: Ineffective, Weapon</td><td>Natsuki grasps her opponent in her clutches and doesn't let go.</td></tr>
+   <tr><td>Gauntlet Crash</td><td>4</td><td>5</td><td>10</td><td>Perks: Area Effect, Stunning; Flaws: Ineffective, Weapon</td><td>Natsuki pounds the ground, sending out a shockwave of destruction all around her.</td></tr>
+   <tr><td>Stiletto Kick</td><td>4</td><td>3</td><td>0</td><td>Affinity: Martial Arts</td><td>Even without her signature gauntlet, Natsuki proves a formidable fighter.</td></tr>
+   </table>
+
+**Notes**
+
+**Malicron Corporation** -- As head of a military-technology powerhouse, Natsuki can call
+on a wide range of vehicles, equipment, and arms, and can
+summon trained security officers (armed guards with a modest
+Ranged Attack bonus) to her side at will.
+
+**A Secret Garden** -- Atop Malicron's headquarters, Natsuki keeps a hidden flower
+garden -- a private sanctuary where she can set aside her
+public persona, known to almost no one.
+
+**Fluff**
+
+**Concept:** Manipulative Mecha-Gloved Millionaire, **Birthday:** October 30, **Age:** 31, **Gender:** Female, **Height:** 5'10", **Weight:** 135 lbs., **Hair:** Platinum, **Eyes:** Blue, **Association:** Malicron Corporation CEO, **Hobbies:** Working in Her Flower Garden, **Favorite Food:** Filet au Poivre, **Allies:** None, **Enemies:** Men.
+

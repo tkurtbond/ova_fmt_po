@@ -1,0 +1,37 @@
+---
+# Broken.yaml -- a synthetic fixture, NOT transcribed from the
+# rulebook, deliberately missing multiple required fields at once to
+# exercise Ova_Fmt.Entities' error-collection (PLAN.md's optional-vs-
+# required audit): every problem below should be reported together,
+# with no rendered output at all, and a nonzero exit status. The
+# first entity ("Sound") is entirely well-formed, to confirm a good
+# entity earlier in the file doesn't get partially rendered when a
+# later one has problems.
+
+- name: Sound
+  abilities:
+    - name: Quick
+      level: 2
+  weaknesses:
+    - name: Clumsy
+      level: -1
+- name: Broken
+  abilities:
+    - name: Quick
+      level: 2
+    - level: 3
+      # missing "name"
+    - name: Strong
+      # missing "level"
+  weaknesses:
+    - name: Clumsy
+      # missing "level"
+  combat:
+    defense: 4
+    health: 20
+    endurance: 15
+    attacks:
+      - name: Wild Swing
+        roll: 4
+        # missing "dx" and "endurance"
+...

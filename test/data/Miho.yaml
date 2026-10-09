@@ -1,0 +1,181 @@
+---
+# Miho (OVA rulebook, "Sample Characters" chapter, p. 30-31).
+# ova-rulebook.txt lines ~1013-1132 (cross-checked against the
+# OVAPlayerBook-Miho-2015-01-29.pdf excerpt, which matches exactly).
+# See Karis.yaml's header comment for the general policy.
+#
+# Miho's Transformation nests a sub-ability that duplicates a
+# top-level Ability name (Combat Expert appears both at top level,
+# +3, and again at +2 under Transformation) -- confirms Transformation
+# can *stack* an additional bonus onto an Ability the character
+# already has, not just grant wholly new ones (matches Fukiko's
+# Transformation, whose granted Attack/Combat Expert/Healer aren't
+# duplicates of anything she already has, so this wasn't visible
+# there).
+
+- name: Miho
+  tagline: I don't know what it is to be human, but I know that it's what I'm meant to be!
+  summary: A runaway military android who just wants to live an ordinary life.
+  background: |
+    Built as a self-aware war machine by the Malicron Corporation,
+    Miho escaped when her creators tried to reclaim her by force,
+    critically damaged. She was found and repaired by a young
+    inventor, Braun, and has stayed by his side ever since, hoping to
+    live a normal, human life despite her origins.
+  personality: |
+    Innocent, kind-hearted, and eager to learn everything she can
+    about the world, Miho wants nothing more than to help -- even if
+    her enormous strength and destructive potential sometimes make
+    that harder than it should be.
+  abilities:
+    - name: Agile
+      level: 3
+    - name: Attack
+      level: 3
+      detail: Robo-Powered Arsenal
+    - name: Beautiful
+      level: 3
+    - name: Combat Expert
+      level: 3
+    - name: Heightened Sense
+      level: 3
+      detail: Sight
+    - name: Life Support
+      level: 3
+    - name: Quick
+      level: 3
+    - name: Strong
+      level: 3
+    - name: Transformation
+      level: 1
+      abilities:
+        - name: Combat Expert
+          level: 2
+        - name: Endurance Reserve
+          level: 2
+      weaknesses:
+        - name: Unique Weakness
+          level: -3
+          detail: Loss of Control
+    - name: Unique Ability
+      level: 1
+      detail: Quick Calculator
+  weaknesses:
+    - name: Bizarre Appearance
+      level: -1
+      detail: Robot Features
+    - name: Dependency
+      level: -3
+      detail: Sun
+    - name: Guardian
+      level: -2
+      detail: Braun
+    - name: Ineptitude
+      level: -2
+      detail: Cooking
+    - name: Kind-Hearted
+      level: -2
+    - name: Naive
+      level: -2
+    - name: Trigger
+      level: -2
+      detail: Transformation If Critical
+    - name: Unique Weakness
+      level: -1
+      detail: Excessive Density
+    - name: Vulnerability
+      level: -3
+      detail: Electricity
+    - name: Wanted
+      level: -3
+      detail: Malicron Corporation
+  combat:
+    defense: 5
+    health: 40
+    endurance: 40
+    threat-value: 20
+    attacks:
+      - name: "Mode 1: Hand-to-Hand"
+        affinity: Martial Arts
+        description: Even barehanded, Miho is a competent combatant.
+        roll: 8
+        dx: 7
+        endurance: 0
+      - name: "Mode 2: Gatling Gun"
+        perks:
+          - Ranged
+          - Overwhelming
+        flaws:
+          - name: Inaccurate
+            counts-as: 3
+        description: She's packin'! The more bullets, the better!
+        roll: 5
+        dx: 4
+        endurance: 0
+      - name: "Mode 3: Missile Launcher"
+        perks:
+          - Area Effect
+          - Stunning
+          - Ranged
+        flaws:
+          - name: Inaccurate
+            counts-as: 3
+          - Delayed
+        description: Speak softly and launch a big missile!
+        roll: 5
+        dx: 4
+        endurance: 0
+      - name: "Mode 4: Sniper Rifle"
+        perks:
+          - Accurate
+          - Armor Piercing
+          - Impairing
+          - Ranged
+        flaws:
+          - name: Concentration
+            detail: Aiming
+        description: Miho takes them out with robotic precision.
+        roll: 9
+        dx: 4
+        endurance: 0
+      - name: "Mode SP: Miho Ray"
+        perks:
+          - name: Effective
+            counts-as: 6
+          - Ranged
+        flaws:
+          - name: Requirement
+            detail: Self-Preservation Mode
+            cost: -20
+        description: Nothing will remain to hurt her.
+        roll: 10
+        dx: 10
+        endurance: 10
+  notes:
+    - header: Robot Characteristics
+      text: |
+        Miho draws energy from the sun, and without regular sunbaths
+        switches to a weaker backup supply after a day. Her
+        considerable density makes her hard to carry and can strain
+        weak floors, and her robotic nature is hard to fully disguise.
+    - header: Self-Preservation Mode
+      text: |
+        If her combined Health and Endurance drop to 10, Miho's
+        consciousness shuts down and she single-mindedly eliminates
+        any threat, friend or foe alike -- returning to normal with no
+        memory of what happened once the danger has passed.
+  fluff:
+    concept: Missile-Powered Mechanical Maiden
+    birthday: February 12
+    age: 1 (Appears 18)
+    gender: Female
+    height: 5'5"
+    weight: 275 lbs.
+    hair: Blue
+    eyes: Yellow
+    association: Malicron Creation
+    hobbies: Reading
+    favorite-food: Sunshine
+    allies: Braun
+    enemies: Malicron Corp.
+...

@@ -1,0 +1,84 @@
+Raine (Ambiguously Sexed Sword Master)
+======================================
+
+*"I will atone for the sins of my past by helping those who cannot help themselves!"*
+
+*A wandering swordsman seeking atonement for his years as an assassin.*
+
+**Background**
+
+Once a skilled assassin for the Clan Cave Fox, Raine broke from
+the clan after discovering that a contract kill was, in fact, his
+own estranged father. Disgusted with himself, he abandoned that
+life -- but the clan doesn't let members leave, and dispatched
+his old comrade Shou to hunt him down. Raine now wanders, trying
+to atone by helping those he can.
+
+**Personality**
+
+Reserved and thoughtful, Raine speaks only when he has something
+worth saying, and his mind often wanders even when he's paying
+close attention -- a habit that leads people to underestimate
+him. He practices swordsmanship and origami in his spare time,
+often folding paper to help himself think.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Agile</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Art of Invisibility</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+3</td><td>Kaze Satsujinsha</td><td></td></tr>
+   <tr><td>Beautiful</td><td>+4</td><td></td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+4</td><td></td><td></td></tr>
+   <tr><td>Evasive</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Intuitive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Iron-Willed</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+2</td><td>Origami</td><td></td></tr>
+   <tr><td>Knowledge</td><td>+2</td><td>Wilderness</td><td></td></tr>
+   <tr><td>Quick</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Sixth Sense</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Vigorous</td><td>+2</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Airhead</td><td>−1</td><td></td></tr>
+   <tr><td>Code of Conduct</td><td>−2</td><td>Will Not Fight Surprised or Defenseless Opponents</td></tr>
+   <tr><td>Guardian</td><td>−2</td><td>Those in Need</td></tr>
+   <tr><td>Ineptitude</td><td>−3</td><td>Home Economics</td></tr>
+   <tr><td>Pacifist</td><td>−1</td><td></td></tr>
+   <tr><td>Poor</td><td>−3</td><td></td></tr>
+   <tr><td>Rival</td><td>−2</td><td>Shou</td></tr>
+   <tr><td>Secret</td><td>−2</td><td>Past as an Assassin</td></tr>
+   <tr><td>Sensitivity</td><td>−1</td><td>Sexual Misidentification</td></tr>
+   <tr><td>Unique Weakness</td><td>−1</td><td>Nightmares</td></tr>
+   <tr><td>Wanted</td><td>−3</td><td>Clan Cave Fox</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>60</td><td>5</td><td>18</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Kaze Satsujinsha</td><td>7</td><td>4</td><td>0</td><td>Perks: Armor Piercing; Flaws: Weapon</td><td>Raine's skill with a sword is extraordinary. His legendary katana is a suitable companion.</td></tr>
+   <tr><td>Raging Thunder Slash</td><td>7</td><td>7</td><td>10</td><td>Affinity: Electricity; Perks: Effective x3; Flaws: Weapon</td><td>Raine whispers across his blade before striking with crackling electrical energy.</td></tr>
+   <tr><td>Electrical Storm</td><td>7</td><td>5</td><td>10</td><td>Affinity: Electricity; Perks: Area Effect x2, Effective; Flaws: Requirement: Must Be Outside (−10), Weapon</td><td>Raine summons the power of nature to cut swaths through legions of enemies.</td></tr>
+   <tr><td>Mist Touch</td><td>7</td><td>4</td><td>10</td><td>Affinity: Spirit; Perks: Continued Effect, Fatiguing, Will Attack</td><td>Raine concentrates his energies to project his very spirit into the opponent's mind.</td></tr>
+   </table>
+
+**Notes**
+
+**Nightmares** -- Raine is plagued by nightmares of his violent past, especially
+his father's death, and rarely sleeps soundly -- his sudden
+awakenings can startle anyone nearby.
+
+**Fluff**
+
+**Concept:** Ambiguously Sexed Sword Master, **Birthday:** January 31, **Age:** 23, **Gender:** Male, **Height:** 5'9", **Weight:** 140 lbs., **Hair:** Brown, **Eyes:** Brown, **Association:** Previously of Clan Cave Fox, **Hobbies:** Origami, **Favorite Food:** Miso Soup, **Allies:** None, **Enemies:** Shou, Clan Cave Fox.
+

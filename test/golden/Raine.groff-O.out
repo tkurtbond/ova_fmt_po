@@ -1,0 +1,276 @@
+Raine (Ambiguously Sexed Sword Master)
+======================================
+
+*"I will atone for the sins of my past by helping those who cannot help themselves!"*
+
+*A wandering swordsman seeking atonement for his years as an assassin.*
+
+**Background**
+
+Once a skilled assassin for the Clan Cave Fox, Raine broke from
+the clan after discovering that a contract kill was, in fact, his
+own estranged father. Disgusted with himself, he abandoned that
+life -- but the clan doesn't let members leave, and dispatched
+his old comrade Shou to hunt him down. Raine now wanders, trying
+to atone by helping those he can.
+
+**Personality**
+
+Reserved and thoughtful, Raine speaks only when he has something
+worth saying, and his mind often wanders even when he's paying
+close attention -- a habit that leads people to underestimate
+him. He practices swordsmanship and origami in his spare time,
+often folding paper to help himself think.
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 34
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Agile
+   .TR
+   .TD hal=r +2
+   .TD
+   Art of Invisibility
+   .TR
+   .TD hal=r +3
+   .TD
+   Attack (Kaze Satsujinsha)
+   .TR
+   .TD hal=r +4
+   .TD
+   Beautiful
+   .TR
+   .TD hal=r +4
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +2
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +1
+   .TD
+   Intuitive
+   .TR
+   .TD hal=r +1
+   .TD
+   Iron-Willed
+   .TR
+   .TD hal=r +2
+   .TD
+   Knowledge (Origami)
+   .TR
+   .TD hal=r +2
+   .TD
+   Knowledge (Wilderness)
+   .TR
+   .TD hal=r +1
+   .TD
+   Quick
+   .TR
+   .TD hal=r +2
+   .TD
+   Sixth Sense
+   .TR
+   .TD hal=r +2
+   .TD
+   Vigorous
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Airhead
+   .TR
+   .TD hal=r −2
+   .TD
+   Code of Conduct (Will Not Fight Surprised or Defenseless Opponents)
+   .TR
+   .TD hal=r −2
+   .TD
+   Guardian (Those in Need)
+   .TR
+   .TD hal=r −3
+   .TD
+   Ineptitude (Home Economics)
+   .TR
+   .TD hal=r −1
+   .TD
+   Pacifist
+   .TR
+   .TD hal=r −3
+   .TD
+   Poor
+   .TR
+   .TD hal=r −2
+   .TD
+   Rival (Shou)
+   .TR
+   .TD hal=r −2
+   .TD
+   Secret (Past as an Assassin)
+   .TR
+   .TD hal=r −1
+   .TD
+   Sensitivity (Sexual Misidentification)
+   .TR
+   .TD hal=r −1
+   .TD
+   Unique Weakness (Nightmares)
+   .TR
+   .TD hal=r −3
+   .TD
+   Wanted (Clan Cave Fox)
+   .ETB
+   .ETB
+   .ne 36
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (RAINE)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBKaze Satsujinsha\fP
+   .TD hal=c 7
+   .TD hal=c
+   4
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Armor Piercing; Flaws: Weapon]
+   .TR
+   .TD colspan=4
+   \fIRaine's skill with a sword is extraordinary. His legendary katana is a suitable companion.\fP
+   .TR
+   .TD
+   \fBRaging Thunder Slash\fP
+   .TD hal=c 7
+   .TD hal=c
+   7
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Affinity: Electricity; Perks: Effective x3; Flaws: Weapon]
+   .TR
+   .TD colspan=4
+   \fIRaine whispers across his blade before striking with crackling electrical energy.\fP
+   .TR
+   .TD
+   \fBElectrical Storm\fP
+   .TD hal=c 7
+   .TD hal=c
+   5
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Affinity: Electricity; Perks: Area Effect x2, Effective; Flaws: Requirement: Must Be Outside (−10), Weapon]
+   .TR
+   .TD colspan=4
+   \fIRaine summons the power of nature to cut swaths through legions of enemies.\fP
+   .TR
+   .TD
+   \fBMist Touch\fP
+   .TD hal=c 7
+   .TD hal=c
+   4
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Affinity: Spirit; Perks: Continued Effect, Fatiguing, Will Attack]
+   .TR
+   .TD colspan=4
+   \fIRaine concentrates his energies to project his very spirit into the opponent's mind.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB5\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB60\fP
+   .TD hal=c \fB18\fP
+   .ETB
+   .ne 32
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='25% 75%'
+   .CPTN val=b "Other Statistics"
+   .TR
+   .TD \fBConcept\fP
+   .TD
+   Ambiguously Sexed Sword Master
+   .TR
+   .TD \fBBirthday\fP
+   .TD
+   January 31
+   .TR
+   .TD \fBAge\fP
+   .TD
+   23
+   .TR
+   .TD \fBGender\fP
+   .TD
+   Male
+   .TR
+   .TD \fBHeight\fP
+   .TD
+   5'9"
+   .TR
+   .TD \fBWeight\fP
+   .TD
+   140 lbs.
+   .TR
+   .TD \fBHair\fP
+   .TD
+   Brown
+   .TR
+   .TD \fBEyes\fP
+   .TD
+   Brown
+   .TR
+   .TD \fBAssociation\fP
+   .TD
+   Previously of Clan Cave Fox
+   .TR
+   .TD \fBHobbies\fP
+   .TD
+   Origami
+   .TR
+   .TD \fBFave Food\fP
+   .TD
+   Miso Soup
+   .TR
+   .TD \fBAllies\fP
+   .TD
+   None
+   .TR
+   .TD \fBEnemies\fP
+   .TD
+   Shou, Clan Cave Fox
+   .ETB
+
+**Notes**
+
+**Nightmares** -- Raine is plagued by nightmares of his violent past, especially
+his father's death, and rarely sleeps soundly -- his sudden
+awakenings can startle anyone nearby.
+

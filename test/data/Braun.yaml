@@ -1,0 +1,106 @@
+---
+# Braun (OVA rulebook, "Sample Characters" chapter, p. 31-33).
+# ova-rulebook.txt lines 1136-1246. See Karis.yaml's header comment
+# for the general policy.
+#
+# Braun's lone attack is a joke stat block: Roll is negative (-2) and
+# DX is a fraction (1/2), not the usual small positive integers seen
+# elsewhere -- confirms `roll` needs to allow negative integers and
+# `dx` needs to allow a fractional value like "1/2" (stored as a
+# string here, same as `combat.defense`'s existing "4/5" pairing --
+# see Barrier's own rules text, already quoted in PLAN.md: "If the
+# Damage Multiplier would be reduced to zero or below, reduce it to
+# 1/2 instead," so "1/2" is a real, if unusual, DX value, not a typo).
+# Threat Value of 0 is also new -- the first character seen with no
+# meaningful combat presence at all.
+
+- name: Braun
+  tagline: I know that I'm not all that strong or brave... but I'll protect her with everything I've got!
+  summary: A reclusive inventor who unexpectedly gained a robotic companion, and a reason to be braver.
+  background: |
+    A brilliant but socially awkward inventor, Braun lived alone
+    surrounded by half-finished gadgets, always chasing the one
+    breakthrough that would make his mark. That breakthrough turned
+    out to be Miho, a damaged android he found discarded and repaired
+    -- who has stayed loyally by his side ever since, upending his
+    quiet, solitary life.
+  personality: |
+    Introverted and easily flustered, especially around women, Braun
+    is nonetheless kind and honest to a fault -- a terrible liar who
+    wears his feelings openly. He can be absent-minded, and is an
+    easy target for bullies.
+  abilities:
+    - name: Connected
+      level: 1
+    - name: Dimensional Pocket
+      level: 2
+    - name: Inventor
+      level: 3
+    - name: Knowledge
+      level: 4
+      detail: Computer Whiz
+    - name: Knowledge
+      level: 2
+      detail: Cosplay
+    - name: Knowledge
+      level: 2
+      detail: Games, Anime, & Manga
+    - name: Pilot
+      level: 1
+    - name: Smart
+      level: 3
+  weaknesses:
+    - name: Absent-Minded
+      level: -1
+    - name: Clumsy
+      level: -2
+    - name: Compulsion
+      level: -2
+      detail: Honesty
+    - name: Nosebleeder
+      level: -1
+    - name: Shy
+      level: -1
+    - name: Weak
+      level: -1
+    - name: Weak-Willed
+      level: -1
+  combat:
+    defense: 2
+    health: 40
+    endurance: 40
+    threat-value: 0
+    attacks:
+      - name: First Day of Sale Shove!
+        affinity: Nerdy
+        description: When a new Draconic Quest game is out, Braun can hold his place in line. Sometimes.
+        roll: -2
+        dx: "1/2"
+        endurance: 0
+  notes:
+    - header: Inventions
+      text: |
+        Braun constantly scraps and rebuilds his inventions, but a
+        few see regular use: a laptop with built-in hacking aids, and
+        a pair of ordinary-looking glasses with several extrasensory
+        functions, both kept handy via his Dimensional Pocket.
+    - header: Connections & Cosplay
+      text: |
+        Braun occasionally trades in black-market parts he can't get
+        otherwise, and sews and sells cosplay costumes for extra
+        cash -- including most of Miho's own wardrobe.
+  fluff:
+    concept: Hopelessly Honest Inventor
+    birthday: November 29
+    age: 20
+    gender: Male
+    height: 5'8"
+    weight: 133 lbs.
+    hair: Brown
+    eyes: Blue
+    association: Mecha Monthly Charter Subscriber
+    hobbies: Video Games
+    favorite-food: Pizza
+    allies: Miho
+    enemies: Malicron Corp.
+...

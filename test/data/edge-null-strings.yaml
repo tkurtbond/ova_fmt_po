@@ -1,0 +1,7 @@
+# Optional strings with no value are empty, and still there.
+- name: X
+  tagline:
+  abilities:
+    - name: Q
+      level: 1
+      detail:

@@ -1,0 +1,106 @@
+Karis (Hotheaded Space-Trekking Bounty Hunter)
+==============================================
+
+*"I'm every bit as tough as my father was, and I'll prove it by avenging his death!"*
+
+*A bounty hunter avenging her father's death, aided by her GPL-issued robotic partner Arasuni.*
+
+**Background**
+
+Karis is the daughter of Dromar d'Ori, a renowned bounty hunter
+for the Galactic Peace Legion. When the elusive criminal
+Shadowman killed her father, Karis dedicated herself to hunting
+him down, eventually tracking him to an unfamiliar, underdeveloped
+world: Earth. She's accompanied by Arasuni, a GPL-issued
+assistant robot.
+
+**Personality**
+
+Quick-witted and sharp-tongued, Karis tends to act before she
+thinks. Earth's customs leave her thoroughly out of her depth,
+and she has a short fuse -- especially when teased about her
+appearance.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Agile</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+3</td><td>Boomerang</td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Companion</td><td>+2</td><td>Arasuni</td><td></td>
+     <td>
+       <table>
+       <caption>Companion: Arasuni — Abilities</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Armored</td><td>+2</td><td></td><td></td></tr>
+       <tr><td>Attack</td><td>+1</td><td></td><td></td></tr>
+       <tr><td>Combat Expert</td><td>+1</td><td></td><td></td></tr>
+       <tr><td>Evasive</td><td>+1</td><td></td><td></td></tr>
+       <tr><td>Life Support</td><td>+3</td><td></td><td></td></tr>
+       <tr><td>Strong</td><td>+3</td><td></td><td></td></tr>
+       <tr><td>Tough</td><td>+2</td><td></td><td></td></tr>
+       <tr><td>Unique Ability</td><td>+1</td><td>Computerized Brain</td><td></td></tr>
+       </table>
+       <table>
+       <caption>Companion: Arasuni — Weaknesses</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Awkward Size</td><td>-1</td><td>Large</td><td></td></tr>
+       <tr><td>Bizarre Appearance</td><td>-2</td><td></td><td></td></tr>
+       <tr><td>Emotionless</td><td>-2</td><td></td><td></td></tr>
+       <tr><td>Quirk</td><td>-1</td><td>Quoting Earth</td><td></td></tr>
+       <tr><td>Servitude</td><td>-3</td><td>Karis</td><td></td></tr>
+       <tr><td>Slow</td><td>-1</td><td></td><td></td></tr>
+       <tr><td>Vulnerability</td><td>-2</td><td>Electricity</td><td></td></tr>
+       </table>
+       <table>
+       <caption>Companion: Arasuni — Combat</caption>
+       <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+       <tr><td>40</td><td>20</td><td>2</td><td>10</td></tr>
+       </table>
+       <table>
+       <caption>Companion: Arasuni — Combat — Attacks</caption>
+       <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+       <tr><td>Iron Knuckle</td><td>3</td><td>5</td><td>0</td><td>Affinity: Mighty Robot</td><td>Arasuni's immense size and strength allow him to deal a crushing blow.</td></tr>
+       <tr><td>Stun Pulse Rifle</td><td>2</td><td>2</td><td>0</td><td>Perks: Impairing, Ranged; Flaws: Inaccurate, Weapon</td><td>While not the most powerful of weapons, it is useful for subduing stubborn foes.</td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Cute!</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Evasive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Intuitive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Perceptive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Quick</td><td>+3</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Bizarre Appearance</td><td>-1</td><td>Strange Ears</td></tr>
+   <tr><td>Impulsive</td><td>-1</td><td></td></tr>
+   <tr><td>Obsession</td><td>-3</td><td>Kill Shadowman</td></tr>
+   <tr><td>Quirk</td><td>-2</td><td>Stranger in a Strange Land</td></tr>
+   <tr><td>Sensitivity</td><td>-2</td><td>Chest</td></tr>
+   <tr><td>Short-Tempered</td><td>-1</td><td></td></tr>
+   <tr><td>Soft Spot</td><td>-1</td><td>Stuffed Animals</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>40</td><td>6</td><td>16</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Kinetic Boomerang</td><td>6</td><td>4</td><td>0</td><td>Perks: Armor Piercing, Ranged; Flaws: Weapon</td><td>Karis's signature weapon can be wielded versatilely, both as a blade and a boomerang.</td></tr>
+   <tr><td>Trick Shot</td><td>6</td><td>3</td><td>0</td><td>Perks: Disarming, Ranged; Flaws: Ineffective, Weapon</td><td>With finesse, Karis throws her weapon in a tight arc to disarm opponents.</td></tr>
+   <tr><td>Sweeping Strike</td><td>6</td><td>3</td><td>0</td><td>Perks: Multiple Targets, Ranged; Flaws: Ineffective, Weapon</td><td>Take down multiple foes in a single throw!</td></tr>
+   <tr><td>Flex-Steel Cable</td><td>6</td><td>1</td><td>0</td><td>Perks: Paralyzing x2, Ranged; Flaws: Ineffective x3, Weapon</td><td>Her weapon can release a super-strong cable to entangle foes, among other creative uses.</td></tr>
+   </table>
+
+**Fluff**
+
+**Concept:** Hotheaded Space-Trekking Bounty Hunter, **Birthday:** March 23, **Age:** 18, **Gender:** Female, **Height:** 5'1", **Weight:** 108 lbs., **Hair:** Reddish-Pink, **Eyes:** Green, **Association:** Galactic Peace Legion Contract, **Hobbies:** Collecting Stuffed Animals, **Favorite Food:** Milkshakes, **Allies:** Arasuni, **Enemies:** Shadowman.
+

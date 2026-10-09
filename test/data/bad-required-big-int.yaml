@@ -1,0 +1,5 @@
+# A required integer too large for an INTEGER.
+- name: X
+  abilities:
+    - name: Q
+      level: 99999999999

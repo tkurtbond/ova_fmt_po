@@ -1,0 +1,106 @@
+Yuu (Plucky Pocket Monster Master)
+==================================
+
+*"I will do anything for my sister! And with Fenrir at my side, there's nothing I can't do!"*
+
+*A monster-loving boy searching for his missing sister, aided by a mysterious wolf-like companion.*
+
+**Background**
+
+Yuu's beloved older sister vanished without a trace -- and,
+stranger still, everyone around him seems to have forgotten she
+ever existed. Chasing a shadowy figure fleeing the scene, Yuu
+instead found a caged, wolf-like creature left behind: Fenrir.
+Certain it was fate, Yuu freed him, and the two have been
+inseparable since, determined to find Yuu's sister together.
+
+**Personality**
+
+Endlessly curious and unable to leave a wrong unrighted, Yuu's
+good nature gets him into trouble as often as it wins him
+friends -- Fenrir very much included.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Companion</td><td>+4</td><td>Fenrir</td><td></td>
+     <td>
+       <table>
+       <caption>Companion: Fenrir — Abilities</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Attack</td><td>+3</td><td></td><td></td></tr>
+       <tr><td>Combat Expert</td><td>+2</td><td></td><td></td></tr>
+       <tr><td>Quick</td><td>+3</td><td></td><td></td></tr>
+       <tr><td>Tough</td><td>+2</td><td></td><td></td></tr>
+       <tr><td>Vigorous</td><td>+3</td><td></td><td></td></tr>
+       </table>
+       <table>
+       <caption>Companion: Fenrir — Weaknesses</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Bizarre Appearance</td><td>−2</td><td></td><td></td></tr>
+       <tr><td>Fear</td><td>−2</td><td>Enclosed Spaces</td><td></td></tr>
+       <tr><td>Guardian</td><td>−1</td><td>Yuu</td><td></td></tr>
+       <tr><td>Mute</td><td>−2</td><td></td><td></td></tr>
+       <tr><td>Servitude</td><td>−1</td><td>Yuu</td><td></td></tr>
+       <tr><td>Short-Tempered</td><td>−1</td><td></td><td></td></tr>
+       </table>
+       <table>
+       <caption>Companion: Fenrir — Combat</caption>
+       <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+       <tr><td>40</td><td>50</td><td>5</td><td>14</td></tr>
+       </table>
+       <table>
+       <caption>Companion: Fenrir — Combat — Attacks</caption>
+       <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+       <tr><td>Maul</td><td>4</td><td>4</td><td>0</td><td>Affinity: Normal Type</td><td>Fenrir leaps at the target and attacks with beastly fury.</td></tr>
+       <tr><td>Quick Attack</td><td>4</td><td>4</td><td>5</td><td>Perks: Stunning; Flaws: Requirement: Trust +1 (−5)</td><td>Fenrir strikes repeatedly in the blink of an eye.</td></tr>
+       <tr><td>Lance</td><td>4</td><td>7</td><td>10</td><td>Perks: Armor Piercing x2, Effective x3; Flaws: Delayed, Requirement: Trust +2 (−10)</td><td>Fenrir charges up a skewering headbutt.</td></tr>
+       <tr><td>Lightning Rod</td><td>4</td><td>10</td><td>15</td><td>Affinity: Lightning; Perks: Effective x6; Flaws: Requirement: Trust +3 (−15)</td><td>A bolt of lightning comes down from above, charging Fenrir's horn with power.</td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Evasive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Intuitive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Iron-Willed</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+3</td><td>Monsters</td><td></td></tr>
+   <tr><td>Knowledge</td><td>+3</td><td>Video Games</td><td></td></tr>
+   <tr><td>Quick</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Unique Ability</td><td>+1</td><td>Trust</td><td></td></tr>
+   <tr><td>Vigorous</td><td>+1</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Ageism</td><td>−2</td><td></td></tr>
+   <tr><td>Compulsion</td><td>−2</td><td>Finding Things Out</td></tr>
+   <tr><td>Guardian</td><td>−2</td><td>Sister</td></tr>
+   <tr><td>Impulsive</td><td>−1</td><td></td></tr>
+   <tr><td>Kind-Hearted</td><td>−1</td><td></td></tr>
+   <tr><td>Wanted</td><td>−3</td><td>Men in Black</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>50</td><td>5</td><td>9</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Struggle</td><td>2</td><td>1</td><td>0</td><td>Affinity: Normal Type</td><td>Though he doesn't have any special moves, Yuu can still put up a fight if he needs to.</td></tr>
+   </table>
+
+**Notes**
+
+**Fenrir and Trust** -- Fenrir has several Attacks Yuu can only use as he earns
+Fenrir's trust (raising his Trust Ability). Trust may also be
+rolled when directing Fenrir through especially complicated
+or dangerous tasks.
+
+**Fluff**
+
+**Concept:** Plucky Pocket Monster Master, **Birthday:** September 28, **Age:** 11, **Gender:** Male, **Height:** 4'8", **Weight:** 78 lbs., **Hair:** Pink, **Eyes:** Lavender, **Association:** Elementary School, **Hobbies:** Monsters!, **Favorite Food:** Pocky, **Allies:** Fenrir, **Enemies:** Men in Black.
+

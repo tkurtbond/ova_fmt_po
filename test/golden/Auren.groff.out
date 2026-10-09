@@ -1,0 +1,278 @@
+Auren (Time Skipping Sorcerer)
+==============================
+
+*"It is my duty to protect this world, even if its future makes me doubt why I should bother…"*
+
+*A centuries-old sorcerer, accidentally de-aged and stranded in the wrong era while investigating a dark omen.*
+
+**Background**
+
+A young but gifted sorcerer of the secretive Order of the Fallen
+Star, Auren volunteered to use forbidden Time Magic to
+investigate a dire omen glimpsed by the Order's seer. The spell
+stranded him in 21st-century Japan and left him with the body of
+a teenager, unable to reverse the effect. With no way home, Auren
+has resolved to hunt down whatever threat he was sent to find.
+
+**Personality**
+
+Serious and stubborn, Auren struggles with the indignity of being
+treated as a mere teenager despite his true age, and often acts
+with an old-fashioned sense of authority he hasn't earned in this
+era. He's awkward around women and, for reasons of his own,
+deeply distrustful of animals.
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 40
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Armored (Medieval Armor)
+   .TR
+   .TD hal=r +3
+   .TD
+   Attack (Sword & Sorcery)
+   .TR
+   .TD hal=r +3
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +2
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +4
+   .TD
+   Knowledge (Magic)
+   .TR
+   .TD hal=r +3
+   .TD
+   Magic, Arcane
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='30% 70%'
+   .CPTN val=b "Magic, Arcane — Spells"
+   .TR
+   .TH Name
+   .TH Detail
+   .TR
+   .TD
+   Mana Shield
+   .TD
+   Barrier +2; 10+ Endurance
+   .TR
+   .TD
+   Wings of Dezantis
+   .TD
+   Flight +2; 10 Endurance
+   .TR
+   .TD
+   Feeblemind
+   .TD
+   Intimidating +2; 10 Endurance
+   .TR
+   .TD
+   Breath
+   .TD
+   Life Support +2; 10 Endurance
+   .TR
+   .TD
+   Hasten
+   .TD
+   Quick +3; 20 Endurance
+   .TR
+   .TD
+   Atlas Arm
+   .TD
+   Strong +3; 20 Endurance
+   .ETB
+   .TR
+   .TD hal=r +2
+   .TD
+   Smart
+   .TR
+   .TD hal=r +2
+   .TD
+   Vigorous
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Ageism
+   .TR
+   .TD hal=r −1
+   .TD
+   Arrogant
+   .TR
+   .TD hal=r −1
+   .TD
+   Code of Conduct (Protecting Women… Begrudgingly)
+   .TR
+   .TD hal=r −2
+   .TD
+   Easily Distracted
+   .TR
+   .TD hal=r −1
+   .TD
+   Hatred (Animals)
+   .TR
+   .TD hal=r −3
+   .TD
+   Ineptitude (Modern Technology)
+   .TR
+   .TD hal=r −1
+   .TD
+   Quirk (Antiquated Language)
+   .TR
+   .TD hal=r −2
+   .TD
+   Quirk (Stranger in a Strange Land)
+   .TR
+   .TD hal=r −2
+   .TD
+   Stubborn
+   .ETB
+   .ETB
+   .ne 36
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (AUREN)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBOrion\fP
+   .TD hal=c 5
+   .TD hal=c
+   4
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Armor Piercing; Flaws: Weapon]
+   .TR
+   .TD colspan=4
+   \fIAuren's sword, crafted from unbreakable adamantite, is as beautiful as it is deadly.\fP
+   .TR
+   .TD
+   \fBFireball\fP
+   .TD hal=c 5
+   .TD hal=c
+   6
+   .TD hal=c 20
+   .TR
+   .TD colspan=4
+   [Affinity: Fire; Perks: Continued Effect, Effective x2, Ranged]
+   .TR
+   .TD colspan=4
+   \fIAuren sends forth a spiralling blast of flame. Its magic continues to burn after it hits.\fP
+   .TR
+   .TD
+   \fBIce Spire Array\fP
+   .TD hal=c 5
+   .TD hal=c
+   3
+   .TD hal=c 20
+   .TR
+   .TD colspan=4
+   [Affinity: Ice; Perks: Area Effect, Armor Piercing, Overwhelming, Ranged; Flaws: Feather Blow, Ineffective]
+   .TR
+   .TD colspan=4
+   \fIA prismatic array of frozen shards bombards multiple enemies, piercing any defenses.\fP
+   .TR
+   .TD
+   \fBThunder Godspell\fP
+   .TD hal=c 7
+   .TD hal=c
+   5
+   .TD hal=c 20
+   .TR
+   .TD colspan=4
+   [Affinity: Lightning; Perks: Accurate x2, Effective, Ranged, Stunning; Flaws: Delayed]
+   .TR
+   .TD colspan=4
+   \fIAuren summons a bolt of electrical energy that stuns its target. It rarely misses.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB4\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB60\fP
+   .TD hal=c \fB18\fP
+   .ETB
+   .ne 32
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='25% 75%'
+   .CPTN val=b "Other Statistics"
+   .TR
+   .TD \fBConcept\fP
+   .TD
+   Time Skipping Sorcerer
+   .TR
+   .TD \fBBirthday\fP
+   .TD
+   June 24
+   .TR
+   .TD \fBAge\fP
+   .TD
+   44 (Appears 16)
+   .TR
+   .TD \fBGender\fP
+   .TD
+   Male
+   .TR
+   .TD \fBHeight\fP
+   .TD
+   5'10"
+   .TR
+   .TD \fBWeight\fP
+   .TD
+   152 lbs.
+   .TR
+   .TD \fBHair\fP
+   .TD
+   Grey-Blue
+   .TR
+   .TD \fBEyes\fP
+   .TD
+   Grey
+   .TR
+   .TD \fBAssociation\fP
+   .TD
+   Order of the Fallen Star
+   .TR
+   .TD \fBHobbies\fP
+   .TD
+   Fencing
+   .TR
+   .TD \fBFave Food\fP
+   .TD
+   Mutton
+   .TR
+   .TD \fBAllies\fP
+   .TD
+   None
+   .TR
+   .TD \fBEnemies\fP
+   .TD
+   Mysterious Evil from the Future
+   .ETB
+

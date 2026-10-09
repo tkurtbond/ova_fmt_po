@@ -1,0 +1,271 @@
+Fukiko (Magical Meow Meow Girl)
+===============================
+
+*"In the memory of my mother, I'll be just like my favorite magical girls!"*
+
+*A young magical girl channeling her late mother's power, guided by her feline companion Azyrus.*
+
+**Background**
+
+Raised on shoujo manga, Fukiko never expected her own fantasies
+to come true -- until a strange winged cat named Azyrus appeared
+at her window one night and revealed that her late mother had
+secretly been a magical crime fighter. Fukiko's locket, a
+keepsake from her mother, turned out to hold that same power,
+and so the heroine Lovely Savior Myu Myu was born.
+
+**Personality**
+
+Strong-willed and naive, Fukiko expects the world to play fair by
+her own rules. That same faith lets her see the good in bad
+situations, though her childish streak can also mean a fair
+amount of whining.
+
+.. raw:: ms
+
+   .mso hdtbl.tmac
+   .ne 40
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Companion (Azyrus) — see below
+   .TR
+   .TD hal=r +2
+   .TD
+   Cute!
+   .TR
+   .TD hal=r +1
+   .TD
+   Iron-Willed
+   .TR
+   .TD hal=r +2
+   .TD
+   Knowledge (Shoujo Manga)
+   .TR
+   .TD hal=r +2
+   .TD
+   Quick
+   .TR
+   .TD hal=r +2
+   .TD
+   Shape-Shifter
+   .TR
+   .TD hal=r +4
+   .TD
+   Transformation
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='15% 85%'
+   .CPTN val=b "Transformation — Grants (Abilities)"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Attack
+   .TR
+   .TD hal=r +3
+   .TD
+   Barrier [Perks: Area Effect; Flaws: Elaborate Gestures] (provides an alternate Defense Roll (the second Defense value in Combat, below))
+   .TR
+   .TD hal=r +2
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +2
+   .TD
+   Healer
+   .ETB
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='15% 85%'
+   .CPTN val=b "Transformation — Grants (Weaknesses)"
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Bizarre Appearance (Cat Features)
+   .ETB
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −2
+   .TD
+   Ageism
+   .TR
+   .TD hal=r −2
+   .TD
+   Crybaby
+   .TR
+   .TD hal=r −1
+   .TD
+   Easily Distracted
+   .TR
+   .TD hal=r −2
+   .TD
+   Focus (Powers Require Neko Transformation Locket)
+   .TR
+   .TD hal=r −1
+   .TD
+   Frail
+   .TR
+   .TD hal=r −1
+   .TD
+   Naive
+   .ETB
+   .ETB
+   .ne 36
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (FUKIKO)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBNeko Neko Catnip Cantrip\fP
+   .TD hal=c 4
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Love; Perks: Ranged]
+   .TR
+   .TD colspan=4
+   \fIIn her magical girl form, Fukiko can perform a variety of mystical attacks of love.\fP
+   .TR
+   .TD
+   \fBNeko Neko Heart Burst\fP
+   .TD hal=c 4
+   .TD hal=c
+   5
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Affinity: Love; Perks: Effective x2, Ranged]
+   .TR
+   .TD colspan=4
+   \fIFukiko forms her hands into the shape of a heart over her chest and emits a barrage of magical heart-shaped bursts.\fP
+   .TR
+   .TD
+   \fBNeko Neko Wave\fP
+   .TD hal=c 4
+   .TD hal=c
+   0
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Affinity: Love; Perks: Area Effect x2, Stunning; Flaws: No Damage]
+   .TR
+   .TD colspan=4
+   \fIWith a waving motion of her arms, Fukiko pushes away all opponents around her.\fP
+   .TR
+   .TD
+   \fBNeko Neko Yarn Entangle\fP
+   .TD hal=c 4
+   .TD hal=c
+   3
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Affinity: Love; Perks: Paralyzing]
+   .TR
+   .TD colspan=4
+   \fIA ball of yarn magically appears and wraps around her target.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB4/5\fP
+   .TD hal=c \fB30\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB12\fP
+   .ETB
+   .ne 32
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='25% 75%'
+   .CPTN val=b "Other Statistics"
+   .TR
+   .TD \fBConcept\fP
+   .TD
+   Magical Meow Meow Girl
+   .TR
+   .TD \fBBirthday\fP
+   .TD
+   July 26
+   .TR
+   .TD \fBAge\fP
+   .TD
+   12
+   .TR
+   .TD \fBGender\fP
+   .TD
+   Female
+   .TR
+   .TD \fBHeight\fP
+   .TD
+   4'10"
+   .TR
+   .TD \fBWeight\fP
+   .TD
+   85 lbs.
+   .TR
+   .TD \fBHair\fP
+   .TD
+   Blonde
+   .TR
+   .TD \fBEyes\fP
+   .TD
+   Blue
+   .TR
+   .TD \fBAssociation\fP
+   .TD
+   Middle School
+   .TR
+   .TD \fBHobbies\fP
+   .TD
+   Shoujo Manga
+   .TR
+   .TD \fBFave Food\fP
+   .TD
+   Chocolate
+   .TR
+   .TD \fBAllies\fP
+   .TD
+   Azyrus
+   .TR
+   .TD \fBEnemies\fP
+   .TD
+   Sinister Folk and Their Minions™
+   .ETB
+
+**Azyrus** -- **Attributes:** Flight +2, Quick +1, Smart +2; Awkward Size −1 (Small), Frail −1, Short-Tempered −1.
+
+**Notes**
+
+**Lovely Savior Myu Myu** -- Clutching her locket and shouting her transformation phrase
+turns Fukiko into her cat-themed magical-girl form, right
+down to a bell collar and a whole new outfit -- villains seem
+oddly willing to wait out the sequence. She can also use this
+power just to change her appearance, but not while also using
+Shape-Shifter.
+
+**Azyrus** -- Beneath his cute exterior, Azyrus is a steady source of
+advice for Fukiko, even when her naivete exasperates him.
+

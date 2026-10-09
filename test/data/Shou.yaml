@@ -1,0 +1,142 @@
+---
+# Shou (OVA rulebook, "Sample Characters" chapter, p. 26-27).
+# ova-rulebook.txt lines 769-869. See Karis.yaml's header comment for
+# the general transcription/copyright policy this and all following
+# files follow.
+
+- name: Shou
+  tagline: Olly olly oxen free! Watch out now, here I come! This is going to be the best!
+  summary: A playful, dangerously skilled assassin hunting down his former best friend.
+  background: |
+    Raised from childhood by the assassins of Clan Cave Fox, Shou
+    never had to grow up -- his skill let him treat killing as a
+    game. He spent years close to his fellow assassin Raine, until
+    Raine broke from the Clan. Now Shou has been sent to track his
+    old friend down, and he's treating the hunt as the best game yet.
+  personality: |
+    Cheerful, playful, and utterly without remorse, Shou brings a
+    childlike energy to a very adult occupation. He's easily won over
+    by food, at least for a little while.
+  abilities:
+    - name: Agile
+      level: 2
+    - name: Art of Invisibility
+      level: 3
+    - name: Attack
+      level: 2
+      detail: Ninjutsu
+    - name: Combat Expert
+      level: 1
+    - name: Evasive
+      level: 2
+    - name: Knowledge
+      level: 2
+      detail: Food
+    - name: Perceptive
+      level: 2
+    - name: Quick
+      level: 3
+    - name: Strong
+      level: 1
+    - name: Teleport
+      level: 3
+    - name: Tough
+      level: 2
+  weaknesses:
+    - name: Easily Distracted
+      level: -1
+    - name: Impulsive
+      level: -2
+    - name: Infamous
+      level: -2
+      detail: Assassin
+    - name: Overconfident
+      level: -2
+    - name: Quirk
+      level: -2
+      detail: Playfulness at All Times
+    - name: Rival
+      level: -2
+      detail: Raine
+    - name: Rude
+      level: -2
+    - name: Servitude
+      level: -2
+      detail: Clan Cave Fox
+    - name: Soft Spot
+      level: -2
+      detail: Food
+    - name: Vulnerability
+      level: -2
+      detail: Light
+  combat:
+    defense: 7
+    health: 60
+    endurance: 40
+    threat-value: 18
+    attacks:
+      - name: Bladed Tonfas
+        perks:
+          - Defensive
+        flaws:
+          - Weapon
+        description: The addition of a gleaming edge makes these otherwise humble weapons deadly.
+        roll: 5
+        dx: 4
+        endurance: 0
+      - name: Sweep Kick
+        perks:
+          - Stunning
+        flaws:
+          - name: Ineffective
+            counts-as: 2
+        description: Shou unbalances his opponent with a swift, low kick.
+        roll: 5
+        dx: 2
+        endurance: 0
+      - name: Pressure Strike
+        perks:
+          - Impairing
+        flaws:
+          - name: Ineffective
+            counts-as: 2
+        description: A precise blow that impedes the opponent's ability to fight.
+        roll: 5
+        dx: 2
+        endurance: 0
+      - name: Dark Spark
+        perks:
+          - name: Effective
+            counts-as: 2
+          - Ranged
+        affinity: Darkness
+        flaws:
+          - name: Backlash
+            counts-as: 2
+        description: By focusing dark magics and striking his blades together, Shou sends out a bolt of energy that devours light in its path.
+        roll: 5
+        dx: 5
+        endurance: 0
+  notes:
+    - header: Dark World
+      text: |
+        A dead elder of Clan Cave Fox once trained Shou in shadow
+        magic -- letting him become living shadow, cross distances in
+        an instant, and strike with darkness-empowered blows. The
+        bargain that granted these powers left his soul tainted, and
+        he's vulnerable to light.
+  fluff:
+    concept: Scarily Playful Ninja Hitman
+    birthday: April 1
+    age: 22
+    gender: Male
+    height: 6'1"
+    weight: 184 lbs.
+    hair: Bone
+    eyes: Indigo
+    association: Clan Cave Fox
+    hobbies: Eating
+    favorite-food: Tempura
+    allies: The Clan
+    enemies: Too Numerous to Count
+...

@@ -1,0 +1,5 @@
+# A required integer that isn't one: reported with the others, by path and location.
+- name: X
+  abilities:
+    - name: Q
+      level: abc

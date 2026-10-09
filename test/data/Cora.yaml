@@ -1,0 +1,158 @@
+---
+# Cora (OVA rulebook, "Sample Characters" chapter, p. 45-47) -- the
+# twelfth and last of the rulebook's Sample Characters, completing
+# this transcription pass (PLAN.md §9 step 1). ova-rulebook.txt lines
+# 1919-2021. See Karis.yaml's header comment for the general policy.
+#
+# Cora has Magic, Witchcraft (unlike Auren's Magic, Arcane) with no
+# nested `spells:` list -- and per the rulebook's own Witchcraft
+# rules text (already in PLAN.md §2.2's quote), Witchcraft casts
+# *Weaknesses* onto a target rather than the caster mimicking another
+# Ability's effect on themselves, so there's no per-spell "mimics an
+# Ability at some Level" list the way Magic, Arcane needs. Confirms
+# `spells:` is specific to Magic, Arcane-style casting, not something
+# every Magic-having character needs.
+
+- name: Cora
+  tagline: To destroy those that took everything from me, I must embrace what I left behind…
+  summary: A stage magician turned paranormal detective, hunting the spirit that killed her father.
+  background: |
+    Cora grew up torn between her American father's stage magic and
+    her Japanese mother's line of Shinto priestesses, always trusting
+    the former over the latter -- until she alone witnessed a
+    malevolent spirit cause her father's death during a performance.
+    Devastated and forced to reckon with truths she'd always
+    dismissed, she returned to her mother to learn the family's real
+    power, and now runs a paranormal detective agency, hoping one day
+    to find the entity responsible.
+  personality: |
+    Guarded and sharp-tongued, Cora treats her true feelings the way
+    she treats her tricks -- always hidden behind whatever face she
+    wants the world to see, making her almost impossible to really
+    know.
+  abilities:
+    - name: Attack
+      level: 2
+      detail: Card Shark
+    - name: Combat Expert
+      level: 2
+    - name: Dexterous
+      level: 2
+    - name: Illusionist
+      level: 2
+    - name: Intuitive
+      level: 1
+    - name: Knowledge
+      level: 2
+      detail: Stage Magic
+    - name: Magic, Witchcraft
+      level: 2
+    - name: Perceptive
+      level: 1
+    - name: Performer
+      level: 2
+    - name: Quick
+      level: 1
+    - name: Sixth Sense
+      level: 2
+    - name: Spirit Medium
+      level: 1
+    - name: Vigorous
+      level: 1
+  weaknesses:
+    - name: Dependency
+      level: -1
+      detail: Cigarettes
+    - name: Focus
+      level: -2
+      detail: Attack and Witchcraft Require Cards
+    - name: Guardian
+      level: -1
+      detail: Chiyoko
+    - name: Loner
+      level: -2
+    - name: Obsession
+      level: -2
+      detail: Find Father's Killer
+    - name: Overconfident
+      level: -1
+    - name: Quirk
+      level: -1
+      detail: Playing with Cards
+    - name: Rude
+      level: -1
+    - name: Sensitivity
+      level: -2
+      detail: Inquiries to Personal Life
+    - name: Stubborn
+      level: -2
+  combat:
+    defense: 3
+    health: 40
+    endurance: 50
+    threat-value: 12
+    attacks:
+      - name: Spade
+        perks:
+          - Defensive
+          - Ranged
+        flaws:
+          - Feather Blow
+        description: Cora fans out a hand of cards, which can deflect attacks and be thrown as a unit.
+        roll: 4
+        dx: 3
+        endurance: 0
+      - name: Diamond
+        perks:
+          - name: Armor Piercing
+            counts-as: 2
+          - Ranged
+        flaws:
+          - Ineffective
+        description: Cora throws a card with dazzling precision slicing through anything like butter.
+        roll: 4
+        dx: 2
+        endurance: 5
+      - name: Heart
+        perks:
+          - name: Paralyzing
+            counts-as: 2
+        flaws:
+          - Finisher
+        description: Cora places a card against the chest of a battered foe, which explodes into a series of spiritual, binding chains.
+        roll: 4
+        dx: 3
+        endurance: 10
+      - name: Club
+        perks:
+          - Area Effect
+          - Stunning
+          - Trap
+        flaws:
+          - Activation
+        description: Once placed, nothing can stop this blast.
+        roll: 4
+        dx: 3
+        endurance: 15
+  notes:
+    - header: Talismans
+      text: |
+        Cora's family power is traditionally channeled through paper
+        talismans, but she prefers to work with something more
+        familiar: playing cards. Beyond her attacks, these cards can
+        also be empowered to hinder others.
+  fluff:
+    concept: Paranormal Detective/Magician
+    birthday: December 21
+    age: 26
+    gender: Female
+    height: 5'9"
+    weight: 143 lbs.
+    hair: Black
+    eyes: Amber
+    association: Umbra Paranormal Detective Agency
+    hobbies: Magic
+    favorite-food: Andouille Gumbo
+    allies: Chiyoko
+    enemies: Unknown
+...
