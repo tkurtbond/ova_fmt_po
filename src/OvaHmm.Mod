@@ -21,18 +21,10 @@ PROCEDURE Node(depth: INTEGER; r: Rope);
 BEGIN OvaOut.Repeat(09X, depth); OvaCommon.Line(r)
 END Node;
 
-PROCEDURE ToSpace(c: CHAR): CHAR;
-BEGIN
-  IF c = 0AX THEN RETURN " " END;
-  RETURN c
-END ToSpace;
-
-(* r with every line feed a blank: a node is one line, and prose from a
-   literal block scalar has line feeds in it. *)
+(* r on one line: a node is one line, and prose from a literal block
+   scalar has line feeds in it. *)
 PROCEDURE AllOneLine(r: Rope): Rope;
-BEGIN
-  IF Ropes.IndexChar(r, 0AX, 0) < 0 THEN RETURN r END;
-  RETURN Ropes.Map(r, ToSpace)
+BEGIN RETURN OvaCommon.AllOneLine(r)
 END AllOneLine;
 
 (* "**Label:** items." on one node with -c/--hmm-compact-lists, else a
@@ -70,7 +62,7 @@ END PrintWeaknesses;
 (* A "Combat" node, its summary, and an "Attacks" node with a node for
    each attack. *)
 PROCEDURE PrintCombat(c: OvaEntities.Combat; depth: INTEGER);
-  VAR i: INTEGER;
+  VAR i: INTEGER; r: Rope;
 BEGIN
   IF ~c.hasCombat THEN RETURN END;
   Node(depth, OvaCommon.SectionHeaderStr("Combat"));
@@ -80,6 +72,10 @@ BEGIN
     FOR i := 0 TO c.attacks.n - 1 DO
       Node(depth + 2, OvaCommon.FormatAttackLine(c.attacks.items[i](OvaEntities.Attack)))
     END
+  END;
+  IF c.hasNotes THEN
+    r := Ropes.AppendChar(OvaCommon.BoldStr("Combat Notes:"), " ");
+    Node(depth + 1, Ropes.Cat(r, AllOneLine(c.notes)))
   END
 END PrintCombat;
 
@@ -142,6 +138,10 @@ BEGIN
       Node(depth + 1, Ropes.Cat(r, AllOneLine(n.text)))
     END
   END;
+  IF e.hasOtherNotes THEN
+    Node(depth, OvaCommon.SectionHeaderStr("Other Notes"));
+    Node(depth + 1, AllOneLine(e.otherNotes))
+  END;
   IF e.hasFluff THEN
     Node(depth, OvaCommon.SectionHeaderStr("Fluff"));
     Node(depth + 1, OvaCommon.EndWithPeriod(AllOneLine(OvaCommon.FluffLine(e))))
@@ -177,6 +177,10 @@ BEGIN
     IF e.hasBackground THEN
       Node(d2, OvaCommon.SectionHeaderStr("Background"));
       Node(d3, AllOneLine(e.background))
+    END;
+    IF e.hasAppearance THEN
+      Node(d2, OvaCommon.SectionHeaderStr("Appearance"));
+      Node(d3, AllOneLine(e.appearance))
     END;
     IF e.hasPersonality THEN
       Node(d2, OvaCommon.SectionHeaderStr("Personality"));

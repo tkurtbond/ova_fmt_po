@@ -63,6 +63,11 @@ BEGIN
   RETURN Ropes.Cat(out, Ropes.Substring(r, from, Ropes.Length(r) - from))
 END HtmlEscape;
 
+(* r, marked if k is in overrides, for a raw table's cell: "*" there. *)
+PROCEDURE Mark(r: Rope; k: INTEGER; overrides: SET): Rope;
+BEGIN RETURN OvaCommon.Marked(r, k, overrides, TRUE)
+END Mark;
+
 (* r without the parentheses around it, if it has them: a clause from
    OvaCommon, built for a sentence, in a table cell. *)
 PROCEDURE StripParens(r: Rope): Rope;
@@ -104,7 +109,7 @@ BEGIN
   FOR i := 0 TO items.n - 1 DO
     s := items.items[i](OvaEntities.SubItem);
     r := Str("<tr>");
-    Cells(r, HtmlEscape(s.name)); Cells(r, OvaCommon.SignedImg(s.level));
+    Cells(r, HtmlEscape(s.name)); Cells(r, Ropes.Cat(OvaCommon.SignedImg(s.level), OvaCommon.HalfTVText(s)));
     Cells(r, HtmlEscape(DetailOf(s)));
     Cells(r, HtmlEscape(StripParens(OvaCommon.FormatModifiersBracket(s.perks, s.flaws))));
     OvaText.Add(r, "</tr>");
@@ -124,7 +129,8 @@ BEGIN
     s := spells.items[i](OvaEntities.Spell);
     r := Str("<tr>");
     Cells(r, HtmlEscape(s.name)); Cells(r, HtmlEscape(s.ability));
-    Cells(r, OvaCommon.SignedImg(s.level)); Cells(r, HtmlEscape(s.endurance));
+    Cells(r, OvaCommon.SignedImg(s.level));
+    Cells(r, Mark(HtmlEscape(s.endurance), OvaEntities.OvEndurance, s.overrides));
     OvaText.Add(r, "</tr>");
     RawRope(indent, r)
   END;
@@ -141,8 +147,9 @@ BEGIN
   FOR i := 0 TO attacks.n - 1 DO
     a := attacks.items[i](OvaEntities.Attack);
     r := Str("<tr>");
-    Cells(r, HtmlEscape(a.name)); Cells(r, OvaCommon.NumberImg(a.roll));
-    Cells(r, HtmlEscape(a.dx)); Cells(r, OvaCommon.TrimImg(a.endurance));
+    Cells(r, HtmlEscape(a.name)); Cells(r, Mark(OvaCommon.NumberImg(a.roll), OvaEntities.OvRoll, a.overrides));
+    Cells(r, Mark(HtmlEscape(a.dx), OvaEntities.OvDx, a.overrides));
+    Cells(r, Mark(OvaCommon.TrimImg(a.endurance), OvaEntities.OvEndurance, a.overrides));
     Cells(r, HtmlEscape(StripParens(OvaCommon.FormatAttackClause(a))));
     IF a.hasDescription THEN d := HtmlEscape(a.description) ELSE d := NIL END;
     Cells(r, d);
@@ -160,14 +167,23 @@ BEGIN
   Caption(indent, caption);
   Raw(indent, "<tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>");
   r := Str("<tr>");
-  Cells(r, OvaCommon.TrimImg(c.health)); Cells(r, OvaCommon.TrimImg(c.endurance));
-  Cells(r, HtmlEscape(c.defense));
-  IF c.hasThreatValue THEN tv := OvaCommon.TrimImg(c.threatValue) ELSE tv := Str("—") END;
+  Cells(r, Mark(OvaCommon.TrimImg(c.health), OvaEntities.OvHealth, c.overrides));
+  Cells(r, Mark(OvaCommon.TrimImg(c.endurance), OvaEntities.OvEndurance, c.overrides));
+  Cells(r, HtmlEscape(OvaCommon.DefenseText(c, TRUE)));
+  IF c.hasThreatValue THEN tv := Mark(OvaCommon.TrimImg(c.threatValue), OvaEntities.OvThreatValue, c.overrides)
+  ELSE tv := Str("—")
+  END;
   Cells(r, tv);
   OvaText.Add(r, "</tr>");
   RawRope(indent, r);
   Raw(indent, "</table>");
-  PrintAttacksTable(c.attacks, Ropes.Cat(caption, Str(" — Attacks")), indent)
+  PrintAttacksTable(c.attacks, Ropes.Cat(caption, Str(" — Attacks")), indent);
+  (* One line: every line of a raw block keeps its indent. *)
+  IF c.hasNotes THEN
+    r := Ropes.Cat(Str("<p><strong>Combat Notes:</strong> "), HtmlEscape(OvaCommon.AllOneLine(c.notes)));
+    OvaText.Add(r, "</p>");
+    RawRope(indent, r)
+  END
 END PrintCombatTable;
 
 (* A Companion's or Vehicle's tables, in its granting ability's cell.
@@ -213,7 +229,7 @@ PROCEDURE PrintAbilityRow(a: OvaEntities.Ability; indent: Rope);
   VAR r: Rope;
 BEGIN
   r := Str("<tr>");
-  Cells(r, HtmlEscape(a.name)); Cells(r, OvaCommon.SignedImg(a.level));
+  Cells(r, HtmlEscape(a.name)); Cells(r, Ropes.Cat(OvaCommon.SignedImg(a.level), OvaCommon.HalfTVText(a)));
   Cells(r, HtmlEscape(DetailOf(a)));
   Cells(r, HtmlEscape(StripParens(OvaCommon.FormatModifiersBracket(a.perks, a.flaws))));
   OvaOut.String(RawPrefix); OvaOut.Rope(indent); OvaOut.Rope(r);
@@ -292,12 +308,14 @@ BEGIN
   RETURN out
 END GroffEscape;
 
-(* "Name (detail) [Perks: ...] (note)", and " — see below" if it grants
-   a sub-entity, written in its own section after this one. *)
+(* "Name (detail) (half TV) [Perks: ...] (note)", and " — see below" if
+   it grants a sub-entity, written in its own section after this one.
+   The half TV goes after the name: the Level column is too narrow. *)
 PROCEDURE ItemCellText(s: OvaEntities.SubItem): Rope;
   VAR r: Rope;
 BEGIN
   r := OvaCommon.NameDetail(s.name, s.hasDetail, s.detail);
+  r := Ropes.Cat(r, OvaCommon.HalfTVText(s));
   r := Ropes.Cat(r, OvaCommon.FormatModifiersBracket(s.perks, s.flaws));
   IF s.hasNote THEN
     OvaText.Add(r, " ("); r := Ropes.AppendChar(Ropes.Cat(r, s.note), ")")
@@ -312,7 +330,8 @@ PROCEDURE SpellDetailText(s: OvaEntities.Spell): Rope;
   VAR r: Rope;
 BEGIN
   r := Ropes.AppendChar(s.ability, " "); r := Ropes.Cat(r, OvaCommon.SignedImg(s.level));
-  OvaText.Add(r, "; "); r := Ropes.Cat(r, s.endurance); OvaText.Add(r, " Endurance");
+  OvaText.Add(r, "; "); r := Ropes.Cat(r, Mark(s.endurance, OvaEntities.OvEndurance, s.overrides));
+  OvaText.Add(r, " Endurance");
   RETURN GroffEscape(r)
 END SpellDetailText;
 
@@ -354,6 +373,8 @@ BEGIN
     IF StripParens(OvaCommon.FormatAttackClause(a)) # NIL THEN INC(n) END;
     IF a.hasDescription THEN INC(n) END
   END;
+  (* Combat Notes: a row, and one more for every 80 bytes. *)
+  IF c.hasNotes THEN INC(n, 1 + SHORT(Ropes.Length(c.notes) DIV 80)) END;
   RETURN n + 2  (* Defense/Health/Endurance/TV headers and values *)
 END CombatTableRows;
 
@@ -539,9 +560,9 @@ BEGIN
     a := c.attacks.items[i](OvaEntities.Attack);
     Raw(NIL, ".TR");
     PutCell("", Fb(GroffEscape(a.name)));
-    CenterCell(OvaCommon.NumberImg(a.roll));
-    PutCell("hal=c", GroffEscape(a.dx));
-    CenterCell(OvaCommon.TrimImg(a.endurance));
+    CenterCell(Mark(OvaCommon.NumberImg(a.roll), OvaEntities.OvRoll, a.overrides));
+    PutCell("hal=c", GroffEscape(Mark(a.dx, OvaEntities.OvDx, a.overrides)));
+    CenterCell(Mark(OvaCommon.TrimImg(a.endurance), OvaEntities.OvEndurance, a.overrides));
     clause := StripParens(OvaCommon.FormatAttackClause(a));
     IF clause # NIL THEN
       Raw(NIL, ".TR");
@@ -558,11 +579,18 @@ BEGIN
   Raw(NIL, ".TH Endurance");
   Raw(NIL, ".TH TV");
   Raw(NIL, ".TR");
-  PutCell("hal=c", Fb(GroffEscape(c.defense)));
-  CenterCell(Fb(OvaCommon.TrimImg(c.health)));
-  CenterCell(Fb(OvaCommon.TrimImg(c.endurance)));
-  IF c.hasThreatValue THEN tv := OvaCommon.TrimImg(c.threatValue) ELSE tv := Str("—") END;
+  PutCell("hal=c", Fb(GroffEscape(OvaCommon.DefenseText(c, TRUE))));
+  CenterCell(Fb(Mark(OvaCommon.TrimImg(c.health), OvaEntities.OvHealth, c.overrides)));
+  CenterCell(Fb(Mark(OvaCommon.TrimImg(c.endurance), OvaEntities.OvEndurance, c.overrides)));
+  IF c.hasThreatValue THEN tv := Mark(OvaCommon.TrimImg(c.threatValue), OvaEntities.OvThreatValue, c.overrides)
+  ELSE tv := Str("—")
+  END;
   CenterCell(Fb(tv));
+  (* One line, as PutCell writes it. *)
+  IF c.hasNotes THEN
+    Raw(NIL, ".TR");
+    PutCell("colspan=4", Ropes.Cat(Str("\fBCombat Notes:\fP "), GroffEscape(OvaCommon.AllOneLine(c.notes))))
+  END;
   Raw(NIL, ".ETB")
 END PrintCombatTableGroff;
 

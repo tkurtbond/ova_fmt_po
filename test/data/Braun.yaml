@@ -77,6 +77,7 @@
         roll: -2
         dx: "1/2"
         endurance: 0
+        overrides: [roll]  # the book's -2, a ruling: the rules give 0
   notes:
     - header: Inventions
       text: |

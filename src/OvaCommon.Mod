@@ -126,6 +126,62 @@ BEGIN
   RETURN r
 END NameDetail;
 
+PROCEDURE ToSpace(c: CHAR): CHAR;
+BEGIN
+  IF c = 0AX THEN RETURN " " END;
+  RETURN c
+END ToSpace;
+
+(* r with every line feed a blank: for an h-m-m node, or a raw table's
+   cell, which hold one line of text. *)
+PROCEDURE AllOneLine*(r: Rope): Rope;
+BEGIN
+  IF Ropes.IndexChar(r, 0AX, 0) < 0 THEN RETURN r END;
+  RETURN Ropes.Map(r, ToSpace)
+END AllOneLine;
+
+(* ---- The keys added for the character generator ---- *)
+
+(* What follows a number its mapping's overrides: list names: NIL if
+   it isn't overridden; "*"; or "\*" where the text is reST or
+   Markdown, so the "*" can't open emphasis.  raw: the number goes in
+   a raw HTML or groff table, so it's "*".  Gemtext and h-m-m have no
+   emphasis to escape from. *)
+PROCEDURE OverrideMark*(overridden, raw: BOOLEAN): Rope;
+BEGIN
+  IF ~overridden THEN RETURN NIL
+  ELSIF raw OR (OvaConfig.format = OvaConfig.Gemtext) OR (OvaConfig.format = OvaConfig.Hmm) THEN
+    RETURN Str("*")
+  END;
+  RETURN Str("\*")
+END OverrideMark;
+
+(* r, then OverrideMark(k IN overrides, raw). *)
+PROCEDURE Marked*(r: Rope; k: INTEGER; overrides: SET; raw: BOOLEAN): Rope;
+BEGIN RETURN Ropes.Cat(r, OverrideMark(k IN overrides, raw))
+END Marked;
+
+(* c's defense with a mark after each overridden half: a paired "4/5"
+   Defense's halves are defense and barrier. *)
+PROCEDURE DefenseText*(c: OvaEntities.Combat; raw: BOOLEAN): Rope;
+  VAR slash, len: LONGINT; r: Rope;
+BEGIN
+  slash := Ropes.IndexChar(c.defense, "/", 0);
+  IF slash < 0 THEN RETURN Marked(c.defense, OvaEntities.OvDefense, c.overrides, raw) END;
+  len := Ropes.Length(c.defense);
+  r := Marked(Ropes.Substring(c.defense, 0, slash), OvaEntities.OvDefense, c.overrides, raw);
+  r := Ropes.Cat(r, Ropes.Substring(c.defense, slash, len - slash));
+  RETURN Marked(r, OvaEntities.OvBarrier, c.overrides, raw)
+END DefenseText;
+
+(* " (half TV)" after the Level of an Ability or SubItem whose
+   threat-value-half is true, with -O/--options; else NIL. *)
+PROCEDURE HalfTVText*(s: OvaEntities.SubItem): Rope;
+BEGIN
+  IF OvaConfig.showOptions & s.hasThreatValueHalf & s.threatValueHalf THEN RETURN Str(" (half TV)") END;
+  RETURN NIL
+END HalfTVText;
+
 (* " (text)" appended to r. *)
 PROCEDURE AddParens(VAR r: Rope; text: Rope);
 BEGIN OvaText.Add(r, " ("); r := Ropes.AppendChar(Ropes.Cat(r, text), ")")
@@ -202,7 +258,7 @@ PROCEDURE FormatSubItemLine*(x: Element): Rope;
 BEGIN
   s := x(OvaEntities.SubItem);
   r := NameDetail(s.name, s.hasDetail, s.detail);
-  r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, SignedImg(s.level));
+  r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, SignedImg(s.level)); r := Ropes.Cat(r, HalfTVText(s));
   r := Ropes.Cat(r, FormatModifiersBracket(s.perks, s.flaws));
   IF s.hasNote THEN AddParens(r, s.note) END;
   RETURN r
@@ -225,7 +281,7 @@ PROCEDURE FormatFragmentSubItemLine*(x: Element): Rope;
   VAR s: OvaEntities.SubItem; r: Rope;
 BEGIN
   s := x(OvaEntities.SubItem);
-  r := Ropes.AppendChar(s.name, " "); r := Ropes.Cat(r, SignedImg(s.level));
+  r := Ropes.AppendChar(s.name, " "); r := Ropes.Cat(r, SignedImg(s.level)); r := Ropes.Cat(r, HalfTVText(s));
   IF s.hasDetail THEN AddParens(r, s.detail) END;
   r := Ropes.Cat(r, FormatModifiersBracket(s.perks, s.flaws));
   IF s.hasNote THEN AddParens(r, s.note) END;
@@ -249,7 +305,8 @@ BEGIN
   s := x(OvaEntities.Spell);
   r := s.name; OvaText.Add(r, " ("); r := Ropes.Cat(r, s.ability);
   r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, SignedImg(s.level));
-  OvaText.Add(r, "; "); r := Ropes.Cat(r, s.endurance); OvaText.Add(r, " Endurance)");
+  OvaText.Add(r, "; "); r := Ropes.Cat(r, Marked(s.endurance, OvaEntities.OvEndurance, s.overrides, FALSE));
+  OvaText.Add(r, " Endurance)");
   RETURN r
 END FormatSpellLine;
 
@@ -291,11 +348,13 @@ PROCEDURE FormatAttackLine*(a: OvaEntities.Attack): Rope;
 BEGIN
   t := Ropes.AppendChar(a.name, ":"); r := Bold(t);
   OvaText.Add(r, " Roll ");
-  t := NumberImg(a.roll); OvaText.Add(t, " dice"); r := Ropes.Cat(r, Bold(t));
+  t := Marked(NumberImg(a.roll), OvaEntities.OvRoll, a.overrides, FALSE);
+  OvaText.Add(t, " dice"); r := Ropes.Cat(r, Bold(t));
   OvaText.Add(r, " | ");
-  t := Ropes.Cat(Str("DX "), a.dx); r := Ropes.Cat(r, Bold(t));
+  t := Ropes.Cat(Str("DX "), Marked(a.dx, OvaEntities.OvDx, a.overrides, FALSE)); r := Ropes.Cat(r, Bold(t));
   OvaText.Add(r, " | ");
-  t := Ropes.Cat(Str("Endurance Cost: "), TrimImg(a.endurance)); r := Ropes.Cat(r, Bold(t));
+  t := Marked(TrimImg(a.endurance), OvaEntities.OvEndurance, a.overrides, FALSE);
+  t := Ropes.Cat(Str("Endurance Cost: "), t); r := Ropes.Cat(r, Bold(t));
   clause := FormatAttackClause(a);
   IF clause # NIL THEN r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, clause) END;
   r := Ropes.AppendChar(r, ".");
@@ -308,14 +367,19 @@ END FormatAttackLine;
 PROCEDURE FormatCombatSummaryLine*(c: OvaEntities.Combat): Rope;
   VAR r: Rope;
 BEGIN
-  r := BoldStr("Health:"); r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, TrimImg(c.health));
+  r := BoldStr("Health:"); r := Ropes.AppendChar(r, " ");
+  r := Ropes.Cat(r, Marked(TrimImg(c.health), OvaEntities.OvHealth, c.overrides, FALSE));
   OvaText.Add(r, " | "); r := Ropes.Cat(r, BoldStr("Endurance:"));
-  r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, TrimImg(c.endurance));
+  r := Ropes.AppendChar(r, " ");
+  r := Ropes.Cat(r, Marked(TrimImg(c.endurance), OvaEntities.OvEndurance, c.overrides, FALSE));
   OvaText.Add(r, " | "); r := Ropes.Cat(r, BoldStr("Defense:"));
-  r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, c.defense);
+  r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, DefenseText(c, FALSE));
   OvaText.Add(r, " | "); r := Ropes.Cat(r, BoldStr("Threat Value (TV):"));
   r := Ropes.AppendChar(r, " ");
-  IF c.hasThreatValue THEN r := Ropes.Cat(r, TrimImg(c.threatValue)) ELSE OvaText.Add(r, "—") END;
+  IF c.hasThreatValue THEN
+    r := Ropes.Cat(r, Marked(TrimImg(c.threatValue), OvaEntities.OvThreatValue, c.overrides, FALSE))
+  ELSE OvaText.Add(r, "—")
+  END;
   RETURN r
 END FormatCombatSummaryLine;
 
@@ -338,6 +402,11 @@ BEGIN
     OvaOut.Ln;
     FOR i := 0 TO c.attacks.n - 1 DO PrintAttack(c.attacks.items[i](OvaEntities.Attack)) END;
     OvaOut.Ln
+  END;
+  (* A paragraph, not a bullet: several lines would need indenting in a
+     reST bullet. *)
+  IF c.hasNotes THEN
+    OvaOut.Rope(BoldStr("Combat Notes:")); OvaOut.Char(" "); Line(c.notes); OvaOut.Ln
   END
 END PrintCombatAndAttacks;
 
@@ -445,12 +514,15 @@ BEGIN
   Line(FragmentAttributes(e)); OvaOut.Ln
 END PrintFragmentAttributes;
 
-(* The entity's title: "Name (concept)", or "Name". *)
+(* The entity's title: "Name (concept)", or "Name", then ", played by
+   Player" with a player: (the Ada Entity_Title). *)
 PROCEDURE Title*(e: OvaEntities.Entity): Rope;
-  VAR has: BOOLEAN;
+  VAR has: BOOLEAN; r: Rope;
 BEGIN
   has := e.hasFluff & e.hasFluffField[OvaEntities.Concept];
-  RETURN NameDetail(e.name, has, e.fluff[OvaEntities.Concept])
+  r := NameDetail(e.name, has, e.fluff[OvaEntities.Concept]);
+  IF e.hasPlayer THEN OvaText.Add(r, ", played by "); r := Ropes.Cat(r, e.player) END;
+  RETURN r
 END Title;
 
 (* Title, tagline, summary, background and personality: the same in
@@ -472,6 +544,14 @@ BEGIN
   END;
   OvaOut.Ln;
 
+  (* The portrait, in HTML-in-reST only: its path is relative to the
+     YAML file, so the HTML must be made beside it. *)
+  IF (OvaConfig.format = OvaConfig.HtmlInRst) & e.hasPortrait THEN
+    OvaOut.String(".. image:: "); Line(e.portrait);
+    OvaOut.String("   :alt: "); Line(e.name);
+    OvaOut.Ln
+  END;
+
   IF e.hasTagline THEN
     Line(Italic(Ropes.AppendChar(Ropes.Cat(Str('"'), e.tagline), '"'))); OvaOut.Ln
   END;
@@ -479,6 +559,10 @@ BEGIN
   IF e.hasBackground THEN
     Line(SectionHeaderStr("Background")); OvaOut.Ln;
     Line(e.background); OvaOut.Ln
+  END;
+  IF e.hasAppearance THEN
+    Line(SectionHeaderStr("Appearance")); OvaOut.Ln;
+    Line(e.appearance); OvaOut.Ln
   END;
   IF e.hasPersonality THEN
     Line(SectionHeaderStr("Personality")); OvaOut.Ln;
@@ -496,6 +580,10 @@ BEGIN
       OvaOut.Rope(Bold(n.header)); OvaOut.String(" -- "); Line(n.text);
       OvaOut.Ln
     END
+  END;
+  IF e.hasOtherNotes THEN
+    Line(SectionHeaderStr("Other Notes")); OvaOut.Ln;
+    Line(e.otherNotes); OvaOut.Ln
   END
 END PrintNotes;
 
@@ -520,7 +608,12 @@ BEGIN
     t := Ropes.AppendChar(Ropes.Cat(Str("Power Ceiling ("), TrimImg(e.options.powerCeiling)), ")");
     AddItem(r, first, t); first := FALSE
   END;
+  IF e.options.hasStartingLevels THEN
+    t := Ropes.AppendChar(Ropes.Cat(Str("Starting Levels ("), TrimImg(e.options.startingLevels)), ")");
+    AddItem(r, first, t); first := FALSE
+  END;
   IF e.options.scaledCost THEN AddItem(r, first, Str("Scaled Cost")); first := FALSE END;
+  IF e.options.halfCostKnowledge THEN AddItem(r, first, Str("Half-Cost Knowledge")); first := FALSE END;
   IF e.options.combinedEffectiveness THEN AddItem(r, first, Str("Combined Effectiveness")); first := FALSE END;
   RETURN ~first
 END CreationRules;

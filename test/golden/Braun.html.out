@@ -56,7 +56,7 @@ easy target for bullies.
    <table>
    <caption>Combat — Attacks</caption>
    <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
-   <tr><td>First Day of Sale Shove!</td><td>−2</td><td>1/2</td><td>0</td><td>Affinity: Nerdy</td><td>When a new Draconic Quest game is out, Braun can hold his place in line. Sometimes.</td></tr>
+   <tr><td>First Day of Sale Shove!</td><td>−2*</td><td>1/2</td><td>0</td><td>Affinity: Nerdy</td><td>When a new Draconic Quest game is out, Braun can hold his place in line. Sometimes.</td></tr>
    </table>
 
 **Notes**

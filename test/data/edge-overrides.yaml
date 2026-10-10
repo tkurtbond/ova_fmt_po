@@ -1,0 +1,19 @@
+# overrides: that mark nothing: an empty list, and keys listed that the
+# mapping doesn't have (no threat-value, no endurance).  Nothing gets a
+# "*", and the missing Threat Value is still a dash.
+- name: Edge Overrides
+  abilities:
+    - name: Flight
+      level: 1
+      overrides: [endurance]
+  combat:
+    defense: 2
+    health: 20
+    endurance: 30
+    overrides: [threat-value]
+    attacks:
+      - name: Punch
+        roll: 2
+        dx: 1
+        endurance: 0
+        overrides: []

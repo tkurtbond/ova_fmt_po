@@ -189,7 +189,7 @@ authority.
    \fBStiletto Kick\fP
    .TD hal=c 4
    .TD hal=c
-   3
+   3*
    .TD hal=c 0
    .TR
    .TD colspan=4

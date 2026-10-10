@@ -140,6 +140,7 @@
     health: 30
     endurance: 40
     threat-value: 12
+    transformed: true  # the sheet shows her as Lovely Savior Myu Myu (p. 63)
     attacks:
       - name: Neko Neko Catnip Cantrip
         perks:

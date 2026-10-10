@@ -109,6 +109,7 @@
         roll: 2
         dx: 4
         endurance: 5
+        telekinesis: true  # Telekinesis adds to its DX (p. 62)
       - name: Mind Break
         perks:
           - Armor Piercing
@@ -124,6 +125,7 @@
         roll: 2
         dx: 5
         endurance: 5
+        telekinesis: true  # Telekinesis adds to its DX (p. 62)
   fluff:
     concept: Amnesiatic ESPer
     birthday: May 13

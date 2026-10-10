@@ -67,7 +67,7 @@ authority.
    <tr><td>Gauntlet Bull</td><td>3</td><td>6</td><td>0</td><td>Perks: Stunning; Flaws: Inaccurate, Weapon</td><td>A fierce punch with speed and power can bowl over even stalwart foes.</td></tr>
    <tr><td>Gauntlet Bear</td><td>4</td><td>5</td><td>0</td><td>Perks: Paralyzing; Flaws: Ineffective, Weapon</td><td>Natsuki grasps her opponent in her clutches and doesn't let go.</td></tr>
    <tr><td>Gauntlet Crash</td><td>4</td><td>5</td><td>10</td><td>Perks: Area Effect, Stunning; Flaws: Ineffective, Weapon</td><td>Natsuki pounds the ground, sending out a shockwave of destruction all around her.</td></tr>
-   <tr><td>Stiletto Kick</td><td>4</td><td>3</td><td>0</td><td>Affinity: Martial Arts</td><td>Even without her signature gauntlet, Natsuki proves a formidable fighter.</td></tr>
+   <tr><td>Stiletto Kick</td><td>4</td><td>3*</td><td>0</td><td>Affinity: Martial Arts</td><td>Even without her signature gauntlet, Natsuki proves a formidable fighter.</td></tr>
    </table>
 
 **Notes**

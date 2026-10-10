@@ -151,6 +151,7 @@
         roll: 10
         dx: 10
         endurance: 10
+        transformed: true  # made in her transformed form (p. 63)
   notes:
     - header: Robot Characteristics
       text: |

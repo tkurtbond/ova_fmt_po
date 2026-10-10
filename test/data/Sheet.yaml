@@ -1,0 +1,120 @@
+---
+# Sheet: a synthetic character (not from the rulebook) using every key
+# added for the character generator, po_ova_cg (PLAN.md §9 step 9):
+# `player`, `appearance`, `other-notes` and `portrait`; combat `notes`
+# and `transformed`; an attack's `telekinesis` and `transformed`;
+# `threat-value-half` on an Ability and a granted one; `options`'
+# `starting-levels` and `half-cost-knowledge`; and `overrides` on every
+# mapping that takes it -- an attack, a combat block (both halves of a
+# paired Defense), an Ability, a granted Ability, a spell, and a
+# fragment Companion's combat block, which prints through the plain
+# reST path even under -H/-G. The Combat Notes hold the characters the
+# HTML and groff tables escape.
+#
+# Every number not listed in `overrides` is the rules' own, as
+# po_ova_cg computes it, so the generator loads this file with no
+# notices; every listed one differs from the rules'.
+
+- name: Hana Mori
+  player: Sam
+  portrait: images/hana.png
+  tagline: The wind goes where I send it.
+  summary: A schoolgirl whose mind moves things, and who becomes a storm.
+  background: |
+    Hana found out she could push things without touching them the
+    day her bicycle chain snapped on a hill.
+
+    The pendant she found afterward lets her become the Gale.
+  appearance: |
+    Short, with a red scarf she never takes off; as the Gale, a grey
+    coat that never stops moving.
+  personality: |
+    Cheerful and stubborn, and quick to take a dare.
+  other-notes: |
+    Owes the shrine keeper a favor.
+  options:
+    power-ceiling: 30
+    starting-levels: 20
+    half-cost-knowledge: true
+  abilities:
+    - name: Companion
+      level: 1
+      detail: Mochi
+      companion:
+        name: Mochi
+        fragment: true
+        abilities:
+          - name: Quick
+            level: 1
+        weaknesses:
+          - name: Awkward Size
+            level: -1
+            detail: Small
+        combat:
+          defense: 3
+          health: 20
+          endurance: 20
+          threat-value: 2
+          overrides: [health]
+          attacks:
+            - name: Nip
+              roll: 2
+              dx: 1
+              endurance: 0
+    - name: Knowledge
+      level: 2
+      detail: Weather
+    - name: Magic
+      level: 2
+      spells:
+        - name: Still Air
+          ability: Barrier
+          level: 1
+          endurance: 15
+          overrides: [endurance]
+    - name: Telekinesis
+      level: 2
+      endurance: 5
+      threat-value-half: true
+      overrides: [endurance]
+    - name: Transformation
+      level: 3
+      abilities:
+        - name: Barrier
+          level: 2
+          note: the second Defense value
+        - name: Flight
+          level: 2
+          endurance: 5
+          threat-value-half: true
+          overrides: [endurance]
+  weaknesses:
+    - name: Short-Tempered
+      level: -1
+  combat:
+    defense: 3/4
+    health: 40
+    endurance: 50
+    threat-value: 9
+    transformed: true
+    overrides: [defense, barrier, health, endurance, threat-value]
+    notes: |
+      Took 10 damage from the <Hollow> & lost her scarf.
+
+      .Still shaken.
+    attacks:
+      - name: Gust
+        roll: 3
+        dx: 3
+        endurance: 0
+        telekinesis: true
+        overrides: [roll, dx]
+      - name: Storm Front
+        roll: 2
+        dx: 1
+        endurance: 10
+        transformed: true
+        overrides: [endurance]
+  fluff:
+    concept: Telekinetic Schoolgirl
+    age: "15"

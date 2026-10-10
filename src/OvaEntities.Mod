@@ -41,6 +41,12 @@ CONST
   Allies* = 11; Enemies* = 12; LoveInterests* = 13;
   NFluff* = 14;
 
+  (* The numbers an overrides: list can name (the Ada Override_Key), the
+     elements of an overrides set; see LoadOverrides. *)
+  OvRoll* = 0; OvDx* = 1; OvEndurance* = 2; OvDefense* = 3; OvBarrier* = 4;
+  OvHealth* = 5; OvThreatValue* = 6;
+  NOverrides = 7;
+
 TYPE
   Rope = Ropes.Rope;
 
@@ -81,7 +87,9 @@ TYPE
     hasDescription-: BOOLEAN; description-: Rope;  (* trimmed *)
     roll-: INTEGER;
     dx-: Rope;                            (* text: "1/2" happens *)
-    endurance-: INTEGER
+    endurance-: INTEGER;
+    telekinesis-, transformed-: BOOLEAN;  (* the generator's inputs, not printed *)
+    overrides-: SET                       (* of OvRoll, OvDx, OvEndurance *)
   END;
 
   (* A combat: block.  hasCombat is FALSE when there is none (a
@@ -91,7 +99,10 @@ TYPE
     defense-: Rope;                       (* text: "4/5" happens *)
     health-, endurance-: INTEGER;
     hasThreatValue-: BOOLEAN; threatValue-: INTEGER;
-    attacks-: List                        (* of Attack, in document order *)
+    attacks-: List;                       (* of Attack, in document order *)
+    hasNotes-: BOOLEAN; notes-: Rope;     (* the Combat Notes, trimmed *)
+    transformed-: BOOLEAN;                (* the generator's input, not printed *)
+    overrides-: SET                       (* of OvDefense .. OvThreatValue, OvEndurance *)
   END;
 
   (* A linked sub-ability or sub-weakness, or a Companion's or
@@ -101,7 +112,9 @@ TYPE
     level-: INTEGER;
     perks-, flaws-: List;                 (* of PerkFlaw, sorted *)
     hasEndurance-: BOOLEAN; endurance-: INTEGER;
-    hasNote-: BOOLEAN; note-: Rope
+    hasNote-: BOOLEAN; note-: Rope;
+    hasThreatValueHalf-, threatValueHalf-: BOOLEAN;
+    overrides-: SET                       (* of OvEndurance *)
   END;
 
   (* A Magic ability's spell. *)
@@ -109,7 +122,8 @@ TYPE
   SpellDesc* = RECORD (ElementDesc)
     name-, ability-: Rope;
     level-: INTEGER;
-    endurance-: Rope                      (* text: "10+" happens *)
+    endurance-: Rope;                     (* text: "10+" happens *)
+    overrides-: SET                       (* of OvEndurance *)
   END;
 
   (* A Companion or Vehicle, nested under the Ability that grants it.
@@ -145,14 +159,19 @@ TYPE
   Options* = RECORD
     hasBaseZero-: BOOLEAN; baseZero-: INTEGER;
     hasPowerCeiling-: BOOLEAN; powerCeiling-: INTEGER;
-    scaledCost-, combinedEffectiveness-: BOOLEAN
+    hasStartingLevels-: BOOLEAN; startingLevels-: INTEGER;
+    scaledCost-, halfCostKnowledge-, combinedEffectiveness-: BOOLEAN
   END;
 
   Entity* = POINTER TO EntityDesc;
   EntityDesc* = RECORD
     name-: Rope;                          (* required *)
-    hasTagline-, hasSummary-, hasBackground-, hasPersonality-: BOOLEAN;
-    tagline-, summary-, background-, personality-: Rope;  (* trimmed *)
+    hasPlayer-, hasPortrait-: BOOLEAN;
+    player-, portrait-: Rope;             (* untrimmed, as in the Ada version *)
+    hasTagline-, hasSummary-, hasBackground-, hasAppearance-, hasPersonality-,
+    hasOtherNotes-: BOOLEAN;
+    tagline-, summary-, background-, appearance-, personality-,
+    otherNotes-: Rope;                    (* trimmed *)
     abilities-: List;                     (* of Ability, sorted *)
     weaknesses-: List;                    (* of Weakness, sorted *)
     combat-: Combat;
@@ -184,6 +203,7 @@ VAR
   fatal: Rope;
 
   fluffKeys: ARRAY NFluff, 16 OF CHAR;
+  overrideKeys: ARRAY NOverrides, 16 OF CHAR;
 
 (* ---- Lists ---- *)
 
@@ -408,6 +428,49 @@ BEGIN
   RETURN TRUE
 END LoadList;
 
+(* ---- overrides: ---- *)
+
+(* The Ada Key_Name: k's YAML spelling ("threat-value"). *)
+PROCEDURE KeyName*(k: INTEGER; VAR name: ARRAY OF CHAR);
+BEGIN COPY(overrideKeys[k], name)
+END KeyName;
+
+(* m's overrides: list, if any, into o: the Ada Load_Overrides.  A list
+   that isn't a sequence, or an item that isn't one of the allowed key
+   names, is a recorded error, like a missing required key. *)
+PROCEDURE LoadOverrides(m: Fyaml.Node; allowed: SET; VAR o: SET);
+  VAR seq, item: Fyaml.Node; it: Fyaml.ItemIter; t: Fyaml.String; k: INTEGER;
+    found, first: BOOLEAN; msg: Rope;
+BEGIN
+  o := {};
+  seq := m.Value("overrides");
+  IF seq = NIL THEN (* none *)
+  ELSIF ~seq.IsSequence() THEN Record(m, "overrides", Ropes.FromString("not a sequence of key names"))
+  ELSE
+    seq.Items(it);
+    WHILE it.Next(item) DO
+      IF item.IsScalar() THEN
+        t := item.Scalar(); found := FALSE;
+        FOR k := 0 TO NOverrides - 1 DO
+          IF ~found & (k IN allowed) & (t^ = overrideKeys[k]) THEN INCL(o, k); found := TRUE END
+        END;
+        IF ~found THEN
+          msg := Ropes.FromString('"'); OvaText.Add(msg, t^); OvaText.Add(msg, '" is not one of ');
+          first := TRUE;
+          FOR k := 0 TO NOverrides - 1 DO
+            IF k IN allowed THEN
+              IF ~first THEN OvaText.Add(msg, ", ") END;
+              OvaText.Add(msg, overrideKeys[k]); first := FALSE
+            END
+          END;
+          Record(m, "overrides", msg)
+        END
+      ELSE Record(m, "overrides", Ropes.FromString("an item is not a key name"))
+      END
+    END
+  END
+END LoadOverrides;
+
 (* ---- Perks and Flaws ---- *)
 
 (* A Perk or Flaw: a scalar (just the name) or a mapping. *)
@@ -462,6 +525,11 @@ BEGIN
   RequireInteger(m, "roll", a.roll);
   RequireString(m, "dx", a.dx);
   RequireInteger(m, "endurance", a.endurance);
+  a.telekinesis := FALSE; a.transformed := FALSE;
+  IF ~OptBoolean(m, "telekinesis", a.telekinesis) OR ~OptBoolean(m, "transformed", a.transformed) THEN
+    RETURN FALSE
+  END;
+  LoadOverrides(m, {OvRoll, OvDx, OvEndurance}, a.overrides);
   RETURN TRUE
 END LoadAttack;
 
@@ -473,8 +541,15 @@ BEGIN
   RequireString(m, "defense", c.defense);
   RequireInteger(m, "health", c.health);
   RequireInteger(m, "endurance", c.endurance);
-  RETURN OptInteger(m, "threat-value", c.hasThreatValue, c.threatValue)
-    & LoadList(m, "attacks", LoadAttack, c.attacks)
+  IF ~OptInteger(m, "threat-value", c.hasThreatValue, c.threatValue)
+     OR ~LoadList(m, "attacks", LoadAttack, c.attacks)
+     OR ~OptString(m, "notes", c.hasNotes, c.notes)
+     OR ~OptBoolean(m, "transformed", c.transformed) THEN
+    RETURN FALSE
+  END;
+  c.notes := OvaText.Trim(c.notes);
+  LoadOverrides(m, {OvEndurance .. OvThreatValue}, c.overrides);
+  RETURN TRUE
 END LoadCombat;
 
 (* The combat: block for key, if there is one, into c. *)
@@ -483,6 +558,7 @@ PROCEDURE OptCombat(m: Fyaml.Node; VAR c: Combat): BOOLEAN;
 BEGIN
   c.hasCombat := FALSE; c.defense := NIL; c.health := 0; c.endurance := 0;
   c.hasThreatValue := FALSE; c.threatValue := 0; Clear(c.attacks);
+  c.hasNotes := FALSE; c.notes := NIL; c.transformed := FALSE; c.overrides := {};
   RETURN Mapping(m, "combat", n) & ((n = NIL) OR LoadCombat(n, c))
 END OptCombat;
 
@@ -493,10 +569,17 @@ PROCEDURE LoadSubItemFields(m: Fyaml.Node; s: SubItem): BOOLEAN;
 BEGIN
   RequireString(m, "name", s.name);
   RequireInteger(m, "level", s.level);
-  RETURN OptString(m, "detail", s.hasDetail, s.detail)
-    & LoadPerkFlaws(m, "perks", s.perks) & LoadPerkFlaws(m, "flaws", s.flaws)
-    & OptInteger(m, "endurance", s.hasEndurance, s.endurance)
-    & OptString(m, "note", s.hasNote, s.note)
+  s.threatValueHalf := FALSE;
+  IF ~OptString(m, "detail", s.hasDetail, s.detail)
+     OR ~LoadPerkFlaws(m, "perks", s.perks) OR ~LoadPerkFlaws(m, "flaws", s.flaws)
+     OR ~OptInteger(m, "endurance", s.hasEndurance, s.endurance)
+     OR ~OptString(m, "note", s.hasNote, s.note) THEN
+    RETURN FALSE
+  END;
+  s.hasThreatValueHalf := m.Value("threat-value-half") # NIL;
+  IF ~OptBoolean(m, "threat-value-half", s.threatValueHalf) THEN RETURN FALSE END;
+  LoadOverrides(m, {OvEndurance}, s.overrides);
+  RETURN TRUE
 END LoadSubItemFields;
 
 PROCEDURE LoadSubItem(m: Fyaml.Node; VAR x: Element): BOOLEAN;
@@ -520,6 +603,7 @@ BEGIN
   RequireString(m, "ability", s.ability);
   RequireInteger(m, "level", s.level);
   RequireString(m, "endurance", s.endurance);
+  LoadOverrides(m, {OvEndurance}, s.overrides);
   RETURN TRUE
 END LoadSpell;
 
@@ -589,10 +673,12 @@ END LoadFluff;
 
 PROCEDURE LoadOptions(m: Fyaml.Node; VAR o: Options): BOOLEAN;
 BEGIN
-  o.scaledCost := FALSE; o.combinedEffectiveness := FALSE;
+  o.scaledCost := FALSE; o.halfCostKnowledge := FALSE; o.combinedEffectiveness := FALSE;
   RETURN OptInteger(m, "base-zero", o.hasBaseZero, o.baseZero)
     & OptInteger(m, "power-ceiling", o.hasPowerCeiling, o.powerCeiling)
+    & OptInteger(m, "starting-levels", o.hasStartingLevels, o.startingLevels)
     & OptBoolean(m, "scaled-cost", o.scaledCost)
+    & OptBoolean(m, "half-cost-knowledge", o.halfCostKnowledge)
     & OptBoolean(m, "combined-effectiveness", o.combinedEffectiveness)
 END LoadOptions;
 
@@ -612,10 +698,14 @@ BEGIN
   RequireString(m, "name", e.name);
   e.isFragment := FALSE;
   IF ~OptBoolean(m, "fragment", e.isFragment)
+     OR ~OptString(m, "player", e.hasPlayer, e.player)
      OR ~Prose(m, "tagline", e.hasTagline, e.tagline)
      OR ~Prose(m, "summary", e.hasSummary, e.summary)
      OR ~Prose(m, "background", e.hasBackground, e.background)
+     OR ~Prose(m, "appearance", e.hasAppearance, e.appearance)
      OR ~Prose(m, "personality", e.hasPersonality, e.personality)
+     OR ~Prose(m, "other-notes", e.hasOtherNotes, e.otherNotes)
+     OR ~OptString(m, "portrait", e.hasPortrait, e.portrait)
      OR ~LoadList(m, "abilities", LoadAbility, e.abilities) THEN
     RETURN FALSE
   END;
@@ -656,5 +746,9 @@ BEGIN
   fluffKeys[Hair] := "hair"; fluffKeys[Eyes] := "eyes";
   fluffKeys[Association] := "association"; fluffKeys[Hobbies] := "hobbies";
   fluffKeys[FavoriteFood] := "favorite-food"; fluffKeys[Allies] := "allies";
-  fluffKeys[Enemies] := "enemies"; fluffKeys[LoveInterests] := "love-interests"
+  fluffKeys[Enemies] := "enemies"; fluffKeys[LoveInterests] := "love-interests";
+  overrideKeys[OvRoll] := "roll"; overrideKeys[OvDx] := "dx";
+  overrideKeys[OvEndurance] := "endurance"; overrideKeys[OvDefense] := "defense";
+  overrideKeys[OvBarrier] := "barrier"; overrideKeys[OvHealth] := "health";
+  overrideKeys[OvThreatValue] := "threat-value"
 END OvaEntities.

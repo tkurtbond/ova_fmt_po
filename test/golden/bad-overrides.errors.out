@@ -1,0 +1,6 @@
+test/data/bad-overrides.yaml:6:13: error: /0/abilities/0/overrides: "roll" is not one of endurance
+test/data/bad-overrides.yaml:15:15: error: /0/combat/attacks/0/overrides: an item is not a key name
+test/data/bad-overrides.yaml:15:15: error: /0/combat/attacks/0/overrides: "threat-value" is not one of roll, dx, endurance
+test/data/bad-overrides.yaml: error: /0/combat/overrides: not a sequence of key names
+ova_fmt: 4 error(s) in test/data/bad-overrides.yaml; no output produced
+==== exit 1 ====

@@ -1,0 +1,98 @@
+Hana Mori (Telekinetic Schoolgirl), played by Sam
+=================================================
+
+.. image:: images/hana.png
+   :alt: Hana Mori
+
+*"The wind goes where I send it."*
+
+*A schoolgirl whose mind moves things, and who becomes a storm.*
+
+**Background**
+
+Hana found out she could push things without touching them the
+day her bicycle chain snapped on a hill.
+
+The pendant she found afterward lets her become the Gale.
+
+**Appearance**
+
+Short, with a red scarf she never takes off; as the Gale, a grey
+coat that never stops moving.
+
+**Personality**
+
+Cheerful and stubborn, and quick to take a dare.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><td>Companion</td><td>+1</td><td>Mochi</td><td></td>
+     <td>
+       <p><strong>Companion: Mochi</strong> -- <strong>Attributes:</strong> Quick +1; Awkward Size -1 (Small).</p>
+       <table>
+       <caption>Companion: Mochi — Combat</caption>
+       <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+       <tr><td>20*</td><td>20</td><td>3</td><td>2</td></tr>
+       </table>
+       <table>
+       <caption>Companion: Mochi — Combat — Attacks</caption>
+       <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+       <tr><td>Nip</td><td>2</td><td>1</td><td>0</td><td></td><td></td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Knowledge</td><td>+2</td><td>Weather</td><td></td></tr>
+   <tr><td>Magic</td><td>+2</td><td></td><td></td>
+     <td>
+       <table>
+       <caption>Magic — Spells</caption>
+       <tr><th>Name</th><th>Ability</th><th>Level</th><th>Endurance</th></tr>
+       <tr><td>Still Air</td><td>Barrier</td><td>+1</td><td>15*</td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Telekinesis</td><td>+2 (half TV)</td><td></td><td></td></tr>
+   <tr><td>Transformation</td><td>+3</td><td></td><td></td>
+     <td>
+       <table>
+       <caption>Transformation — Grants (Abilities)</caption>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><td>Barrier</td><td>+2</td><td></td><td></td></tr>
+       <tr><td>Flight</td><td>+2 (half TV)</td><td></td><td></td></tr>
+       </table>
+     </td>
+   </tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Short-Tempered</td><td>-1</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40*</td><td>50*</td><td>3*/4*</td><td>9*</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Gust</td><td>3*</td><td>3*</td><td>0</td><td></td><td></td></tr>
+   <tr><td>Storm Front</td><td>2</td><td>1</td><td>10*</td><td></td><td></td></tr>
+   </table>
+   <p><strong>Combat Notes:</strong> Took 10 damage from the &lt;Hollow&gt; &amp; lost her scarf.  .Still shaken.</p>
+
+**Other Notes**
+
+Owes the shrine keeper a favor.
+
+**Fluff**
+
+**Concept:** Telekinetic Schoolgirl, **Age:** 15.
+
+**Creation Rules:** Power Ceiling (30), Starting Levels (20), Half-Cost Knowledge.
+

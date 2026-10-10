@@ -1,0 +1,19 @@
+# overrides: that can't be read: a name the mapping doesn't compute, an
+# item that isn't a scalar, a list that isn't a sequence.  Each is a
+# recorded error, like a missing required key, so all four are reported.
+- name: Bad Overrides
+  abilities:
+    - name: Flight
+      level: 1
+      overrides: [roll]
+  combat:
+    defense: 2
+    health: 20
+    endurance: 30
+    overrides: defense
+    attacks:
+      - name: Punch
+        roll: 2
+        dx: 1
+        endurance: 0
+        overrides: [roll, [dx], threat-value]

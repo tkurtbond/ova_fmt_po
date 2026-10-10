@@ -1,7 +1,9 @@
 # PLAN.md - porting ova_fmt to Oberon-2 with poc
 
 The Ada `ova_fmt` (`~/Repos/RPG/Tools/ova_fmt`, at commit 262776d, "Add
-Markdown backend") ported to Oberon-2, compiled with poc 0.5.0. The
+Markdown backend") ported to Oberon-2, compiled with poc 0.5.0, then
+the keys added to both for the character generator ("Keys for the
+character generator"). The
 design of the program itself -- the YAML schema, each output format's
 layout, and why -- is in the Ada repo's `PLAN.md` and its source
 comments; it isn't copied here. This file records the port.
@@ -102,9 +104,48 @@ exception or where the libraries differ:
    the second, `ova_fmt: -u/--underliner takes exactly one character,
    got "xx"`.
 
+## Keys for the character generator [done]
+
+po_ova_cg (`~/Repos/RPG/Tools/po_ova_cg`), an OVA character generator
+built on this program's `OvaEntities`, saves what ova_fmt had no keys
+for. The user decided (2026-10-09) they are added to the Ada ova_fmt
+first and then ported here: `player`, `appearance`, `other-notes`,
+`portrait`; combat `notes` and `transformed`; an attack's `telekinesis`
+and `transformed`; `threat-value-half` on an Ability or a granted one;
+`options`' `starting-levels` and `half-cost-knowledge`; and `overrides`.
+The Ada repo's PLAN.md, §9 step 9, has the schema and how each format
+prints them; its `Format_Common` gained `Entity_Title` and
+`Options_Text`, which this port already had as `OvaCommon.Title` and
+`CreationRules`.
+
+- `overrides` is a `SET` of `OvaEntities.OvRoll` .. `OvThreatValue`
+  (the Ada `Override_Key`), `KeyName` its YAML spelling, for the
+  generator's writer. A bad list is a recorded error, as in the Ada
+  `Load_Overrides`, in the same words.
+- `OvaCommon.Marked(r, k, overrides, raw)` writes the `*` after an
+  overridden number: `\*` in reST and Markdown text, `*` in Gemtext,
+  h-m-m and the raw tables (`raw`).
+- `AllOneLine` moved from `OvaHmm` to `OvaCommon`, as in the Ada
+  version: the tables' Combat Notes cells use it too.
+- `test/data/Sheet.yaml` is the Ada repo's new fixture, using every
+  key; `bad-overrides.yaml` (all four kinds of error) and
+  `edge-overrides.yaml` (an empty list, and names for numbers the
+  mapping doesn't have) are this repo's.
+
+Verified: before regenerating the golden files, the new Ada binary gave
+all 368 existing cases byte-for-byte, and the port matched it on
+`Sheet.yaml` in 16 combinations of format and options and on both new
+`bad-`/`edge-` fixtures; regenerated, only new files and new entities
+in the several-files cases appeared. Then the samples gained the keys
+that apply to them (the Ada PLAN.md, §9 step 9), and only Braun's and
+Natsuki's outputs changed, a `*` after each ruling. Planted bugs (an unescaped `*`, a
+misspelled `barrier`, half TV without `-O`, the Combat Notes rows left
+out of the `.ne` count, combat `endurance` not allowed in `overrides`)
+each failed between 2 and 20 cases.
+
 ## Testing [done]
 
-- `test/golden.sh` and `test/golden.cases`: 368 cases, golden files
+- `test/golden.sh` and `test/golden.cases`: 390 cases, golden files
   from the Ada binary (`make golden`): every character fixture in every
   format and in combinations of the options, several files in one run,
   standard input, `-o`, and the error and edge-case fixtures
@@ -114,7 +155,7 @@ exception or where the libraries differ:
   `bad-shape-*` fixtures), and 300 copies of a character in one file,
   which runs the collector many times.
 - `test/TestText.Mod`: `OvaText`, on ropes of several leaves too.
-- `make valgrind`: 281 runs, clean, with polibfyaml's suppressions and
+- `make valgrind`: 302 runs, clean, with polibfyaml's suppressions and
   `test/poc-gc.supp` (the conservative stack scan's reports in
   `DrainMarkStack`, which this program's frames reach too).
 - The rendered outputs (`make rst gemtext hmm`, and so on) are the same
