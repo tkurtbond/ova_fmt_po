@@ -45,10 +45,10 @@ Cheerful and stubborn, and quick to take a dare.
      </td>
    </tr>
    <tr><td>Knowledge</td><td>+2</td><td>Weather</td><td></td></tr>
-   <tr><td>Magic</td><td>+2</td><td></td><td></td>
+   <tr><td>Magic, Arcane</td><td>+2</td><td></td><td></td>
      <td>
        <table>
-       <caption>Magic — Spells</caption>
+       <caption>Magic, Arcane — Spells</caption>
        <tr><th>Name</th><th>Ability</th><th>Level</th><th>Endurance</th></tr>
        <tr><td>Still Air</td><td>Barrier</td><td>+1</td><td>15*</td></tr>
        </table>

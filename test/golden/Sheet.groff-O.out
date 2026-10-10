@@ -44,9 +44,9 @@ Cheerful and stubborn, and quick to take a dare.
    .TR
    .TD hal=r +2
    .TD
-   Magic
+   Magic, Arcane
    .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='30% 70%'
-   .CPTN val=b "Magic — Spells"
+   .CPTN val=b "Magic, Arcane — Spells"
    .TR
    .TH Name
    .TH Detail

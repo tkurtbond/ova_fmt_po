@@ -447,7 +447,7 @@ ova_fmt: 5 error(s) in test/data/Broken.yaml; no output produced
 		**Abilities**
 			Companion (Mochi) +1
 			Knowledge (Weather) +2
-			Magic +2
+			Magic, Arcane +2
 			Telekinesis +2
 			Transformation +3
 		**Weaknesses**
@@ -463,7 +463,7 @@ ova_fmt: 5 error(s) in test/data/Broken.yaml; no output produced
 			**Health:** 20* | **Endurance:** 20 | **Defense:** 3 | **Threat Value (TV):** 2
 			**Attacks**
 				**Nip:** Roll **2 dice** | **DX 1** | **Endurance Cost: 0**.
-		**Magic**
+		**Magic, Arcane**
 			Spells: Still Air (Barrier +1; 15* Endurance).
 		**Transformation**
 			Grants: Barrier +2 (the second Defense value), Flight +2.

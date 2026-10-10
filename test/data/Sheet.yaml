@@ -64,7 +64,7 @@
     - name: Knowledge
       level: 2
       detail: Weather
-    - name: Magic
+    - name: Magic, Arcane
       level: 2
       spells:
         - name: Still Air
