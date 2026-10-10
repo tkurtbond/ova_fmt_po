@@ -1,0 +1,65 @@
+Jiro
+====
+
+*"Break? There's no time for a break! If you want a break, I'll give it to you -- a break in the neck!"*
+
+*The local police captain, chronically overworked and much too quick to draw his gun.*
+
+**Background**
+
+As the local police captain, Jiro keeps the force running, and
+the strain shows: he's jumpy, irritable, and always juggling
+several unrelated jobs at once, sometimes answering phones,
+barking orders, and doing paperwork all at the same time. His
+colleagues keep urging him to take time off, but he's never
+missed a day, and some suspect he's been saving up vacation for
+decades. Whether from stress or something darker, he tends to aim
+his gun at anything he considers an unwanted intrusion.
+
+**Character Hooks**
+
+For all his near-psychotic devotion to the job, Captain Jiro
+generally does it well. Still, even well-behaved PCs can find
+themselves under police scrutiny.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Armored</td><td>+1</td><td>Bulletproof Vest</td><td></td></tr>
+   <tr><td>Attack</td><td>+1</td><td>Police Training</td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Evasive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Intimidating</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Minions</td><td>+3</td><td>Officers</td><td></td></tr>
+   <tr><td>Perceptive</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Position of Power</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Strong</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Tough</td><td>+1</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Compulsion</td><td>-2</td><td>Trigger-Happy</td></tr>
+   <tr><td>Dependency</td><td>-1</td><td>Coffee</td></tr>
+   <tr><td>Jittery</td><td>-2</td><td></td></tr>
+   <tr><td>Obsession</td><td>-3</td><td>Work</td></tr>
+   <tr><td>Servitude</td><td>-2</td><td>Police Force</td></tr>
+   <tr><td>Short-Tempered</td><td>-3</td><td></td></tr>
+   <tr><td>Stubborn</td><td>-1</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat (Secondary)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>30</td><td>20</td><td>3</td><td>9</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Secondary) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Desk-Side Revolver</td><td>4</td><td>4</td><td>0</td><td>Perks: Effective x2, Ranged; Flaws: Ammunition, Weapon</td><td>Jiro's constant companion and likely only friend.</td></tr>
+   <tr><td>Bare Knuckle</td><td>3</td><td>4</td><td>5</td><td>Perks: Stunning; Flaws: Inaccurate</td><td>While he prefers "civilized" weaponry like his revolver, Jiro can throw a mean punch.</td></tr>
+   </table>
+

@@ -3,9 +3,9 @@
 #
 # Transcribed from the primary rulebook (ova-rulebook.txt lines
 # 652-765) per PLAN.md's build order (§9 step 1), following the
-# schema conventions established by test-data/Karis.yaml and
-# test-data/Ai.yaml (see Karis.yaml's header comment for the general
-# copyright/transcription policy).
+# schema conventions established by test-data/sample-pcs/Karis.yaml
+# and test-data/sample-pcs/Ai.yaml (see Karis.yaml's header comment
+# for the general copyright/transcription policy).
 #
 # New things this file exercises:
 #

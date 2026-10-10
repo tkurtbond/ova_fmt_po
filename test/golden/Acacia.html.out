@@ -1,0 +1,87 @@
+Acacia
+======
+
+*"Darling, let us destroy this world together. Side by side, who would stop us?"*
+
+*A witch of the Order of Chaos whose real loyalty is to her partner, Saspar.*
+
+**Background**
+
+Acacia serves the Order of Chaos, a group bent on reviving
+ancient magic to usher in an age of discord. Alongside her
+partner Saspar she carries out whatever the Order asks, armed
+with witchcraft and a retinue of demons. The Order's goals mean
+little to her, though: she's devoted to Saspar, and serves Chaos
+only because he does, hoping one day to be more to him than a
+partner.
+
+**Character Hooks**
+
+The Order of Chaos makes Acacia and Saspar natural enemies for
+anyone defending the world from evil -- Fukiko and Auren, whose
+backgrounds both feature a vague darkness to be fought, fit
+especially well. They can also serve as magical rivals.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Agile</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+2</td><td>Black Magic</td><td></td></tr>
+   <tr><td>Barrier</td><td>+2</td><td></td><td> [Perks: Effective; 5 Endurance]</td></tr>
+   <tr><td>Beautiful</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Flight</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Incorporeal Form</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+2</td><td>Magic</td><td></td></tr>
+   <tr><td>Magic, Witchcraft</td><td>+3</td><td></td><td></td>
+     <td>
+       <table>
+       <caption>Magic, Witchcraft — Spells</caption>
+       <tr><th>Name</th><th>Ability</th><th>Level</th><th>Endurance</th></tr>
+       <tr><td>Break</td><td>Frail</td><td>−2</td><td>10</td></tr>
+       <tr><td>Impede</td><td>Slow</td><td>−2</td><td>10</td></tr>
+       <tr><td>Wither</td><td>Weak</td><td>−3</td><td>20</td></tr>
+       </table>
+     </td>
+   </tr>
+   <tr><td>Vigorous</td><td>+2</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Arrogant</td><td>−1</td><td></td></tr>
+   <tr><td>Focus</td><td>−2</td><td>Flight/Incorporeal Form Require Hat</td></tr>
+   <tr><td>Impulsive</td><td>−1</td><td></td></tr>
+   <tr><td>Love Interest</td><td>−2</td><td>Saspar</td></tr>
+   <tr><td>Overconfident</td><td>−2</td><td></td></tr>
+   <tr><td>Servitude</td><td>−3</td><td>Chaos</td></tr>
+   <tr><td>Vulnerability</td><td>−2</td><td>Light/Holy</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat (Heroic)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>60</td><td>4</td><td>14</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Heroic) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Lock Heaven's Door</td><td>3</td><td>3</td><td>10</td><td>Perks: Fatiguing, Unique Perk: Prevents Healing/Recovering Until Battle's End</td><td>A stroke of her finger saps the target's energy and fills them with dread.</td></tr>
+   <tr><td>Devil's Breath</td><td>3</td><td>3</td><td>15</td><td>Affinity: Dark; Perks: Blinding; Flaws: Feather Blow</td><td>A chilling breath clouds the target's mind.</td></tr>
+   </table>
+
+**Sazza and Fraz**, twin lesser demons of mischief in Acacia's
+service, always appear together. Alone, each is feeble; as a pair
+they hit startlingly hard.
+
+**Attributes (Secondary):** Attack +2 [Perks: Effective x3, Ranged; Flaws: Assisted], Quick +3; Frail −1, Weak −2.
+
+**High Fructo Cezar**, another of Acacia's demons, once held real
+power, until a single act of kindness cost him his rank and
+sealed away most of his strength. He resents it, but he stays
+mostly loyal to Acacia.
+
+**Attributes (Secondary):** Strong +3, Tough +2; Clumsy −1, Slow −2.
+

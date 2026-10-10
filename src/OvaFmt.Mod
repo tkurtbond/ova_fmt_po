@@ -12,7 +12,7 @@ MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown o
    with status 1. *)
 
 IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaHmm, OvaOut, OvaRst,
-  OvaText, Out, Platform, Ropes, SYSTEM;
+  OvaText, Out, Platform, Ropes, Strings, SYSTEM;
 
 TYPE
   Entities = POINTER TO ARRAY OF OvaEntities.Entity;
@@ -69,7 +69,7 @@ BEGIN
     sep := ": error: ";
     f := 0; WHILE err.file[f] # 0X DO INC(f) END;
     n := 0; WHILE err.msg[n] # 0X DO INC(n) END;
-    skip := f + 9;  (* the length of sep *)
+    skip := f + Strings.Length(sep);
     prefixed := n >= skip;
     i := 0;
     WHILE prefixed & (i < skip) DO

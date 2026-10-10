@@ -1,0 +1,29 @@
+---
+# Ebullient Club President (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Around Campus", p. 142). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Ebullient Club President
+  fragment: true
+  background: |
+    The **Ebullient Club President** is certain his club is the
+    greatest in the school, and he'll keep talking until you agree --
+    never mind that he seems to be its only member.
+  abilities:
+    - name: Charismatic
+      level: 1
+    - name: Evasive
+      level: 2
+    - name: Knowledge
+      level: 2
+      detail: Club Matters
+    - name: Smart
+      level: 1
+  weaknesses:
+    - name: Compulsion
+      level: -2
+      detail: Talking
+    - name: Oblivious
+      level: -2
+...

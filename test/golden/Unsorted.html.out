@@ -7,20 +7,20 @@ Unsorted
 
    <table>
    <caption>Abilities</caption>
-   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
    <tr><td>Attack</td><td>+3</td><td>Sword</td><td> [Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon]</td></tr>
    <tr><td>Combat Expert</td><td>+1</td><td></td><td></td></tr>
    <tr><td>Companion</td><td>+1</td><td>Sidekick</td><td></td>
      <td>
        <table>
        <caption>Companion: Sidekick — Abilities</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
        <tr><td>Agile</td><td>+1</td><td></td><td></td></tr>
        <tr><td>Tough</td><td>+1</td><td></td><td></td></tr>
        </table>
        <table>
        <caption>Companion: Sidekick — Weaknesses</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
        <tr><td>Frail</td><td>−1</td><td></td><td></td></tr>
        <tr><td>Quirk</td><td>−1</td><td></td><td></td></tr>
        </table>
@@ -41,14 +41,14 @@ Unsorted
      <td>
        <table>
        <caption>Transformation — Grants (Abilities)</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
        <tr><td>Armored</td><td>+1</td><td></td><td></td></tr>
        <tr><td>Evasive</td><td>+1</td><td></td><td></td></tr>
        <tr><td>Strong</td><td>+2</td><td></td><td></td></tr>
        </table>
        <table>
        <caption>Transformation — Grants (Weaknesses)</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
        <tr><td>Bizarre Appearance</td><td>−1</td><td></td><td></td></tr>
        <tr><td>Slow</td><td>−1</td><td></td><td></td></tr>
        </table>

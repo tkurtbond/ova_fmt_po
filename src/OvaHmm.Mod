@@ -59,14 +59,14 @@ BEGIN
   IF l.n > 0 THEN PrintList("Weaknesses", l, OvaCommon.JoinWeaknesses(l), TRUE, depth) END
 END PrintWeaknesses;
 
-(* A "Combat" node, its summary, and an "Attacks" node with a node for
-   each attack. *)
-PROCEDURE PrintCombat(c: OvaEntities.Combat; depth: INTEGER);
+(* A "Combat" node, its summary (led by npcType if that isn't NIL), and
+   an "Attacks" node with a node for each attack. *)
+PROCEDURE PrintCombat(c: OvaEntities.Combat; depth: INTEGER; npcType: Rope);
   VAR i: INTEGER; r: Rope;
 BEGIN
   IF ~c.hasCombat THEN RETURN END;
   Node(depth, OvaCommon.SectionHeaderStr("Combat"));
-  Node(depth + 1, OvaCommon.FormatCombatSummaryLine(c));
+  Node(depth + 1, OvaCommon.FormatCombatSummaryLine(c, npcType));
   IF c.attacks.n > 0 THEN
     Node(depth + 1, OvaCommon.SectionHeaderStr("Attacks"));
     FOR i := 0 TO c.attacks.n - 1 DO
@@ -93,7 +93,7 @@ BEGIN
       OvaCommon.JoinFragmentSubItems(se.weaknesses), se.abilities.n > 0, se.weaknesses.n > 0));
     Node(depth, Ropes.AppendChar(r, "."))
   END;
-  PrintCombat(se.combat, depth)
+  PrintCombat(se.combat, depth, NIL)
 END PrintSubEntityFragmentStyle;
 
 PROCEDURE PrintLinkedSection(a: OvaEntities.Ability; depth: INTEGER);
@@ -115,7 +115,7 @@ BEGIN
   IF se # NIL THEN
     PrintItems("Abilities", se.abilities, depth + 1);
     PrintItems("Weaknesses", se.weaknesses, depth + 1);
-    PrintCombat(se.combat, depth + 1)
+    PrintCombat(se.combat, depth + 1, NIL)
   END
 END PrintLinkedSection;
 
@@ -152,6 +152,16 @@ BEGIN
   END
 END PrintTail;
 
+(* A "Character Hooks" node after the other prose (or a Fragment's
+   Attributes node), as OvaCommon.PrintCharacterHooks. *)
+PROCEDURE PrintCharacterHooks(e: OvaEntities.Entity; depth: INTEGER);
+BEGIN
+  IF e.hasCharacterHooks THEN
+    Node(depth, OvaCommon.SectionHeaderStr("Character Hooks"));
+    Node(depth + 1, AllOneLine(e.characterHooks))
+  END
+END PrintCharacterHooks;
+
 (* Writes e as an outline.  entityNo is unused: an outline has no
    underlines to tell entities apart. *)
 PROCEDURE ProcessEntity*(e: OvaEntities.Entity; entityNo: INTEGER);
@@ -165,7 +175,8 @@ BEGIN
        says. *)
     IF e.hasBackground THEN Node(d1, AllOneLine(e.background)) ELSE Node(d1, OvaCommon.Bold(e.name)) END;
     IF (e.abilities.n > 0) OR (e.weaknesses.n > 0) THEN Node(d2, OvaCommon.FragmentAttributes(e)) END;
-    PrintCombat(e.combat, d2);
+    PrintCharacterHooks(e, d2);
+    PrintCombat(e.combat, d2, NIL);
     PrintLinkedSections(e, d2)
   ELSE
     Node(d1, OvaCommon.Title(e));
@@ -186,9 +197,10 @@ BEGIN
       Node(d2, OvaCommon.SectionHeaderStr("Personality"));
       Node(d3, AllOneLine(e.personality))
     END;
+    PrintCharacterHooks(e, d2);
     PrintItems("Abilities", e.abilities, d2);
     PrintWeaknesses(e.weaknesses, d2);
-    PrintCombat(e.combat, d2);
+    PrintCombat(e.combat, d2, OvaCommon.NpcTypeText(e));
     PrintLinkedSections(e, d2)
   END;
   PrintTail(e, d2)

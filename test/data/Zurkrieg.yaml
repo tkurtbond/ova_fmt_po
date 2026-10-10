@@ -1,0 +1,118 @@
+---
+# Zurkrieg (OVA rulebook, "Sample NPCs" chapter, p. 137), with his
+# Men in Black. ova-rulebook.txt lines 6310-6370. See Acacia.yaml's
+# header comment for the transcription policy and the new `npc-type`
+# and `character-hooks` keys.
+#
+# The Men in Black follow as a `fragment: true` entity, like Acacia's
+# demons. Their "Attributes:" line gives no NPC type, so they have no
+# `npc-type`, and no detail for their Servitude (Zurkrieg, by the
+# context).
+
+- name: Zurkrieg
+  npc-type: Heroic
+  tagline: Come, have at you! I will show you what real strength is!
+  summary: A self-made tycoon and fighter who hunts the world's most powerful people to recruit or destroy them.
+  background: |
+    Grant Zurkrieg grew up poor in Europe and has craved power ever
+    since. A gift for economics made him a millionaire by his
+    mid-twenties; when money wasn't enough, he built his body into a
+    fighting machine, and that wasn't enough either. Now his Men in
+    Black scour the world for its most powerful people, so that he
+    can make them join him or crush them.
+  character-hooks: |
+    Anyone with remarkable skill or power can catch Zurkrieg's eye,
+    and his lavishly funded experiments can cause trouble of their
+    own -- as in Ai's and Yuu's backgrounds.
+  abilities:
+    - name: Attack
+      level: 3
+      detail: Power & Control
+    - name: Combat Expert
+      level: 3
+    - name: Evasive
+      level: 2
+    - name: Intimidating
+      level: 3
+    - name: Iron-Willed
+      level: 2
+    - name: Knowledge
+      level: 4
+      detail: Economics
+    - name: Minions
+      level: 4
+      detail: Men in Black
+    - name: Smart
+      level: 2
+    - name: Strong
+      level: 3
+    - name: Tough
+      level: 2
+    - name: Wealthy
+      level: 5
+  weaknesses:
+    - name: Arrogant
+      level: -2
+    - name: Code of Conduct
+      level: -1
+      detail: Must Have Fair Duels
+    - name: Fear
+      level: -3
+      detail: Drowning, from Childhood Accident
+    - name: Hatred
+      level: -2
+      detail: Weakness
+    - name: Obsession
+      level: -3
+      detail: Power
+    - name: Secret
+      level: -3
+      detail: Illegal Research
+    - name: Stubborn
+      level: -3
+  combat:
+    defense: 4
+    health: 60
+    endurance: 40
+    threat-value: 18
+    attacks:
+      - name: Extending Cane
+        perks:
+          - Reach
+        flaws:
+          - Weapon
+        description: Zurkrieg's cane is engineered to extend, giving him command of any situation.
+        roll: 5
+        dx: 7
+        endurance: 0
+      - name: The World's Strongest
+        perks:
+          - Stunning
+        flaws:
+          - Ineffective
+          - Unwieldy
+        description: While fond enough of his cane, Zurkrieg enjoys finishing off opponents barehanded.
+        roll: 5
+        dx: 6
+        endurance: 0
+
+- name: Men in Black
+  fragment: true
+  background: |
+    Zurkrieg's **Men in Black** are cyborgs, assembled from the
+    terminally ill, the brain-dead, and even the dead: part human,
+    part machine. They're slow but tireless and strong, and they
+    carry out his orders exactly.
+  abilities:
+    - name: Strong
+      level: 2
+    - name: Tough
+      level: 2
+  weaknesses:
+    - name: Emotionless
+      level: -3
+    - name: Servitude
+      level: -3
+    - name: Slow
+      level: -1
+...

@@ -1,0 +1,66 @@
+Nazo
+====
+
+*"Shall I show you what you covet most? What, pray tell, would you give up to have it?"*
+
+*An outcast kitsune who stages elaborate tests of human nature.*
+
+**Background**
+
+Nazo is a kitsune, one of the Japanese fox spirits notorious for
+tricking and toying with mortals. She keeps her distance from
+other kitsune, though, because she won't follow their traditions:
+she reveals what she is without a second thought, and her
+interest in people goes past simply fooling them -- she truly
+wants to understand them, and some say she envies them. With
+shapeshifting, illusions, and curses she devises intricate
+schemes to test what her targets believe in, and leaves them be
+only once her curiosity is satisfied.
+
+**Character Hooks**
+
+Equally at home as a fox, a child, or a beautiful woman, Nazo
+can fit alongside almost any character, and one of her carefully
+plotted schemes could fill a whole adventure. She could also be
+the "old bag" from Daisuke's background or the evil spirit from
+Cora's.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Charismatic</td><td>+4</td><td></td><td></td></tr>
+   <tr><td>Illusionist</td><td>+5</td><td></td><td></td></tr>
+   <tr><td>Incorporeal Form</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Magic, Witchcraft</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Psychic</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Resistance</td><td>+2</td><td>Physical</td><td></td></tr>
+   <tr><td>Shape-Shifter</td><td>+5</td><td></td><td></td></tr>
+   <tr><td>Telekinesis</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Teleport</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Vigorous</td><td>+3</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Compulsion</td><td>-2</td><td>Curiosity</td></tr>
+   <tr><td>Obsession</td><td>-2</td><td>Human Nature</td></tr>
+   <tr><td>Outcast</td><td>-2</td><td>Other Kitsune</td></tr>
+   <tr><td>Overconfident</td><td>-2</td><td></td></tr>
+   <tr><td>Soft Spot</td><td>-2</td><td>Green Tea</td></tr>
+   <tr><td>Unique Weakness</td><td>-3</td><td>Priests Immune to Illusions</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat (Heroic)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>70</td><td>5</td><td>16</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Heroic) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Fox Fire</td><td>2</td><td>3</td><td>0</td><td>Affinity: Spirit</td><td>Nazo dazzles the opponent with a brilliant illusionary display before overwhelming them with spiritual power.</td></tr>
+   </table>
+

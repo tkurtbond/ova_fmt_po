@@ -23,6 +23,7 @@ amount of whining.
 
 .. raw:: ms
 
+   .br
    .mso hdtbl.tmac
    .ne 40
    .TBL cols=2 border=0 csp=4p cpd=0
@@ -73,7 +74,7 @@ amount of whining.
    .TR
    .TD hal=r +3
    .TD
-   Barrier [Perks: Area Effect; Flaws: Elaborate Gestures] (provides an alternate Defense Roll (the second Defense value in Combat, below))
+   Barrier [Perks: Area Effect; Flaws: Elaborate Gestures; 5 Endurance] (provides an alternate Defense Roll (the second Defense value in Combat, below))
    .TR
    .TD hal=r +2
    .TD

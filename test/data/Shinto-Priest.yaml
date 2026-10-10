@@ -1,0 +1,30 @@
+---
+# Shinto Priest (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "On the Town", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Shinto Priest
+  fragment: true
+  background: |
+    A **Shinto Priest** keeps a little shrine hidden in a corner of
+    town. He's not as nimble as he used to be, but he can still be
+    relied on to handle a troublesome spirit, or to offer some advice.
+  abilities:
+    - name: Intuitive
+      level: 1
+    - name: Sixth Sense
+      level: 2
+    - name: Spirit Medium
+      level: 3
+  weaknesses:
+    - name: Frail
+      level: -1
+    - name: Pacifist
+      level: -1
+    - name: Restricted Freedom
+      level: -2
+      detail: Rarely Strays Far from Shrine
+    - name: Weak
+      level: -1
+...

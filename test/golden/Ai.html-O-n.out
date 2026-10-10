@@ -24,10 +24,10 @@ nowhere left to run.
 
    <table>
    <caption>Abilities</caption>
-   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
    <tr><td>Art of Invisibility</td><td>+2</td><td></td><td></td></tr>
    <tr><td>Attack</td><td>+1</td><td>Telekinetic Power</td><td></td></tr>
-   <tr><td>Barrier</td><td>+3</td><td></td><td> [Perks: No Gesture]</td></tr>
+   <tr><td>Barrier</td><td>+3</td><td></td><td> [Perks: No Gesture; 5 Endurance] (provides an alternate Defense Roll (the second Defense value below))</td></tr>
    <tr><td>Dexterous</td><td>+2</td><td></td><td></td></tr>
    <tr><td>Knowledge</td><td>+1</td><td>String Games</td><td></td></tr>
    <tr><td>Psychic</td><td>+3</td><td></td><td></td></tr>

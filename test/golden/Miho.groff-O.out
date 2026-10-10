@@ -22,6 +22,7 @@ that harder than it should be.
 
 .. raw:: ms
 
+   .br
    .mso hdtbl.tmac
    .ne 42
    .TBL cols=2 border=0 csp=4p cpd=0

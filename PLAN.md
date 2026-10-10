@@ -138,7 +138,7 @@ each failed between 2 and 20 cases.
 
 ## Testing [done]
 
-- `test/golden.sh` and `test/golden.cases`: 400 cases, golden files
+- `test/golden.sh` and `test/golden.cases`: 946 cases, golden files
   from the Ada binary (`make golden`): every character fixture in every
   format and in combinations of the options, several files in one run,
   standard input, `-o`, and the error and edge-case fixtures
@@ -149,22 +149,48 @@ each failed between 2 and 20 cases.
   300 copies of a character in one file, which runs the collector many
   times.
 - `test/TestText.Mod`: `OvaText`, on ropes of several leaves too.
-- `make valgrind`: 302 runs, clean, with polibfyaml's suppressions and
+- `make valgrind`: 533 runs, clean, with polibfyaml's suppressions and
   `test/poc-gc.supp` (the conservative stack scan's reports in
   `DrainMarkStack`, which this program's frames reach too).
 - The rendered outputs (`make rst gemtext hmm`, and so on) are the same
   bytes as the Ada repo's `build/` files.
 
-## Not yet ported
+## Sample NPCs, npc-type, character-hooks, endurance [done]
 
-The Ada version's commits of 2026-10-10 before the one that removed the
-differences above, each with its PLAN.md entry there: groff-in-reST's
-`.br` before the tables (7f50d3b), `npc-type` and `character-hooks`
-(4c57810, with the Sample NPCs and NPC Fragments fixtures, 0eb4c32),
-and an Ability's endurance and Html_In_Rst's notes (47b49d1). Their
-golden files weren't regenerated, so `make test` passes on this
-port's current behavior; regenerating them (`make golden`) is part of
-porting those.
+The Ada version's commits of 2026-10-10, each with its PLAN.md entry
+there, ported together (2026-10-10):
+
+- groff-in-reST writes a `.br` before `.mso hdtbl.tmac` at the top of
+  each raw ms block, so a prose paragraph's last line prints before
+  hd's tables, not after them (Ada 7f50d3b).
+- The rulebook's 8 Sample NPCs and 22 NPC Fragments (Ada 0eb4c32),
+  copied flat into `test/data/` from its `sample-npcs/` and
+  `sample-npc-fragments/<subsection>/`.
+- `npc-type` and `character-hooks` (Ada 4c57810). `OvaEntities` has
+  `Heroic`, `Secondary`, `Extra` and `NpcTypeName` (the Ada
+  `NPC_Kind`, `NPC_Kind_Name`); `LoadNpcType` matches ignoring case and
+  blanks, a bad name a recorded error in the Ada words, a non-scalar
+  fatal as for any optional string. The type leads the main entity's
+  stats line (`FormatCombatSummaryLine`'s and `PrintCombatAndAttacks`'s
+  new `npcType`, NIL elsewhere), is `Combat (Secondary)` in the HTML
+  caption, `(SECONDARY)` in the groff box in place of the name, and
+  `Attributes (Secondary):` on a Fragment
+  (`OvaCommon.FragmentAttributesLabel`). The hooks are a "Character
+  Hooks" section after the other prose, or after a Fragment's
+  Attributes line.
+- An Ability's or SubItem's `endurance` (Ada 47b49d1):
+  `FormatModifiersBracket(s, raw)` now takes the item, adding "5
+  Endurance" after the Perks/Flaws, `raw` for the mark inside the raw
+  tables. HTML-in-reST's header is `Perks/Flaws/Endurance`, and its
+  cells now have the item's note, as every other format does.
+
+`bad-npc-type.yaml` (a bad and an empty name, both reported),
+`bad-npc-type-shape.yaml` (a sequence, which ends the file) and
+`edge-npc-type.yaml` (case and blanks, a Fragment's type, multi-line
+hooks) are this repo's; the port matched the Ada binary on each in
+three formats before they became golden files. Regenerated, the golden
+files changed only by the `.br` lines, the endurance and notes, the
+HTML header, and the new NPCs in the several-files cases.
 
 ## Open questions
 

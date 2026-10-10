@@ -213,16 +213,25 @@ BEGIN
   RETURN r
 END FormatPerkFlaw;
 
-(* " [Perks: ...; Flaws: ...]", with only the lists there are; NIL if
-   neither is. *)
-PROCEDURE FormatModifiersBracket*(perks, flaws: OvaEntities.List): Rope;
+(* Appends text to parts, after "; " if parts isn't empty. *)
+PROCEDURE AddPart(VAR parts: Rope; text: Rope);
+BEGIN
+  IF parts # NIL THEN OvaText.Add(parts, "; ") END;
+  parts := Ropes.Cat(parts, text)
+END AddPart;
+
+(* " [Perks: ...; Flaws: ...; 5 Endurance]" for an Ability or a SubItem,
+   with only the parts there are; NIL if none is.  raw: it goes in a raw
+   HTML or groff table (see OverrideMark). *)
+PROCEDURE FormatModifiersBracket*(s: OvaEntities.SubItem; raw: BOOLEAN): Rope;
   VAR parts: Rope;
 BEGIN
   parts := NIL;
-  IF perks.n > 0 THEN parts := Ropes.Cat(Str("Perks: "), Join(perks, FormatPerkFlaw)) END;
-  IF flaws.n > 0 THEN
-    IF parts # NIL THEN OvaText.Add(parts, "; ") END;
-    OvaText.Add(parts, "Flaws: "); parts := Ropes.Cat(parts, Join(flaws, FormatPerkFlaw))
+  IF s.perks.n > 0 THEN AddPart(parts, Ropes.Cat(Str("Perks: "), Join(s.perks, FormatPerkFlaw))) END;
+  IF s.flaws.n > 0 THEN AddPart(parts, Ropes.Cat(Str("Flaws: "), Join(s.flaws, FormatPerkFlaw))) END;
+  IF s.hasEndurance THEN
+    AddPart(parts, Ropes.Cat(Marked(TrimImg(s.endurance), OvaEntities.OvEndurance, s.overrides, raw),
+      Str(" Endurance")))
   END;
   IF parts = NIL THEN RETURN NIL END;
   RETURN Ropes.AppendChar(Ropes.Cat(Str(" ["), parts), "]")
@@ -259,7 +268,7 @@ BEGIN
   s := x(OvaEntities.SubItem);
   r := NameDetail(s.name, s.hasDetail, s.detail);
   r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, SignedImg(s.level)); r := Ropes.Cat(r, HalfTVText(s));
-  r := Ropes.Cat(r, FormatModifiersBracket(s.perks, s.flaws));
+  r := Ropes.Cat(r, FormatModifiersBracket(s, FALSE));
   IF s.hasNote THEN AddParens(r, s.note) END;
   RETURN r
 END FormatSubItemLine;
@@ -283,7 +292,7 @@ BEGIN
   s := x(OvaEntities.SubItem);
   r := Ropes.AppendChar(s.name, " "); r := Ropes.Cat(r, SignedImg(s.level)); r := Ropes.Cat(r, HalfTVText(s));
   IF s.hasDetail THEN AddParens(r, s.detail) END;
-  r := Ropes.Cat(r, FormatModifiersBracket(s.perks, s.flaws));
+  r := Ropes.Cat(r, FormatModifiersBracket(s, FALSE));
   IF s.hasNote THEN AddParens(r, s.note) END;
   RETURN r
 END FormatFragmentSubItemLine;
@@ -363,11 +372,17 @@ BEGIN
 END FormatAttackLine;
 
 (* "**Health:** H | **Endurance:** E | **Defense:** D | **Threat Value
-   (TV):** T", an em dash for a missing TV; no bullet. *)
-PROCEDURE FormatCombatSummaryLine*(c: OvaEntities.Combat): Rope;
+   (TV):** T", an em dash for a missing TV; no bullet.  Led by "**NPC
+   Type:** T | " if npcType isn't NIL. *)
+PROCEDURE FormatCombatSummaryLine*(c: OvaEntities.Combat; npcType: Rope): Rope;
   VAR r: Rope;
 BEGIN
-  r := BoldStr("Health:"); r := Ropes.AppendChar(r, " ");
+  r := NIL;
+  IF npcType # NIL THEN
+    r := BoldStr("NPC Type:"); r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, npcType);
+    OvaText.Add(r, " | ")
+  END;
+  r := Ropes.Cat(r, BoldStr("Health:")); r := Ropes.AppendChar(r, " ");
   r := Ropes.Cat(r, Marked(TrimImg(c.health), OvaEntities.OvHealth, c.overrides, FALSE));
   OvaText.Add(r, " | "); r := Ropes.Cat(r, BoldStr("Endurance:"));
   r := Ropes.AppendChar(r, " ");
@@ -391,11 +406,13 @@ BEGIN
   Line(FormatAttackLine(a))
 END PrintAttack;
 
-PROCEDURE PrintCombatAndAttacks*(c: OvaEntities.Combat);
+(* The combat summary, its line led by npcType if that isn't NIL, then
+   the attacks and combat notes. *)
+PROCEDURE PrintCombatAndAttacks*(c: OvaEntities.Combat; npcType: Rope);
   VAR i: INTEGER;
 BEGIN
   IF ~c.hasCombat THEN RETURN END;
-  Line(Ropes.Cat(Bullet(), FormatCombatSummaryLine(c)));
+  Line(Ropes.Cat(Bullet(), FormatCombatSummaryLine(c, npcType)));
   OvaOut.Ln;
   IF c.attacks.n > 0 THEN
     Line(Ropes.Cat(Bullet(), BoldStr("Attacks:")));
@@ -428,7 +445,7 @@ BEGIN
     Line(Ropes.AppendChar(r, "."))
   END;
   OvaOut.Ln;
-  PrintCombatAndAttacks(se.combat)
+  PrintCombatAndAttacks(se.combat, NIL)
 END PrintSubEntityFragmentStyle;
 
 (* "Label: Name", a sub-entity's heading. *)
@@ -478,7 +495,7 @@ BEGIN
     IF se.weaknesses.n > 0 THEN
       Line(EndWithPeriod(Ropes.Cat(Str("Weaknesses: "), JoinSubItems(se.weaknesses)))); OvaOut.Ln
     END;
-    PrintCombatAndAttacks(se.combat)
+    PrintCombatAndAttacks(se.combat, NIL)
   END
 END PrintLinkedSection;
 
@@ -498,11 +515,28 @@ BEGIN
   OvaOut.Ln
 END PrintFragmentHeader;
 
+(* e's npc-type's name, or NIL if it has none: the Ada NPC_Type_Text. *)
+PROCEDURE NpcTypeText*(e: OvaEntities.Entity): Rope;
+BEGIN
+  IF e.hasNpcType THEN RETURN OvaEntities.NpcTypeName(e.npcType) END;
+  RETURN NIL
+END NpcTypeText;
+
+(* "**Attributes (Secondary):**" with an npc-type, else
+   "**Attributes:**". *)
+PROCEDURE FragmentAttributesLabel*(e: OvaEntities.Entity): Rope;
+BEGIN
+  IF e.hasNpcType THEN
+    RETURN Bold(Ropes.Cat(Ropes.Cat(Str("Attributes ("), NpcTypeText(e)), Str("):")))
+  END;
+  RETURN BoldStr("Attributes:")
+END FragmentAttributesLabel;
+
 (* "**Attributes:** abilities; weaknesses." *)
 PROCEDURE FragmentAttributes*(e: OvaEntities.Entity): Rope;
   VAR r: Rope;
 BEGIN
-  r := BoldStr("Attributes:"); r := Ropes.AppendChar(r, " ");
+  r := FragmentAttributesLabel(e); r := Ropes.AppendChar(r, " ");
   r := Ropes.Cat(r, Semi(JoinFragmentSubItems(e.abilities), JoinFragmentWeaknesses(e.weaknesses),
     e.abilities.n > 0, e.weaknesses.n > 0));
   RETURN Ropes.AppendChar(r, ".")
@@ -513,6 +547,16 @@ BEGIN
   IF (e.abilities.n = 0) & (e.weaknesses.n = 0) THEN RETURN END;
   Line(FragmentAttributes(e)); OvaOut.Ln
 END PrintFragmentAttributes;
+
+(* After the other prose, as the Sample NPCs' pages have it (and after a
+   Fragment's Attributes line, it having no other prose section). *)
+PROCEDURE PrintCharacterHooks(e: OvaEntities.Entity);
+BEGIN
+  IF e.hasCharacterHooks THEN
+    Line(SectionHeaderStr("Character Hooks")); OvaOut.Ln;
+    Line(e.characterHooks); OvaOut.Ln
+  END
+END PrintCharacterHooks;
 
 (* The entity's title: "Name (concept)", or "Name", then ", played by
    Player" with a player: (the Ada Entity_Title). *)
@@ -525,10 +569,11 @@ BEGIN
   RETURN r
 END Title;
 
-(* Title, tagline, summary, background and personality: the same in
-   every format but the title's heading: "# Title" in gemtext and
-   Markdown, else the title underlined, with -U's character for every
-   entity of a file after the first if it was given. *)
+(* Title, tagline, summary, background, personality and character
+   hooks: the same in every format but the title's heading: "# Title"
+   in gemtext and Markdown, else the title underlined, with -U's
+   character for every entity of a file after the first if it was
+   given. *)
 PROCEDURE PrintHeaderAndProse*(e: OvaEntities.Entity; entityNo: INTEGER);
   VAR title: Rope; c: CHAR;
 BEGIN
@@ -567,7 +612,8 @@ BEGIN
   IF e.hasPersonality THEN
     Line(SectionHeaderStr("Personality")); OvaOut.Ln;
     Line(e.personality); OvaOut.Ln
-  END
+  END;
+  PrintCharacterHooks(e)
 END PrintHeaderAndProse;
 
 PROCEDURE PrintNotes*(e: OvaEntities.Entity);
@@ -687,7 +733,8 @@ BEGIN
   IF e.isFragment THEN
     PrintFragmentHeader(e);
     PrintFragmentAttributes(e);
-    PrintCombatAndAttacks(e.combat);
+    PrintCharacterHooks(e);
+    PrintCombatAndAttacks(e.combat, NIL);
     PrintLinkedSections(e)
   ELSE
     PrintHeaderAndProse(e, entityNo);
@@ -701,7 +748,7 @@ BEGIN
       OvaOut.Rope(JoinWeaknesses(e.weaknesses)); Line(Str("."));
       OvaOut.Ln
     END;
-    PrintCombatAndAttacks(e.combat);
+    PrintCombatAndAttacks(e.combat, NpcTypeText(e));
     PrintLinkedSections(e)
   END;
   PrintTail(e)

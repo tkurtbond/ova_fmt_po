@@ -1,0 +1,191 @@
+Acacia
+======
+
+*"Darling, let us destroy this world together. Side by side, who would stop us?"*
+
+*A witch of the Order of Chaos whose real loyalty is to her partner, Saspar.*
+
+**Background**
+
+Acacia serves the Order of Chaos, a group bent on reviving
+ancient magic to usher in an age of discord. Alongside her
+partner Saspar she carries out whatever the Order asks, armed
+with witchcraft and a retinue of demons. The Order's goals mean
+little to her, though: she's devoted to Saspar, and serves Chaos
+only because he does, hoping one day to be more to him than a
+partner.
+
+**Character Hooks**
+
+The Order of Chaos makes Acacia and Saspar natural enemies for
+anyone defending the world from evil -- Fukiko and Auren, whose
+backgrounds both feature a vague darkness to be fought, fit
+especially well. They can also serve as magical rivals.
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 36
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Agile
+   .TR
+   .TD hal=r +2
+   .TD
+   Attack (Black Magic)
+   .TR
+   .TD hal=r +2
+   .TD
+   Barrier [Perks: Effective; 5 Endurance]
+   .TR
+   .TD hal=r +3
+   .TD
+   Beautiful
+   .TR
+   .TD hal=r +3
+   .TD
+   Flight
+   .TR
+   .TD hal=r +2
+   .TD
+   Incorporeal Form
+   .TR
+   .TD hal=r +2
+   .TD
+   Knowledge (Magic)
+   .TR
+   .TD hal=r +3
+   .TD
+   Magic, Witchcraft
+   .TBL cols=2 border=.5p bc=black csp=1p cpd=1p width='30% 70%'
+   .CPTN val=b "Magic, Witchcraft — Spells"
+   .TR
+   .TH Name
+   .TH Detail
+   .TR
+   .TD
+   Break
+   .TD
+   Frail −2; 10 Endurance
+   .TR
+   .TD
+   Impede
+   .TD
+   Slow −2; 10 Endurance
+   .TR
+   .TD
+   Wither
+   .TD
+   Weak −3; 20 Endurance
+   .ETB
+   .TR
+   .TD hal=r +2
+   .TD
+   Vigorous
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Arrogant
+   .TR
+   .TD hal=r −2
+   .TD
+   Focus (Flight/Incorporeal Form Require Hat)
+   .TR
+   .TD hal=r −1
+   .TD
+   Impulsive
+   .TR
+   .TD hal=r −2
+   .TD
+   Love Interest (Saspar)
+   .TR
+   .TD hal=r −2
+   .TD
+   Overconfident
+   .TR
+   .TD hal=r −3
+   .TD
+   Servitude (Chaos)
+   .TR
+   .TD hal=r −2
+   .TD
+   Vulnerability (Light/Holy)
+   .ETB
+   .ETB
+   .ne 24
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (HEROIC)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBLock Heaven's Door\fP
+   .TD hal=c 3
+   .TD hal=c
+   3
+   .TD hal=c 10
+   .TR
+   .TD colspan=4
+   [Perks: Fatiguing, Unique Perk: Prevents Healing/Recovering Until Battle's End]
+   .TR
+   .TD colspan=4
+   \fIA stroke of her finger saps the target's energy and fills them with dread.\fP
+   .TR
+   .TD
+   \fBDevil's Breath\fP
+   .TD hal=c 3
+   .TD hal=c
+   3
+   .TD hal=c 15
+   .TR
+   .TD colspan=4
+   [Affinity: Dark; Perks: Blinding; Flaws: Feather Blow]
+   .TR
+   .TD colspan=4
+   \fIA chilling breath clouds the target's mind.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB4\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB60\fP
+   .TD hal=c \fB14\fP
+   .ETB
+
+**Sazza and Fraz**, twin lesser demons of mischief in Acacia's
+service, always appear together. Alone, each is feeble; as a pair
+they hit startlingly hard.
+
+**Attributes (Secondary):** Attack +2 [Perks: Effective x3, Ranged; Flaws: Assisted], Quick +3; Frail −1, Weak −2.
+
+**High Fructo Cezar**, another of Acacia's demons, once held real
+power, until a single act of kindness cost him his rank and
+sealed away most of his strength. He resents it, but he stays
+mostly loyal to Acacia.
+
+**Attributes (Secondary):** Strong +3, Tough +2; Clumsy −1, Slow −2.
+

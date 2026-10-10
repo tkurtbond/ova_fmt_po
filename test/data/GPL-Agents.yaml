@@ -1,0 +1,34 @@
+---
+# GPL Agents (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "High-Tech Marvels & Outer Space", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: GPL Agents
+  fragment: true
+  background: |
+    **GPL Agents** have the whole known universe to police. Their
+    all-business manner has started rumors that they're robots, or
+    at least genetically engineered clones. The GPL says otherwise.
+  abilities:
+    - name: Attack
+      level: 2
+      detail: Stun Baton
+      perks:
+        - Paralyzing
+      flaws:
+        - Ineffective
+        - Low Penetration
+    - name: Combat Expert
+      level: 1
+    - name: Evasive
+      level: 1
+    - name: Perceptive
+      level: 1
+  weaknesses:
+    - name: Emotionless
+      level: -1
+    - name: Servitude
+      level: -2
+      detail: GPL
+...

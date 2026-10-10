@@ -5,7 +5,7 @@
 # Transformation-linked sub-Ability/sub-Weakness list below is
 # deliberately given out of alphabetical order, to exercise
 # Ova_Fmt.Entities' sorting (PLAN.md's optional-vs-required audit --
-# every other test-data/*.yaml file happens to already be transcribed
+# every other test-data/**/*.yaml file happens to already be transcribed
 # in alphabetical order, which is why the missing sort went unnoticed
 # until this file was added). The Attacks and Spells lists below are
 # ALSO deliberately out of alphabetical order, but on purpose in the

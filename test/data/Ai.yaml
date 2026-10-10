@@ -3,11 +3,12 @@
 #
 # Transcribed from the primary rulebook (ova-rulebook.txt lines
 # 1596-1691ish) per PLAN.md's build order (§9 step 1) and following
-# the schema conventions established by test-data/Karis.yaml (see
-# its header comment for the general policy: game-mechanical data
-# transcribed faithfully, background/personality kept as short
-# original paraphrases -- no verbatim book prose, confirmed policy
-# per PLAN.md's copyright note, this repo has a public remote).
+# the schema conventions established by
+# test-data/sample-pcs/Karis.yaml (see its header comment for the
+# general policy: game-mechanical data transcribed faithfully,
+# background/personality kept as short original paraphrases -- no
+# verbatim book prose, confirmed policy per PLAN.md's copyright note,
+# this repo has a public remote).
 #
 # Chosen deliberately as the second transcription because Ai is a
 # clean "no nesting at all" character (no Transformation/Magic/

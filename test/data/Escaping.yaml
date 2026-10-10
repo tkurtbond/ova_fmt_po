@@ -2,7 +2,7 @@
 # Escaping.yaml -- a synthetic fixture, NOT transcribed from the
 # rulebook, exercising HTML escaping (&/</>) in every field the
 # -H/--html backend places inside a raw <table> cell (PLAN.md's build
-# order §9 step 4). None of the other test-data/*.yaml files happen to
+# order §9 step 4). None of the other test-data/**/*.yaml files happen to
 # contain these characters, so this is the only regression coverage
 # for Html_Escape actually firing. Terse/Gemtext output is unaffected
 # by this fixture (no escaping concern there -- plain text passes

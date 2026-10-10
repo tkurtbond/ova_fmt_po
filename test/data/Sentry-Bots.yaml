@@ -1,0 +1,34 @@
+---
+# Sentry Bots (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "High-Tech Marvels & Outer Space", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Sentry Bots
+  fragment: true
+  background: |
+    Spider-like **Sentry Bots** are quicker than the Spider Tank and,
+    fortunately, far less deadly. Even so, the laser rifle mounted on
+    each one's head deserves respect.
+  abilities:
+    - name: Armored
+      level: 1
+    - name: Attack
+      level: 1
+      detail: Laser Rifle
+    - name: Combat Expert
+      level: 2
+    - name: Heightened Sense
+      level: 2
+      detail: Vision
+    - name: Quick
+      level: 2
+  weaknesses:
+    - name: Clumsy
+      level: -1
+    - name: Emotionless
+      level: -3
+    - name: Vulnerability
+      level: -2
+      detail: Electricity
+...

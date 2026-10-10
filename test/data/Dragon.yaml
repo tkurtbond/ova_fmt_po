@@ -1,0 +1,47 @@
+---
+# Dragon (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Fantastic Creatures of Lore", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+#
+# Its single Attack Ability covers two attacks, "Fire Breath: Area
+# Effect, Ranged; 10 Endurance" and "Claw & Bite: Reach; Inaccurate".
+# An Ability's perks:/flaws:/endurance can describe only one, so the
+# whole parenthetical is kept as its `detail`, exactly as printed.
+
+- name: Dragon
+  fragment: true
+  background: |
+    A **Dragon** is a terrifying opponent. As if its enormous size
+    and strength weren't enough, there's the small matter of its
+    fiery breath, which can surprise an unready adventurer (or an
+    unlucky villager).
+  abilities:
+    - name: Armored
+      level: 2
+    - name: Attack
+      level: 2
+      detail: "Fire Breath: Area Effect, Ranged; 10 Endurance—Claw & Bite: Reach; Inaccurate"
+    - name: Combat Expert
+      level: 1
+    - name: Flight
+      level: 2
+    - name: Intimidating
+      level: 2
+    - name: Smart
+      level: 1
+    - name: Strong
+      level: 2
+    - name: Tough
+      level: 2
+  weaknesses:
+    - name: Awkward Size
+      level: -3
+    - name: Obsession
+      level: -2
+      detail: Treasure
+    - name: Slow
+      level: -1
+    - name: Stubborn
+      level: -2
+...

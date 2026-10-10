@@ -1,0 +1,30 @@
+---
+# Wild Beast (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "In the Wild", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Wild Beast
+  fragment: true
+  background: |
+    Every kind of **Wild Beast** roams beyond the bustle of human
+    society, some bigger and some faster. Take these as a starting
+    point for exciting run-ins with nature.
+  abilities:
+    - name: Agile
+      level: 2
+    - name: Attack
+      level: 1
+      detail: Tooth & Claw
+    - name: Intimidating
+      level: 2
+    - name: Quick
+      level: 2
+  weaknesses:
+    - name: Easily Distracted
+      level: -1
+    - name: Short-Tempered
+      level: -1
+    - name: Stubborn
+      level: -1
+...

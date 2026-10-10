@@ -26,7 +26,7 @@ deeply distrustful of animals.
 
    <table>
    <caption>Abilities</caption>
-   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
    <tr><td>Armored</td><td>+1</td><td>Medieval Armor</td><td></td></tr>
    <tr><td>Attack</td><td>+3</td><td>Sword &amp; Sorcery</td><td></td></tr>
    <tr><td>Combat Expert</td><td>+3</td><td></td><td></td></tr>

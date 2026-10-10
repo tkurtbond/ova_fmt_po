@@ -1,0 +1,36 @@
+---
+# Spider Tank (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "High-Tech Marvels & Outer Space", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Spider Tank
+  fragment: true
+  background: |
+    Slow, relentless, and heavily armored, the **Spider Tank** exists
+    for one thing: destruction. Bristling with weapons, it has no
+    trouble carrying out its programming.
+  abilities:
+    - name: Armored
+      level: 3
+    - name: Attack
+      level: 3
+      detail: Countless Weapons
+    - name: Combat Expert
+      level: 2
+    - name: Tough
+      level: 1
+  weaknesses:
+    - name: Awkward Size
+      level: -3
+      detail: Huge
+    - name: Clumsy
+      level: -1
+    - name: Emotionless
+      level: -3
+    - name: Slow
+      level: -1
+    - name: Vulnerability
+      level: -2
+      detail: Electricity
+...

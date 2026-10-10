@@ -1,0 +1,32 @@
+---
+# Shady Teacher (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Around Campus", p. 142). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Shady Teacher
+  fragment: true
+  background: |
+    The **Shady Teacher** just joined the faculty and seems to know
+    his subject, yet something about him is wrong. Perhaps it's the
+    sunglasses he never takes off, even inside -- or the students who
+    keep vanishing from his class.
+  abilities:
+    - name: Art of Invisibility
+      level: 2
+    - name: Perceptive
+      level: 2
+    - name: Smart
+      level: 3
+  weaknesses:
+    - name: Absent-Minded
+      level: -1
+    - name: Fussy
+      level: -1
+    - name: Quirk
+      level: -1
+      detail: Always Wears Sunglasses
+    - name: Secret
+      level: -2
+      detail: To Everybody
+...

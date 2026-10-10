@@ -1,0 +1,6 @@
+Spider-like **Sentry Bots** are quicker than the Spider Tank and,
+fortunately, far less deadly. Even so, the laser rifle mounted on
+each one's head deserves respect.
+
+**Attributes:** Armored +1, Attack +1 (Laser Rifle), Combat Expert +2, Heightened Sense +2 (Vision), Quick +2; Clumsy −1, Emotionless −3, Vulnerability −2 (Electricity).
+

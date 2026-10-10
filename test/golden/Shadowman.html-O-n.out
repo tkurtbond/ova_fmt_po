@@ -1,0 +1,68 @@
+Shadowman
+=========
+
+*"My precious daughter, we will be together again even if I must destroy the whole universe!"*
+
+*A once-celebrated scientist in powered armor, hunting a banned cloning project to restore his dead daughter.*
+
+**Background**
+
+Shadowman is feared across the galaxy for the ruin he leaves
+behind, though his rampage may be less random than it looks. He
+was once Har Grimoire, an acclaimed scientist devoted to his
+daughter Elle, until a lab accident killed her and nearly killed
+him. Thought dead, he rebuilt himself inside armor that both
+keeps him alive and makes him more than human, and set out to
+find OVA -- an outlawed project to rebuild a person from a single
+DNA sample, which he's sure still exists somewhere. He'll let
+nothing stop him.
+
+**Character Hooks**
+
+He's an obvious enemy for Karis, but anyone protecting the common
+good can end up opposing him. Curiously, Karis looks a great deal
+like Elle.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Armored</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+3</td><td>Futuristic Force</td><td></td></tr>
+   <tr><td>Barrier</td><td>+4</td><td></td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Flight</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Inventor</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Life Support</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Pilot</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Smart</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Strong</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Telekinesis</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Tough</td><td>+4</td><td></td><td></td></tr>
+   <tr><td>Vigorous</td><td>+2</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Bizarre Appearance</td><td>-2</td><td></td></tr>
+   <tr><td>Focus</td><td>-3</td><td>Abilities from Suit</td></tr>
+   <tr><td>Infamous</td><td>-3</td><td>Criminal</td></tr>
+   <tr><td>Obsession</td><td>-3</td><td>Finding OVA</td></tr>
+   <tr><td>Secret</td><td>-3</td><td>Identity</td></tr>
+   <tr><td>Wanted</td><td>-3</td><td>GPL</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat (Heroic)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>80</td><td>60</td><td>6</td><td>24</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Heroic) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Laser Sword</td><td>3</td><td>7</td><td>0</td><td>Perks: Armor Piercing; Flaws: Weapon</td><td>A glowing beam of light that instills fear into those who would dare face him.</td></tr>
+   <tr><td>Psycho-Kinetic Crush</td><td>3</td><td>5</td><td>10</td><td>Perks: Area Effect, Stunning; Flaws: Ineffective x2</td><td>Shadowman uses his amplified mental powers to toss around the opponent.</td></tr>
+   </table>
+

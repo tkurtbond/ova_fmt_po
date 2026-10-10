@@ -1,0 +1,169 @@
+---
+# Acacia (OVA rulebook, "Sample NPCs" chapter, p. 134), with her two
+# demons. ova-rulebook.txt lines 6113-6182; the stat block was checked
+# against the PDF page, since the text extraction scrambles stacked
+# Levels (Barrier/Beautiful/Flight). Same transcription policy as the
+# Sample Characters (see test-data/sample-pcs/Karis.yaml's header
+# comment): game-mechanical data faithfully, `background` and
+# `character-hooks` as short original paraphrases, taglines and
+# one-line attack captions close to the source.
+#
+# `npc-type` (the "(HEROIC)"/"(SECONDARY)" after "Attacks & Combat
+# Stats") and `character-hooks` are new keys, asked for by the user
+# (2026-10-10); see PLAN.md's "Decisions already made" for how they
+# print.
+#
+# Acacia's page has no Character Hooks of its own: Saspar's page
+# gives one paragraph for the pair, paraphrased in both files.
+#
+# Lock Heaven's Door prints as "fatiguing; unique perk: prevents
+# healing/recovering until battle's end", which puts the unique perk
+# where the Flaws go; it's transcribed as a Perk, which it says it is.
+#
+# Her demons (Sazza and Fraz, High Fructo Cezar) are given only a
+# one-line "Attributes (Secondary):" each, so they follow her as
+# `fragment: true` entities, as the user chose; she has no Minions or
+# Companion Ability to nest them under.
+
+- name: Acacia
+  npc-type: Heroic
+  tagline: Darling, let us destroy this world together. Side by side, who would stop us?
+  summary: A witch of the Order of Chaos whose real loyalty is to her partner, Saspar.
+  background: |
+    Acacia serves the Order of Chaos, a group bent on reviving
+    ancient magic to usher in an age of discord. Alongside her
+    partner Saspar she carries out whatever the Order asks, armed
+    with witchcraft and a retinue of demons. The Order's goals mean
+    little to her, though: she's devoted to Saspar, and serves Chaos
+    only because he does, hoping one day to be more to him than a
+    partner.
+  character-hooks: |
+    The Order of Chaos makes Acacia and Saspar natural enemies for
+    anyone defending the world from evil -- Fukiko and Auren, whose
+    backgrounds both feature a vague darkness to be fought, fit
+    especially well. They can also serve as magical rivals.
+  abilities:
+    - name: Agile
+      level: 1
+    - name: Attack
+      level: 2
+      detail: Black Magic
+    - name: Barrier
+      level: 2
+      perks:
+        - Effective
+      endurance: 5
+    - name: Beautiful
+      level: 3
+    - name: Flight
+      level: 3
+    - name: Incorporeal Form
+      level: 2
+    - name: Knowledge
+      level: 2
+      detail: Magic
+    - name: Magic, Witchcraft
+      level: 3
+      spells:
+        - name: Break
+          ability: Frail
+          level: -2
+          endurance: 10
+        - name: Impede
+          ability: Slow
+          level: -2
+          endurance: 10
+        - name: Wither
+          ability: Weak
+          level: -3
+          endurance: 20
+    - name: Vigorous
+      level: 2
+  weaknesses:
+    - name: Arrogant
+      level: -1
+    - name: Focus
+      level: -2
+      detail: Flight/Incorporeal Form Require Hat
+    - name: Impulsive
+      level: -1
+    - name: Love Interest
+      level: -2
+      detail: Saspar
+    - name: Overconfident
+      level: -2
+    - name: Servitude
+      level: -3
+      detail: Chaos
+    - name: Vulnerability
+      level: -2
+      detail: Light/Holy
+  combat:
+    defense: 4
+    health: 40
+    endurance: 60
+    threat-value: 14
+    attacks:
+      - name: Lock Heaven's Door
+        perks:
+          - Fatiguing
+          - name: Unique Perk
+            detail: Prevents Healing/Recovering Until Battle's End
+        description: A stroke of her finger saps the target's energy and fills them with dread.
+        roll: 3
+        dx: 3
+        endurance: 10
+      - name: Devil's Breath
+        perks:
+          - Blinding
+        affinity: Dark
+        flaws:
+          - Feather Blow
+        description: A chilling breath clouds the target's mind.
+        roll: 3
+        dx: 3
+        endurance: 15
+
+- name: Sazza and Fraz
+  fragment: true
+  npc-type: Secondary
+  background: |
+    **Sazza and Fraz**, twin lesser demons of mischief in Acacia's
+    service, always appear together. Alone, each is feeble; as a pair
+    they hit startlingly hard.
+  abilities:
+    - name: Attack
+      level: 2
+      perks:
+        - name: Effective
+          counts-as: 3
+        - Ranged
+      flaws:
+        - Assisted
+    - name: Quick
+      level: 3
+  weaknesses:
+    - name: Frail
+      level: -1
+    - name: Weak
+      level: -2
+
+- name: High Fructo Cezar
+  fragment: true
+  npc-type: Secondary
+  background: |
+    **High Fructo Cezar**, another of Acacia's demons, once held real
+    power, until a single act of kindness cost him his rank and
+    sealed away most of his strength. He resents it, but he stays
+    mostly loyal to Acacia.
+  abilities:
+    - name: Strong
+      level: 3
+    - name: Tough
+      level: 2
+  weaknesses:
+    - name: Clumsy
+      level: -1
+    - name: Slow
+      level: -2
+...

@@ -1,0 +1,170 @@
+Zurkrieg
+========
+
+*"Come, have at you! I will show you what real strength is!"*
+
+*A self-made tycoon and fighter who hunts the world's most powerful people to recruit or destroy them.*
+
+**Background**
+
+Grant Zurkrieg grew up poor in Europe and has craved power ever
+since. A gift for economics made him a millionaire by his
+mid-twenties; when money wasn't enough, he built his body into a
+fighting machine, and that wasn't enough either. Now his Men in
+Black scour the world for its most powerful people, so that he
+can make them join him or crush them.
+
+**Character Hooks**
+
+Anyone with remarkable skill or power can catch Zurkrieg's eye,
+and his lavishly funded experiments can cause trouble of their
+own -- as in Ai's and Yuu's backgrounds.
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 30
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +3
+   .TD
+   Attack (Power & Control)
+   .TR
+   .TD hal=r +3
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +2
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +3
+   .TD
+   Intimidating
+   .TR
+   .TD hal=r +2
+   .TD
+   Iron-Willed
+   .TR
+   .TD hal=r +4
+   .TD
+   Knowledge (Economics)
+   .TR
+   .TD hal=r +4
+   .TD
+   Minions (Men in Black)
+   .TR
+   .TD hal=r +2
+   .TD
+   Smart
+   .TR
+   .TD hal=r +3
+   .TD
+   Strong
+   .TR
+   .TD hal=r +2
+   .TD
+   Tough
+   .TR
+   .TD hal=r +5
+   .TD
+   Wealthy
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −2
+   .TD
+   Arrogant
+   .TR
+   .TD hal=r −1
+   .TD
+   Code of Conduct (Must Have Fair Duels)
+   .TR
+   .TD hal=r −3
+   .TD
+   Fear (Drowning, from Childhood Accident)
+   .TR
+   .TD hal=r −2
+   .TD
+   Hatred (Weakness)
+   .TR
+   .TD hal=r −3
+   .TD
+   Obsession (Power)
+   .TR
+   .TD hal=r −3
+   .TD
+   Secret (Illegal Research)
+   .TR
+   .TD hal=r −3
+   .TD
+   Stubborn
+   .ETB
+   .ETB
+   .ne 24
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (HEROIC)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBExtending Cane\fP
+   .TD hal=c 5
+   .TD hal=c
+   7
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Reach; Flaws: Weapon]
+   .TR
+   .TD colspan=4
+   \fIZurkrieg's cane is engineered to extend, giving him command of any situation.\fP
+   .TR
+   .TD
+   \fBThe World's Strongest\fP
+   .TD hal=c 5
+   .TD hal=c
+   6
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Stunning; Flaws: Ineffective, Unwieldy]
+   .TR
+   .TD colspan=4
+   \fIWhile fond enough of his cane, Zurkrieg enjoys finishing off opponents barehanded.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB4\fP
+   .TD hal=c \fB60\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB18\fP
+   .ETB
+
+Zurkrieg's **Men in Black** are cyborgs, assembled from the
+terminally ill, the brain-dead, and even the dead: part human,
+part machine. They're slow but tireless and strong, and they
+carry out his orders exactly.
+
+**Attributes:** Strong +2, Tough +2; Emotionless −3, Servitude −3, Slow −1.
+

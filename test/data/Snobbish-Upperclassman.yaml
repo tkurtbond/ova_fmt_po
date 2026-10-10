@@ -1,0 +1,40 @@
+---
+# Snobbish Upperclassman (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Around Campus", p. 142). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Snobbish Upperclassman
+  fragment: true
+  background: |
+    The **Snobbish Upperclassman** is top of her class, star of the
+    kendo team, and the most popular girl in school, and she's well
+    aware of it. Don't expect her to give you the time of day.
+  abilities:
+    - name: Agile
+      level: 2
+    - name: Beautiful
+      level: 2
+    - name: Knowledge
+      level: 2
+      detail: Kendo
+    - name: Minions
+      level: 2
+      detail: Her Clique
+    - name: Quick
+      level: 2
+    - name: Smart
+      level: 2
+  weaknesses:
+    - name: Arrogant
+      level: -2
+    - name: Emotionless
+      level: -1
+    - name: Obsession
+      level: -2
+      detail: Meeting Her Mother's Lofty Expectations
+    - name: Overconfident
+      level: -2
+    - name: Short-Tempered
+      level: -1
+...

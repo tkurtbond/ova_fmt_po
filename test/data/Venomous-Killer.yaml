@@ -1,0 +1,35 @@
+---
+# Venomous Killer (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "In the Wild", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+#
+# Its Attack's "5 Endurance" is the Ability's `endurance`.
+
+- name: Venomous Killer
+  fragment: true
+  background: |
+    The coldblooded **Venomous Killer** lies hidden, waiting to strike
+    when you least expect it. Whether it's a legless serpent or a
+    huge lizard, it's not something you want to meet up close.
+  abilities:
+    - name: Art of Invisibility
+      level: 2
+    - name: Attack
+      level: 2
+      detail: Bite
+      perks:
+        - name: Continued Effect
+          counts-as: 2
+      flaws:
+        - Feather Blow
+        - name: Low Penetration
+          counts-as: 2
+      endurance: 5
+    - name: Quick
+      level: 1
+  weaknesses:
+    - name: Vulnerability
+      level: -2
+      detail: Heat/Cold
+...

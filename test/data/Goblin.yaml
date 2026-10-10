@@ -1,0 +1,30 @@
+---
+# Goblin (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Fantastic Creatures of Lore", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Goblin
+  fragment: true
+  background: |
+    Dirty, hideous, and spiteful, a **Goblin** is an unwelcome
+    encounter. They can use any sort of scavenged weapon, and their
+    small size hides a real eagerness for mayhem.
+  abilities:
+    - name: Attack
+      level: 1
+      detail: Rusty Sword
+    - name: Combat Expert
+      level: 1
+    - name: Quick
+      level: 1
+  weaknesses:
+    - name: Bizarre Appearance
+      level: -2
+    - name: Dense
+      level: -1
+    - name: Greedy
+      level: -1
+    - name: Rude
+      level: -2
+...

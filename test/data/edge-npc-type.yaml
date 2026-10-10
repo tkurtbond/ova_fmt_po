@@ -1,0 +1,22 @@
+# npc-type: is matched ignoring case and surrounding blanks, and prints
+# in the rulebook's capitalization; a Fragment's goes on its Attributes
+# line, not the stats line.
+- name: Edge Type
+  npc-type: "  sEcOnDaRy "
+  character-hooks: |
+    Two lines
+    of hooks.
+  abilities:
+    - name: Tough
+      level: 1
+  combat:
+    health: 40
+    endurance: 40
+    defense: 2
+- name: Edge Fragment
+  fragment: true
+  npc-type: EXTRA
+  character-hooks: Hooks.
+  abilities:
+    - name: Tough
+      level: 1

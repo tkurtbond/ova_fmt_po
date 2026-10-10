@@ -1,0 +1,81 @@
+---
+# Nazo (OVA rulebook, "Sample NPCs" chapter, p. 139).
+# ova-rulebook.txt lines 6444-6505; the stat block was checked against
+# the PDF page, since the text extraction separates the Weaknesses'
+# Levels from their names. See Acacia.yaml's header comment for the
+# transcription policy and the new `npc-type` and `character-hooks`
+# keys.
+
+- name: Nazo
+  npc-type: Heroic
+  tagline: Shall I show you what you covet most? What, pray tell, would you give up to have it?
+  summary: An outcast kitsune who stages elaborate tests of human nature.
+  background: |
+    Nazo is a kitsune, one of the Japanese fox spirits notorious for
+    tricking and toying with mortals. She keeps her distance from
+    other kitsune, though, because she won't follow their traditions:
+    she reveals what she is without a second thought, and her
+    interest in people goes past simply fooling them -- she truly
+    wants to understand them, and some say she envies them. With
+    shapeshifting, illusions, and curses she devises intricate
+    schemes to test what her targets believe in, and leaves them be
+    only once her curiosity is satisfied.
+  character-hooks: |
+    Equally at home as a fox, a child, or a beautiful woman, Nazo
+    can fit alongside almost any character, and one of her carefully
+    plotted schemes could fill a whole adventure. She could also be
+    the "old bag" from Daisuke's background or the evil spirit from
+    Cora's.
+  abilities:
+    - name: Charismatic
+      level: 4
+    - name: Illusionist
+      level: 5
+    - name: Incorporeal Form
+      level: 3
+    - name: Magic, Witchcraft
+      level: 3
+    - name: Psychic
+      level: 3
+    - name: Resistance
+      level: 2
+      detail: Physical
+    - name: Shape-Shifter
+      level: 5
+    - name: Telekinesis
+      level: 2
+    - name: Teleport
+      level: 3
+    - name: Vigorous
+      level: 3
+  weaknesses:
+    - name: Compulsion
+      level: -2
+      detail: Curiosity
+    - name: Obsession
+      level: -2
+      detail: Human Nature
+    - name: Outcast
+      level: -2
+      detail: Other Kitsune
+    - name: Overconfident
+      level: -2
+    - name: Soft Spot
+      level: -2
+      detail: Green Tea
+    - name: Unique Weakness
+      level: -3
+      detail: Priests Immune to Illusions
+  combat:
+    defense: 5
+    health: 40
+    endurance: 70
+    threat-value: 16
+    attacks:
+      - name: Fox Fire
+        affinity: Spirit
+        description: Nazo dazzles the opponent with a brilliant illusionary display before overwhelming them with spiritual power.
+        roll: 2
+        dx: 3
+        endurance: 0
+...

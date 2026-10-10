@@ -99,19 +99,27 @@ BEGIN
   RawRope(indent, r)
 END Caption;
 
+(* " (note)", the note after the bracket, as every other format has
+   it; NIL without one. *)
+PROCEDURE NoteText(s: OvaEntities.SubItem): Rope;
+BEGIN
+  IF s.hasNote THEN RETURN Ropes.AppendChar(Ropes.Cat(Str(" ("), s.note), ")") END;
+  RETURN NIL
+END NoteText;
+
 PROCEDURE PrintSubItemTable(items: OvaEntities.List; caption, indent: Rope);
   VAR i: INTEGER; s: OvaEntities.SubItem; r: Rope;
 BEGIN
   IF items.n = 0 THEN RETURN END;
   Raw(indent, "<table>");
   Caption(indent, caption);
-  Raw(indent, "<tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>");
+  Raw(indent, "<tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>");
   FOR i := 0 TO items.n - 1 DO
     s := items.items[i](OvaEntities.SubItem);
     r := Str("<tr>");
     Cells(r, HtmlEscape(s.name)); Cells(r, Ropes.Cat(OvaCommon.SignedImg(s.level), OvaCommon.HalfTVText(s)));
     Cells(r, HtmlEscape(DetailOf(s)));
-    Cells(r, HtmlEscape(StripParens(OvaCommon.FormatModifiersBracket(s.perks, s.flaws))));
+    Cells(r, HtmlEscape(Ropes.Cat(StripParens(OvaCommon.FormatModifiersBracket(s, TRUE)), NoteText(s))));
     OvaText.Add(r, "</tr>");
     RawRope(indent, r)
   END;
@@ -231,7 +239,7 @@ BEGIN
   r := Str("<tr>");
   Cells(r, HtmlEscape(a.name)); Cells(r, Ropes.Cat(OvaCommon.SignedImg(a.level), OvaCommon.HalfTVText(a)));
   Cells(r, HtmlEscape(DetailOf(a)));
-  Cells(r, HtmlEscape(StripParens(OvaCommon.FormatModifiersBracket(a.perks, a.flaws))));
+  Cells(r, HtmlEscape(Ropes.Cat(StripParens(OvaCommon.FormatModifiersBracket(a, TRUE)), NoteText(a))));
   OvaOut.String(RawPrefix); OvaOut.Rope(indent); OvaOut.Rope(r);
   IF ~OvaCommon.HasLinked(a) THEN
     OvaOut.String("</tr>"); OvaOut.Ln
@@ -250,7 +258,7 @@ BEGIN
   IF abilities.n = 0 THEN RETURN END;
   Raw(NIL, "<table>");
   Raw(NIL, "<caption>Abilities</caption>");
-  Raw(NIL, "<tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>");
+  Raw(NIL, "<tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>");
   FOR i := 0 TO abilities.n - 1 DO PrintAbilityRow(abilities.items[i](OvaEntities.Ability), NIL) END;
   Raw(NIL, "</table>");
   OvaOut.Ln
@@ -282,7 +290,10 @@ BEGIN
   OvaOut.Ln;
   PrintAbilitiesTable(e.abilities);
   PrintWeaknessesTable(e.weaknesses);
-  PrintCombatTable(e.combat, Str("Combat"), NIL);
+  IF e.hasNpcType THEN
+    PrintCombatTable(e.combat, Ropes.AppendChar(Ropes.Cat(Str("Combat ("), OvaCommon.NpcTypeText(e)), ")"), NIL)
+  ELSE PrintCombatTable(e.combat, Str("Combat"), NIL)
+  END;
   OvaOut.Ln
 END PrintHtmlTables;
 
@@ -316,7 +327,7 @@ PROCEDURE ItemCellText(s: OvaEntities.SubItem): Rope;
 BEGIN
   r := OvaCommon.NameDetail(s.name, s.hasDetail, s.detail);
   r := Ropes.Cat(r, OvaCommon.HalfTVText(s));
-  r := Ropes.Cat(r, OvaCommon.FormatModifiersBracket(s.perks, s.flaws));
+  r := Ropes.Cat(r, OvaCommon.FormatModifiersBracket(s, TRUE));
   IF s.hasNote THEN
     OvaText.Add(r, " ("); r := Ropes.AppendChar(Ropes.Cat(r, s.note), ")")
   END;
@@ -673,6 +684,10 @@ BEGIN
   IF ~inRaw THEN
     OvaOut.String(".. raw:: ms"); OvaOut.Ln;
     OvaOut.Ln;
+    (* Pandoc ends the preceding prose paragraph without a break, so
+       its last, still-filling output line would otherwise print after
+       hd's tables, not before them. *)
+    Raw(NIL, ".br");
     Raw(NIL, ".mso hdtbl.tmac");
     inRaw := TRUE
   END
@@ -693,7 +708,11 @@ BEGIN
   inRaw := FALSE;
   EnsureRawOpen;
   PrintSideBySideGroff(e.abilities, e.weaknesses);
-  PrintCombatTableGroff(e.combat, OvaText.ToUpper(e.name));
+  (* "(HEROIC)", as the Sample NPCs' boxes have it, in place of the
+     name: a Companion/Vehicle's own box still has its name. *)
+  IF e.hasNpcType THEN PrintCombatTableGroff(e.combat, OvaText.ToUpper(OvaCommon.NpcTypeText(e)))
+  ELSE PrintCombatTableGroff(e.combat, OvaText.ToUpper(e.name))
+  END;
   IF e.hasFluff THEN PrintOtherStatisticsGroff(e) END;
   FOR i := 0 TO e.abilities.n - 1 DO
     se := e.abilities.items[i](OvaEntities.Ability).subEntity;

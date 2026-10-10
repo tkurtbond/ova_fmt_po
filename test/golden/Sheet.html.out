@@ -28,7 +28,7 @@ Cheerful and stubborn, and quick to take a dare.
 
    <table>
    <caption>Abilities</caption>
-   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
    <tr><td>Companion</td><td>+1</td><td>Mochi</td><td></td>
      <td>
        <p><strong>Companion: Mochi</strong> -- <strong>Attributes:</strong> Quick +1; Awkward Size −1 (Small).</p>
@@ -54,14 +54,14 @@ Cheerful and stubborn, and quick to take a dare.
        </table>
      </td>
    </tr>
-   <tr><td>Telekinesis</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Telekinesis</td><td>+2</td><td></td><td> [5* Endurance]</td></tr>
    <tr><td>Transformation</td><td>+3</td><td></td><td></td>
      <td>
        <table>
        <caption>Transformation — Grants (Abilities)</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
-       <tr><td>Barrier</td><td>+2</td><td></td><td></td></tr>
-       <tr><td>Flight</td><td>+2</td><td></td><td></td></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+       <tr><td>Barrier</td><td>+2</td><td></td><td> (the second Defense value)</td></tr>
+       <tr><td>Flight</td><td>+2</td><td></td><td> [5* Endurance]</td></tr>
        </table>
      </td>
    </tr>

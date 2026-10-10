@@ -72,9 +72,9 @@ make print-VAR  # show a makefile variable
   `make test` after any change.
 - **Regenerate golden files with `make golden`; never hand-edit one.**
   Add a line to `test/golden.cases` for new coverage and review the new
-  files before committing them. The cases where the Ada version dies of
-  an exception (PLAN.md, "Differences from the Ada version") can't be
-  golden files; they are checked in `test/cli.sh`.
+  files before committing them. What can't be a golden file (a missing
+  input file, an `-o` that can't be created or written) is checked in
+  `test/cli.sh`.
 - Fixtures: the capitalized ones in `test/data/` are the Ada repo's
   `test-data/` (copy any new one over, and keep them the same);
   `bad-*` and `edge-*` are this repo's. `[A-Z]*` cases take every

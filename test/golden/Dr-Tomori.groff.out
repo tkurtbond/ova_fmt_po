@@ -1,0 +1,110 @@
+Dr. Tomori
+==========
+
+*"Computers make for dry companions but very helpful allies when you are "dead.""*
+
+*An AI pioneer, believed dead, who uploaded his mind into the Malicron Corporation's network.*
+
+**Background**
+
+Dr. Heiji Tomori, a groundbreaking artificial-intelligence
+researcher, was recruited as the lone man at the Malicron
+Corporation, where his work made the company's long-held dream,
+Project MIHO, real. Soon afterward he was killed in an accident
+-- or so everyone believes. Drawing on his expertise with
+artificial brains, he had copied his entire mind into Malicron's
+network. Unknown to anyone, he quietly steers the company's work
+and searches the world's networks for any sign of his beloved
+Miho.
+
+**Character Hooks**
+
+He fits best in Malicron-centered campaigns (with PCs like
+Natsuki, Braun, and Miho), though he could turn up in any
+computer system. His robotics expertise could be crucial, and
+having no body has its uses.
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 16
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +5
+   .TD
+   Knowledge (AI)
+   .TR
+   .TD hal=r +4
+   .TD
+   Knowledge (Robotics)
+   .TR
+   .TD hal=r +4
+   .TD
+   Smart
+   .TR
+   .TD hal=r +3
+   .TD
+   Unique Ability (Instant Computer Research)
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Absent-Minded
+   .TR
+   .TD hal=r −3
+   .TD
+   Unique Weakness (Can Only Travel in Cyberspace)
+   .TR
+   .TD hal=r −3
+   .TD
+   Unique Weakness (No Physical Form)
+   .ETB
+   .ETB
+   .ne 18
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (SECONDARY)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBLitany of Scientific Fact\fP
+   .TD hal=c 2
+   .TD hal=c
+   1
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Erudite; Perks: Fatiguing]
+   .TR
+   .TD colspan=4
+   \fIDr. Tomori's exhaustive knowledge can be tiresome to the uninitiated.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB2\fP
+   .TD hal=c \fB20\fP
+   .TD hal=c \fB20\fP
+   .TD hal=c \fB1\fP
+   .ETB
+

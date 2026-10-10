@@ -1,0 +1,62 @@
+Saspar
+======
+
+*"Time, unstoppable time … when will my time come to an end?"*
+
+*A blindfolded gunman of the Order of Chaos who secretly longs to fail.*
+
+**Background**
+
+Saspar looks like a cold servant of the Order of Chaos, but
+underneath he simply doesn't care whether he lives; he quietly
+hopes to fail at his work and so be done with existence. His
+magic comes from strange enchanted devices rather than study: a
+gun that fires spells once loaded with the right bullet, and an
+ornate pocket watch that lets him foresee events and head off
+danger. He always wears a red sash over his eyes, and nobody
+knows whether he's truly blind.
+
+**Character Hooks**
+
+The Order of Chaos makes Saspar and Acacia natural enemies for
+anyone defending the world from evil -- Fukiko and Auren, whose
+backgrounds both feature a vague darkness to be fought, fit
+especially well. They can also serve as magical rivals.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Art of Invisibility</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+3</td><td>Magic Gun</td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+4</td><td>Violin</td><td></td></tr>
+   <tr><td>Quick</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Sixth Sense</td><td>+3</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Emotionless</td><td>-2</td><td></td></tr>
+   <tr><td>Focus</td><td>-1</td><td>Chronos Watch</td></tr>
+   <tr><td>Hatred</td><td>-2</td><td>Excessive Noise</td></tr>
+   <tr><td>Servitude</td><td>-3</td><td>Chaos</td></tr>
+   <tr><td>Unique Weakness</td><td>-2</td><td>Cannot Detect Things Perceptible to Sight Alone</td></tr>
+   <tr><td>Vulnerability</td><td>-1</td><td>Holy</td></tr>
+   </table>
+
+   <table>
+   <caption>Combat (Heroic)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>40</td><td>5</td><td>14</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Heroic) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Brim Shot</td><td>7</td><td>5</td><td>0</td><td>Affinity: Fire; Perks: Accurate x2, Effective, Ranged; Flaws: Activation, Weapon</td><td>Calls on the spirit of Phoenix to fire a homing projectile bathed in fire.</td></tr>
+   <tr><td>Ise Shot</td><td>5</td><td>5</td><td>0</td><td>Affinity: Ice; Perks: Effective, Impairing, Ranged; Flaws: Activation, Weapon</td><td>Calls on the spirit of Ymir to fire a frost ray that encapsulates what it hits in ice.</td></tr>
+   <tr><td>Lode Shot</td><td>5</td><td>5</td><td>0</td><td>Affinity: Earth; Perks: Effective, Ranged, Stunning; Flaws: Activation, Weapon</td><td>Calls on the spirit of Gaia to fire a rocky blast that knocks targets off their feet.</td></tr>
+   </table>
+

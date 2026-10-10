@@ -1,0 +1,34 @@
+---
+# Zombies (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Lurking in the Shadows", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Zombies
+  fragment: true
+  background: |
+    **Zombies**: you can't live with them, and they can't live
+    without your brains. Slow and mindless, they make up for their
+    feeble offense with sheer numbers and a refusal to stay dead.
+  abilities:
+    - name: Attack
+      level: 1
+    - name: Tough
+      level: 2
+    - name: Unique Ability
+      level: 3
+      detail: Turns Defeated into Zombies
+  weaknesses:
+    - name: Clumsy
+      level: -1
+    - name: Dense
+      level: -3
+    - name: Slow
+      level: -2
+    - name: Vulnerability
+      level: -2
+      detail: Fire
+    - name: Vulnerability
+      level: -2
+      detail: Head Shots
+...

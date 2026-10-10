@@ -1,0 +1,28 @@
+---
+# Ninja (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Lurking in the Shadows", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Ninja
+  fragment: true
+  background: |
+    It doesn't matter that a **Ninja** and his comrades go down
+    easily and by the dozen, or that years of assassin's training
+    count for little. The work is his whole life, and no odds,
+    however hopeless, will make him betray it.
+  abilities:
+    - name: Agile
+      level: 1
+    - name: Art of Invisibility
+      level: 2
+    - name: Attack
+      level: 1
+      detail: Katana
+    - name: Quick
+      level: 1
+  weaknesses:
+    - name: Code of Conduct
+      level: -3
+      detail: Will Die Before Revealing Information
+...

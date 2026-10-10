@@ -1,0 +1,68 @@
+Ancel
+=====
+
+*"It is most unfortunate that you have seen me. Oh well, it can't be helped. Good-bye."*
+
+*A twelve-year-old pianist who is secretly a hitman.*
+
+**Background**
+
+Ancel looks like an ordinary twelve-year-old boy, but anyone who
+spends time with him notices something deeper: a composure,
+insight, and self-supporting life as a pianist that don't fit his
+age. Playing piano is only his cover. He's a hitman, equipped with
+every kind of weapon and gadget and very good at the job. Clients
+never meet him, targets never survive him, and his youthful look
+is the ideal disguise. Nobody knows his past.
+
+**Character Hooks**
+
+Anyone who angers the wrong person might find Ancel sent after
+them, and the PCs might try to stop him finishing a job. Or he
+might just be a friendly face at the local café or bar.
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Agile</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Art of Invisibility</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Attack</td><td>+2</td><td>Tools of the Trade</td><td></td></tr>
+   <tr><td>Combat Expert</td><td>+4</td><td></td><td></td></tr>
+   <tr><td>Dimensional Pocket</td><td>+3</td><td></td><td></td></tr>
+   <tr><td>Evasive</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Intuitive</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Knowledge</td><td>+4</td><td>Piano</td><td></td></tr>
+   <tr><td>Perceptive</td><td>+2</td><td></td><td></td></tr>
+   <tr><td>Quick</td><td>+1</td><td></td><td></td></tr>
+   <tr><td>Wealthy</td><td>+2</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Weaknesses</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th></tr>
+   <tr><td>Ageism</td><td>−1</td><td></td></tr>
+   <tr><td>Emotionless</td><td>−1</td><td></td></tr>
+   <tr><td>Frail</td><td>−2</td><td></td></tr>
+   <tr><td>Fussy</td><td>−1</td><td></td></tr>
+   <tr><td>Ineptitude</td><td>−2</td><td>Speaking Face-to-Face</td></tr>
+   <tr><td>Secret</td><td>−3</td><td>Assassin</td></tr>
+   <tr><td>Soft Spot</td><td>−2</td><td>Music</td></tr>
+   <tr><td>Wanted</td><td>−3</td><td>The Law</td></tr>
+   <tr><td>Weak</td><td>−2</td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat (Heroic)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>20</td><td>40</td><td>5</td><td>14</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Heroic) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Handgun</td><td>8</td><td>4</td><td>0</td><td>Perks: Effective, Ranged; Flaws: Weapon</td><td>Happiness is a warm gun. Well, Ancel never seems to be happy, but close enough.</td></tr>
+   <tr><td>Sniper Rifle</td><td>8</td><td>3</td><td>0</td><td>Perks: Impairing, Ranged; Flaws: Delayed, Weapon</td><td>What better way to carry out one's work but from afar and well out of harm's way?</td></tr>
+   <tr><td>Length of Wire</td><td>8</td><td>1</td><td>10</td><td>Perks: Paralyzing x2; Flaws: Low Penetration x2</td><td>If left without other means, Ancel knows how to improvise to take down a target, even if his small frame makes the effort exhausting.</td></tr>
+   </table>
+

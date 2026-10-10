@@ -47,6 +47,12 @@ CONST
   OvHealth* = 5; OvThreatValue* = 6;
   NOverrides = 7;
 
+  (* An npc-type: (rulebook p. 133, "Using NPC Type"), an NPC's
+     importance to the story: the Ada NPC_Kind.  Matched ignoring case;
+     anything else is a recorded error.  See NpcTypeName. *)
+  Heroic* = 0; Secondary* = 1; Extra* = 2;
+  NNpcTypes = 3;
+
 TYPE
   Rope = Ropes.Rope;
 
@@ -169,9 +175,10 @@ TYPE
     hasPlayer-, hasPortrait-: BOOLEAN;
     player-, portrait-: Rope;             (* untrimmed, as in the Ada version *)
     hasTagline-, hasSummary-, hasBackground-, hasAppearance-, hasPersonality-,
-    hasOtherNotes-: BOOLEAN;
+    hasCharacterHooks-, hasOtherNotes-: BOOLEAN;
     tagline-, summary-, background-, appearance-, personality-,
-    otherNotes-: Rope;                    (* trimmed *)
+    characterHooks-, otherNotes-: Rope;   (* trimmed *)
+    hasNpcType-: BOOLEAN; npcType-: INTEGER;  (* Heroic, Secondary or Extra *)
     abilities-: List;                     (* of Ability, sorted *)
     weaknesses-: List;                    (* of Weakness, sorted *)
     combat-: Combat;
@@ -471,6 +478,40 @@ BEGIN
   END
 END LoadOverrides;
 
+(* The rulebook's capitalization of npc-type k ("Heroic"). *)
+PROCEDURE NpcTypeName*(k: INTEGER): Rope;
+BEGIN
+  CASE k OF
+    Heroic: RETURN Ropes.FromString("Heroic")
+  | Secondary: RETURN Ropes.FromString("Secondary")
+  | Extra: RETURN Ropes.FromString("Extra")
+  END
+END NpcTypeName;
+
+(* m's npc-type:, if any: the Ada Load_NPC_Type.  Anything but one of
+   the three names is a recorded error, like an overrides: name:
+   silently dropping it would lose the type from the output.  A value
+   that isn't a scalar fails the Load, as any optional string's does. *)
+PROCEDURE LoadNpcType(m: Fyaml.Node; VAR has: BOOLEAN; VAR k: INTEGER): BOOLEAN;
+  VAR there: BOOLEAN; raw, msg: Rope; i: INTEGER;
+BEGIN
+  has := FALSE; k := Heroic;
+  IF ~OptString(m, "npc-type", there, raw) THEN RETURN FALSE END;
+  IF there THEN
+    FOR i := 0 TO NNpcTypes - 1 DO
+      IF ~has & Ropes.Equal(OvaText.FoldCI(OvaText.Trim(raw)), OvaText.FoldCI(NpcTypeName(i))) THEN
+        has := TRUE; k := i
+      END
+    END;
+    IF ~has THEN
+      msg := Ropes.Cat(Ropes.FromString('"'), raw);
+      OvaText.Add(msg, '" is not one of Heroic, Secondary, Extra');
+      Record(m, "npc-type", msg)
+    END
+  END;
+  RETURN TRUE
+END LoadNpcType;
+
 (* ---- Perks and Flaws ---- *)
 
 (* A Perk or Flaw: a scalar (just the name) or a mapping. *)
@@ -704,6 +745,8 @@ BEGIN
      OR ~Prose(m, "background", e.hasBackground, e.background)
      OR ~Prose(m, "appearance", e.hasAppearance, e.appearance)
      OR ~Prose(m, "personality", e.hasPersonality, e.personality)
+     OR ~Prose(m, "character-hooks", e.hasCharacterHooks, e.characterHooks)
+     OR ~LoadNpcType(m, e.hasNpcType, e.npcType)
      OR ~Prose(m, "other-notes", e.hasOtherNotes, e.otherNotes)
      OR ~OptString(m, "portrait", e.hasPortrait, e.portrait)
      OR ~LoadList(m, "abilities", LoadAbility, e.abilities) THEN

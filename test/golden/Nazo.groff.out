@@ -1,0 +1,147 @@
+Nazo
+====
+
+*"Shall I show you what you covet most? What, pray tell, would you give up to have it?"*
+
+*An outcast kitsune who stages elaborate tests of human nature.*
+
+**Background**
+
+Nazo is a kitsune, one of the Japanese fox spirits notorious for
+tricking and toying with mortals. She keeps her distance from
+other kitsune, though, because she won't follow their traditions:
+she reveals what she is without a second thought, and her
+interest in people goes past simply fooling them -- she truly
+wants to understand them, and some say she envies them. With
+shapeshifting, illusions, and curses she devises intricate
+schemes to test what her targets believe in, and leaves them be
+only once her curiosity is satisfied.
+
+**Character Hooks**
+
+Equally at home as a fox, a child, or a beautiful woman, Nazo
+can fit alongside almost any character, and one of her carefully
+plotted schemes could fill a whole adventure. She could also be
+the "old bag" from Daisuke's background or the evil spirit from
+Cora's.
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 28
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +4
+   .TD
+   Charismatic
+   .TR
+   .TD hal=r +5
+   .TD
+   Illusionist
+   .TR
+   .TD hal=r +3
+   .TD
+   Incorporeal Form
+   .TR
+   .TD hal=r +3
+   .TD
+   Magic, Witchcraft
+   .TR
+   .TD hal=r +3
+   .TD
+   Psychic
+   .TR
+   .TD hal=r +2
+   .TD
+   Resistance (Physical)
+   .TR
+   .TD hal=r +5
+   .TD
+   Shape-Shifter
+   .TR
+   .TD hal=r +2
+   .TD
+   Telekinesis
+   .TR
+   .TD hal=r +3
+   .TD
+   Teleport
+   .TR
+   .TD hal=r +3
+   .TD
+   Vigorous
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −2
+   .TD
+   Compulsion (Curiosity)
+   .TR
+   .TD hal=r −2
+   .TD
+   Obsession (Human Nature)
+   .TR
+   .TD hal=r −2
+   .TD
+   Outcast (Other Kitsune)
+   .TR
+   .TD hal=r −2
+   .TD
+   Overconfident
+   .TR
+   .TD hal=r −2
+   .TD
+   Soft Spot (Green Tea)
+   .TR
+   .TD hal=r −3
+   .TD
+   Unique Weakness (Priests Immune to Illusions)
+   .ETB
+   .ETB
+   .ne 18
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (HEROIC)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBFox Fire\fP
+   .TD hal=c 2
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Spirit]
+   .TR
+   .TD colspan=4
+   \fINazo dazzles the opponent with a brilliant illusionary display before overwhelming them with spiritual power.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB5\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB70\fP
+   .TD hal=c \fB16\fP
+   .ETB
+

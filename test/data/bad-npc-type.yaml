@@ -1,0 +1,6 @@
+# npc-type: that isn't Heroic, Secondary or Extra: a recorded error,
+# like a missing required key, so both entities' are reported.
+- name: Bad Type
+  npc-type: Boss
+- name: Empty Type
+  npc-type:

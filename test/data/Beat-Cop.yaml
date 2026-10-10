@@ -1,0 +1,41 @@
+---
+# Beat Cop (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "On the Town", p. 142). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Beat Cop
+  fragment: true
+  background: |
+    The **Beat Cop** is the neighborhood's friendly face: young, new
+    to the force, and always glad to give directions or lend a hand.
+    On quiet shifts he jots down notes for the crime novel he's
+    writing, as long as his boss doesn't catch him at it.
+  abilities:
+    - name: Attack
+      level: 2
+      detail: Pistol
+    - name: Combat Expert
+      level: 1
+    - name: Knowledge
+      level: 2
+      detail: The City In and Out
+    - name: Knowledge
+      level: 1
+      detail: Writing
+    - name: Perceptive
+      level: 1
+    - name: Position of Power
+      level: 2
+      detail: Police Officer
+  weaknesses:
+    - name: Secret
+      level: -1
+      detail: Writing Aspirations
+    - name: Servitude
+      level: -2
+      detail: Police Department and the Common Good
+    - name: Soft Spot
+      level: -1
+      detail: Dessert
+...

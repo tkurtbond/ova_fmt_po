@@ -22,6 +22,7 @@ nowhere left to run.
 
 .. raw:: ms
 
+   .br
    .mso hdtbl.tmac
    .ne 26
    .TBL cols=2 border=0 csp=4p cpd=0
@@ -43,7 +44,7 @@ nowhere left to run.
    .TR
    .TD hal=r +3
    .TD
-   Barrier [Perks: No Gesture] (provides an alternate Defense Roll (the second Defense value below))
+   Barrier [Perks: No Gesture; 5 Endurance] (provides an alternate Defense Roll (the second Defense value below))
    .TR
    .TD hal=r +2
    .TD

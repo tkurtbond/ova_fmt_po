@@ -1,0 +1,24 @@
+---
+# Thugs (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "The Wrong Side of the Law", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Thugs
+  fragment: true
+  background: |
+    **Thugs** haunt every dark alley and make for the classic quick
+    fight. Maybe life dealt them a bad hand, but let's be honest:
+    they exist for the PCs to beat up.
+  abilities:
+    - name: Attack
+      level: 1
+      detail: Length of Chain
+    - name: Combat Expert
+      level: 1
+  weaknesses:
+    - name: Dense
+      level: -1
+    - name: Easily Distracted
+      level: -1
+...

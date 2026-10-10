@@ -1,0 +1,7 @@
+The **Indebted Yakuza** owes his life to his crime family, so he
+has become a loyal and honored member of it -- though all he
+really wants is to stay away from violence. The conflict between
+the two sides of him torments him.
+
+**Attributes:** Attack +2 (Illegal Firearm), Intimidating +2, Knowledge +2 (Gambling), Tough +1; Bizarre Appearance −1 (Full-Body Tattoos), Pacifist −1, Servitude −3 (Yakuza).
+

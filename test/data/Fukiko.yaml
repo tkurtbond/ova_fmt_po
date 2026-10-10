@@ -8,8 +8,8 @@
 # Scheme project (~/current/RPG/Tools/OVA/test-data/Fukiko.yaml,
 # left untouched there) -- the first file transcribed for this
 # project, before the schema conventions in this comment existed.
-# Changes made to bring it in line with test-data/Karis.yaml through
-# Cora.yaml:
+# Changes made to bring it in line with
+# test-data/sample-pcs/Karis.yaml through Cora.yaml:
 #
 #   - Top-level document is now a YAML sequence, not a bare mapping.
 #   - `tagline` and `summary` added (didn't exist as fields yet when

@@ -3,6 +3,7 @@ Rock & Roll <Star>
 
 .. raw:: ms
 
+   .br
    .mso hdtbl.tmac
    .ne 12
    .TBL cols=2 border=0 csp=4p cpd=0

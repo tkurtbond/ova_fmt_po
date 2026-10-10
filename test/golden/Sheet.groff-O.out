@@ -23,6 +23,7 @@ Cheerful and stubborn, and quick to take a dare.
 
 .. raw:: ms
 
+   .br
    .mso hdtbl.tmac
    .ne 32
    .TBL cols=2 border=0 csp=4p cpd=0
@@ -59,7 +60,7 @@ Cheerful and stubborn, and quick to take a dare.
    .TR
    .TD hal=r +2
    .TD
-   Telekinesis (half TV)
+   Telekinesis (half TV) [5* Endurance]
    .TR
    .TD hal=r +3
    .TD
@@ -76,7 +77,7 @@ Cheerful and stubborn, and quick to take a dare.
    .TR
    .TD hal=r +2
    .TD
-   Flight (half TV)
+   Flight (half TV) [5* Endurance]
    .ETB
    .ETB
    .TD

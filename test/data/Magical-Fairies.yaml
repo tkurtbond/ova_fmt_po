@@ -1,0 +1,35 @@
+---
+# Magical Fairies (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Fantastic Creatures of Lore", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Magical Fairies
+  fragment: true
+  background: |
+    **Magical Fairies** can be helpful or mischievous, and it's hard
+    to tell which kind you've met -- their riddling, singsong way of
+    talking certainly doesn't help.
+  abilities:
+    - name: Charismatic
+      level: 1
+    - name: Cute!
+      level: 1
+    - name: Flight
+      level: 2
+    - name: Magic, Arcane
+      level: 1
+    - name: Quick
+      level: 2
+  weaknesses:
+    - name: Awkward Size
+      level: -3
+      detail: Tiny
+    - name: Frail
+      level: -1
+    - name: Quirk
+      level: -1
+      detail: Nonsensical Talk
+    - name: Weak
+      level: -2
+...

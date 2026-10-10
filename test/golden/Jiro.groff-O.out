@@ -1,0 +1,161 @@
+Jiro
+====
+
+*"Break? There's no time for a break! If you want a break, I'll give it to you -- a break in the neck!"*
+
+*The local police captain, chronically overworked and much too quick to draw his gun.*
+
+**Background**
+
+As the local police captain, Jiro keeps the force running, and
+the strain shows: he's jumpy, irritable, and always juggling
+several unrelated jobs at once, sometimes answering phones,
+barking orders, and doing paperwork all at the same time. His
+colleagues keep urging him to take time off, but he's never
+missed a day, and some suspect he's been saving up vacation for
+decades. Whether from stress or something darker, he tends to aim
+his gun at anything he considers an unwanted intrusion.
+
+**Character Hooks**
+
+For all his near-psychotic devotion to the job, Captain Jiro
+generally does it well. Still, even well-behaved PCs can find
+themselves under police scrutiny.
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 28
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Armored (Bulletproof Vest)
+   .TR
+   .TD hal=r +1
+   .TD
+   Attack (Police Training)
+   .TR
+   .TD hal=r +2
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +1
+   .TD
+   Evasive
+   .TR
+   .TD hal=r +2
+   .TD
+   Intimidating
+   .TR
+   .TD hal=r +3
+   .TD
+   Minions (Officers)
+   .TR
+   .TD hal=r +1
+   .TD
+   Perceptive
+   .TR
+   .TD hal=r +2
+   .TD
+   Position of Power
+   .TR
+   .TD hal=r +2
+   .TD
+   Strong
+   .TR
+   .TD hal=r +1
+   .TD
+   Tough
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −2
+   .TD
+   Compulsion (Trigger-Happy)
+   .TR
+   .TD hal=r −1
+   .TD
+   Dependency (Coffee)
+   .TR
+   .TD hal=r −2
+   .TD
+   Jittery
+   .TR
+   .TD hal=r −3
+   .TD
+   Obsession (Work)
+   .TR
+   .TD hal=r −2
+   .TD
+   Servitude (Police Force)
+   .TR
+   .TD hal=r −3
+   .TD
+   Short-Tempered
+   .TR
+   .TD hal=r −1
+   .TD
+   Stubborn
+   .ETB
+   .ETB
+   .ne 24
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (SECONDARY)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBDesk-Side Revolver\fP
+   .TD hal=c 4
+   .TD hal=c
+   4
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Perks: Effective x2, Ranged; Flaws: Ammunition, Weapon]
+   .TR
+   .TD colspan=4
+   \fIJiro's constant companion and likely only friend.\fP
+   .TR
+   .TD
+   \fBBare Knuckle\fP
+   .TD hal=c 3
+   .TD hal=c
+   4
+   .TD hal=c 5
+   .TR
+   .TD colspan=4
+   [Perks: Stunning; Flaws: Inaccurate]
+   .TR
+   .TD colspan=4
+   \fIWhile he prefers "civilized" weaponry like his revolver, Jiro can throw a mean punch.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB3\fP
+   .TD hal=c \fB30\fP
+   .TD hal=c \fB20\fP
+   .TD hal=c \fB9\fP
+   .ETB
+

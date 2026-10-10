@@ -1,0 +1,66 @@
+---
+# Dr. Tomori (OVA rulebook, "Sample NPCs" chapter, p. 140).
+# ova-rulebook.txt lines 6511-6555; the TV was checked against the
+# PDF page (the text extraction gives "1."; the page says 1). See
+# Acacia.yaml's header comment for the transcription policy and the
+# new `npc-type` and `character-hooks` keys.
+#
+# His sheet spells it "Absent Minded", the only place the rulebook
+# does; everywhere else (the Weakness's own entry included) it's
+# "Absent-Minded", used here so the name matches the rules.
+
+- name: Dr. Tomori
+  npc-type: Secondary
+  tagline: Computers make for dry companions but very helpful allies when you are "dead."
+  summary: An AI pioneer, believed dead, who uploaded his mind into the Malicron Corporation's network.
+  background: |
+    Dr. Heiji Tomori, a groundbreaking artificial-intelligence
+    researcher, was recruited as the lone man at the Malicron
+    Corporation, where his work made the company's long-held dream,
+    Project MIHO, real. Soon afterward he was killed in an accident
+    -- or so everyone believes. Drawing on his expertise with
+    artificial brains, he had copied his entire mind into Malicron's
+    network. Unknown to anyone, he quietly steers the company's work
+    and searches the world's networks for any sign of his beloved
+    Miho.
+  character-hooks: |
+    He fits best in Malicron-centered campaigns (with PCs like
+    Natsuki, Braun, and Miho), though he could turn up in any
+    computer system. His robotics expertise could be crucial, and
+    having no body has its uses.
+  abilities:
+    - name: Knowledge
+      level: 5
+      detail: AI
+    - name: Knowledge
+      level: 4
+      detail: Robotics
+    - name: Smart
+      level: 4
+    - name: Unique Ability
+      level: 3
+      detail: Instant Computer Research
+  weaknesses:
+    - name: Absent-Minded
+      level: -1
+    - name: Unique Weakness
+      level: -3
+      detail: Can Only Travel in Cyberspace
+    - name: Unique Weakness
+      level: -3
+      detail: No Physical Form
+  combat:
+    defense: 2
+    health: 20
+    endurance: 20
+    threat-value: 1
+    attacks:
+      - name: Litany of Scientific Fact
+        perks:
+          - Fatiguing
+        affinity: Erudite
+        description: Dr. Tomori's exhaustive knowledge can be tiresome to the uninitiated.
+        roll: 2
+        dx: 1
+        endurance: 0
+...

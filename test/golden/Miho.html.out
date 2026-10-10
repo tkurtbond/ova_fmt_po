@@ -24,7 +24,7 @@ that harder than it should be.
 
    <table>
    <caption>Abilities</caption>
-   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
    <tr><td>Agile</td><td>+3</td><td></td><td></td></tr>
    <tr><td>Attack</td><td>+3</td><td>Robo-Powered Arsenal</td><td></td></tr>
    <tr><td>Beautiful</td><td>+3</td><td></td><td></td></tr>
@@ -37,13 +37,13 @@ that harder than it should be.
      <td>
        <table>
        <caption>Transformation — Grants (Abilities)</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
        <tr><td>Combat Expert</td><td>+2</td><td></td><td></td></tr>
        <tr><td>Endurance Reserve</td><td>+2</td><td></td><td></td></tr>
        </table>
        <table>
        <caption>Transformation — Grants (Weaknesses)</caption>
-       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws</th></tr>
+       <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
        <tr><td>Unique Weakness</td><td>−3</td><td>Loss of Control</td><td></td></tr>
        </table>
      </td>

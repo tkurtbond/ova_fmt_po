@@ -1,0 +1,2 @@
+ova_fmt: error processing test/data/bad-npc-type-shape.yaml: key "npc-type" is not a scalar value
+==== exit 1 ====

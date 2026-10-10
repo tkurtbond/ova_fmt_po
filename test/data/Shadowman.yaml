@@ -1,0 +1,98 @@
+---
+# Shadowman (OVA rulebook, "Sample NPCs" chapter, p. 136).
+# ova-rulebook.txt lines 6245-6305. See Acacia.yaml's header comment
+# for the transcription policy and the new `npc-type` and
+# `character-hooks` keys. "ova" (the banned cloning project) is set
+# in small caps in the book, so it's written "OVA" here.
+
+- name: Shadowman
+  npc-type: Heroic
+  tagline: My precious daughter, we will be together again even if I must destroy the whole universe!
+  summary: A once-celebrated scientist in powered armor, hunting a banned cloning project to restore his dead daughter.
+  background: |
+    Shadowman is feared across the galaxy for the ruin he leaves
+    behind, though his rampage may be less random than it looks. He
+    was once Har Grimoire, an acclaimed scientist devoted to his
+    daughter Elle, until a lab accident killed her and nearly killed
+    him. Thought dead, he rebuilt himself inside armor that both
+    keeps him alive and makes him more than human, and set out to
+    find OVA -- an outlawed project to rebuild a person from a single
+    DNA sample, which he's sure still exists somewhere. He'll let
+    nothing stop him.
+  character-hooks: |
+    He's an obvious enemy for Karis, but anyone protecting the common
+    good can end up opposing him. Curiously, Karis looks a great deal
+    like Elle.
+  abilities:
+    - name: Armored
+      level: 2
+    - name: Attack
+      level: 3
+      detail: Futuristic Force
+    - name: Barrier
+      level: 4
+    - name: Combat Expert
+      level: 1
+    - name: Flight
+      level: 3
+    - name: Inventor
+      level: 3
+    - name: Life Support
+      level: 3
+    - name: Pilot
+      level: 2
+    - name: Smart
+      level: 3
+    - name: Strong
+      level: 3
+    - name: Telekinesis
+      level: 3
+    - name: Tough
+      level: 4
+    - name: Vigorous
+      level: 2
+  weaknesses:
+    - name: Bizarre Appearance
+      level: -2
+    - name: Focus
+      level: -3
+      detail: Abilities from Suit
+    - name: Infamous
+      level: -3
+      detail: Criminal
+    - name: Obsession
+      level: -3
+      detail: Finding OVA
+    - name: Secret
+      level: -3
+      detail: Identity
+    - name: Wanted
+      level: -3
+      detail: GPL
+  combat:
+    defense: 6
+    health: 80
+    endurance: 60
+    threat-value: 24
+    attacks:
+      - name: Laser Sword
+        perks:
+          - Armor Piercing
+        flaws:
+          - Weapon
+        description: A glowing beam of light that instills fear into those who would dare face him.
+        roll: 3
+        dx: 7
+        endurance: 0
+      - name: Psycho-Kinetic Crush
+        perks:
+          - Area Effect
+          - Stunning
+        flaws:
+          - name: Ineffective
+            counts-as: 2
+        description: Shadowman uses his amplified mental powers to toss around the opponent.
+        roll: 3
+        dx: 5
+        endurance: 10
+...

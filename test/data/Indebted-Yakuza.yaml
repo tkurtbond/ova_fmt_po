@@ -1,0 +1,34 @@
+---
+# Indebted Yakuza (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "The Wrong Side of the Law", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Indebted Yakuza
+  fragment: true
+  background: |
+    The **Indebted Yakuza** owes his life to his crime family, so he
+    has become a loyal and honored member of it -- though all he
+    really wants is to stay away from violence. The conflict between
+    the two sides of him torments him.
+  abilities:
+    - name: Attack
+      level: 2
+      detail: Illegal Firearm
+    - name: Intimidating
+      level: 2
+    - name: Knowledge
+      level: 2
+      detail: Gambling
+    - name: Tough
+      level: 1
+  weaknesses:
+    - name: Bizarre Appearance
+      level: -1
+      detail: Full-Body Tattoos
+    - name: Pacifist
+      level: -1
+    - name: Servitude
+      level: -3
+      detail: Yakuza
+...

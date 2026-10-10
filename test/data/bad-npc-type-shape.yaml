@@ -1,0 +1,4 @@
+# npc-type: that isn't a scalar ends the file, as any optional string
+# that isn't one does.
+- name: Bad Shape
+  npc-type: [Heroic]

@@ -1,0 +1,36 @@
+---
+# Ghosts (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "Lurking in the Shadows", p. 143). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Ghosts
+  fragment: true
+  background: |
+    **Ghosts** are the spirits of the dead, held in this world by
+    unfinished business. On top of their eerie powers, physical
+    attacks can't touch them, so special powers -- or an exorcist --
+    come in handy.
+  abilities:
+    - name: Attack
+      level: 1
+      detail: Haunt
+      perks:
+        - Fatiguing
+    - name: Flight
+      level: 1
+    - name: Incorporeal Form
+      level: 2
+    - name: Resistance
+      level: 5
+      detail: Physical Attacks
+    - name: Telekinesis
+      level: 1
+  weaknesses:
+    - name: Bizarre Appearance
+      level: -3
+      detail: Ghostly
+    - name: Restricted Freedom
+      level: -3
+      detail: Place of Death
+...

@@ -1,0 +1,155 @@
+Saspar
+======
+
+*"Time, unstoppable time … when will my time come to an end?"*
+
+*A blindfolded gunman of the Order of Chaos who secretly longs to fail.*
+
+**Background**
+
+Saspar looks like a cold servant of the Order of Chaos, but
+underneath he simply doesn't care whether he lives; he quietly
+hopes to fail at his work and so be done with existence. His
+magic comes from strange enchanted devices rather than study: a
+gun that fires spells once loaded with the right bullet, and an
+ornate pocket watch that lets him foresee events and head off
+danger. He always wears a red sash over his eyes, and nobody
+knows whether he's truly blind.
+
+**Character Hooks**
+
+The Order of Chaos makes Saspar and Acacia natural enemies for
+anyone defending the world from evil -- Fukiko and Auren, whose
+backgrounds both feature a vague darkness to be fought, fit
+especially well. They can also serve as magical rivals.
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 20
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +3
+   .TD
+   Art of Invisibility
+   .TR
+   .TD hal=r +3
+   .TD
+   Attack (Magic Gun)
+   .TR
+   .TD hal=r +3
+   .TD
+   Combat Expert
+   .TR
+   .TD hal=r +4
+   .TD
+   Knowledge (Violin)
+   .TR
+   .TD hal=r +3
+   .TD
+   Quick
+   .TR
+   .TD hal=r +3
+   .TD
+   Sixth Sense
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −2
+   .TD
+   Emotionless
+   .TR
+   .TD hal=r −1
+   .TD
+   Focus (Chronos Watch)
+   .TR
+   .TD hal=r −2
+   .TD
+   Hatred (Excessive Noise)
+   .TR
+   .TD hal=r −3
+   .TD
+   Servitude (Chaos)
+   .TR
+   .TD hal=r −2
+   .TD
+   Unique Weakness (Cannot Detect Things Perceptible to Sight Alone)
+   .TR
+   .TD hal=r −1
+   .TD
+   Vulnerability (Holy)
+   .ETB
+   .ETB
+   .ne 30
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (HEROIC)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBBrim Shot\fP
+   .TD hal=c 7
+   .TD hal=c
+   5
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Fire; Perks: Accurate x2, Effective, Ranged; Flaws: Activation, Weapon]
+   .TR
+   .TD colspan=4
+   \fICalls on the spirit of Phoenix to fire a homing projectile bathed in fire.\fP
+   .TR
+   .TD
+   \fBIse Shot\fP
+   .TD hal=c 5
+   .TD hal=c
+   5
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Ice; Perks: Effective, Impairing, Ranged; Flaws: Activation, Weapon]
+   .TR
+   .TD colspan=4
+   \fICalls on the spirit of Ymir to fire a frost ray that encapsulates what it hits in ice.\fP
+   .TR
+   .TD
+   \fBLode Shot\fP
+   .TD hal=c 5
+   .TD hal=c
+   5
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Affinity: Earth; Perks: Effective, Ranged, Stunning; Flaws: Activation, Weapon]
+   .TR
+   .TD colspan=4
+   \fICalls on the spirit of Gaia to fire a rocky blast that knocks targets off their feet.\fP
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB5\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB14\fP
+   .ETB
+

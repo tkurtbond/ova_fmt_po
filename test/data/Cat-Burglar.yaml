@@ -1,0 +1,35 @@
+---
+# Cat Burglar (OVA rulebook, "Sample NPCs" chapter, "NPC Fragments",
+# "High-Tech Marvels & Outer Space", p. 144). Game-mechanical data transcribed faithfully;
+# the description is a short original paraphrase (see
+# test-data/sample-npcs/Acacia.yaml's header comment).
+
+- name: Cat Burglar
+  fragment: true
+  background: |
+    Wanted across the galaxy, the **Cat Burglar** will gladly stroll
+    off with your valuables, her feline alien heritage making her
+    nimble and stealthy. Just never call her a cat to her face, or
+    you could lose more than your belongings.
+  abilities:
+    - name: Agile
+      level: 2
+    - name: Art of Invisibility
+      level: 2
+    - name: Attack
+      level: 1
+      detail: Claws
+    - name: Dexterous
+      level: 2
+    - name: Quick
+      level: 2
+  weaknesses:
+    - name: Greedy
+      level: -2
+    - name: Sensitivity
+      level: -2
+      detail: Being Called a Cat
+    - name: Wanted
+      level: -3
+      detail: GPL
+...
