@@ -24,10 +24,7 @@
 # wasn't 0.
 #
 # The character fixtures are the capitalized ones ([A-Z]*), from the
-# Ada repo's test-data; bad-* and edge-* are the port's.  Cases where
-# the Ada version dies with an assertion failure (bad-shape-*) aren't
-# here: test/cli.sh checks what the port says instead (PLAN.md,
-# "Differences from the Ada version").
+# Ada repo's test-data; bad-* and edge-* are the port's.
 
 # ---- Every format, on every character fixture ----
 ada    terse       [A-Z]*
@@ -57,9 +54,10 @@ ada:all    all-hmm     [A-Z]*   -m
 
 # ---- Standard input and -o ----
 ada:stdin  stdin       @(Karis|Options|edge-multi-document)   -U ~
+ada:stdin  stdin-errors  @(bad-yaml|Broken)
 ada:file   o-file      @(Karis|Fragment)   -G
 
 # ---- Errors and edge cases ----
-ada    errors      @(bad-!(shape-*)|edge-*|Broken)
-ada    errors-m    @(bad-!(shape-*)|edge-*|Broken)   -m
-ada:all    errors-all  @(Options|Broken|bad-yaml|Fragment)
+ada    errors      @(bad-*|edge-*|Broken)
+ada    errors-m    @(bad-*|edge-*|Broken)   -m
+ada:all    errors-all  @(Options|Broken|bad-yaml|bad-shape-fluff|Fragment)

@@ -25,13 +25,13 @@ VAR
 
 (* -u/--underliner and -U/--subunderliner take one character.  Anything
    else is a command-line mistake, status 2, in the Ada version's
-   words. *)
+   words (its Arg_Parser's prefix, then its own message). *)
 PROCEDURE OneChar(VAR arg: ARRAY OF CHAR; names: ARRAY OF CHAR; VAR c: CHAR);
 BEGIN
   IF Strings.Length(arg) # 1 THEN
     Out.Flush;
-    Err.String("ova_fmt: "); Err.String(names);
-    Err.String(' takes exactly one character, got "'); Err.String(arg); Err.String('"'); Err.Ln;
+    Err.String("Invalid value for option "); Err.String(names);
+    Err.String(': takes exactly one character, got "'); Err.String(arg); Err.String('"'); Err.Ln;
     Platform.Exit(ArgParser.UsageErrorStatus)
   END;
   c := arg[0]

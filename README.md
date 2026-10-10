@@ -15,10 +15,10 @@ read through polibfyaml, the poc binding to libfyaml. The layout of the
 port follows pobesm2_fmt2 (`~/Repos/RPG/Tools/pobesm2_fmt2`), the poc
 port of besm2_fmt.
 
-Standard output is byte-for-byte the same as the Ada binary's, and so
-are standard error and the exit status wherever the Ada version reports
-a problem rather than dying of an unhandled exception (the golden tests
-check this). PLAN.md lists the differences.
+Standard output, standard error and the exit status are byte-for-byte
+the same as the Ada binary's (the golden tests check this), but for the
+command line's own messages, which are ArgParser's. PLAN.md lists the
+differences.
 
 ## Usage
 

@@ -1,3 +1,4 @@
+ova_fmt: error processing test/data/bad-shape-fluff.yaml: /0/fluff: not a mapping
 ova_fmt: error processing test/data/bad-yaml.yaml: test/data/bad-yaml.yaml:4:1: error: flow sequence without a closing bracket
 
 test/data/Broken.yaml: error: /1/abilities/1/name: missing required key "name"

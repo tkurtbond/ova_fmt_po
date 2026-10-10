@@ -57,9 +57,36 @@ END Report;
 
 (* The same, for an error from polibfyaml: its message names the file
    and position already, gcc style, one line for each error, each ending
-   in a line feed, as the Ada binding's does. *)
+   in a line feed, as the Ada binding's does.  But a file that can't be
+   opened is "FILE: REASON", as the Ada version says it (GNAT's
+   Name_Error message), not polibfyaml's "FILE: error: REASON" and line
+   feed. *)
 PROCEDURE ReportYaml(source: Ropes.Rope; err: Fyaml.Error);
-BEGIN Report(source, Ropes.FromString(err.msg^))
+  VAR msg: Ropes.Rope; reason: OvaText.String; sep: ARRAY 10 OF CHAR;
+    f, i, n, skip: INTEGER; prefixed: BOOLEAN;
+BEGIN
+  IF err.kind = Fyaml.FileError THEN
+    sep := ": error: ";
+    f := 0; WHILE err.file[f] # 0X DO INC(f) END;
+    n := 0; WHILE err.msg[n] # 0X DO INC(n) END;
+    skip := f + 9;  (* the length of sep *)
+    prefixed := n >= skip;
+    i := 0;
+    WHILE prefixed & (i < skip) DO
+      IF i < f THEN prefixed := err.msg[i] = err.file[i] ELSE prefixed := err.msg[i] = sep[i - f] END;
+      INC(i)
+    END;
+    IF prefixed THEN
+      IF (n > skip) & (err.msg[n - 1] = 0AX) THEN DEC(n) END;
+      NEW(reason, n - skip + 1);
+      FOR i := skip TO n - 1 DO reason[i - skip] := err.msg[i] END;
+      reason[n - skip] := 0X;
+      msg := Ropes.FromString(err.file^); OvaText.Add(msg, ": "); OvaText.Add(msg, reason^);
+      Report(source, msg);
+      RETURN
+    END
+  END;
+  Report(source, Ropes.FromString(err.msg^))
 END ReportYaml;
 
 (* Every required-field error collected for source, then a summary
@@ -173,8 +200,7 @@ BEGIN
     path := OvaText.Chars(OvaConfig.outputFile);
     e := OvaOut.ToFile(path^);
     IF e # 0 THEN
-      (* The Ada version dies here with an unhandled Name_Error,
-         status 1. *)
+      (* The Ada version's words and status. *)
       Err.String("ova_fmt: can't create "); Err.String(path^);
       Err.String(": "); ErrReason(e); Err.Ln;
       Platform.Exit(1)

@@ -59,10 +59,9 @@ to what ova_fmt needs, plus `ToUpper`.
   problem writes nothing.
 - **Sorting.** Abilities, Weaknesses, sub-items and Perks/Flaws are
   sorted by name then detail, folded as Ada's `To_Lower` folds them
-  (Latin-1 capitals included), with a stable insertion sort. The Ada
-  version uses `Generic_Sorting.Sort`, which needn't be stable: items
-  equal in both name and detail could come out in another order. None
-  of the fixtures has such a pair.
+  (Latin-1 capitals included), with a stable insertion sort, as the
+  Ada version's `Stable_Sort` (it used `Generic_Sorting.Sort`, which
+  needn't be stable, until 2026-10-10).
 - **`To_Upper`.** groff-in-reST's "Attacks & Combat Stats (NAME)"
   caption upper-cases the name with Ada's Latin-1 `To_Upper`, which
   changes some UTF-8 lead bytes; `OvaText.ToUpper` does the same, so
@@ -72,37 +71,31 @@ to what ova_fmt needs, plus `ToUpper`.
 
 ## Differences from the Ada version
 
-Standard output is the same for every input. These are the differences
-in what is reported, all where the Ada version dies of an unhandled
-exception or where the libraries differ:
+Standard output, standard error and the exit status are the same for
+every input, but for the command line's own messages: the usage's
+layout, and the wording of ArgParser's errors (an unknown option, a
+missing argument, an `-L` that isn't a non-negative integer), are
+ArgParser's, as in pobesm2_fmt2. The statuses are the Ada version's: 2
+for a mistake, 1 for `-h`.
 
-1. **YAML of the wrong shape** -- a list key (`abilities:`, `perks:`,
-   `attacks:`, ...) that isn't a sequence, a list item or an entity
-   that isn't a mapping, or a `combat:`, `fluff:`, `options:`,
-   `companion:` or `vehicle:` that isn't a mapping -- dies in the Ada
-   version with an `ASSERTION_ERROR` from libfyaml-nodes.ads, status 1.
-   The port reports `ova_fmt: error processing FILE: PATH: not a
-   sequence` (or `not a mapping`) and goes on with the next file.
-2. **An input file that can't be opened** kills the Ada version with
-   `NAME_ERROR`, ending the run. The port reports `ova_fmt: error
-   processing FILE: FILE: error: No such file or directory` (polibfyaml's
-   message, followed by a blank line as a YAML error is in both
-   versions) and goes on with the next file.
-3. **An `-o` file that can't be created** (`NAME_ERROR`) **or written**
-   (`DEVICE_ERROR`): the port reports `ova_fmt: can't create PATH:
-   REASON` or `ova_fmt: error writing output: REASON`. Status 1 in both.
-4. **A YAML syntax error on standard input** names the input `<stdin>`
-   (polibfyaml) where the Ada version, which reads standard input into a
-   string first, says `(string-in-memory)`. The port's own messages say
-   `(stdin)`, as the Ada version's do.
-5. **The command line**: the usage's layout, and the wording of
-   ArgParser's own errors (an unknown option, a missing argument, an
-   `-L` that isn't a non-negative integer), are ArgParser's, as in
-   pobesm2_fmt2. The statuses are the Ada version's: 2 for a mistake, 1
-   for `-h`. For `-u`/`-U` with other than one character, the Ada
-   version prints its message twice, in two wordings; the port prints
-   the second, `ova_fmt: -u/--underliner takes exactly one character,
-   got "xx"`.
+Until 2026-10-10 there were more, where the Ada version died of an
+unhandled exception or the libraries differed. The Ada version was
+fixed to match the port, and this port and polibfyaml changed with it:
+
+- YAML of the wrong shape: the Ada version's new `Shape_Error`, in the
+  port's words, `PATH: not a sequence` (or `not a mapping`); the
+  `bad-shape-*` fixtures are golden cases now.
+- An input file that can't be opened: both say `ova_fmt: error
+  processing FILE: FILE: REASON`, the Ada version's (GNAT's) words;
+  `ReportYaml` rebuilds polibfyaml's `FILE: error: REASON` and line
+  feed into that.
+- An `-o` file that can't be created or written: the port's words.
+- Standard input: both name it `(stdin)`, the Ada version through
+  alibfyaml's `Open_String` name, polibfyaml (and olibfyaml) by
+  `Fyaml.stdinName`, which was `<stdin>`.
+- `-u`/`-U` with other than one character: the Ada version printed its
+  message twice; both now print `Invalid value for option
+  -u/--underliner: takes exactly one character, got "xx"`.
 
 ## Keys for the character generator [done]
 
@@ -145,21 +138,33 @@ each failed between 2 and 20 cases.
 
 ## Testing [done]
 
-- `test/golden.sh` and `test/golden.cases`: 390 cases, golden files
+- `test/golden.sh` and `test/golden.cases`: 400 cases, golden files
   from the Ada binary (`make golden`): every character fixture in every
   format and in combinations of the options, several files in one run,
   standard input, `-o`, and the error and edge-case fixtures
   (`test/data/bad-*.yaml`, `edge-*.yaml`, `Broken.yaml`). The
   capitalized fixtures are the Ada repo's `test-data/`, copied.
-- `test/cli.sh`: the command line, the differences above (the
-  `bad-shape-*` fixtures), and 300 copies of a character in one file,
-  which runs the collector many times.
+- `test/cli.sh`: the command line, what can't be a golden case (a
+  missing input file, an `-o` that can't be created or written), and
+  300 copies of a character in one file, which runs the collector many
+  times.
 - `test/TestText.Mod`: `OvaText`, on ropes of several leaves too.
 - `make valgrind`: 302 runs, clean, with polibfyaml's suppressions and
   `test/poc-gc.supp` (the conservative stack scan's reports in
   `DrainMarkStack`, which this program's frames reach too).
 - The rendered outputs (`make rst gemtext hmm`, and so on) are the same
   bytes as the Ada repo's `build/` files.
+
+## Not yet ported
+
+The Ada version's commits of 2026-10-10 before the one that removed the
+differences above, each with its PLAN.md entry there: groff-in-reST's
+`.br` before the tables (7f50d3b), `npc-type` and `character-hooks`
+(4c57810, with the Sample NPCs and NPC Fragments fixtures, 0eb4c32),
+and an Ability's endurance and Html_In_Rst's notes (47b49d1). Their
+golden files weren't regenerated, so `make test` passes on this
+port's current behavior; regenerating them (`make golden`) is part of
+porting those.
 
 ## Open questions
 

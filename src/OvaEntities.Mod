@@ -22,9 +22,9 @@ MODULE OvaEntities; (* An OVA entity, read once from its YAML *)
      wrong shape) ends loading: Load returns FALSE with a message, and
      the caller abandons the file, as the Ada version does when an
      exception reaches its Process_One.  YAML of the wrong shape (a
-     list that isn't a sequence, an item that isn't a mapping) died
-     with an assertion failure in the Ada version; it is an ordinary
-     error here, "PATH: not a sequence" or "PATH: not a mapping".
+     list that isn't a sequence, an item that isn't a mapping) is
+     "PATH: not a sequence" or "PATH: not a mapping", the Ada
+     Shape_Error's words.
 
    Every string is a rope.  The empty rope is NIL, so a field that may
    be absent has a flag saying whether it was there, as in the Ada

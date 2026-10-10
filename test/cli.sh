@@ -44,8 +44,8 @@ fi
 check "an unknown long option exits 2" 2 '^Error: Unknown option --bogus$' --bogus "$f"
 check "an unknown short option exits 2" 2 '^Error: Unknown option -x$' -x "$f"
 check "a missing option argument exits 2" 2 '^Error: Argument required for option -u, --underliner$' -u
-check "-u with two characters exits 2" 2 '^ova_fmt: -u/--underliner takes exactly one character, got "xx"$' -u xx "$f"
-check "-U with two characters exits 2" 2 'subunderliner takes exactly one character, got "ab"' -U ab "$f"
+check "-u with two characters exits 2" 2 '^Invalid value for option -u/--underliner: takes exactly one character, got "xx"$' -u xx "$f"
+check "-U with two characters exits 2" 2 'subunderliner: takes exactly one character, got "ab"' -U ab "$f"
 check "-u with an empty argument exits 2" 2 'got ""$' -u "" "$f"
 check "-u= sets the underliner to =" 0 '' -u= "$f"
 check "-L that isn't a number exits 2" 2 'Invalid integer value for option -L, --hmm-depth: x' -m -L x "$f"
@@ -53,13 +53,15 @@ check "-L -1 exits 2" 2 'Value out of range for option -L, --hmm-depth' -m -L -1
 check "--hmm-depth=3 indents by three more tabs" 0 $'^\t\t\t\tKaris' -m --hmm-depth=3 "$f"
 check "the last format option wins" 0 '^# Karis' -m -H -M "$f"
 
-# The Ada version dies with an unhandled exception for these.
+# What can't be a golden case (a path that must not exist, a full
+# device).  The YAML of the wrong shape (bad-shape-*) is in
+# test/golden.cases too; these check that a bad file doesn't end the run.
 check "-o to a directory that doesn't exist exits 1 with the OS reason" 1 \
   "^ova_fmt: can't create /nonexistent/dir/out: No such file or directory$" -o /nonexistent/dir/out "$f"
 check "a write error is reported, exit 1" 1 '^ova_fmt: error writing output: No space left on device$' \
   -o /dev/full "$f"
 check "a missing file is reported, exit 1" 1 \
-  '^ova_fmt: error processing nosuch\.yaml: nosuch\.yaml: error: No such file or directory$' nosuch.yaml
+  '^ova_fmt: error processing nosuch\.yaml: nosuch\.yaml: No such file or directory$' nosuch.yaml
 check "the run goes on after a missing file" 1 '^Karis \(Hotheaded' nosuch.yaml "$f"
 check "abilities: that isn't a sequence" 1 \
   '^ova_fmt: error processing test/data/bad-shape-not-sequence\.yaml: /0/abilities: not a sequence$' \
@@ -75,7 +77,7 @@ check "a fluff: that isn't a mapping" 1 \
   "$data/bad-shape-fluff.yaml"
 check "a bad file doesn't stop the next one" 1 '^Karis \(Hotheaded' "$data/bad-shape-fluff.yaml" "$f"
 
-# Standard input: errors name it (stdin), and libfyaml's <stdin>.
+# Standard input: errors name it (stdin), libfyaml's included.
 "$prog" <"$data/Broken.yaml" >"$tmp/out" 2>&1
 if [ $? -eq 1 ] && grep -q '^ova_fmt: 5 error(s) in (stdin); no output produced$' "$tmp/out"; then
   echo "ok   - errors on standard input name it (stdin)"
@@ -83,7 +85,7 @@ else
   echo "FAIL - errors on standard input name it (stdin)"; sed 's/^/    /' "$tmp/out"; failed=$((failed + 1))
 fi
 "$prog" <"$data/bad-yaml.yaml" >"$tmp/out" 2>&1
-if [ $? -eq 1 ] && grep -q '^ova_fmt: error processing (stdin): <stdin>:4:1: error: flow sequence' "$tmp/out"; then
+if [ $? -eq 1 ] && grep -q '^ova_fmt: error processing (stdin): (stdin):4:1: error: flow sequence' "$tmp/out"; then
   echo "ok   - a YAML error on standard input"
 else
   echo "FAIL - a YAML error on standard input"; sed 's/^/    /' "$tmp/out"; failed=$((failed + 1))
