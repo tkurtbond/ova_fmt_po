@@ -32,20 +32,20 @@ working around any of those libraries.
 ## Build / test
 
 ```sh
-make            # obj/ (poc output) and ./po_ova_fmt
+make            # obj/ (poc output) and ./ova_fmt_po
 make test       # unit tests, test/cli.sh, test/golden.sh check
 make golden     # regenerate test/golden/ from the Ada binary
 make valgrind   # the program under valgrind over every fixture and path
 make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm
 make install    # to $(PREFIX)/bin, default ~/local/bin (DESTDIR for staging)
 make uninstall
-make clean      # rm -rf obj po_ova_fmt build
+make clean      # rm -rf obj ova_fmt_po build
 make testclean  # rm -rf build
 make print-VAR  # show a makefile variable
 ```
 
 - **Don't run `make install` with the default `PREFIX` unless asked**:
-  it puts `po_ova_fmt` in `~/local/bin`, beside the Ada `ova_fmt`.
+  it puts `ova_fmt_po` in `~/local/bin`, beside the Ada `ova_fmt`.
   Check the target with `make install DESTDIR=<scratch>`.
 - **Everything is compiled with `-OC`**, because polibfyaml requires
   it, and poc refuses a `.sym` from the other size model. Under `-OC`,
@@ -61,7 +61,7 @@ make print-VAR  # show a makefile variable
   `src/` needs nothing in the makefile**, a new unit test only its
   name in `TESTS`. Every program rewrites this repo's modules' files in
   `obj/`, so the makefile is `.NOTPARALLEL`.
-- The main module is `OvaFmt`, built as `./po_ova_fmt`, named for this
+- The main module is `OvaFmt`, built as `./ova_fmt_po`, named for this
   repo so it can be installed beside the Ada `ova_fmt`. Its messages
   still say `ova_fmt`, as the Ada version's do.
 

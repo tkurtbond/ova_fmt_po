@@ -6,7 +6,7 @@
 # `defense-3` mark prints after it alone.
 #
 # Every number not listed in `overrides` is the rules' own, as
-# po_ova_cg computes it, so the generator loads this file with no
+# ova_cg_po computes it, so the generator loads this file with no
 # notices.
 
 - name: Bastion

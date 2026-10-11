@@ -1,6 +1,6 @@
 ---
 # Sheet: a synthetic character (not from the rulebook) using every key
-# added for the character generator, po_ova_cg (PLAN.md §9 step 9):
+# added for the character generator, ova_cg_po (PLAN.md §9 step 9):
 # `player`, `appearance`, `other-notes` and `portrait`; combat `notes`
 # and `transformed`; an attack's `telekinesis` and `transformed`;
 # `threat-value-half` on an Ability and a granted one; `options`'
@@ -12,7 +12,7 @@
 # HTML and groff tables escape.
 #
 # Every number not listed in `overrides` is the rules' own, as
-# po_ova_cg computes it, so the generator loads this file with no
+# ova_cg_po computes it, so the generator loads this file with no
 # notices; every listed one differs from the rules'.
 
 - name: Hana Mori

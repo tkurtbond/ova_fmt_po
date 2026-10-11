@@ -3,5 +3,5 @@
 # rendered test output (reST, PDF, HTML)
 /build/
 # the program
-/po_ova_fmt
+/ova_fmt_po
 .~/

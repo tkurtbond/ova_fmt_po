@@ -2,7 +2,7 @@
 # Golden-output tests.  Run from the repo root.
 #
 #   test/golden.sh check [PROGRAM]   compare PROGRAM's output (default
-#                                    ./po_ova_fmt) with test/golden/
+#                                    ./ova_fmt_po) with test/golden/
 #   test/golden.sh generate          rewrite test/golden/ from the Ada
 #                                    ova_fmt
 #
@@ -15,7 +15,7 @@
 
 set -u
 mode=${1:-check}
-prog=${2:-./po_ova_fmt}
+prog=${2:-./ova_fmt_po}
 ada=${ADA_OVA_FMT:-$HOME/Repos/RPG/Tools/ova_fmt/ova_fmt}
 cases=test/golden.cases
 golden=test/golden

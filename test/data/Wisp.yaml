@@ -6,7 +6,7 @@
 # which ova_fmt still reads as `defense-2`.
 #
 # Every number not listed in `overrides` is the rules' own, as
-# po_ova_cg computes it, so the generator loads this file with no
+# ova_cg_po computes it, so the generator loads this file with no
 # notices.
 
 - name: Wisp

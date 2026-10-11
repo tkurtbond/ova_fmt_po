@@ -9,7 +9,7 @@
 # command-line mistakes 2, bad input 1, and an output file that can't be
 # created or written 1.
 
-prog=${1:-./po_ova_fmt}
+prog=${1:-./ova_fmt_po}
 data=test/data
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT

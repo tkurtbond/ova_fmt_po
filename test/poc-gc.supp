@@ -9,7 +9,7 @@
 # such a word on to the mark stack when it happens to point into a
 # block, and DrainMarkStack then traces from it: "Use of uninitialised
 # value of size 8" with DrainMarkStack as the top frame.  Without this
-# file, `po_ova_fmt -H test/data/Yuu.yaml` gets 37 of them and nothing
+# file, `ova_fmt_po -H test/data/Yuu.yaml` gets 37 of them and nothing
 # else (2026-10-09, poc 0.5.0).  That is how a conservative collector
 # works, not a bug in the program.
 #

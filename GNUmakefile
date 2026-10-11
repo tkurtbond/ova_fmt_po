@@ -38,7 +38,7 @@ IMPORTS := -import-path src $(LIBPATH)
 OBJ   := obj
 BUILD := build
 
-PROGRAM := po_ova_fmt
+PROGRAM := ova_fmt_po
 MAIN    := OvaFmt
 
 # Every source and library a program is built from, for make's

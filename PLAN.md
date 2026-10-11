@@ -99,7 +99,7 @@ fixed to match the port, and this port and polibfyaml changed with it:
 
 ## Keys for the character generator [done]
 
-po_ova_cg (`~/Repos/RPG/Tools/po_ova_cg`), an OVA character generator
+ova_cg_po (`~/Repos/RPG/Tools/ova_cg_po`), an OVA character generator
 built on this program's `OvaEntities`, saves what ova_fmt had no keys
 for. The user decided (2026-10-09) they are added to the Ada ova_fmt
 first and then ported here: `player`, `appearance`, `other-notes`,

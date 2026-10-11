@@ -1,4 +1,4 @@
-# po_ova_fmt - ova_fmt in Oberon-2, built with poc
+# ova_fmt_po - ova_fmt in Oberon-2, built with poc
 
 `ova_fmt` reads a character for the OVA tabletop RPG (Open Versatile
 Anime engine) from a YAML file -- Abilities, Weaknesses, combat stats,
@@ -63,7 +63,7 @@ You need:
   (default `~/Repos/Oberon/polibfyaml`), for its suppressions.
 
 ```sh
-make                # ./po_ova_fmt
+make                # ./ova_fmt_po
 make test           # unit tests, command-line checks, golden-output tests
 make golden         # regenerate test/golden/ from the Ada binary
 make valgrind       # the program under valgrind, over every fixture
@@ -74,7 +74,7 @@ make uninstall
 make clean          # everything built; make testclean removes only build/
 ```
 
-The program is built as `po_ova_fmt`, so it can be installed beside the
+The program is built as `ova_fmt_po`, so it can be installed beside the
 Ada `ova_fmt`; its messages and usage still call it `ova_fmt`, as the
 Ada version's do.
 
