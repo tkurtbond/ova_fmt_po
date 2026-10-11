@@ -161,17 +161,20 @@ PROCEDURE Marked*(r: Rope; k: INTEGER; overrides: SET; raw: BOOLEAN): Rope;
 BEGIN RETURN Ropes.Cat(r, OverrideMark(k IN overrides, raw))
 END Marked;
 
-(* c's defense with a mark after each overridden half: a paired "4/5"
-   Defense's halves are defense and barrier. *)
+(* c's defense with a mark after each overridden value: a "2/4/6"
+   Defense's are defense, defense-2 and defense-3. *)
 PROCEDURE DefenseText*(c: OvaEntities.Combat; raw: BOOLEAN): Rope;
-  VAR slash, len: LONGINT; r: Rope;
+  VAR from, slash: LONGINT; k: INTEGER; r: Rope;
 BEGIN
-  slash := Ropes.IndexChar(c.defense, "/", 0);
-  IF slash < 0 THEN RETURN Marked(c.defense, OvaEntities.OvDefense, c.overrides, raw) END;
-  len := Ropes.Length(c.defense);
-  r := Marked(Ropes.Substring(c.defense, 0, slash), OvaEntities.OvDefense, c.overrides, raw);
-  r := Ropes.Cat(r, Ropes.Substring(c.defense, slash, len - slash));
-  RETURN Marked(r, OvaEntities.OvBarrier, c.overrides, raw)
+  r := NIL; from := 0; k := OvaEntities.OvDefense;
+  slash := Ropes.IndexChar(c.defense, "/", from);
+  WHILE (slash >= 0) & (k # OvaEntities.OvDefense3) DO
+    r := Ropes.Cat(r, Marked(Ropes.Substring(c.defense, from, slash - from), k, c.overrides, raw));
+    r := Ropes.Cat(r, Str("/"));
+    from := slash + 1; INC(k);
+    slash := Ropes.IndexChar(c.defense, "/", from)
+  END;
+  RETURN Ropes.Cat(r, Marked(Ropes.Substring(c.defense, from, Ropes.Length(c.defense) - from), k, c.overrides, raw))
 END DefenseText;
 
 (* " (half TV)" after the Level of an Ability or SubItem whose

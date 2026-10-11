@@ -192,6 +192,30 @@ three formats before they became golden files. Regenerated, the golden
 files changed only by the `.br` lines, the endurance and notes, the
 HTML header, and the new NPCs in the several-files cases.
 
+## Up to three Defense values [done]
+
+Ported from the Ada version's (uncommitted there when ported,
+2026-10-10): `defense` holds up to three values, `D[/A[/A]]`, so the
+generator can save Incorporeal Form's alternate Defense beside
+Barrier's. `OvBarrier` became `OvDefense2`, `OvDefense3` follows it,
+and Health and Threat Value moved up one (`NOverrides` = 8); their
+names are `defense-2` and `defense-3`, and `barrier` is still read as
+`defense-2`, in `LoadOverrides`. `LoadCombat` records four or more
+values as an error (`Slashes`), and `OvaCommon.DefenseText` marks each
+value by its slot.
+
+`Defenses.yaml` and `Wisp.yaml` are the Ada repo's new fixtures, and
+`Sheet.yaml` its `defense-2` change. `bad-defense.yaml` (four values,
+the keys where they don't belong) and `edge-defense.yaml` (every slot
+marked, a missing slot's key, `barrier` with `defense-2`, a free-form
+Defense with empty values) are this repo's; the port matched the Ada
+binary on all six in six formats before they became golden files.
+Regenerated, no existing golden file changed but the several-files
+cases, which gained the new fixtures. Planted bugs (no `barrier`
+alias, four values allowed) fail the golden check; `DefenseText`'s
+stop at the third slot can't be reached, since a fourth value is a
+load error.
+
 ## Open questions
 
 - None yet. The Ada version's own open questions (direct-to-Lout

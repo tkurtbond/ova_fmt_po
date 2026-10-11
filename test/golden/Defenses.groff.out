@@ -1,0 +1,45 @@
+Bastion
+=======
+
+*"Nothing gets through, and nothing holds her."*
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 12
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Barrier
+   .TR
+   .TD hal=r +1
+   .TD
+   Incorporeal Form
+   .ETB
+   .ne 12
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (BASTION)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB2/4/6*\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB9\fP
+   .ETB
+

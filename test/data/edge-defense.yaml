@@ -1,0 +1,28 @@
+# Defense values marked by slot: three, every one overridden; two, with
+# defense-3 listed but no third value to mark; barrier and defense-2
+# both listed, the same key; and a free-form Defense, which is printed
+# as it is, its empty values marked like any other.
+- name: All Three
+  combat:
+    defense: 2/3/4
+    health: 40
+    endurance: 40
+    overrides: [defense, defense-2, defense-3]
+- name: No Third
+  combat:
+    defense: 2/3
+    health: 40
+    endurance: 40
+    overrides: [defense-3]
+- name: Both Names
+  combat:
+    defense: 2/3
+    health: 40
+    endurance: 40
+    overrides: [barrier, defense-2]
+- name: Free Form
+  combat:
+    defense: 2 (4 vs. magic)//
+    health: 40
+    endurance: 40
+    overrides: [defense-2, defense-3]

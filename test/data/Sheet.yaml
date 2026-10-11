@@ -97,7 +97,7 @@
     endurance: 50
     threat-value: 9
     transformed: true
-    overrides: [defense, barrier, health, endurance, threat-value]
+    overrides: [defense, defense-2, health, endurance, threat-value]
     notes: |
       Took 10 damage from the <Hollow> & lost her scarf.
 

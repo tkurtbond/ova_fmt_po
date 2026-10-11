@@ -1,0 +1,19 @@
+Wisp
+====
+
+*"A draft through a closed room."*
+
+.. raw:: html
+
+   <table>
+   <caption>Abilities</caption>
+   <tr><th>Name</th><th>Level</th><th>Detail</th><th>Perks/Flaws/Endurance</th></tr>
+   <tr><td>Incorporeal Form</td><td>+3</td><td></td><td></td></tr>
+   </table>
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>40</td><td>40</td><td>2/6*</td><td>9</td></tr>
+   </table>
+

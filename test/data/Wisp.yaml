@@ -1,0 +1,22 @@
+---
+# Wisp.yaml -- a synthetic fixture, NOT transcribed from the rulebook,
+# whose only alternate Defense is Incorporeal Form's (p. 55), so it is
+# the second value, with no Barrier before it. Its `overrides` says
+# `barrier`, the second value's name before there could be a third,
+# which ova_fmt still reads as `defense-2`.
+#
+# Every number not listed in `overrides` is the rules' own, as
+# po_ova_cg computes it, so the generator loads this file with no
+# notices.
+
+- name: Wisp
+  tagline: A draft through a closed room.
+  abilities:
+    - name: Incorporeal Form
+      level: 3
+  combat:
+    defense: 2/6
+    health: 40
+    endurance: 40
+    threat-value: 9
+    overrides: [barrier]

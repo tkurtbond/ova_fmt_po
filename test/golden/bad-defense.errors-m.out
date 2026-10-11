@@ -1,0 +1,6 @@
+test/data/bad-defense.yaml:7:13: error: /0/abilities/0/overrides: "defense-2" is not one of endurance
+test/data/bad-defense.yaml: error: /0/combat/defense: "2/3/4/5" has more than three values
+test/data/bad-defense.yaml:16:15: error: /0/combat/attacks/0/overrides: "barrier" is not one of roll, dx, endurance
+test/data/bad-defense.yaml: error: /0/combat/overrides: "defense-4" is not one of endurance, defense, defense-2, defense-3, health, threat-value
+ova_fmt: 4 error(s) in test/data/bad-defense.yaml; no output produced
+==== exit 1 ====

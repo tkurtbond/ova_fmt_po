@@ -43,9 +43,9 @@ CONST
 
   (* The numbers an overrides: list can name (the Ada Override_Key), the
      elements of an overrides set; see LoadOverrides. *)
-  OvRoll* = 0; OvDx* = 1; OvEndurance* = 2; OvDefense* = 3; OvBarrier* = 4;
-  OvHealth* = 5; OvThreatValue* = 6;
-  NOverrides = 7;
+  OvRoll* = 0; OvDx* = 1; OvEndurance* = 2; OvDefense* = 3; OvDefense2* = 4;
+  OvDefense3* = 5; OvHealth* = 6; OvThreatValue* = 7;
+  NOverrides = 8;
 
   (* An npc-type: (rulebook p. 133, "Using NPC Type"), an NPC's
      importance to the story: the Ada NPC_Kind.  Matched ignoring case;
@@ -461,6 +461,8 @@ BEGIN
         FOR k := 0 TO NOverrides - 1 DO
           IF ~found & (k IN allowed) & (t^ = overrideKeys[k]) THEN INCL(o, k); found := TRUE END
         END;
+        (* defense-2's name before there could be a third value. *)
+        IF ~found & (OvDefense2 IN allowed) & (t^ = "barrier") THEN INCL(o, OvDefense2); found := TRUE END;
         IF ~found THEN
           msg := Ropes.FromString('"'); OvaText.Add(msg, t^); OvaText.Add(msg, '" is not one of ');
           first := TRUE;
@@ -574,12 +576,27 @@ BEGIN
   RETURN TRUE
 END LoadAttack;
 
+(* The number of slashes in r. *)
+PROCEDURE Slashes(r: Rope): INTEGER;
+  VAR n: INTEGER; i: LONGINT;
+BEGIN
+  n := 0; i := Ropes.IndexChar(r, "/", 0);
+  WHILE i >= 0 DO INC(n); i := Ropes.IndexChar(r, "/", i + 1) END;
+  RETURN n
+END Slashes;
+
 (* The combat: block m into c.  m has no "name" of its own, so these
    errors have a path but no location, as in the Ada version. *)
 PROCEDURE LoadCombat(m: Fyaml.Node; VAR c: Combat): BOOLEAN;
+  VAR msg: Rope;
 BEGIN
   c.hasCombat := TRUE;
   RequireString(m, "defense", c.defense);
+  IF Slashes(c.defense) > 2 THEN
+    msg := Ropes.FromString('"'); msg := Ropes.Cat(msg, c.defense);
+    OvaText.Add(msg, '" has more than three values');
+    Record(m, "defense", msg)
+  END;
   RequireInteger(m, "health", c.health);
   RequireInteger(m, "endurance", c.endurance);
   IF ~OptInteger(m, "threat-value", c.hasThreatValue, c.threatValue)
@@ -792,6 +809,7 @@ BEGIN
   fluffKeys[Enemies] := "enemies"; fluffKeys[LoveInterests] := "love-interests";
   overrideKeys[OvRoll] := "roll"; overrideKeys[OvDx] := "dx";
   overrideKeys[OvEndurance] := "endurance"; overrideKeys[OvDefense] := "defense";
-  overrideKeys[OvBarrier] := "barrier"; overrideKeys[OvHealth] := "health";
+  overrideKeys[OvDefense2] := "defense-2";
+  overrideKeys[OvDefense3] := "defense-3"; overrideKeys[OvHealth] := "health";
   overrideKeys[OvThreatValue] := "threat-value"
 END OvaEntities.

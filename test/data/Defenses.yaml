@@ -1,0 +1,24 @@
+---
+# Defenses.yaml -- a synthetic fixture, NOT transcribed from the
+# rulebook, with a three-value Defense: the ordinary Defense Roll, then
+# Barrier's alternate, then Incorporeal Form's (p. 51, p. 55), each
+# 2 + the Ability's Level. Its third value is overridden, so the
+# `defense-3` mark prints after it alone.
+#
+# Every number not listed in `overrides` is the rules' own, as
+# po_ova_cg computes it, so the generator loads this file with no
+# notices.
+
+- name: Bastion
+  tagline: Nothing gets through, and nothing holds her.
+  abilities:
+    - name: Barrier
+      level: 2
+    - name: Incorporeal Form
+      level: 1
+  combat:
+    defense: 2/4/6
+    health: 40
+    endurance: 40
+    threat-value: 9
+    overrides: [defense-3]
