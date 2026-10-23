@@ -8,8 +8,8 @@ MODULE OvaInline; (* The inline format: -i/--inline *)
      ...; Weakness -1, ...* Attack (Perks; Flaws): Roll 4, DX 3, End
      0. Defense 3. Health 20, Endurance 20. TV 6.
 
-   This format is the port's own; the Ada version has none like it
-   (PLAN.md, "The inline format").  It is a stat block, so it leaves out
+   First written here, then ported to the Ada version, whose output is
+   now its reference (PLAN.md, "The inline format").  It is a stat block, so it leaves out
    what a cast list doesn't need: the tagline, character hooks, notes,
    fluff, the player and the portrait.  The prose that describes the
    entity (summary, background, appearance, personality) runs together

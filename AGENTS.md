@@ -5,7 +5,7 @@ Oberon-2 program compiled with poc, the Peaseblossom Oberon Compiler.
 It reads YAML files describing OVA characters and writes them as terse
 reST, gemtext, Markdown, reST with HTML or groff `hd` tables, an
 h-m-m outline, or the inline format (`-i`, `OvaInline`: a Markdown
-paragraph per entity, the port's own; PLAN.md, "The inline format").
+paragraph per entity; PLAN.md, "The inline format").
 
 It is a port of the Ada `ova_fmt` (`~/Repos/RPG/Tools/ova_fmt`); see
 PLAN.md for the port, and the Ada repo's `PLAN.md` for the design of
@@ -35,8 +35,7 @@ working around any of those libraries.
 ```sh
 make            # obj/ (poc output) and ./ova_fmt_po
 make test       # unit tests, test/cli.sh, test/golden.sh check
-make golden     # regenerate test/golden/ from the Ada binary ("ada" cases)
-make golden-po  # regenerate the "po" cases' golden files from ./ova_fmt_po
+make golden     # regenerate test/golden/ from the Ada binary
 make valgrind   # the program under valgrind over every fixture and path
 make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline
 make install    # to $(PREFIX)/bin, default ~/local/bin (DESTDIR for staging)
@@ -74,11 +73,10 @@ make print-VAR  # show a makefile variable
   `make test` after any change.
 - **Regenerate golden files with `make golden`; never hand-edit one.**
   Add a line to `test/golden.cases` for new coverage and review the new
-  files before committing them. The inline format has no Ada
-  counterpart, so its cases' reference is `po`, this program, and
-  `make golden-po` regenerates them: read their diff, since nothing
-  else checks them against an outside reference. `test/cli.sh` checks
-  the filling (70 columns, no line opening a Markdown block). What can't be a golden file (a missing
+  files before committing them. A new format or option goes into the
+  Ada version first, so that it can be the reference. `test/cli.sh`
+  checks the inline format's filling (70 columns, no line opening a
+  Markdown block). What can't be a golden file (a missing
   input file, an `-o` that can't be created or written) is checked in
   `test/cli.sh`.
 - Fixtures: the capitalized ones in `test/data/` are the Ada repo's

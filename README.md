@@ -19,8 +19,7 @@ port of besm2_fmt.
 
 Standard output, standard error and the exit status are byte-for-byte
 the same as the Ada binary's (the golden tests check this), but for the
-command line's own messages, which are ArgParser's, and the inline
-format, which the Ada version doesn't have. PLAN.md lists the
+command line's own messages, which are ArgParser's. PLAN.md lists the
 differences.
 
 ## Usage
@@ -86,7 +85,6 @@ You need:
 make                # ./ova_fmt_po
 make test           # unit tests, command-line checks, golden-output tests
 make golden         # regenerate test/golden/ from the Ada binary
-make golden-po      # regenerate the inline format's golden files from ./ova_fmt_po
 make valgrind       # the program under valgrind, over every fixture
 make rst            # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline,
                     # with the Ada GNUmakefile's file names

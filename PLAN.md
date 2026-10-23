@@ -76,8 +76,7 @@ every input, but for the command line's own messages: the usage's
 layout, and the wording of ArgParser's errors (an unknown option, a
 missing argument, an `-L` that isn't a non-negative integer), are
 ArgParser's, as in pobesm2_fmt2. The statuses are the Ada version's: 2
-for a mistake, 1 for `-h`. The inline format (`-i`, below) is the
-port's own, so the Ada version has no output to compare it with.
+for a mistake, 1 for `-h`.
 
 Until 2026-10-10 there were more, where the Ada version died of an
 unhandled exception or the libraries differed. The Ada version was
@@ -101,8 +100,8 @@ fixed to match the port, and this port and polibfyaml changed with it:
 ## The inline format [done]
 
 Added 2026-10-23 at the user's request, after the Cast of Lost-Worlds'
-`001-breakout.md`, for adventures' cast lists; the Ada version has no
-counterpart. `-i`/`--inline` (`OvaConfig.Inline`) writes each entity
+`001-breakout.md`, for adventures' cast lists, and the same day ported
+to the Ada version (`Ova_Fmt.Format_Inline`). `-i`/`--inline` (`OvaConfig.Inline`) writes each entity
 with `OvaInline` as one Markdown paragraph:
 
     **Name** (Secondary). Summary. Background. Appearance.
@@ -131,8 +130,10 @@ with `OvaInline` as one Markdown paragraph:
   it, so `Endurance 10.` breaks before `Endurance`. Nothing is escaped,
   as in `-M`.
 
-Its golden cases' reference is `po`, this program (`make golden-po`),
-not the Ada binary.
+It was written here first, and its golden files came from this program
+(a `po` reference and `make golden-po`, since removed). The Ada port
+reproduced all of them byte for byte, so its cases' reference is now
+`ada`, like every other case.
 
 ## Keys for the character generator [done]
 

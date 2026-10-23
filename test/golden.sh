@@ -3,19 +3,12 @@
 #
 #   test/golden.sh check [PROGRAM]   compare PROGRAM's output (default
 #                                    ./ova_fmt_po) with test/golden/
-#   test/golden.sh generate          rewrite the "ada" cases' golden
-#                                    files from the Ada ova_fmt
-#   test/golden.sh generate-po [PROGRAM]
-#                                    rewrite the "po" cases' golden
-#                                    files from PROGRAM (default
-#                                    ./ova_fmt_po)
+#   test/golden.sh generate          rewrite test/golden/ from the Ada
+#                                    ova_fmt
 #
 # The cases are in test/golden.cases.  generate runs the Ada ova_fmt,
-# $ADA_OVA_FMT (default ~/Repos/RPG/Tools/ova_fmt/ova_fmt), for the
-# output the port must match; generate-po runs this program, for the
-# output it has that the Ada version doesn't (the inline format), whose
-# golden files are then checked by eye before they are committed.  Never
-# edit a golden file by hand.
+# $ADA_OVA_FMT (default ~/Repos/RPG/Tools/ova_fmt/ova_fmt).  Never edit
+# a golden file by hand.
 #
 # check prints ok/FAIL per case, with a diff for a failure, and exits 1
 # if any failed.
@@ -30,7 +23,7 @@ tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 failed=0 count=0
 
-case $mode in generate|generate-po) mkdir -p "$golden" ;; esac
+[ "$mode" = generate ] && mkdir -p "$golden"
 
 # run PROGRAM OUT FILES...: run PROGRAM as case $modes says, with
 # $flags, writing what is compared to OUT, then a "==== exit N ===="
@@ -74,8 +67,7 @@ while read -r ref id pattern flags; do
   case $ref in ''|'#'*) continue ;; esac
   modes=:${ref#*:}: ; [[ $ref == *:* ]] || modes=::
   case ${ref%%:*} in
-    ada) [ "$mode" = generate-po ] && continue ;;
-    po) [ "$mode" = generate ] && continue ;;
+    ada) ;;
     *) echo "golden.sh: bad reference '$ref' in $cases" >&2; exit 2 ;;
   esac
   # $pattern is a glob on purpose.
@@ -98,8 +90,6 @@ while read -r ref id pattern flags; do
     count=$((count + 1))
     if [ "$mode" = generate ]; then
       run "$ada" "$out" "${files[@]}"
-    elif [ "$mode" = generate-po ]; then
-      run "$prog" "$out" "${files[@]}"
     else
       run "$prog" "$tmp/out" "${files[@]}"
       compare "$label"
@@ -107,7 +97,7 @@ while read -r ref id pattern flags; do
   done
 done <"$cases"
 
-if [ "$mode" = generate ] || [ "$mode" = generate-po ]; then
+if [ "$mode" = generate ]; then
   echo "Wrote $count golden files to $golden/."
 elif [ $failed -eq 0 ]; then
   echo "All checks passed."

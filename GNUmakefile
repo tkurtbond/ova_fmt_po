@@ -57,7 +57,7 @@ ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-
 $(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POC_OBERON_LIBRARIES)/$(l)/*/OC/$(l).library),,$(error the $(l) library is not in $(POC_OBERON_LIBRARIES)/$(l); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
-.PHONY: all test golden golden-po valgrind rst pdf gemtext markdown html groff hmm inline install uninstall clean testclean
+.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline install uninstall clean testclean
 .NOTPARALLEL:
 
 all: $(PROGRAM)
@@ -87,12 +87,6 @@ test: $(PROGRAM) $(TESTBINS)
 ADA_OVA_FMT ?= $(HOME)/Repos/RPG/Tools/ova_fmt/ova_fmt
 golden:
 	ADA_OVA_FMT=$(ADA_OVA_FMT) test/golden.sh generate
-
-# Rewrite the golden files of test/golden.cases' "po" cases, the output
-# the Ada version has no counterpart for, from this program.  Read the
-# diff before committing them.
-golden-po: $(PROGRAM)
-	test/golden.sh generate-po ./$(PROGRAM)
 
 # The program under valgrind: every fixture in each format, several
 # files, standard input (empty, too), -o, and the early exits.
