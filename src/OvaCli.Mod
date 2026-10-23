@@ -51,6 +51,10 @@ PROCEDURE DoMarkdown(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.Markdown; RETURN TRUE
 END DoMarkdown;
 
+PROCEDURE DoInline(): BOOLEAN;
+BEGIN OvaConfig.format := OvaConfig.Inline; RETURN TRUE
+END DoInline;
+
 PROCEDURE DoHtml(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.HtmlInRst; RETURN TRUE
 END DoHtml;
@@ -120,6 +124,9 @@ BEGIN
   Opt(ArgParser.MakeOption("g", "gemtext",
     "Output gemtext (the Gemini protocol's hypertext markup) instead of reST.", DoGemtext));
   Opt(ArgParser.MakeOption("M", "markdown", "Output plain Markdown prose instead of reST.", DoMarkdown));
+  Opt(ArgParser.MakeOption("i", "inline",
+    "Output each entity as one Markdown paragraph, an inline stat block like an adventure's cast list, instead of reST.",
+    DoInline));
   Opt(ArgParser.MakeOption("H", "html",
     "Output reST with nested HTML tables (a `.. raw:: html` block) for Abilities/Weaknesses/Combat/Attacks, instead of terse prose.",
     DoHtml));

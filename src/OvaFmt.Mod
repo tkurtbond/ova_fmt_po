@@ -11,7 +11,7 @@ MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown o
    MESSAGE".  Either way the run goes on with the next file, and ends
    with status 1. *)
 
-IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaHmm, OvaOut, OvaRst,
+IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaHmm, OvaInline, OvaOut, OvaRst,
   OvaText, Out, Platform, Ropes, Strings, SYSTEM;
 
 TYPE
@@ -147,6 +147,7 @@ BEGIN
   CASE OvaConfig.format OF
     OvaConfig.Gemtext, OvaConfig.Markdown: OvaCommon.ProcessEntity(e, entityNo)
   | OvaConfig.Hmm: OvaHmm.ProcessEntity(e, entityNo)
+  | OvaConfig.Inline: OvaInline.ProcessEntity(e, entityNo)
   | OvaConfig.Terse, OvaConfig.HtmlInRst, OvaConfig.GroffInRst: OvaRst.ProcessEntity(e, entityNo)
   END
 END Write;

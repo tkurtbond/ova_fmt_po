@@ -2,7 +2,8 @@
 #
 # One case per line: REF[:MODE...] ID FIXTURES FLAGS...
 #   REF       the program whose output is the reference: "ada", the Ada
-#             ova_fmt ($ADA_OVA_FMT), the only one
+#             ova_fmt ($ADA_OVA_FMT), or "po", this program, for what
+#             the Ada version doesn't have (make golden-po)
 #   MODE      how the program is run and what is compared, as many as
 #             apply:
 #               stdout  standard output only
@@ -36,6 +37,11 @@ ada    groff       [A-Z]*   -G
 ada    hmm         [A-Z]*   -m
 ada    hmm-c       [A-Z]*   -m -c
 ada    hmm-p       [A-Z]*   -m -p
+
+# ---- The inline format, the port's own (make golden-po) ----
+po     inline      [A-Z]*   -i
+po     inline-n-O  [A-Z]*   -i -n -O
+po:all inline-all  @(Karis|Fragment|Vehicle)   -i
 
 # ---- Options ----
 ada    terse-O     [A-Z]*   -O

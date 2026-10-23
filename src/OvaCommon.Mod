@@ -205,7 +205,7 @@ END Join;
 (* ---- Perks and Flaws ---- *)
 
 (* "Name: detail x2 (−5)", each part only if there. *)
-PROCEDURE FormatPerkFlaw(x: Element): Rope;
+PROCEDURE FormatPerkFlaw*(x: Element): Rope;
   VAR pf: OvaEntities.PerkFlaw; r: Rope;
 BEGIN
   pf := x(OvaEntities.PerkFlaw);

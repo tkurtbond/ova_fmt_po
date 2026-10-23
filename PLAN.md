@@ -76,7 +76,8 @@ every input, but for the command line's own messages: the usage's
 layout, and the wording of ArgParser's errors (an unknown option, a
 missing argument, an `-L` that isn't a non-negative integer), are
 ArgParser's, as in pobesm2_fmt2. The statuses are the Ada version's: 2
-for a mistake, 1 for `-h`.
+for a mistake, 1 for `-h`. The inline format (`-i`, below) is the
+port's own, so the Ada version has no output to compare it with.
 
 Until 2026-10-10 there were more, where the Ada version died of an
 unhandled exception or the libraries differed. The Ada version was
@@ -96,6 +97,42 @@ fixed to match the port, and this port and polibfyaml changed with it:
 - `-u`/`-U` with other than one character: the Ada version printed its
   message twice; both now print `Invalid value for option
   -u/--underliner: takes exactly one character, got "xx"`.
+
+## The inline format [done]
+
+Added 2026-10-23 at the user's request, after the Cast of Lost-Worlds'
+`001-breakout.md`, for adventures' cast lists; the Ada version has no
+counterpart. `-i`/`--inline` (`OvaConfig.Inline`) writes each entity
+with `OvaInline` as one Markdown paragraph:
+
+    **Name** (Secondary). Summary. Background. Appearance.
+    Personality. *Abilities; Weaknesses.* Attack (Affinity: a; perks;
+    flaws): Roll N, DX d, End c. Description. Defense D. Health H,
+    Endurance E. TV T. Combat notes.
+
+- With no NPC type the lead is `**Name.**`. A Fragment with a
+  background leads with that (it names the NPC in bold already), then
+  `Secondary NPC.`.
+- The prose is joined onto one line and each part ended as a sentence
+  (not after `.`, `!` or `?`, perhaps followed by a closing quote or
+  parenthesis). Abilities and Weaknesses are `OvaCommon`'s lists, the
+  perks and flaws `OvaCommon.FormatPerkFlaw` (exported for this), and
+  `*` marks overrides, as in `-M`; `-n` works as in the other formats.
+- Left out, as a stat block doesn't need them: tagline, character
+  hooks, other notes, fluff, `options` (so `-O` changes nothing), the
+  player and the portrait.
+- A linked Ability (Companion, Vehicle, Transformation, spells) follows
+  as its own paragraph, led by `**Companion: Name.**` or the Ability's
+  name in bold.
+- Paragraphs are filled to 70 columns, counting UTF-8 characters, and a
+  run of blanks is one. A word that would open a Markdown block at the
+  start of a line (`#`, `>`, a lone `+`, nothing but `-`, `=`, `*` or
+  `_`, or digits and `.` or `)`) is kept on the line of the word before
+  it, so `Endurance 10.` breaks before `Endurance`. Nothing is escaped,
+  as in `-M`.
+
+Its golden cases' reference is `po`, this program (`make golden-po`),
+not the Ada binary.
 
 ## Keys for the character generator [done]
 

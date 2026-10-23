@@ -5,7 +5,9 @@ Anime engine) from a YAML file -- Abilities, Weaknesses, combat stats,
 Attacks, and linked content such as Transformations, Magic spells,
 Companions and Vehicles -- and writes it as terse reStructuredText,
 gemtext, Markdown, reST with nested HTML tables, reST with groff `hd`
-tables, or an [h-m-m](https://github.com/nadrad/h-m-m) outline.
+tables, an [h-m-m](https://github.com/nadrad/h-m-m) outline, or the
+inline format, a paragraph of Markdown per character, as an adventure's
+cast lists them.
 
 This is the Ada [ova_fmt](../ova_fmt) (`~/Repos/RPG/Tools/ova_fmt`)
 ported to Oberon-2 and built with poc, the
@@ -17,7 +19,8 @@ port of besm2_fmt.
 
 Standard output, standard error and the exit status are byte-for-byte
 the same as the Ada binary's (the golden tests check this), but for the
-command line's own messages, which are ArgParser's. PLAN.md lists the
+command line's own messages, which are ArgParser's, and the inline
+format, which the Ada version doesn't have. PLAN.md lists the
 differences.
 
 ## Usage
@@ -37,8 +40,25 @@ or to the file given by `-o`.
 | reST with nested HTML tables | `-H`, `--html` |
 | reST with groff `hd` tables | `-G`, `--groff` |
 | h-m-m outline | `-m`, `--hmm` (`-L`, `-c`, `-p`) |
+| inline Markdown paragraphs | `-i`, `--inline` |
 
 If more than one format option is given, the last one wins.
+
+The inline format writes each character as one paragraph, filled to 70
+columns, for pasting into an adventure's cast list:
+
+```
+**Drerta Drokris** (Secondary). The warden's second, now the senior
+surviving |PKA| aboard. ... *Attack (Blaster rifle) +2, Combat Expert
++2, ...; Code of Conduct (the purity of the breed) −2, Stubborn −2.*
+Blaster rifle (Ranged; Weapon): Roll 4, DX 3, End 0. Defense 3. Health
+20, Endurance 20. TV 6.
+```
+
+It leaves out what a stat block doesn't need: the tagline, character
+hooks, other notes, fluff, options, the player and the portrait. A
+Companion, Vehicle, Transformation or spell list follows as a paragraph
+of its own.
 `ova_fmt -h` lists every option. The input format is described in the
 Ada repo's `PLAN.md` and in the comments of its `test-data/*.yaml`.
 
@@ -66,8 +86,9 @@ You need:
 make                # ./ova_fmt_po
 make test           # unit tests, command-line checks, golden-output tests
 make golden         # regenerate test/golden/ from the Ada binary
+make golden-po      # regenerate the inline format's golden files from ./ova_fmt_po
 make valgrind       # the program under valgrind, over every fixture
-make rst            # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm,
+make rst            # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline,
                     # with the Ada GNUmakefile's file names
 make install        # to $(PREFIX)/bin, default ~/local/bin
 make uninstall

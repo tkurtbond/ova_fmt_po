@@ -52,6 +52,38 @@ check "-L that isn't a number exits 2" 2 'Invalid integer value for option -L, -
 check "-L -1 exits 2" 2 'Value out of range for option -L, --hmm-depth' -m -L -1 "$f"
 check "--hmm-depth=3 indents by three more tabs" 0 $'^\t\t\t\tKaris' -m --hmm-depth=3 "$f"
 check "the last format option wins" 0 '^# Karis' -m -H -M "$f"
+check "-h lists -i, --inline" 1 '^  -i, --inline$' -h
+check "-i leads with the name in bold" 0 '^\*\*Karis\.\*\* A bounty hunter' -i "$f"
+check "-i gives the NPC type after the name" 0 '^\*\*Shadowman\*\* \([A-Z][a-z]+\)\. ' -i "$data/Shadowman.yaml"
+
+# inline-fill FILE: whether the inline output in FILE is filled: no line
+# over 70 characters (counted in UTF-8) unless it is one word, and none
+# whose first word would open a Markdown block (a heading, a block
+# quote, a list item, a thematic break or setext underline).
+inline_fill() {
+  LC_ALL=C.UTF-8 awk '
+    length($0) > 70 && index($0, " ") { print FILENAME ":" FNR ": over 70: " $0; bad = 1 }
+    $1 ~ /^(#|>|\+$|[-=*_]+$|[0-9]+[.)]$)/ { print FILENAME ":" FNR ": opens a block: " $0; bad = 1 }
+    END { exit bad }' "$1"
+}
+for y in "$data"/[A-Z]*.yaml; do "$prog" -i "$y"; done >"$tmp/inline" 2>/dev/null
+if inline_fill "$tmp/inline" >"$tmp/out"; then
+  echo "ok   - -i fills every character fixture to 70 columns, with no line opening a block"
+else
+  echo "FAIL - -i fills every character fixture to 70 columns, with no line opening a block"
+  sed 's/^/    /' "$tmp/out" | head -20; failed=$((failed + 1))
+fi
+# The filler keeps a word that can't start a line with the word before.
+printf -- "- name: Fill\n  summary: '%s'\n" \
+  "aaaaaaaaa bbbbbbbbb ccccccccc ddddddddd eeeeeeeee fffffff ggggg 10. # > - * 1) + === x" \
+  >"$tmp/fill.yaml"
+"$prog" -i "$tmp/fill.yaml" >"$tmp/fill" 2>&1
+if inline_fill "$tmp/fill" >"$tmp/out" && grep -q '^ggggg 10\. # > - \* 1) + === x\.$' "$tmp/fill"; then
+  echo "ok   - -i breaks before the word ahead of one that can't start a line"
+else
+  echo "FAIL - -i breaks before the word ahead of one that can't start a line"
+  sed 's/^/    /' "$tmp/fill" "$tmp/out"; failed=$((failed + 1))
+fi
 
 # What can't be a golden case (a path that must not exist, a full
 # device).  The YAML of the wrong shape (bad-shape-*) is in

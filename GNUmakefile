@@ -57,7 +57,7 @@ ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-
 $(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POC_OBERON_LIBRARIES)/$(l)/*/OC/$(l).library),,$(error the $(l) library is not in $(POC_OBERON_LIBRARIES)/$(l); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
-.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm install uninstall clean testclean
+.PHONY: all test golden golden-po valgrind rst pdf gemtext markdown html groff hmm inline install uninstall clean testclean
 .NOTPARALLEL:
 
 all: $(PROGRAM)
@@ -88,6 +88,12 @@ ADA_OVA_FMT ?= $(HOME)/Repos/RPG/Tools/ova_fmt/ova_fmt
 golden:
 	ADA_OVA_FMT=$(ADA_OVA_FMT) test/golden.sh generate
 
+# Rewrite the golden files of test/golden.cases' "po" cases, the output
+# the Ada version has no counterpart for, from this program.  Read the
+# diff before committing them.
+golden-po: $(PROGRAM)
+	test/golden.sh generate-po ./$(PROGRAM)
+
 # The program under valgrind: every fixture in each format, several
 # files, standard input (empty, too), -o, and the early exits.
 # polibfyaml's suppressions and still-reachable check, used from its
@@ -111,7 +117,7 @@ valgrind: $(PROGRAM) | $(OBJ)
 	     || ! grep -q 'are still reachable' $$log; then \
 	    echo "FAIL - valgrind $$*"; sed 's/^/    /' $$log; status=1; fi; }; \
 	for f in test/data/*.yaml; do \
-	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2"; do vg $$fl $$f </dev/null; done; \
+	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O"; do vg $$fl $$f </dev/null; done; \
 	done; \
 	vg test/data/*.yaml </dev/null; \
 	vg -U '~' <test/data/Options.yaml; \
@@ -137,6 +143,7 @@ MARKDOWN_OUTPUT   := $(BASES:%=$(BUILD)/%.md) $(BASES:%=$(BUILD)/%.md.ms.pdf)
 HTML_OUTPUT       := $(BASES:%=$(BUILD)/%.html.gen.rst) $(BASES:%=$(BUILD)/%.html)
 GROFF_OUTPUT      := $(BASES:%=$(BUILD)/%.groff.gen.rst) $(BASES:%=$(BUILD)/%.groff.pdf)
 HMM_OUTPUT        := $(BASES:%=$(BUILD)/%.hmm) $(BASES:%=$(BUILD)/%.compact.hmm) $(BASES:%=$(BUILD)/%.plain.hmm)
+INLINE_OUTPUT     := $(BASES:%=$(BUILD)/%.inline.md)
 
 rst: $(TERSE_OUTPUT)
 pdf: rst $(PDF_OUTPUT)
@@ -145,6 +152,7 @@ markdown: $(MARKDOWN_OUTPUT)
 html: $(HTML_OUTPUT)
 groff: $(GROFF_OUTPUT)
 hmm: $(HMM_OUTPUT)
+inline: $(INLINE_OUTPUT)
 
 $(BUILD):
 	mkdir -p $@
@@ -171,6 +179,8 @@ $(BUILD)/%.compact.hmm: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -m -c $< >$@
 $(BUILD)/%.plain.hmm: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -m -p $< >$@
+$(BUILD)/%.inline.md: test/data/%.yaml $(PROGRAM) | $(BUILD)
+	./$(PROGRAM) -i $< >$@
 
 #MS_COLUMNS = -V twocolumns
 $(BUILD)/%.rst.ms.pdf: $(BUILD)/%.gen.rst
@@ -180,7 +190,7 @@ $(BUILD)/%.md.ms.pdf: $(BUILD)/%.md
 
 .PRECIOUS: $(BUILD)/%.gen.rst $(BUILD)/%.rst.ms.pdf $(BUILD)/%.gmi $(BUILD)/%.emp.gmi $(BUILD)/%.md \
   $(BUILD)/%.md.ms.pdf $(BUILD)/%.html.gen.rst $(BUILD)/%.html $(BUILD)/%.hmm $(BUILD)/%.compact.hmm \
-  $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf
+  $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf $(BUILD)/%.inline.md
 
 # ---- Installation ----
 #
