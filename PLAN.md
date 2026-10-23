@@ -114,9 +114,12 @@ with `OvaInline` as one Markdown paragraph:
   `Secondary NPC.`.
 - The prose is joined onto one line and each part ended as a sentence
   (not after `.`, `!` or `?`, perhaps followed by a closing quote or
-  parenthesis). Abilities and Weaknesses are `OvaCommon`'s lists, the
-  perks and flaws `OvaCommon.FormatPerkFlaw` (exported for this), and
-  `*` marks overrides, as in `-M`; `-n` works as in the other formats.
+  parenthesis). Abilities and Weaknesses (a Companion's or Vehicle's
+  and a Transformation's grants too) are `OvaCommon`'s Fragment lists,
+  "Name Level (detail)", as the cast has "Attack +2 (Blaster rifle)"
+  (the user's request, later on 2026-10-23); the perks and flaws
+  `OvaCommon.FormatPerkFlaw` (exported for this), and `*` marks
+  overrides, as in `-M`; `-n` works as in the other formats.
 - Left out, as a stat block doesn't need them: tagline, character
   hooks, other notes, fluff, `options` (so `-O` changes nothing), the
   player and the portrait.

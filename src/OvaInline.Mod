@@ -4,7 +4,7 @@ MODULE OvaInline; (* The inline format: -i/--inline *)
    adventure's cast (the user's request of 2026-10-23, modeled on the
    Cast of Lost-Worlds' 001-breakout.md):
 
-     **Name** (Secondary). Summary. Background. *Ability (detail) +2,
+     **Name** (Secondary). Summary. Background. *Ability +2 (detail),
      ...; Weakness -1, ...* Attack (Perks; Flaws): Roll 4, DX 3, End
      0. Defense 3. Health 20, Endurance 20. TV 6.
 
@@ -16,7 +16,9 @@ MODULE OvaInline; (* The inline format: -i/--inline *)
    on one line, as do its combat notes.  An NPC Fragment's background
    names it already, so it leads instead of the bold name.  An Ability's
    linked content (a Transformation's grants, spells, a Companion or
-   Vehicle) follows as a paragraph of its own.
+   Vehicle) follows as a paragraph of its own.  Abilities and
+   Weaknesses, there too, are "Name Level (detail)", the rulebook's NPC
+   Fragment order, as the cast has "Attack +2 (Blaster rifle)".
 
    Each paragraph is filled to Width columns, counting characters, not
    bytes, never breaking a line before a word that would start a
@@ -126,13 +128,17 @@ END Paragraph;
 
 (* ---- Parts ---- *)
 
-(* "*abilities; weaknesses.*", NIL if there are neither. *)
+(* "*abilities; weaknesses.*", NIL if there are neither.  Each is
+   "Name Level (detail)", the NPC Fragment order, as in a cast list:
+   "Attack +2 (Blaster rifle)". *)
 PROCEDURE Traits(abilities, weaknesses: OvaEntities.List; weak: BOOLEAN): Rope;
   VAR w: Rope;
 BEGIN
   IF (abilities.n = 0) & (weaknesses.n = 0) THEN RETURN NIL END;
-  IF weak THEN w := OvaCommon.JoinWeaknesses(weaknesses) ELSE w := OvaCommon.JoinSubItems(weaknesses) END;
-  RETURN OvaCommon.Italic(Ropes.AppendChar(OvaCommon.Semi(OvaCommon.JoinSubItems(abilities), w,
+  IF weak THEN w := OvaCommon.JoinFragmentWeaknesses(weaknesses)
+  ELSE w := OvaCommon.JoinFragmentSubItems(weaknesses)
+  END;
+  RETURN OvaCommon.Italic(Ropes.AppendChar(OvaCommon.Semi(OvaCommon.JoinFragmentSubItems(abilities), w,
     abilities.n > 0, weaknesses.n > 0), "."))
 END Traits;
 
@@ -212,7 +218,9 @@ BEGIN
   END;
   p := OvaCommon.Bold(Ropes.AppendChar(t, "."));
   IF (a.subAbilities.n > 0) OR (a.subWeaknesses.n > 0) THEN
-    Add(p, Sentence(OvaCommon.GrantsLine(a)))
+    Add(p, Sentence(Ropes.Cat(Str("Grants: "),
+      OvaCommon.Semi(OvaCommon.JoinFragmentSubItems(a.subAbilities),
+        OvaCommon.JoinFragmentSubItems(a.subWeaknesses), a.subAbilities.n > 0, a.subWeaknesses.n > 0))))
   END;
   IF a.spells.n > 0 THEN
     Add(p, Sentence(Ropes.Cat(Str("Spells: "), OvaCommon.JoinSpells(a.spells))))
