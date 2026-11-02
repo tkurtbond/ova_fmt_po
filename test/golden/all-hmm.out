@@ -140,6 +140,23 @@
 			**Concept:** Time Skipping Sorcerer, **Birthday:** June 24, **Age:** 44 (Appears 16), **Gender:** Male, **Height:** 5'10", **Weight:** 152 lbs., **Hair:** Grey-Blue, **Eyes:** Grey, **Association:** Order of the Fallen Star, **Hobbies:** Fencing, **Favorite Food:** Mutton, **Allies:** None, **Enemies:** Mysterious Evil from the Future.
 	The **Beat Cop** is the neighborhood's friendly face: young, new to the force, and always glad to give directions or lend a hand. On quiet shifts he jots down notes for the crime novel he's writing, as long as his boss doesn't catch him at it.
 		**Attributes:** Attack +2 (Pistol), Combat Expert +1, Knowledge +2 (The City In and Out), Knowledge +1 (Writing), Perceptive +1, Position of Power +2 (Police Officer); Secret −1 (Writing Aspirations), Servitude −2 (Police Department and the Common Good), Soft Spot −1 (Dessert).
+	The Warden
+		**Abilities**
+			Attack (Shock baton) +2
+			Escape Plan (A capsule under the desk) +1
+			Health Reserve +1
+			Scale Advantage (Attack) +1
+		**Weaknesses**
+			Arrogant −1
+		**Combat**
+			**NPC Type:** Boss | **Health:** 40 | **Endurance:** 40 | **Defense:** 2 | **Threat Value (TV):** 22
+			**Attacks**
+				**Shock baton:** Roll **2 dice** | **DX 3** | **Endurance Cost: 0** (Flaws: Weapon).
+	Twin Wardens
+		**Abilities**
+			Extra Actions +1
+		**Combat**
+			**NPC Type:** Boss | **Health:** 40 | **Endurance:** 40 | **Defense:** 2 | **Threat Value (TV):** 10
 	Braun (Hopelessly Honest Inventor)
 		*"I know that I'm not all that strong or brave... but I'll protect her with everything I've got!"*
 		*A reclusive inventor who unexpectedly gained a robotic companion, and a reason to be braver.*

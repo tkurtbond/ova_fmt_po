@@ -50,8 +50,8 @@ CONST
   (* An npc-type: (rulebook p. 133, "Using NPC Type"), an NPC's
      importance to the story: the Ada NPC_Kind.  Matched ignoring case;
      anything else is a recorded error.  See NpcTypeName. *)
-  Heroic* = 0; Secondary* = 1; Extra* = 2;
-  NNpcTypes = 3;
+  Heroic* = 0; Secondary* = 1; Extra* = 2; Boss* = 3;
+  NNpcTypes = 4;
 
 TYPE
   Rope = Ropes.Rope;
@@ -178,7 +178,7 @@ TYPE
     hasCharacterHooks-, hasOtherNotes-: BOOLEAN;
     tagline-, summary-, background-, appearance-, personality-,
     characterHooks-, otherNotes-: Rope;   (* trimmed *)
-    hasNpcType-: BOOLEAN; npcType-: INTEGER;  (* Heroic, Secondary or Extra *)
+    hasNpcType-: BOOLEAN; npcType-: INTEGER;  (* Heroic, Secondary, Extra or Boss *)
     count-: INTEGER;                      (* how many it stands for, 1 or more; 1 with no count: *)
     abilities-: List;                     (* of Ability, sorted *)
     weaknesses-: List;                    (* of Weakness, sorted *)
@@ -488,11 +488,12 @@ BEGIN
     Heroic: RETURN Ropes.FromString("Heroic")
   | Secondary: RETURN Ropes.FromString("Secondary")
   | Extra: RETURN Ropes.FromString("Extra")
+  | Boss: RETURN Ropes.FromString("Boss")
   END
 END NpcTypeName;
 
 (* m's npc-type:, if any: the Ada Load_NPC_Type.  Anything but one of
-   the three names is a recorded error, like an overrides: name:
+   the four names is a recorded error, like an overrides: name:
    silently dropping it would lose the type from the output.  A value
    that isn't a scalar fails the Load, as any optional string's does. *)
 PROCEDURE LoadNpcType(m: Fyaml.Node; VAR has: BOOLEAN; VAR k: INTEGER): BOOLEAN;
@@ -508,7 +509,7 @@ BEGIN
     END;
     IF ~has THEN
       msg := Ropes.Cat(Ropes.FromString('"'), raw);
-      OvaText.Add(msg, '" is not one of Heroic, Secondary, Extra');
+      OvaText.Add(msg, '" is not one of Heroic, Secondary, Extra, Boss');
       Record(m, "npc-type", msg)
     END
   END;

@@ -209,10 +209,12 @@ BEGIN
   END
 END CountText;
 
-(* e's NPC type's plural, as a count of them has it: "Secondaries". *)
+(* e's NPC type's plural, as a count of them has it: "Secondaries",
+   "Bosses". *)
 PROCEDURE NpcTypePlural(e: OvaEntities.Entity): Rope;
 BEGIN
   IF e.npcType = OvaEntities.Secondary THEN RETURN Str("Secondaries") END;
+  IF e.npcType = OvaEntities.Boss THEN RETURN Str("Bosses") END;
   RETURN Ropes.AppendChar(OvaCommon.NpcTypeText(e), "s")
 END NpcTypePlural;
 

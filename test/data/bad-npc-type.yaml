@@ -1,6 +1,6 @@
-# npc-type: that isn't Heroic, Secondary or Extra: a recorded error,
+# npc-type: that isn't Heroic, Secondary, Extra or Boss: a recorded error,
 # like a missing required key, so both entities' are reported.
 - name: Bad Type
-  npc-type: Boss
+  npc-type: Overlord
 - name: Empty Type
   npc-type:

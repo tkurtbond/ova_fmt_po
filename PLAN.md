@@ -216,7 +216,7 @@ there, ported together (2026-10-10):
   copied flat into `test/data/` from its `sample-npcs/` and
   `sample-npc-fragments/<subsection>/`.
 - `npc-type` and `character-hooks` (Ada 4c57810). `OvaEntities` has
-  `Heroic`, `Secondary`, `Extra` and `NpcTypeName` (the Ada
+  `Heroic`, `Secondary`, `Extra`, `Boss` and `NpcTypeName` (the Ada
   `NPC_Kind`, `NPC_Kind_Name`); `LoadNpcType` matches ignoring case and
   blanks, a bad name a recorded error in the Ada words, a non-scalar
   fatal as for any optional string. The type leads the main entity's

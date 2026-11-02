@@ -1,0 +1,115 @@
+The Warden
+==========
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 16
+   .TBL cols=2 border=0 csp=4p cpd=0
+   .TR
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +2
+   .TD
+   Attack (Shock baton)
+   .TR
+   .TD hal=r +1
+   .TD
+   Escape Plan (A capsule under the desk)
+   .TR
+   .TD hal=r +1
+   .TD
+   Health Reserve
+   .TR
+   .TD hal=r +1
+   .TD
+   Scale Advantage (Attack)
+   .ETB
+   .TD
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Weaknesses
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r −1
+   .TD
+   Arrogant
+   .ETB
+   .ETB
+   .ne 16
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (BOSS)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TD
+   \fBShock baton\fP
+   .TD hal=c 2
+   .TD hal=c
+   3
+   .TD hal=c 0
+   .TR
+   .TD colspan=4
+   [Flaws: Weapon]
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB2\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB22\fP
+   .ETB
+
+Twin Wardens
+============
+
+.. raw:: ms
+
+   .br
+   .mso hdtbl.tmac
+   .ne 10
+   .TBL cols=2 border=.5p bc=black csp=2p cpd=2p width='15% 85%'
+   .CPTN val=b Abilities
+   .TR
+   .TH Level
+   .TH Name
+   .TR
+   .TD hal=r +1
+   .TD
+   Extra Actions
+   .ETB
+   .ne 12
+   .TBL cols=4 border=.5p bc=black csp=2p cpd=2p width='25% 25% 25% 25%'
+   .CPTN val=b "Attacks & Combat Stats (BOSS)"
+   .TR
+   .TH Name
+   .TH Roll
+   .TH DX
+   .TH End
+   .TR
+   .TH Defense
+   .TH Health
+   .TH Endurance
+   .TH TV
+   .TR
+   .TD hal=c
+   \fB2\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB40\fP
+   .TD hal=c \fB10\fP
+   .ETB
+
