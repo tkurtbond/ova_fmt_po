@@ -1,0 +1,114 @@
+Guards
+======
+
+*Holding the door.*
+
+.. raw:: html
+
+   <table>
+   <caption>Combat (Extra)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>10</td><td>10</td><td>2</td><td>1</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Extra) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Rifle</td><td>3</td><td>3</td><td>0</td><td></td><td></td></tr>
+   </table>
+
+Sergeants
+=========
+
+.. raw:: html
+
+   <table>
+   <caption>Combat (Secondary)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>10</td><td>10</td><td>2</td><td>1</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Secondary) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Rifle</td><td>3</td><td>3</td><td>0</td><td></td><td></td></tr>
+   </table>
+
+Heroes
+======
+
+.. raw:: html
+
+   <table>
+   <caption>Combat (Heroic)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>10</td><td>10</td><td>2</td><td>1</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Heroic) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Rifle</td><td>3</td><td>3</td><td>0</td><td></td><td></td></tr>
+   </table>
+
+Crowd
+=====
+
+.. raw:: html
+
+   <table>
+   <caption>Combat</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>10</td><td>10</td><td>2</td><td>1*</td></tr>
+   </table>
+   <table>
+   <caption>Combat — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Rifle</td><td>3</td><td>3</td><td>0</td><td></td><td></td></tr>
+   </table>
+
+Lone guard
+==========
+
+.. raw:: html
+
+   <table>
+   <caption>Combat (Extra)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>10</td><td>10</td><td>2</td><td>1</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Extra) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Rifle</td><td>3</td><td>3</td><td>0</td><td></td><td></td></tr>
+   </table>
+
+No TV
+=====
+
+.. raw:: html
+
+   <table>
+   <caption>Combat (Extra)</caption>
+   <tr><th>Health</th><th>Endurance</th><th>Defense</th><th>Threat Value</th></tr>
+   <tr><td>10</td><td>10</td><td>2</td><td>—</td></tr>
+   </table>
+   <table>
+   <caption>Combat (Extra) — Attacks</caption>
+   <tr><th>Name</th><th>Roll</th><th>DX</th><th>Endurance Cost</th><th>Perks/Flaws</th><th>Description</th></tr>
+   <tr><td>Rifle</td><td>3</td><td>3</td><td>0</td><td></td><td></td></tr>
+   </table>
+
+**Pack.** Hunting together.
+
+- **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+**Swarm.** No type at all.
+
+- **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+

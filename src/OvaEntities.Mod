@@ -179,6 +179,7 @@ TYPE
     tagline-, summary-, background-, appearance-, personality-,
     characterHooks-, otherNotes-: Rope;   (* trimmed *)
     hasNpcType-: BOOLEAN; npcType-: INTEGER;  (* Heroic, Secondary or Extra *)
+    count-: INTEGER;                      (* how many it stands for, 1 or more; 1 with no count: *)
     abilities-: List;                     (* of Ability, sorted *)
     weaknesses-: List;                    (* of Weakness, sorted *)
     combat-: Combat;
@@ -514,6 +515,23 @@ BEGIN
   RETURN TRUE
 END LoadNpcType;
 
+(* m's count:, 1 if there is none: the Ada Load_Count.  Less than 1 is
+   a recorded error, as a bad npc-type: is.  Something that isn't an
+   integer fails the Load, as any optional integer's does. *)
+PROCEDURE LoadCount(m: Fyaml.Node; VAR count: INTEGER): BOOLEAN;
+  VAR has: BOOLEAN; msg: Rope;
+BEGIN
+  IF ~OptInteger(m, "count", has, count) THEN RETURN FALSE END;
+  IF ~has THEN count := 1
+  ELSIF count < 1 THEN
+    msg := Ropes.Cat(Ropes.FromString('"'), OvaText.Int(count));
+    OvaText.Add(msg, '" is not 1 or more');
+    Record(m, "count", msg);
+    count := 1
+  END;
+  RETURN TRUE
+END LoadCount;
+
 (* ---- Perks and Flaws ---- *)
 
 (* A Perk or Flaw: a scalar (just the name) or a mapping. *)
@@ -764,6 +782,7 @@ BEGIN
      OR ~Prose(m, "personality", e.hasPersonality, e.personality)
      OR ~Prose(m, "character-hooks", e.hasCharacterHooks, e.characterHooks)
      OR ~LoadNpcType(m, e.hasNpcType, e.npcType)
+     OR ~LoadCount(m, e.count)
      OR ~Prose(m, "other-notes", e.hasOtherNotes, e.otherNotes)
      OR ~OptString(m, "portrait", e.hasPortrait, e.portrait)
      OR ~LoadList(m, "abilities", LoadAbility, e.abilities) THEN

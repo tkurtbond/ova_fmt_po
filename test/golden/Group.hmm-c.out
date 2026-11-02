@@ -1,0 +1,41 @@
+	Guards
+		*Holding the door.*
+		**Combat**
+			**NPC Type:** Extra | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	Sergeants
+		**Combat**
+			**NPC Type:** Secondary | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	Heroes
+		**Combat**
+			**NPC Type:** Heroic | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	Crowd
+		**Combat**
+			**Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1*
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	Lone guard
+		**Combat**
+			**NPC Type:** Extra | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	No TV
+		**Combat**
+			**NPC Type:** Extra | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** —
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	**Pack.** Hunting together.
+		**Combat**
+			**Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+	**Swarm.** No type at all.
+		**Combat**
+			**Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+			**Attacks**
+				**Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.

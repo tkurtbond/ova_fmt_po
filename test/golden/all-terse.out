@@ -490,6 +490,78 @@ at least genetically engineered clones. The GPL says otherwise.
 
 **Attributes:** Attack +2 (Stun Baton) [Perks: Paralyzing; Flaws: Ineffective, Low Penetration], Combat Expert +1, Evasive +1, Perceptive +1; Emotionless −1, Servitude −2 (GPL).
 
+Guards
+======
+
+*Holding the door.*
+
+- **NPC Type:** Extra | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+Sergeants
+~~~~~~~~~
+
+- **NPC Type:** Secondary | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+Heroes
+~~~~~~
+
+- **NPC Type:** Heroic | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+Crowd
+~~~~~
+
+- **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1\*
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+Lone guard
+~~~~~~~~~~
+
+- **NPC Type:** Extra | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+No TV
+~~~~~
+
+- **NPC Type:** Extra | **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** —
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+**Pack.** Hunting together.
+
+- **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
+**Swarm.** No type at all.
+
+- **Health:** 10 | **Endurance:** 10 | **Defense:** 2 | **Threat Value (TV):** 1
+
+- **Attacks:**
+
+  - **Rifle:** Roll **3 dice** | **DX 3** | **Endurance Cost: 0**.
+
 The **Indebted Yakuza** owes his life to his crime family, so he
 has become a loyal and honored member of it -- though all he
 really wants is to stay away from violence. The conflict between

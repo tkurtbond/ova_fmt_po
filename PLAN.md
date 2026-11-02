@@ -133,6 +133,14 @@ with `OvaInline` as one Markdown paragraph:
   it, so `Endurance 10.` breaks before `Endurance`. Nothing is escaped,
   as in `-M`.
 
+A `count:` over 1 makes one stat block stand for a group (the user,
+2026-11-02, in the Ada version first; its PLAN.md has the details):
+`**Guards** (three Extras).`, `**Crowd** (three).` with no NPC type,
+`Extra NPCs (three).` after a Fragment's background, and `TV 1 each.`
+Only this format shows it, as every other is a sheet, which describes
+one. `count:` under 1 is a recorded error (`bad-count.yaml`), one that
+isn't an integer ends the file (`bad-count-int.yaml`).
+
 It was written here first, and its golden files came from this program
 (a `po` reference and `make golden-po`, since removed). The Ada port
 reproduced all of them byte for byte, so its cases' reference is now

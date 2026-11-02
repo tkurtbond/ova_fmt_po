@@ -8,6 +8,10 @@ MODULE OvaInline; (* The inline format: -i/--inline *)
      ...; Weakness -1, ...* Attack (Perks; Flaws): Roll 4, DX 3, End
      0. Defense 3. Health 20, Endurance 20. TV 6.
 
+   A count: over 1 makes the lead "**Name** (three Secondaries)." and
+   the end "TV 6 each.": one stat block standing for a group.  It is
+   the only format that shows it, as a sheet describes one.
+
    First written here, then ported to the Ada version, whose output is
    now its reference (PLAN.md, "The inline format").  It is a stat block, so it leaves out
    what a cast list doesn't need: the tagline, character hooks, notes,
@@ -184,9 +188,42 @@ BEGIN
   RETURN r
 END Attack;
 
+(* n as a word, up to twelve, as prose has it; past that its digits:
+   the Ada Count_Text. *)
+PROCEDURE CountText(n: INTEGER): Rope;
+BEGIN
+  CASE n OF
+    1: RETURN Str("one")
+  | 2: RETURN Str("two")
+  | 3: RETURN Str("three")
+  | 4: RETURN Str("four")
+  | 5: RETURN Str("five")
+  | 6: RETURN Str("six")
+  | 7: RETURN Str("seven")
+  | 8: RETURN Str("eight")
+  | 9: RETURN Str("nine")
+  | 10: RETURN Str("ten")
+  | 11: RETURN Str("eleven")
+  | 12: RETURN Str("twelve")
+  ELSE RETURN OvaCommon.TrimImg(n)
+  END
+END CountText;
+
+(* e's NPC type's plural, as a count of them has it: "Secondaries". *)
+PROCEDURE NpcTypePlural(e: OvaEntities.Entity): Rope;
+BEGIN
+  IF e.npcType = OvaEntities.Secondary THEN RETURN Str("Secondaries") END;
+  RETURN Ropes.AppendChar(OvaCommon.NpcTypeText(e), "s")
+END NpcTypePlural;
+
+(* "(three)", the parenthesis that says how many. *)
+PROCEDURE Parenthesized(r: Rope): Rope;
+BEGIN RETURN Ropes.AppendChar(Ropes.Cat(Str("("), r), ")")
+END Parenthesized;
+
 (* c's attacks, then "Defense D. Health H, Endurance E. TV T.", then its
    notes, appended to p; nothing if there is no combat. *)
-PROCEDURE AddCombat(VAR p: Rope; c: OvaEntities.Combat);
+PROCEDURE AddCombat(VAR p: Rope; c: OvaEntities.Combat; group: BOOLEAN);
   VAR i: INTEGER; r: Rope;
 BEGIN
   IF ~c.hasCombat THEN RETURN END;
@@ -200,6 +237,7 @@ BEGIN
     OvaText.Add(r, " TV ");
     r := Ropes.Cat(r, OvaCommon.Marked(OvaCommon.TrimImg(c.threatValue), OvaEntities.OvThreatValue, c.overrides,
       FALSE));
+    IF group THEN OvaText.Add(r, " each") END;
     r := Ropes.AppendChar(r, ".")
   END;
   Add(p, r);
@@ -227,7 +265,7 @@ BEGIN
   END;
   IF se # NIL THEN
     Add(p, Traits(se.abilities, se.weaknesses, FALSE));
-    AddCombat(p, se.combat)
+    AddCombat(p, se.combat, FALSE)
   END;
   Paragraph(p)
 END Linked;
@@ -235,13 +273,24 @@ END Linked;
 (* The entity's paragraph, led by "**Name** (Secondary)." or, with no
    NPC type, "**Name.**", then its linked content's. *)
 PROCEDURE ProcessEntity*(e: OvaEntities.Entity; entityNo: INTEGER);
-  VAR p: Rope; i: INTEGER;
+  VAR p, r: Rope; i: INTEGER; group: BOOLEAN;
 BEGIN
+  group := e.count > 1;
   IF e.isFragment & e.hasBackground THEN
     p := NIL; AddProse(p, e.background);
-    IF e.hasNpcType THEN Add(p, Ropes.Cat(OvaCommon.NpcTypeText(e), Str(" NPC."))) END
+    IF e.hasNpcType & group THEN
+      r := Ropes.Cat(OvaCommon.NpcTypeText(e), Str(" NPCs "));
+      Add(p, Ropes.AppendChar(Ropes.Cat(r, Parenthesized(CountText(e.count))), "."))
+    ELSIF e.hasNpcType THEN Add(p, Ropes.Cat(OvaCommon.NpcTypeText(e), Str(" NPC.")))
+    ELSIF group THEN Add(p, Ropes.AppendChar(Parenthesized(CountText(e.count)), "."))
+    END
   ELSE
-    IF e.hasNpcType THEN
+    IF group THEN
+      r := CountText(e.count);
+      IF e.hasNpcType THEN r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, NpcTypePlural(e)) END;
+      p := OvaCommon.Bold(e.name); OvaText.Add(p, " ");
+      p := Ropes.AppendChar(Ropes.Cat(p, Parenthesized(r)), ".")
+    ELSIF e.hasNpcType THEN
       p := OvaCommon.Bold(e.name); OvaText.Add(p, " (");
       p := Ropes.Cat(p, OvaCommon.NpcTypeText(e)); OvaText.Add(p, ").")
     ELSE p := OvaCommon.Bold(Ropes.AppendChar(e.name, "."))
@@ -252,7 +301,7 @@ BEGIN
     IF e.hasPersonality THEN AddProse(p, e.personality) END
   END;
   Add(p, Traits(e.abilities, e.weaknesses, TRUE));
-  AddCombat(p, e.combat);
+  AddCombat(p, e.combat, group);
   Paragraph(p);
   FOR i := 0 TO e.abilities.n - 1 DO Linked(e.abilities.items[i](OvaEntities.Ability)) END
 END ProcessEntity;

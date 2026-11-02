@@ -1,0 +1,4 @@
+# A count: that isn't an integer: ends the file, as any optional
+# integer's does.
+- name: Several
+  count: many

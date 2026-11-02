@@ -1,0 +1,6 @@
+# count: under 1: a recorded error, like a bad npc-type:, so both
+# entities' are reported.
+- name: None
+  count: 0
+- name: Fewer
+  count: -1

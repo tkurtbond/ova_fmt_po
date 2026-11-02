@@ -1,0 +1,2 @@
+ova_fmt: error processing test/data/bad-count-int.yaml: not a valid integer: "many"
+==== exit 1 ====
