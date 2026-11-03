@@ -27,12 +27,16 @@ LINK := $(foreach f,$(FYAML_LIBS),-link $(f))
 
 # The libraries argparser and ropes are installed by the ArgParser and
 # Ropes repos (make -f pocGNUmakefile install), and polibfyaml by
-# polibfyaml (make install), each in its own directory under
-# POC_OBERON_LIBRARIES.  None of their sources is copied here.  Args and
-# Err come from poc's runtime library, poc-rtl.
-POC_OBERON_LIBRARIES ?= /usr/local/sw/versions/oberon/poc/lib
+# polibfyaml (make install), all in POCLIBDIR.  None of their sources is
+# copied here.  Args and Err come from poc's runtime library, poc-rtl.
+# POCLIBDIR doesn't follow PREFIX, which says where this program installs.
+POCLIBDIR ?= $(HOME)/.local/lib/poc
 SHAREDLIBS := argparser ropes polibfyaml
-LIBPATH := $(foreach l,$(SHAREDLIBS),-library-path $(POC_OBERON_LIBRARIES)/$(l))
+LIBPATH := -library-path $(abspath $(POCLIBDIR))
+
+# The libraries this build takes are the ones in $(POCLIBDIR).  A library
+# on POC_LIBRARY_PATH would stop the build if another poc wrote it.
+unexport POC_LIBRARY_PATH
 IMPORTS := -import-path src $(LIBPATH)
 
 OBJ   := obj
@@ -43,7 +47,7 @@ MAIN    := OvaFmt
 
 # Every source and library a program is built from, for make's
 # dependencies: a reinstalled library rebuilds the programs.
-SHAREDLIBMANIFESTS := $(foreach l,$(SHAREDLIBS),$(wildcard $(POC_OBERON_LIBRARIES)/$(l)/*/OC/$(l).library))
+SHAREDLIBMANIFESTS := $(foreach l,$(SHAREDLIBS),$(wildcard $(POCLIBDIR)/*/OC/$(l).library))
 PROGSRC := $(wildcard src/*.Mod)
 
 # Test support modules, and test programs (test/<name>.Mod, main modules).
@@ -54,7 +58,7 @@ TESTBINS    := $(TESTS:%=$(OBJ)/%)
 # Only building needs the shared modules, so the cleaning targets don't
 # check for them.
 ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-%,$(MAKECMDGOALS)),all),)
-$(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POC_OBERON_LIBRARIES)/$(l)/*/OC/$(l).library),,$(error the $(l) library is not in $(POC_OBERON_LIBRARIES)/$(l); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
+$(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POCLIBDIR)/*/OC/$(l).library),,$(error the $(l) library is not in $(POCLIBDIR); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
 .PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline install uninstall clean testclean

@@ -21,9 +21,9 @@ not a design doc. A change to the Ada program belongs here too.
 | Ada program | `~/Repos/RPG/Tools/ova_fmt/` (`src/`, `PLAN.md`, `test-data/`) |
 | Ada binary (the oracle for `make golden`) | `~/Repos/RPG/Tools/ova_fmt/ova_fmt` (`gprbuild -p -P ova_fmt.gpr` there) |
 | The sibling poc port this one follows | `~/Repos/RPG/Tools/pobesm2_fmt2/` |
-| Ropes | `~/Repos/Oberon/Ropes/`; poc library `ropes` in `$POC_OBERON_LIBRARIES/ropes` |
-| ArgParser (command-line parsing) | `~/Repos/Oberon/ArgParser/`; poc library `argparser` in `$POC_OBERON_LIBRARIES/argparser` (default root `/usr/local/sw/versions/oberon/poc/lib`) |
-| polibfyaml (YAML) | `~/Repos/Oberon/polibfyaml/` (`AGENTS.md`, `src/`, `test/poc-gc.supp`, `test/vg-reachable.sh`); poc library `polibfyaml` in `$POC_OBERON_LIBRARIES/polibfyaml` |
+| Ropes | `~/Repos/Oberon/Ropes/`; poc library `ropes` in `$POCLIBDIR` |
+| ArgParser (command-line parsing) | `~/Repos/Oberon/ArgParser/`; poc library `argparser` in `$POCLIBDIR` (default `~/.local/lib/poc`) |
+| polibfyaml (YAML) | `~/Repos/Oberon/polibfyaml/` (`AGENTS.md`, `src/`, `test/poc-gc.supp`, `test/vg-reachable.sh`); poc library `polibfyaml` in `$POCLIBDIR` |
 | poc | installed from the Peaseblossom RPM: `/usr/bin/poc`, its runtime library `poc-rtl` under `/usr/lib/poc` |
 | poc source and runtime | `~/Repos/Oberon/Peaseblossom-main` (`doc/users-guide.md`, `doc/reference-guide.md`, `AGENTS.md`; the runtime in `rtl/llvm/`) |
 
@@ -52,11 +52,12 @@ make print-VAR  # show a makefile variable
   it, and poc refuses a `.sym` from the other size model. Under `-OC`,
   `INTEGER` is 32 bits, like Ada's `Integer`, and `LONGINT` 64.
 - **Don't copy `Ropes.Mod`, `ArgParser.Mod` or polibfyaml's modules
-  into this repo.** They come compiled, from the poc libraries on the
-  library path. A change one of them needs is made in its own repo,
-  tested and installed there, and needs the user's go-ahead. **After
-  upgrading poc, reinstall all three**: a library records the poc that
-  built it, and another poc refuses it.
+  into this repo.** They come compiled, from the poc libraries in
+  `POCLIBDIR`. The makefile unexports `POC_LIBRARY_PATH`, so that is
+  the only place it takes a library from. A change one of them needs
+  is made in its own repo, tested and installed there, and needs the
+  user's go-ahead. **After upgrading poc, reinstall all three**: a
+  library records the poc that built it, and another poc refuses it.
 - poc builds a program from its main module, compiling this repo's
   modules from source on every build into `obj/`. **A new module in
   `src/` needs nothing in the makefile**, a new unit test only its
