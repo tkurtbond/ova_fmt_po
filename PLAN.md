@@ -409,9 +409,12 @@ pypdf are installed here.
   and hyphenates multi-line boxes, and gropdf embeds fonts. `.PDFPIC`
   places the portrait, a PDF that **rsvg-convert** or **ImageMagick**
   makes from a PNG, JPEG or SVG. This program already writes groff
-  (`-G`).
-- **Lout**: the other choice for the overlay, and what the Ada PLAN.md
-  §9 step 7 already plans for a direct-to-Lout backend. Absolute
+  (`-G`). **Chosen for the overlay** (the user, 2026-11-12).
+- **fontforge** and groff's **afmtodit** turn the Noto Sans TrueType
+  files into Type 1 fonts and groff font descriptions for gropdf
+  ("Fonts and type styles").
+- **Lout**: considered for the overlay, and what the Ada PLAN.md §9
+  step 7 plans for a direct-to-Lout backend. Not chosen: absolute
   placement is clumsier in Lout than in groff, and its PostScript
   output needs ps2pdf.
 - **Ghostscript** (`ps2pdf`, and for checking), **poppler-utils**
@@ -454,6 +457,67 @@ pypdf are installed here.
    `-k`. This gives full Unicode, wrapping and fitting, the portrait
    (`.PDFPIC`), and no fixed limits.
 
+### Fonts and type styles [decided]
+
+The user decided (2026-11-12): a proportional font, as in the
+rulebook's sample characters, and that font is **Noto Sans**. Not
+monospace: Consolas was only ever proposed to match the form's own
+fields. The XFDF path still gets Consolas, since the form's fields
+name it and pdftk uses what they name.
+
+The rulebook uses Calluna Sans (`pdffonts` on PDF page 33), which is
+commercial; Noto Sans is free and on every system here. Each part of
+an entry keeps the rulebook's emphasis, in the matching Noto Sans
+face:
+
+| Part | Rulebook | Overlay |
+|---|---|---|
+| Ability, Weakness rows | Calluna Sans Italic | Noto Sans Italic, 8 pt; the detail in parentheses too |
+| Built-under and spell rows | Calluna Sans Light Italic, smaller | Noto Sans Light Italic, about 6.5 pt |
+| Their perks, flaws and Endurance | small caps | upper case one size down (`\s-1`) in Noto Sans Regular. The Type 1 conversion drops OpenType's `smcp`, so real small caps aren't available. |
+| Attack name | Calluna Sans Bold, dark red | Noto Sans Bold, dark red (a `.defcolor` from the sheet's colour) |
+| Attack's perks, flaws, Affinity | small caps | the same faked small caps |
+| Attack description | Calluna Sans Bold | Noto Sans Bold |
+| Roll, DX, End; Defense, Health, Endurance, TV | the sheet's large condensed numerals | Noto Sans Condensed SemiBold, sized to the box |
+| Name, player, prose (p2) | | Noto Sans Regular |
+
+**gropdf can't read TrueType** in groff 1.23. A make step builds a
+font directory under `build/font/devpdf`:
+
+1. `fontforge` writes each face as `.pfa` and `.afm`.
+2. `afmtodit -e enc/text.enc FACE.afm map/text.map NAME` writes groff's
+   description.
+3. A `download` file lists each face. Its lines are TAB-separated,
+   with an empty foundry field first; a line separated by spaces gives
+   Perl warnings and leaves the face unembedded.
+
+`groff -F build/font` then uses the fonts. The TTF directory is a make
+variable, since the BSDs keep it under `/usr/local/share/fonts`.
+
+Tested here (2026-11-12) with Regular, Italic, Bold and BoldItalic:
+all four embedded, "Tōdō Ōkami" and U+2212 came through `-k`, and the
+faked small caps looked right at 200 dpi. afmtodit warns that two Greek
+glyph names map to one code; that is harmless.
+
+### Redrawing the sheet [decided]
+
+The user decided (2026-11-12) there will also be a third mode: groff
+draws the sheet itself, with no Dyskami artwork, so the output can be
+shared. `OvaSheetDraw` (Ada `Ova_Fmt.Sheet_Draw`) writes the frames:
+
+- the rounded panels, done with `\D'p'` polygons and `\D'a'` arcs;
+- the dotted rules and the shaded backgrounds (`\M` fill colour);
+- the Combat Stats box's grid;
+- the headings ("Abilities", "Weaknesses", "Attacks & Combat Stats",
+  "Background" and so on), set in Noto Sans ExtraCondensed Bold in
+  place of the rulebook's Chalet Comprime;
+- no OVA logo.
+
+It uses the same field rectangles as the overlay, so `OvaSheet` places
+the text the same way over either background. For NPCs,
+Acacia's one-column block is the model, as noted under "Sub-Abilities"
+above.
+
 **Proposed:** do both, the overlay first. It is the complete output,
 and XFDF then costs little, since its field mapping is the same code.
 The form-filled PDF is the one for a player who wants to keep editing
@@ -464,8 +528,9 @@ it.
 | Oberon module | Ada unit | Writes |
 |---|---|---|
 | `OvaSheetMap` | `Ova_Fmt.Sheet_Map` | Shared: the field table above (name, page, rectangle, size, single/multi-line) as constants, and `Fill(e)`. `Fill` maps an entity onto slots: Abilities and Weaknesses sorted as now (`OvaCommon`), each "Name (detail) [perks/flaws/endurance]" with the level in the Dice column. Built-under content becomes `Sub` and `Spell` rows in blocks kept together ("Sub-Abilities, as the rulebook prints them"). Attacks go to name / "Affinity; perks; flaws" / Roll, DX, End. Defense is `OvaCommon.DefenseText`, and `*` marks overrides, as `raw` does. Prose fields are trimmed and joined (`AllOneLine` where a field is one line). Whatever didn't fit goes on an overflow list. |
+| `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw` (the letter is proposed), and only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). |
 | `OvaXfdf` | `Ova_Fmt.Format_Xfdf` | `-X`/`--xfdf`: XFDF for `pdftk fill_form`, XML-escaped (`&`, `<`, `>`, `"`). Overflow becomes one line at the end of Other Notes ("More on the continuation sheet"), or, with an option, goes to standard error. |
-| `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size. A macro `FLD page x y w h size` places each value. Two passes per value: measure with `\w`, shrink to the floor, then wrap in an `.ev` with `.ll` set to the field's width. The continuation pages are in `-ms` style: linked Abilities, then the sections the sheet has no place for, reusing `OvaCommon`'s Formatter callbacks, as `OvaHmm` does. `-P FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file, as in `-H`. |
+| `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size. A macro `FLD page x y w h size` places each value. Two passes per value: measure with `\w`, shrink to the floor, then wrap in an `.ev` with `.ll` set to the field's width. The continuation pages are in `-ms` style: linked Abilities, then the sections the sheet has no place for, reusing `OvaCommon`'s Formatter callbacks, as `OvaHmm` does. `-P FILE`/`--portrait FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file, as in `-H`. |
 
 They fit the existing structure. `OvaConfig` gets `Xfdf` and `Sheet`
 (exclusive with the other format flags, as now). `OvaFmt` dispatches
@@ -522,16 +587,15 @@ with unit tests in `TestText.Mod`.
 
 - **The official sheet as PDF** (above), to be decided before work
   starts:
-  - Should the overlay be in groff (proposed: easy absolute placement,
-    and the program already writes it) or Lout (the Ada plan's
-    direct-to-Lout backend)?
-  - Which option letters: `-S` and `-X` (free now), and `-P` for the
-    portrait?
-  - Should there be a third mode that redraws the whole sheet
-    ourselves, with no Dyskami artwork? Only that mode's output could
-    be shared freely beyond personal use.
-  - Which fonts should the overlay use? Consolas, to match the form,
-    isn't free; DejaVu Sans Mono or Noto have the coverage.
+  - ~~Should the overlay be in groff or Lout?~~ groff (the user,
+    2026-11-12).
+  - ~~Which option letters?~~ `-S`/`--sheet`, `-X`/`--xfdf` and
+    `-P`/`--portrait` (the user, 2026-11-12). `-R`/`--redraw` for the
+    redrawn sheet is proposed, not yet agreed.
+  - ~~A third mode that redraws the whole sheet?~~ Yes (the user,
+    2026-11-12): "Redrawing the sheet".
+  - ~~Which fonts?~~ Noto Sans, proportional, with the rulebook's
+    emphasis (the user, 2026-11-12): "Fonts and type styles".
   - Order of work: should the Ada version come first, as this repo's
     rule for a new format says, or this port first, as with the inline
     format?
