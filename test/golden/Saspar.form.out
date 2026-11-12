@@ -1,0 +1,63 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Saspar",
+        "Abilities Dice1": "+3",
+        "Ability 1": "Art of Invisibility",
+        "Abilities Dice2": "+3",
+        "Ability 2": "Attack (Magic Gun)",
+        "Abilities Dice3": "+3",
+        "Ability 3": "Combat Expert",
+        "Abilities Dice4": "+4",
+        "Ability 4": "Knowledge (Violin)",
+        "Abilities Dice5": "+3",
+        "Ability 5": "Quick",
+        "Abilities Dice6": "+3",
+        "Ability 6": "Sixth Sense",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Emotionless",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Focus (Chronos Watch)",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Hatred (Excessive Noise)",
+        "Weakness Dice 4": "-3",
+        "Weakness 4": "Servitude (Chaos)",
+        "Weakness Dice 5": "-2",
+        "Weakness 5": "Unique Weakness (Cannot Detect Things Perceptible to Sight Alone)",
+        "Weakness Dice 6": "-1",
+        "Weakness 6": "Vulnerability (Holy)",
+        "Attack 1": "Brim Shot",
+        "Attack Description 1": "Affinity: Fire; Perks: Accurate x2, Effective, Ranged; Flaws: Activation, Weapon",
+        "roll": "7",
+        "dx": "5",
+        "end": "0",
+        "Attack 2": "Ise Shot",
+        "Attack Description 2": "Affinity: Ice; Perks: Effective, Impairing, Ranged; Flaws: Activation, Weapon",
+        "roll_2": "5",
+        "dx_2": "5",
+        "end_2": "0",
+        "Attack 3": "Lode Shot",
+        "Attack Description 3": "Affinity: Earth; Perks: Effective, Ranged, Stunning; Flaws: Activation, Weapon",
+        "roll_3": "5",
+        "dx_3": "5",
+        "end_3": "0",
+        "Combat Notes": "NPC Type: Heroic",
+        "Defense": "5",
+        "Health": "40",
+        "Endurance": "40",
+        "TV": "14",
+        "Background": "Saspar looks like a cold servant of the Order of Chaos, but underneath he simply doesn't care whether he lives; he quietly hopes to fail at his work and so be done with existence. His magic comes from strange enchanted devices rather than study: a gun that fires spells once loaded with the right bullet, and an ornate pocket watch that lets him foresee events and head off danger. He always wears a red sash over his eyes, and nobody knows whether he's truly blind."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Saspar: Lines in Full\n-2 Unique Weakness (Cannot Detect Things Perceptible to Sight Alone)\n\nSaspar: Attacks\nBrim Shot (Affinity: Fire; Perks: Accurate x2, Effective, Ranged; Flaws: Activation, Weapon): Calls on the spirit of Phoenix to fire a homing projectile bathed in fire.\nIse Shot: Calls on the spirit of Ymir to fire a frost ray that encapsulates what it hits in ice.\nLode Shot (Affinity: Earth; Perks: Effective, Ranged, Stunning; Flaws: Activation, Weapon): Calls on the spirit of Gaia to fire a rocky blast that knocks targets off their feet.\n\nSaspar: Character Hooks\nThe Order of Chaos makes Saspar and Acacia natural enemies for anyone defending the world from evil -- Fukiko and Auren, whose backgrounds both feature a vague darkness to be fought, fit especially well. They can also serve as magical rivals."
+      }
+    }
+  ]
+]

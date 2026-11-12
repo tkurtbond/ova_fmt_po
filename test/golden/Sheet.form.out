@@ -1,0 +1,70 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": ["Ability 4", "Ability 7", "Ability 8"],
+      "fields": {
+        "Character Name": "Hana Mori",
+        "Player Name": "Sam",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Companion (Mochi)",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Knowledge (Weather)",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Magic, Arcane",
+        "Ability 4": "    Still Air (Barrier +1, 15* END)",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Telekinesis [5* Endurance]",
+        "Abilities Dice6": "+3",
+        "Ability 6": "Transformation",
+        "Ability 7": "    +2 Barrier",
+        "Ability 8": "    +2 Flight [5* Endurance]",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Short-Tempered",
+        "Attack 1": "Gust",
+        "roll": "3*",
+        "dx": "3*",
+        "end": "0",
+        "Attack 2": "Storm Front",
+        "roll_2": "2",
+        "dx_2": "1",
+        "end_2": "10*",
+        "Combat Notes": "Took 10 damage from the <Hollow> & lost her scarf.\n.Still shaken.",
+        "Defense": "3*/4*",
+        "Health": "40*",
+        "Endurance": "50*",
+        "TV": "9*",
+        "Background": "Hana found out she could push things without touching them the day her bicycle chain snapped on a hill.\nThe pendant she found afterward lets her become the Gale.",
+        "Appearance": "Short, with a red scarf she never takes off; as the Gale, a grey coat that never stops moving.",
+        "Personality": "Cheerful and stubborn, and quick to take a dare.",
+        "Other Notes": "Owes the shrine keeper a favor."
+      }
+    },
+    {
+      "pages": [1],
+      "sub": [],
+      "fields": {
+        "Character Name": "Mochi (Hana Mori's Companion)",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Quick",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Awkward Size (Small)",
+        "Attack 1": "Nip",
+        "roll": "2",
+        "dx": "1",
+        "end": "0",
+        "Defense": "3",
+        "Health": "20*",
+        "Endurance": "20",
+        "TV": "2"
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Hana Mori: Ability Notes\nBarrier: the second Defense value"
+      }
+    }
+  ]
+]

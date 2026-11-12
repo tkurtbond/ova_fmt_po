@@ -1,0 +1,3 @@
+ova_fmt: error processing test/data/bad-second-document.yaml: expected a top-level YAML sequence of entities in test/data/bad-second-document.yaml
+[]
+==== exit 1 ====

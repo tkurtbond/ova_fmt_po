@@ -1,0 +1,72 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Shadowman",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Armored",
+        "Abilities Dice2": "+3",
+        "Ability 2": "Attack (Futuristic Force)",
+        "Abilities Dice3": "+4",
+        "Ability 3": "Barrier",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Combat Expert",
+        "Abilities Dice5": "+3",
+        "Ability 5": "Flight",
+        "Abilities Dice6": "+3",
+        "Ability 6": "Inventor",
+        "Abilities Dice7": "+3",
+        "Ability 7": "Life Support",
+        "Abilities Dice8": "+2",
+        "Ability 8": "Pilot",
+        "Abilities Dice9": "+3",
+        "Ability 9": "Smart",
+        "Abilities Dice10": "+3",
+        "Ability 10": "Strong",
+        "Abilities Dice11": "+3",
+        "Ability 11": "Telekinesis",
+        "Abilities Dice12": "+4",
+        "Ability 12": "Tough",
+        "Abilities Dice13": "+2",
+        "Ability 13": "Vigorous",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Bizarre Appearance",
+        "Weakness Dice 2": "-3",
+        "Weakness 2": "Focus (Abilities from Suit)",
+        "Weakness Dice 3": "-3",
+        "Weakness 3": "Infamous (Criminal)",
+        "Weakness Dice 4": "-3",
+        "Weakness 4": "Obsession (Finding OVA)",
+        "Weakness Dice 5": "-3",
+        "Weakness 5": "Secret (Identity)",
+        "Weakness Dice 6": "-3",
+        "Weakness 6": "Wanted (GPL)",
+        "Attack 1": "Laser Sword",
+        "Attack Description 1": "Perks: Armor Piercing; Flaws: Weapon",
+        "roll": "3",
+        "dx": "7",
+        "end": "0",
+        "Attack 2": "Psycho-Kinetic Crush",
+        "Attack Description 2": "Perks: Area Effect, Stunning; Flaws: Ineffective x2",
+        "roll_2": "3",
+        "dx_2": "5",
+        "end_2": "10",
+        "Combat Notes": "NPC Type: Heroic",
+        "Defense": "6",
+        "Health": "80",
+        "Endurance": "60",
+        "TV": "24",
+        "Background": "Shadowman is feared across the galaxy for the ruin he leaves behind, though his rampage may be less random than it looks. He was once Har Grimoire, an acclaimed scientist devoted to his daughter Elle, until a lab accident killed her and nearly killed him. Thought dead, he rebuilt himself inside armor that both keeps him alive and makes him more than human, and set out to find OVA -- an outlawed project to rebuild a person from a single DNA sample, which he's sure still exists somewhere. He'll let nothing stop him."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Shadowman: Attacks\nLaser Sword: A glowing beam of light that instills fear into those who would dare face him.\nPsycho-Kinetic Crush: Shadowman uses his amplified mental powers to toss around the opponent.\n\nShadowman: Character Hooks\nHe's an obvious enemy for Karis, but anyone protecting the common good can end up opposing him. Curiously, Karis looks a great deal like Elle."
+      }
+    }
+  ]
+]

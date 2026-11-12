@@ -1,0 +1,72 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Daisuke",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Attack (Kung Faux)",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Beautiful",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Combat Expert",
+        "Abilities Dice5": "+3",
+        "Ability 5": "Famous",
+        "Abilities Dice6": "+2",
+        "Ability 6": "Knowledge (Motorcycles)",
+        "Abilities Dice7": "+3",
+        "Ability 7": "Performer",
+        "Abilities Dice8": "+1",
+        "Ability 8": "Quick",
+        "Abilities Dice9": "+1",
+        "Ability 9": "Vigorous",
+        "Abilities Dice10": "+3",
+        "Ability 10": "Wealthy",
+        "Weakness Dice 1": "-3",
+        "Weakness 1": "Accidental Transformation (Black Bunny)",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Impulsive",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Lecherous",
+        "Weakness Dice 4": "-1",
+        "Weakness 4": "Love Interest (Himself)",
+        "Weakness Dice 5": "-3",
+        "Weakness 5": "Love Magnet",
+        "Weakness Dice 6": "-1",
+        "Weakness 6": "Overconfident",
+        "Weakness Dice 7": "-1",
+        "Weakness 7": "Quirk (Odd Food Demands)",
+        "Weakness Dice 8": "-1",
+        "Weakness 8": "Rude",
+        "Weakness Dice 9": "-1",
+        "Weakness 9": "Weak-Willed",
+        "Attack 1": "Crouching Rabbit, Hidden Bunny",
+        "Attack Description 1": "Affinity: Martial Arts",
+        "roll": "5",
+        "dx": "2",
+        "end": "0",
+        "Attack 2": "This Axe Goes to 11!",
+        "Attack Description 2": "Perks: Effective x3; Flaws: Ammunition x3",
+        "roll_2": "5",
+        "dx_2": "5",
+        "end_2": "0",
+        "Defense": "3",
+        "Health": "40",
+        "Endurance": "50",
+        "TV": "11",
+        "Background": "A wealthy, womanizing pop idol, Daisuke rudely dismissed an elderly fan who asked for an autograph -- and she cursed him on the spot. Now any woman's amorous touch turns him into a handsome black rabbit until he escapes her sight, clothes and all left behind. Chastened but hardly reformed, he's determined to track the old woman down and get the curse lifted.",
+        "Personality": "Lecherous, self-absorbed, and far too famous for his own good, Daisuke's biggest problems are entirely of his own making -- when he isn't chasing girls, he's complaining about his food."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Daisuke: Attacks\nCrouching Rabbit, Hidden Bunny: Daisuke's fondness for martial arts movies has led to spending megabucks on tutors.\nThis Axe Goes to 11!: In desperation, Daisuke can sacrifice his guitar to save his hide…\n\nDaisuke: Black Bunny!\nWhile transformed, Daisuke loses nearly all his Abilities but gains Quick +2 and Awkward Size -2. He reverts to human form once he's out of the sight of the woman who triggered the change -- his clothes, unfortunately, do not come with him."
+      }
+    }
+  ]
+]

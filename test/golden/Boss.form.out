@@ -1,0 +1,47 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "The Warden",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Attack (Shock baton)",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Escape Plan (A capsule under the desk)",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Health Reserve",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Scale Advantage (Attack)",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Arrogant",
+        "Attack 1": "Shock baton",
+        "Attack Description 1": "Flaws: Weapon",
+        "roll": "2",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Boss",
+        "Defense": "2",
+        "Health": "40",
+        "Endurance": "40",
+        "TV": "22"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Twin Wardens",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Extra Actions",
+        "Combat Notes": "NPC Type: Boss",
+        "Defense": "2",
+        "Health": "40",
+        "Endurance": "40",
+        "TV": "10"
+      }
+    }
+  ]
+]

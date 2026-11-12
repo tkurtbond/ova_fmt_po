@@ -1,0 +1,31 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "GPL Agents",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Attack (Stun Baton) [Perks: Paralyzing; Flaws: Ineffective, Low Penetration]",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Combat Expert",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Evasive",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Perceptive",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Emotionless",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Servitude (GPL)",
+        "Background": "**GPL Agents** have the whole known universe to police. Their all-business manner has started rumors that they're robots, or at least genetically engineered clones. The GPL says otherwise."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "GPL Agents: Lines in Full\n+2 Attack (Stun Baton) [Perks: Paralyzing; Flaws: Ineffective, Low Penetration]"
+      }
+    }
+  ]
+]

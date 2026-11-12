@@ -1,0 +1,43 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Dragon",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Armored",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Attack (Fire Breath: Area Effect, Ranged; 10 Endurance—Claw & Bite: Reach; Inaccurate)",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Combat Expert",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Flight",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Intimidating",
+        "Abilities Dice6": "+1",
+        "Ability 6": "Smart",
+        "Abilities Dice7": "+2",
+        "Ability 7": "Strong",
+        "Abilities Dice8": "+2",
+        "Ability 8": "Tough",
+        "Weakness Dice 1": "-3",
+        "Weakness 1": "Awkward Size",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Obsession (Treasure)",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Slow",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Stubborn",
+        "Background": "A **Dragon** is a terrifying opponent. As if its enormous size and strength weren't enough, there's the small matter of its fiery breath, which can surprise an unready adventurer (or an unlucky villager)."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Dragon: Lines in Full\n+2 Attack (Fire Breath: Area Effect, Ranged; 10 Endurance—Claw & Bite: Reach; Inaccurate)"
+      }
+    }
+  ]
+]

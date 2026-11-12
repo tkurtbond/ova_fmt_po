@@ -1,0 +1,3 @@
+ova_fmt: error processing test/data/bad-shape-fluff.yaml: /0/fluff: not a mapping
+[]
+==== exit 1 ====

@@ -1,0 +1,28 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Cat Burglar",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Art of Invisibility",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Attack (Claws)",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Dexterous",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Quick",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Greedy",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Sensitivity (Being Called a Cat)",
+        "Weakness Dice 3": "-3",
+        "Weakness 3": "Wanted (GPL)",
+        "Background": "Wanted across the galaxy, the **Cat Burglar** will gladly stroll off with your valuables, her feline alien heritage making her nimble and stealthy. Just never call her a cat to her face, or you could lose more than your belongings."
+      }
+    }
+  ]
+]

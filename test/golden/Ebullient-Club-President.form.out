@@ -1,0 +1,24 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Ebullient Club President",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Charismatic",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Evasive",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Knowledge (Club Matters)",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Smart",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Compulsion (Talking)",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Oblivious",
+        "Background": "The **Ebullient Club President** is certain his club is the greatest in the school, and he'll keep talking until you agree -- never mind that he seems to be its only member."
+      }
+    }
+  ]
+]

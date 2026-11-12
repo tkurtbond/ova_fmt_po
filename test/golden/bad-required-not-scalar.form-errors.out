@@ -1,0 +1,4 @@
+test/data/bad-required-not-scalar.yaml: error: /0/name: key "name" is not a scalar value
+ova_fmt: 1 error(s) in test/data/bad-required-not-scalar.yaml; no output produced
+[]
+==== exit 1 ====

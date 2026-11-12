@@ -1,0 +1,22 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Weird Exchange Student",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Knowledge (The Occult)",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Psychic",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Spirit Medium",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Outcast (Weird Kid)",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Shy",
+        "Background": "The **Weird Exchange Student** really is strange. She keeps to herself, forever writing secrets in an old leather book, and during long classes she can be heard murmuring to people who aren't there."
+      }
+    }
+  ]
+]

@@ -1,2 +1,2 @@
-ova_fmt: error processing test/data/bad-detail-not-scalar.yaml: key "detail" is not a scalar value
+test/data/bad-detail-not-scalar.yaml:6:7: error: /0/abilities/0/detail: key "detail" is not a scalar value
 ==== exit 1 ====

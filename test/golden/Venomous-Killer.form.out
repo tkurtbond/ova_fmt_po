@@ -1,0 +1,27 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Venomous Killer",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Art of Invisibility",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Attack (Bite) [Perks: Continued Effect x2; Flaws: Feather Blow, Low Penetration x2; 5 Endurance]",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Quick",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Vulnerability (Heat/Cold)",
+        "Background": "The coldblooded **Venomous Killer** lies hidden, waiting to strike when you least expect it. Whether it's a legless serpent or a huge lizard, it's not something you want to meet up close."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Venomous Killer: Lines in Full\n+2 Attack (Bite) [Perks: Continued Effect x2; Flaws: Feather Blow, Low Penetration x2; 5 Endurance]"
+      }
+    }
+  ]
+]

@@ -1,0 +1,26 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Shady Teacher",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Art of Invisibility",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Perceptive",
+        "Abilities Dice3": "+3",
+        "Ability 3": "Smart",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Absent-Minded",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Fussy",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Quirk (Always Wears Sunglasses)",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Secret (To Everybody)",
+        "Background": "The **Shady Teacher** just joined the faculty and seems to know his subject, yet something about him is wrong. Perhaps it's the sunglasses he never takes off, even inside -- or the students who keep vanishing from his class."
+      }
+    }
+  ]
+]

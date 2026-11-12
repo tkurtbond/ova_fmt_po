@@ -1,0 +1,66 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Ai",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Art of Invisibility",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Attack (Telekinetic Power)",
+        "Abilities Dice3": "+3",
+        "Ability 3": "Barrier [Perks: No Gesture; 5 Endurance]",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Dexterous",
+        "Abilities Dice5": "+1",
+        "Ability 5": "Knowledge (String Games)",
+        "Abilities Dice6": "+3",
+        "Ability 6": "Psychic",
+        "Abilities Dice7": "+2",
+        "Ability 7": "Quick",
+        "Abilities Dice8": "+3",
+        "Ability 8": "Sixth Sense",
+        "Abilities Dice9": "+3",
+        "Ability 9": "Telekinesis",
+        "Weakness Dice 1": "-3",
+        "Weakness 1": "Amnesia",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Fear (Men in Black Suits)",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Frail",
+        "Weakness Dice 4": "-1",
+        "Weakness 4": "Pacifist",
+        "Weakness Dice 5": "-3",
+        "Weakness 5": "Shy",
+        "Weakness Dice 6": "-3",
+        "Weakness 6": "Wanted (Men in Black)",
+        "Weakness Dice 7": "-1",
+        "Weakness 7": "Weak",
+        "Attack 1": "Telekinetic Push",
+        "Attack Description 1": "Perks: No Gesture, Ranged, Stunning; Flaws: Ineffective, Low Penetration",
+        "roll": "2",
+        "dx": "4",
+        "end": "5",
+        "Attack 2": "Mind Break",
+        "Attack Description 2": "Perks: Armor Piercing, Fatiguing, No Gesture, Ranged, Will Attack; Flaws: Cancel: Unliving (-5)",
+        "roll_2": "2",
+        "dx_2": "5",
+        "end_2": "5",
+        "Defense": "4/5",
+        "Health": "20",
+        "Endurance": "40",
+        "TV": "10",
+        "Background": "Ai awoke in an alley with no memory of who she was. As she wandered Tokyo trying to survive, she discovered she could sense others' thoughts and emotions, and even move objects with her mind. Worse, she found herself doggedly pursued by strange, unsettling men in black suits.",
+        "Personality": "Shy and withdrawn, Ai struggles to connect with people and finds it hard to put her feelings into words. She'd rather avoid a problem than face it -- though her real trouble is that she has nowhere left to run."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Ai: Ability Notes\nBarrier: provides an alternate Defense Roll (the second Defense value below)\n\nAi: Attacks\nTelekinetic Push: Ai lashes out with her telekinetic powers, pushing the target away.\nMind Break (Perks: Armor Piercing, Fatiguing, No Gesture, Ranged, Will Attack; Flaws: Cancel: Unliving (-5)): Ai fills another's mind with a confusing din of psychic energy, draining the opponent."
+      }
+    }
+  ]
+]

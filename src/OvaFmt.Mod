@@ -1,4 +1,4 @@
-MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown or h-m-m *)
+MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown, h-m-m or form JSON *)
 
 (* Oberon-2 port of the Ada ova_fmt (ova_fmt_main.adb), with every
    string a Ropes.Rope.  See PLAN.md.
@@ -11,7 +11,7 @@ MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown o
    MESSAGE".  Either way the run goes on with the next file, and ends
    with status 1. *)
 
-IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaHmm, OvaInline, OvaOut, OvaRst,
+IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaForm, OvaHmm, OvaInline, OvaOut, OvaRst,
   OvaText, Out, Platform, Ropes, Strings, SYSTEM;
 
 TYPE
@@ -55,14 +55,15 @@ BEGIN
   ErrRope(msg); Err.Ln
 END Report;
 
-(* The same, for an error from polibfyaml: its message names the file
-   and position already, gcc style, one line for each error, each ending
-   in a line feed, as the Ada binding's does.  But a file that can't be
-   opened is "FILE: REASON", as the Ada version says it (GNAT's
+(* The same, for an error from polibfyaml.  A syntax error's message
+   is gcc style already, "FILE:LINE:COLUMN: error: TEXT", one line for
+   each error, and is put as it is, but with one line feed at the end,
+   not the two it has, as the Ada version puts it.  A file that can't
+   be opened is "FILE: REASON", as the Ada version says it (GNAT's
    Name_Error message), not polibfyaml's "FILE: error: REASON" and line
    feed. *)
 PROCEDURE ReportYaml(source: Ropes.Rope; err: Fyaml.Error);
-  VAR msg: Ropes.Rope; reason: OvaText.String; sep: ARRAY 10 OF CHAR;
+  VAR msg, prefix: Ropes.Rope; reason: OvaText.String; sep: ARRAY 10 OF CHAR;
     f, i, n, skip: INTEGER; prefixed: BOOLEAN;
 BEGIN
   IF err.kind = Fyaml.FileError THEN
@@ -86,12 +87,34 @@ BEGIN
       RETURN
     END
   END;
-  Report(source, Ropes.FromString(err.msg^))
+  msg := Ropes.FromString(err.msg^);
+  prefix := Ropes.AppendChar(source, ":");
+  IF (Ropes.Length(msg) > Ropes.Length(prefix))
+     & Ropes.Equal(Ropes.Substring(msg, 0, Ropes.Length(prefix)), prefix) THEN
+    hadErrors := TRUE;
+    OvaOut.Flush;
+    n := SHORT(Ropes.Length(msg));
+    WHILE (n > 0) & (Ropes.Fetch(msg, n - 1) = 0AX) DO DEC(n) END;
+    msg := Ropes.Substring(msg, 0, n);
+    ErrRope(msg); Err.Ln
+  ELSE Report(source, msg)
+  END
 END ReportYaml;
 
-(* Every required-field error collected for source, then a summary
-   line: "SOURCE:LINE:COLUMN: error: PATH: MESSAGE", or
-   "SOURCE: error: PATH: MESSAGE" when there is no location. *)
+(* One error in source, gcc style: "SOURCE:LINE:COLUMN: error: PATH:
+   MESSAGE", or "SOURCE: error: PATH: MESSAGE" when there is no
+   location. *)
+PROCEDURE PutError(source: Ropes.Rope; e: OvaEntities.LoadError);
+BEGIN
+  ErrRope(source);
+  IF e.hasLocation THEN
+    Err.Char(":"); ErrRope(OvaText.Int(e.line)); Err.Char(":"); ErrRope(OvaText.Int(e.column))
+  END;
+  Err.String(": error: "); ErrRope(e.path); Err.String(": "); ErrRope(e.message); Err.Ln
+END PutError;
+
+(* Every required-field error collected for source (PutError), then a
+   summary line. *)
 PROCEDURE ReportErrors(source: Ropes.Rope);
   VAR i: INTEGER; e: OvaEntities.LoadError;
 BEGIN
@@ -99,11 +122,7 @@ BEGIN
   OvaOut.Flush;
   FOR i := 0 TO OvaEntities.errors.n - 1 DO
     e := OvaEntities.errors.items[i](OvaEntities.LoadError);
-    ErrRope(source);
-    IF e.hasLocation THEN
-      Err.Char(":"); ErrRope(OvaText.Int(e.line)); Err.Char(":"); ErrRope(OvaText.Int(e.column))
-    END;
-    Err.String(": error: "); ErrRope(e.path); Err.String(": "); ErrRope(e.message); Err.Ln
+    PutError(source, e)
   END;
   Err.String("ova_fmt: "); ErrRope(OvaText.Int(OvaEntities.errors.n)); Err.String(" error(s) in ");
   ErrRope(source); Err.String("; no output produced"); Err.Ln
@@ -148,6 +167,7 @@ BEGIN
     OvaConfig.Gemtext, OvaConfig.Markdown: OvaCommon.ProcessEntity(e, entityNo)
   | OvaConfig.Hmm: OvaHmm.ProcessEntity(e, entityNo)
   | OvaConfig.Inline: OvaInline.ProcessEntity(e, entityNo)
+  | OvaConfig.Form: OvaForm.ProcessEntity(e)
   | OvaConfig.Terse, OvaConfig.HtmlInRst, OvaConfig.GroffInRst: OvaRst.ProcessEntity(e, entityNo)
   END
 END Write;
@@ -170,7 +190,11 @@ BEGIN
     IF ok THEN d := s.Next(err) END
   END;
   s.Close;
-  IF ~ok THEN Report(source, msg)
+  IF ~ok & (OvaEntities.valueError # NIL) THEN
+    (* An optional field's value of the wrong kind: put as a required
+       field's error is, but on its own, as the Ada version puts it. *)
+    hadErrors := TRUE; OvaOut.Flush; PutError(source, OvaEntities.valueError)
+  ELSIF ~ok THEN Report(source, msg)
   ELSIF err # NIL THEN ReportYaml(source, err)
   ELSIF OvaEntities.errors.n > 0 THEN ReportErrors(source)
   ELSE
@@ -185,7 +209,9 @@ BEGIN
     ProcessOne(NIL, TRUE)
   ELSE
     FOR i := 0 TO OvaCli.files.n - 1 DO ProcessOne(OvaCli.files.items[i], FALSE) END
-  END
+  END;
+  (* -X's output is one JSON array across every file. *)
+  IF OvaConfig.format = OvaConfig.Form THEN OvaForm.Finish END
 END ProcessAll;
 
 PROCEDURE Main;

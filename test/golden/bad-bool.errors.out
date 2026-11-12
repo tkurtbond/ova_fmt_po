@@ -1,2 +1,2 @@
-ova_fmt: error processing test/data/bad-bool.yaml: not a valid boolean: "maybe"
+test/data/bad-bool.yaml:3:13: error: /0/fragment: not a valid boolean: "maybe"
 ==== exit 1 ====

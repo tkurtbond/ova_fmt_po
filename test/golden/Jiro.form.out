@@ -1,0 +1,68 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Jiro",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Armored (Bulletproof Vest)",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Attack (Police Training)",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Combat Expert",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Evasive",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Intimidating",
+        "Abilities Dice6": "+3",
+        "Ability 6": "Minions (Officers)",
+        "Abilities Dice7": "+1",
+        "Ability 7": "Perceptive",
+        "Abilities Dice8": "+2",
+        "Ability 8": "Position of Power",
+        "Abilities Dice9": "+2",
+        "Ability 9": "Strong",
+        "Abilities Dice10": "+1",
+        "Ability 10": "Tough",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Compulsion (Trigger-Happy)",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Dependency (Coffee)",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Jittery",
+        "Weakness Dice 4": "-3",
+        "Weakness 4": "Obsession (Work)",
+        "Weakness Dice 5": "-2",
+        "Weakness 5": "Servitude (Police Force)",
+        "Weakness Dice 6": "-3",
+        "Weakness 6": "Short-Tempered",
+        "Weakness Dice 7": "-1",
+        "Weakness 7": "Stubborn",
+        "Attack 1": "Desk-Side Revolver",
+        "Attack Description 1": "Perks: Effective x2, Ranged; Flaws: Ammunition, Weapon",
+        "roll": "4",
+        "dx": "4",
+        "end": "0",
+        "Attack 2": "Bare Knuckle",
+        "Attack Description 2": "Perks: Stunning; Flaws: Inaccurate",
+        "roll_2": "3",
+        "dx_2": "4",
+        "end_2": "5",
+        "Combat Notes": "NPC Type: Secondary",
+        "Defense": "3",
+        "Health": "30",
+        "Endurance": "20",
+        "TV": "9",
+        "Background": "As the local police captain, Jiro keeps the force running, and the strain shows: he's jumpy, irritable, and always juggling several unrelated jobs at once, sometimes answering phones, barking orders, and doing paperwork all at the same time. His colleagues keep urging him to take time off, but he's never missed a day, and some suspect he's been saving up vacation for decades. Whether from stress or something darker, he tends to aim his gun at anything he considers an unwanted intrusion."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Jiro: Attacks\nDesk-Side Revolver: Jiro's constant companion and likely only friend.\nBare Knuckle: While he prefers \"civilized\" weaponry like his revolver, Jiro can throw a mean punch.\n\nJiro: Character Hooks\nFor all his near-psychotic devotion to the job, Captain Jiro generally does it well. Still, even well-behaved PCs can find themselves under police scrutiny."
+      }
+    }
+  ]
+]

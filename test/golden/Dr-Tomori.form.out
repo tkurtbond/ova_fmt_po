@@ -1,0 +1,43 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Dr. Tomori",
+        "Abilities Dice1": "+5",
+        "Ability 1": "Knowledge (AI)",
+        "Abilities Dice2": "+4",
+        "Ability 2": "Knowledge (Robotics)",
+        "Abilities Dice3": "+4",
+        "Ability 3": "Smart",
+        "Abilities Dice4": "+3",
+        "Ability 4": "Unique Ability (Instant Computer Research)",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Absent-Minded",
+        "Weakness Dice 2": "-3",
+        "Weakness 2": "Unique Weakness (Can Only Travel in Cyberspace)",
+        "Weakness Dice 3": "-3",
+        "Weakness 3": "Unique Weakness (No Physical Form)",
+        "Attack 1": "Litany of Scientific Fact",
+        "Attack Description 1": "Affinity: Erudite; Perks: Fatiguing",
+        "roll": "2",
+        "dx": "1",
+        "end": "0",
+        "Combat Notes": "NPC Type: Secondary",
+        "Defense": "2",
+        "Health": "20",
+        "Endurance": "20",
+        "TV": "1",
+        "Background": "Dr. Heiji Tomori, a groundbreaking artificial-intelligence researcher, was recruited as the lone man at the Malicron Corporation, where his work made the company's long-held dream, Project MIHO, real. Soon afterward he was killed in an accident -- or so everyone believes. Drawing on his expertise with artificial brains, he had copied his entire mind into Malicron's network. Unknown to anyone, he quietly steers the company's work and searches the world's networks for any sign of his beloved Miho."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Dr. Tomori: Lines in Full\n+3 Unique Ability (Instant Computer Research)\n-3 Unique Weakness (Can Only Travel in Cyberspace)\n\nDr. Tomori: Attacks\nLitany of Scientific Fact: Dr. Tomori's exhaustive knowledge can be tiresome to the uninitiated.\n\nDr. Tomori: Character Hooks\nHe fits best in Malicron-centered campaigns (with PCs like Natsuki, Braun, and Miho), though he could turn up in any computer system. His robotics expertise could be crucial, and having no body has its uses."
+      }
+    }
+  ]
+]

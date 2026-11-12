@@ -1,0 +1,114 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": ["Ability 9", "Ability 10", "Ability 11"],
+      "fields": {
+        "Character Name": "Acacia",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Attack (Black Magic)",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Barrier [Perks: Effective; 5 Endurance]",
+        "Abilities Dice4": "+3",
+        "Ability 4": "Beautiful",
+        "Abilities Dice5": "+3",
+        "Ability 5": "Flight",
+        "Abilities Dice6": "+2",
+        "Ability 6": "Incorporeal Form",
+        "Abilities Dice7": "+2",
+        "Ability 7": "Knowledge (Magic)",
+        "Abilities Dice8": "+3",
+        "Ability 8": "Magic, Witchcraft",
+        "Ability 9": "    Break (Frail -2, 10 END)",
+        "Ability 10": "    Impede (Slow -2, 10 END)",
+        "Ability 11": "    Wither (Weak -3, 20 END)",
+        "Abilities Dice12": "+2",
+        "Ability 12": "Vigorous",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Arrogant",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Focus (Flight/Incorporeal Form Require Hat)",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Impulsive",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Love Interest (Saspar)",
+        "Weakness Dice 5": "-2",
+        "Weakness 5": "Overconfident",
+        "Weakness Dice 6": "-3",
+        "Weakness 6": "Servitude (Chaos)",
+        "Weakness Dice 7": "-2",
+        "Weakness 7": "Vulnerability (Light/Holy)",
+        "Attack 1": "Lock Heaven's Door",
+        "Attack Description 1": "Perks: Fatiguing, Unique Perk: Prevents Healing/Recovering Until Battle's End",
+        "roll": "3",
+        "dx": "3",
+        "end": "10",
+        "Attack 2": "Devil's Breath",
+        "Attack Description 2": "Affinity: Dark; Perks: Blinding; Flaws: Feather Blow",
+        "roll_2": "3",
+        "dx_2": "3",
+        "end_2": "15",
+        "Combat Notes": "NPC Type: Heroic",
+        "Defense": "4",
+        "Health": "40",
+        "Endurance": "60",
+        "TV": "14",
+        "Background": "Acacia serves the Order of Chaos, a group bent on reviving ancient magic to usher in an age of discord. Alongside her partner Saspar she carries out whatever the Order asks, armed with witchcraft and a retinue of demons. The Order's goals mean little to her, though: she's devoted to Saspar, and serves Chaos only because he does, hoping one day to be more to him than a partner."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Acacia: Lines in Full\n-2 Focus (Flight/Incorporeal Form Require Hat)\n\nAcacia: Attacks\nLock Heaven's Door (Perks: Fatiguing, Unique Perk: Prevents Healing/Recovering Until Battle's End): A stroke of her finger saps the target's energy and fills them with dread.\nDevil's Breath: A chilling breath clouds the target's mind.\n\nAcacia: Character Hooks\nThe Order of Chaos makes Acacia and Saspar natural enemies for anyone defending the world from evil -- Fukiko and Auren, whose backgrounds both feature a vague darkness to be fought, fit especially well. They can also serve as magical rivals."
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Sazza and Fraz",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Attack [Perks: Effective x3, Ranged; Flaws: Assisted]",
+        "Abilities Dice2": "+3",
+        "Ability 2": "Quick",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Frail",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Weak",
+        "Combat Notes": "NPC Type: Secondary",
+        "Background": "**Sazza and Fraz**, twin lesser demons of mischief in Acacia's service, always appear together. Alone, each is feeble; as a pair they hit startlingly hard."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Sazza and Fraz: Lines in Full\n+2 Attack [Perks: Effective x3, Ranged; Flaws: Assisted]"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "High Fructo Cezar",
+        "Abilities Dice1": "+3",
+        "Ability 1": "Strong",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Tough",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Clumsy",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Slow",
+        "Combat Notes": "NPC Type: Secondary",
+        "Background": "**High Fructo Cezar**, another of Acacia's demons, once held real power, until a single act of kindness cost him his rank and sealed away most of his strength. He resents it, but he stays mostly loyal to Acacia."
+      }
+    }
+  ]
+]

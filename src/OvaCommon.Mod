@@ -322,6 +322,19 @@ BEGIN
   RETURN r
 END FormatSpellLine;
 
+(* The character sheet's shorter "Name (Ability +L, E END)", from the
+   rulebook's Acacia (p. 134), for every spell in the sheet's narrow
+   Abilities column.  raw: as OverrideMark's. *)
+PROCEDURE FormatShortSpellLine*(s: OvaEntities.Spell; raw: BOOLEAN): Rope;
+  VAR r: Rope;
+BEGIN
+  r := s.name; OvaText.Add(r, " ("); r := Ropes.Cat(r, s.ability);
+  r := Ropes.AppendChar(r, " "); r := Ropes.Cat(r, SignedImg(s.level));
+  OvaText.Add(r, ", "); r := Ropes.Cat(r, Marked(s.endurance, OvaEntities.OvEndurance, s.overrides, raw));
+  OvaText.Add(r, " END)");
+  RETURN r
+END FormatShortSpellLine;
+
 (* Abilities or SubItems, joined with ", ". *)
 PROCEDURE JoinSubItems*(l: OvaEntities.List): Rope;
 BEGIN RETURN Join(l, FormatSubItemLine)

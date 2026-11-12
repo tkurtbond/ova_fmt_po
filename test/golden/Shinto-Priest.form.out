@@ -1,0 +1,33 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Shinto Priest",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Intuitive",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Sixth Sense",
+        "Abilities Dice3": "+3",
+        "Ability 3": "Spirit Medium",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Frail",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Pacifist",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Restricted Freedom (Rarely Strays Far from Shrine)",
+        "Weakness Dice 4": "-1",
+        "Weakness 4": "Weak",
+        "Background": "A **Shinto Priest** keeps a little shrine hidden in a corner of town. He's not as nimble as he used to be, but he can still be relied on to handle a troublesome spirit, or to offer some advice."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Shinto Priest: Lines in Full\n-2 Restricted Freedom (Rarely Strays Far from Shrine)"
+      }
+    }
+  ]
+]

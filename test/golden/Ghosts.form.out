@@ -1,0 +1,26 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Ghosts",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Attack (Haunt) [Perks: Fatiguing]",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Flight",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Incorporeal Form",
+        "Abilities Dice4": "+5",
+        "Ability 4": "Resistance (Physical Attacks)",
+        "Abilities Dice5": "+1",
+        "Ability 5": "Telekinesis",
+        "Weakness Dice 1": "-3",
+        "Weakness 1": "Bizarre Appearance (Ghostly)",
+        "Weakness Dice 2": "-3",
+        "Weakness 2": "Restricted Freedom (Place of Death)",
+        "Background": "**Ghosts** are the spirits of the dead, held in this world by unfinished business. On top of their eerie powers, physical attacks can't touch them, so special powers -- or an exorcist -- come in handy."
+      }
+    }
+  ]
+]

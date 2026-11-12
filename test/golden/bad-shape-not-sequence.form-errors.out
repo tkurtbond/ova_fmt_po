@@ -1,0 +1,3 @@
+ova_fmt: error processing test/data/bad-shape-not-sequence.yaml: /0/abilities: not a sequence
+[]
+==== exit 1 ====

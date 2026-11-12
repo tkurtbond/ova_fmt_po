@@ -117,7 +117,7 @@ else
   echo "FAIL - errors on standard input name it (stdin)"; sed 's/^/    /' "$tmp/out"; failed=$((failed + 1))
 fi
 "$prog" <"$data/bad-yaml.yaml" >"$tmp/out" 2>&1
-if [ $? -eq 1 ] && grep -q '^ova_fmt: error processing (stdin): (stdin):4:1: error: flow sequence' "$tmp/out"; then
+if [ $? -eq 1 ] && [ "$(cat "$tmp/out")" = '(stdin):4:1: error: flow sequence without a closing bracket' ]; then
   echo "ok   - a YAML error on standard input"
 else
   echo "FAIL - a YAML error on standard input"; sed 's/^/    /' "$tmp/out"; failed=$((failed + 1))

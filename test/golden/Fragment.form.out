@@ -1,0 +1,65 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Shady Teacher",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Art of Invisibility",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Perceptive",
+        "Abilities Dice3": "+3",
+        "Ability 3": "Smart",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Absent-Minded",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Fussy",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Quirk (Always Wears Sunglasses)",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Secret (To Everybody)",
+        "Background": "The **Shady Teacher** is new to the school but seems to be knowledgeable enough. Yet there's something...off about him. Maybe it's because he wears sunglasses even indoors or that students are suspiciously disappearing from his class..."
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Snobbish Upperclassman",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Beautiful",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Knowledge (Kendo)",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Minions (Her Clique)",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Quick",
+        "Abilities Dice6": "+2",
+        "Ability 6": "Smart",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Arrogant",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Emotionless",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Obsession (Meeting Her Mother's Lofty Expectations)",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Overconfident",
+        "Weakness Dice 5": "-1",
+        "Weakness 5": "Short-Tempered",
+        "Background": "The **Snobbish Upperclassman** is the school's academic darling, the kendo team's star athlete, and easily the most popular girl on campus -- and she knows it. You'd be lucky if she gave you the time of day...or honored you by allowing you to tell it to her."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Snobbish Upperclassman: Lines in Full\n-2 Obsession (Meeting Her Mother's Lofty Expectations)"
+      }
+    }
+  ]
+]

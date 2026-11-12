@@ -1,0 +1,145 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Guards",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Extra",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Sergeants",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Secondary",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Heroes",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Heroic",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Crowd",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1*"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Lone guard",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Extra",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "No TV",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Extra",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Pack",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Combat Notes": "NPC Type: Extra",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1",
+        "Background": "**Pack.** Hunting together."
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Swarm",
+        "Attack 1": "Rifle",
+        "roll": "3",
+        "dx": "3",
+        "end": "0",
+        "Defense": "2",
+        "Health": "10",
+        "Endurance": "10",
+        "TV": "1",
+        "Background": "**Swarm.** No type at all."
+      }
+    }
+  ]
+]

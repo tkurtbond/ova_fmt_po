@@ -1,0 +1,19 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Bastion",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Barrier",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Incorporeal Form",
+        "Defense": "2/4/6*",
+        "Health": "40",
+        "Endurance": "40",
+        "TV": "9"
+      }
+    }
+  ]
+]

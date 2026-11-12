@@ -1,0 +1,4 @@
+test/data/bad-required-int.yaml:4:13: error: /0/abilities/0/level: not a valid integer: "abc"
+ova_fmt: 1 error(s) in test/data/bad-required-int.yaml; no output produced
+[]
+==== exit 1 ====

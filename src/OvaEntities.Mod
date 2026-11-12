@@ -210,6 +210,10 @@ VAR
   (* The message for the Load in progress when a loader returns FALSE. *)
   fatal: Rope;
 
+  (* Instead of fatal, an optional field's value of the wrong kind that
+     ended the last Load, reported as a recorded error is; or NIL. *)
+  valueError-: LoadError;
+
   fluffKeys: ARRAY NFluff, 16 OF CHAR;
   overrideKeys: ARRAY NOverrides, 16 OF CHAR;
 
@@ -320,6 +324,31 @@ BEGIN
   RETURN r
 END NotScalar;
 
+(* Fails the Load in progress with value v of key, in mapping m, of the
+   wrong kind: valueError.  The location is the value's if it is a
+   scalar, and its key's if not, as the Ada binding's Data_Error has
+   it. *)
+PROCEDURE FailValue(m: Fyaml.Node; key: ARRAY OF CHAR; v: Fyaml.Node; text: Rope): BOOLEAN;
+  VAR e: LoadError; it: Fyaml.PairIter; k, x: Fyaml.Node; t: Fyaml.String;
+BEGIN
+  NEW(e);
+  e.message := text;
+  e.path := PathOf(m); e.path := Ropes.AppendChar(e.path, "/"); OvaText.Add(e.path, key);
+  IF v.IsScalar() THEN e.hasLocation := v.Location(e.line, e.column)
+  ELSE
+    e.hasLocation := FALSE;
+    m.Pairs(it);
+    WHILE ~e.hasLocation & it.Next(k, x) DO
+      IF k.IsScalar() THEN
+        t := k.Scalar();
+        IF t^ = key THEN e.hasLocation := k.Location(e.line, e.column) END
+      END
+    END
+  END;
+  valueError := e;
+  RETURN FALSE
+END FailValue;
+
 (* Fails the Load in progress with message "PATH: text". *)
 PROCEDURE FailAt(n: Fyaml.Node; text: ARRAY OF CHAR): BOOLEAN;
 BEGIN
@@ -369,7 +398,7 @@ BEGIN
   s := NIL;
   v := m.Value(key); has := v # NIL;
   IF has THEN
-    IF ~v.IsScalar() THEN fatal := NotScalar(key); RETURN FALSE END;
+    IF ~v.IsScalar() THEN RETURN FailValue(m, key, v, NotScalar(key)) END;
     t := v.Scalar(); s := Ropes.FromString(t^)
   END;
   RETURN TRUE
@@ -378,13 +407,15 @@ END OptString;
 (* The integer for key, if there is such a key, which has says.  A
    malformed one fails the Load. *)
 PROCEDURE OptInteger(m: Fyaml.Node; key: ARRAY OF CHAR; VAR has: BOOLEAN; VAR i: INTEGER): BOOLEAN;
-  VAR v: Fyaml.Node; err: Fyaml.Error;
+  VAR v: Fyaml.Node; err: Fyaml.Error; msg: Rope;
 BEGIN
   i := 0;
   v := m.Value(key); has := v # NIL;
   IF has THEN
-    IF ~v.IsScalar() THEN fatal := NotScalar(key); RETURN FALSE END;
-    IF ~v.IntegerValue(i, err) THEN fatal := ErrorText(err); RETURN FALSE END
+    IF ~v.IsScalar() OR ~v.IntegerValue(i, err) THEN
+      IF v.IsScalar() THEN msg := ErrorText(err) ELSE msg := NotScalar(key) END;
+      RETURN FailValue(m, key, v, msg)
+    END
   END;
   RETURN TRUE
 END OptInteger;
@@ -392,12 +423,14 @@ END OptInteger;
 (* The boolean for key, if there is such a key; b is unchanged if there
    isn't.  A malformed one fails the Load. *)
 PROCEDURE OptBoolean(m: Fyaml.Node; key: ARRAY OF CHAR; VAR b: BOOLEAN): BOOLEAN;
-  VAR v: Fyaml.Node; err: Fyaml.Error;
+  VAR v: Fyaml.Node; err: Fyaml.Error; msg: Rope;
 BEGIN
   v := m.Value(key);
   IF v # NIL THEN
-    IF ~v.IsScalar() THEN fatal := NotScalar(key); RETURN FALSE END;
-    IF ~v.BooleanValue(b, err) THEN fatal := ErrorText(err); RETURN FALSE END
+    IF ~v.IsScalar() OR ~v.BooleanValue(b, err) THEN
+      IF v.IsScalar() THEN msg := ErrorText(err) ELSE msg := NotScalar(key) END;
+      RETURN FailValue(m, key, v, msg)
+    END
   END;
   RETURN TRUE
 END OptBoolean;
@@ -806,12 +839,12 @@ END LoadEntity;
 (* Reads entity e from m, an item of a document's top-level sequence.
    A required field that is missing or malformed is added to errors,
    and loading goes on: check errors.n once the whole file is loaded.
-   Anything else wrong returns FALSE with msg set (never empty) and e
-   NIL; the caller abandons the file. *)
+   Anything else wrong returns FALSE with e NIL, and either valueError
+   set (msg NIL) or msg (never empty); the caller abandons the file. *)
 PROCEDURE Load*(m: Fyaml.Node; VAR e: Entity; VAR msg: Rope): BOOLEAN;
   VAR ok: BOOLEAN;
 BEGIN
-  fatal := NIL; msg := NIL;
+  fatal := NIL; msg := NIL; valueError := NIL;
   NEW(e);
   IF m.IsMapping() THEN ok := LoadEntity(m, e) ELSE ok := FailAt(m, "not a mapping") END;
   IF ~ok THEN msg := fatal; e := NIL END;
@@ -819,7 +852,7 @@ BEGIN
 END Load;
 
 BEGIN
-  Clear(errors); fatal := NIL;
+  Clear(errors); fatal := NIL; valueError := NIL;
   fluffKeys[Concept] := "concept"; fluffKeys[Birthday] := "birthday";
   fluffKeys[Age] := "age"; fluffKeys[Gender] := "gender";
   fluffKeys[Height] := "height"; fluffKeys[Weight] := "weight";

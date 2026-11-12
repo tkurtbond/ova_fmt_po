@@ -52,7 +52,7 @@ PROGSRC := $(wildcard src/*.Mod)
 
 # Test support modules, and test programs (test/<name>.Mod, main modules).
 TESTSUPPORT := test/Check.Mod
-TESTS       := TestText TestOut
+TESTS       := TestText TestOut TestForm
 TESTBINS    := $(TESTS:%=$(OBJ)/%)
 
 # Only building needs the shared modules, so the cleaning targets don't
@@ -61,7 +61,7 @@ ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-
 $(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POCLIBDIR)/*/OC/$(l).library),,$(error the $(l) library is not in $(POCLIBDIR); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
-.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline install uninstall clean testclean
+.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form install uninstall clean testclean
 .NOTPARALLEL:
 
 all: $(PROGRAM)
@@ -115,9 +115,10 @@ valgrind: $(PROGRAM) | $(OBJ)
 	     || ! grep -q 'are still reachable' $$log; then \
 	    echo "FAIL - valgrind $$*"; sed 's/^/    /' $$log; status=1; fi; }; \
 	for f in test/data/*.yaml; do \
-	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O"; do vg $$fl $$f </dev/null; done; \
+	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X"; do vg $$fl $$f </dev/null; done; \
 	done; \
 	vg test/data/*.yaml </dev/null; \
+	vg -X test/data/*.yaml </dev/null; \
 	vg -U '~' <test/data/Options.yaml; \
 	vg </dev/null; \
 	vg -o $(OBJ)/valgrind.out test/data/Karis.yaml </dev/null; \
@@ -143,6 +144,12 @@ GROFF_OUTPUT      := $(BASES:%=$(BUILD)/%.groff.gen.rst) $(BASES:%=$(BUILD)/%.gr
 HMM_OUTPUT        := $(BASES:%=$(BUILD)/%.hmm) $(BASES:%=$(BUILD)/%.compact.hmm) $(BASES:%=$(BUILD)/%.plain.hmm)
 INLINE_OUTPUT     := $(BASES:%=$(BUILD)/%.inline.md)
 
+# The official character sheet's form, filled (-X/--form and
+# ova_form.sh, the Ada repo's copy; PLAN.md, "The official character
+# sheet as PDF").  The blank sheet is Dyskami's and isn't in the repo.
+OVA_SHEET ?= $(HOME)/Reference/RPG/OVA/OVA-Blank-Character-Sheet-Form-Fillable.pdf
+FORM_OUTPUT       := $(BASES:%=$(BUILD)/%.form.pdf)
+
 rst: $(TERSE_OUTPUT)
 pdf: rst $(PDF_OUTPUT)
 gemtext: $(GEMTEXT_OUTPUT)
@@ -151,6 +158,7 @@ html: $(HTML_OUTPUT)
 groff: $(GROFF_OUTPUT)
 hmm: $(HMM_OUTPUT)
 inline: $(INLINE_OUTPUT)
+form: $(FORM_OUTPUT)
 
 $(BUILD):
 	mkdir -p $@
@@ -179,6 +187,10 @@ $(BUILD)/%.plain.hmm: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -m -p $< >$@
 $(BUILD)/%.inline.md: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -i $< >$@
+$(BUILD)/%.fields.json: test/data/%.yaml $(PROGRAM) | $(BUILD)
+	./$(PROGRAM) -X $< >$@
+$(BUILD)/%.form.pdf: $(BUILD)/%.fields.json ova_form.sh
+	./ova_form.sh -s "$(OVA_SHEET)" -o $@ $<
 
 #MS_COLUMNS = -V twocolumns
 $(BUILD)/%.rst.ms.pdf: $(BUILD)/%.gen.rst
@@ -188,22 +200,25 @@ $(BUILD)/%.md.ms.pdf: $(BUILD)/%.md
 
 .PRECIOUS: $(BUILD)/%.gen.rst $(BUILD)/%.rst.ms.pdf $(BUILD)/%.gmi $(BUILD)/%.emp.gmi $(BUILD)/%.md \
   $(BUILD)/%.md.ms.pdf $(BUILD)/%.html.gen.rst $(BUILD)/%.html $(BUILD)/%.hmm $(BUILD)/%.compact.hmm \
-  $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf $(BUILD)/%.inline.md
+  $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf $(BUILD)/%.inline.md \
+  $(BUILD)/%.fields.json $(BUILD)/%.form.pdf
 
 # ---- Installation ----
 #
 # To $(PREFIX)/bin, $HOME/local/bin by default as in the Ada version
 # (its ova_fmt.gpr's Install package), under its own name, beside the
-# Ada ova_fmt.  DESTDIR is prepended, for staging.
+# Ada ova_fmt, with ova_form.sh, which fills the sheet from -X's
+# output.  DESTDIR is prepended, for staging.
 PREFIX ?= $(HOME)/local
 BINDIR ?= $(PREFIX)/bin
 
 install: $(PROGRAM)
 	install -d $(DESTDIR)$(BINDIR)
 	install -m 755 $(PROGRAM) $(DESTDIR)$(BINDIR)/$(PROGRAM)
+	install -m 755 ova_form.sh $(DESTDIR)$(BINDIR)/ova_form.sh
 
 uninstall:
-	rm -f $(DESTDIR)$(BINDIR)/$(PROGRAM)
+	rm -f $(DESTDIR)$(BINDIR)/$(PROGRAM) $(DESTDIR)$(BINDIR)/ova_form.sh
 
 clean: testclean
 	rm -rf $(OBJ) $(PROGRAM)

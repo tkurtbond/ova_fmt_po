@@ -31,6 +31,8 @@ to what ova_fmt needs, plus `ToUpper`.
 | `OvaCommon` | `Ova_Fmt.Format_Common`, and `Format_Gemini` and `Format_Markdown`, which only call its `Process_Entity` |
 | `OvaRst` | `Ova_Fmt.Format_Rst` |
 | `OvaHmm` | `Ova_Fmt.Format_Hmm` |
+| `OvaSheetMap` | `Ova_Fmt.Sheet_Map` |
+| `OvaForm` | `Ova_Fmt.Format_Form` |
 | `OvaText` | `Ada.Strings`, `Ada.Characters.Handling` as used |
 | `OvaOut` | `Ada.Text_IO`'s current output |
 
@@ -54,6 +56,16 @@ to what ova_fmt needs, plus `ToUpper`.
   'integer out of range: "x"', 'not a valid boolean: "x"'). A
   non-scalar value is checked here, to say 'key "K" is not a scalar
   value' as the Ada binding does.
+- **Error lines are gcc style** (the user, 2026-11-12), with the file
+  named once. A required field's error, an optional field's value of
+  the wrong kind (`OvaEntities.valueError`, the Ada
+  Missing_Key/Data_Error) and a YAML syntax error are all
+  `FILE:LINE:COLUMN: error: TEXT` (`FILE: error: TEXT` with no
+  location), with no `ova_fmt: error processing FILE: ` before them.
+  A wrong-kind value's location is the value's if it is a scalar, and
+  its key's if not, as alibfyaml's Data_Error has it. Other errors
+  (a shape, no top-level sequence, a file that can't be opened) keep
+  `ova_fmt: error processing FILE: `. In both versions.
 - **Whole files.** As in the Ada version, every document and entity of
   a file is loaded before any of it is written, so a file with any
   problem writes nothing.
@@ -729,7 +741,7 @@ whose Background starts "Fukiko: Lines in Full". `ova_fmt_po -X
 Party.yaml | ova_form.sh -o party.pdf` gives one PDF, each
 character's pages in turn.
 
-### What `-X` puts where [done in Ada]
+### What `-X` puts where [done]
 
 Settled while writing `Sheet_Map` and `Format_Form` (2026-11-12),
 where the plan above left it open. Each is checked on the fixtures
@@ -811,6 +823,35 @@ with `make form` in the Ada repo.
   `-o` with standard input, and an empty array is an error ("no
   fills").
 
+### The port of `-X` [done]
+
+Ported 2026-11-12, byte for byte: every `-X` golden case passes.
+
+- **Golden cases** (`test/golden.cases`, "-X"): every character
+  fixture; four files as one array (`form-all`); none at all
+  (`form-none`, `[]` and exit 1, as `edge-empty` and `Broken` give
+  nothing); standard input; `-o`; and every `bad-*` and `edge-*`
+  fixture.
+- **`OvaSheetMap`** keeps the Ada vectors as a `Seq` of `Thing`s
+  taken out with a type guard. poc can't return a record, so `Place`
+  and `Fill` give theirs through a `VAR` parameter.
+- **`OvaForm`** measures on flat copies (`OvaText.Chars`), and a cut
+  is a count of bytes kept, which is the Ada index of the cut's last
+  byte, so the arithmetic is the Ada version's unchanged. Under `-OC`
+  `LEN` is a `LONGINT`, hence the `SHORT`s. The width tables are
+  filled at initialization from strings of numbers, each under the
+  255-character literal limit.
+- **`TestForm`** checks `FitCut`'s edges (a wide word, an LF, bold
+  widths, UTF-8), `Reflow` and the escapes no fixture holds (`\b`,
+  `\f`, `\u00xx`). Planting a zero width for a UTF-8 lead byte and
+  dropping `\b` each failed a check.
+- **`ova_form.sh`** is the Ada repo's copy, unchanged (its header
+  says the two must stay the same). `make install` installs it beside
+  `ova_fmt_po`, and `make uninstall` removes it; the Ada version
+  doesn't install it.
+- **`make valgrind`** runs `-X` on every fixture and on all of them
+  at once.
+
 ### Build and tests
 
 - `make sheet`: `build/%.sheet.pdf` from each fixture, by the pipeline
@@ -850,9 +891,9 @@ The Ada version comes first, as this repo's rule says (the user,
 
 1. Ada first: `Sheet_Map` and `Format_Form`, with golden files, and
    `make form` there. Then port them here (`OvaSheetMap`, `OvaForm`)
-   and check byte for byte. [Ada done, 2026-11-12: `-X`, `ova_form.sh`
-   and `make form`, all 52 fixtures building. Next: the golden cases
-   and the port.]
+   and check byte for byte. [done, 2026-11-12: `-X`, `ova_form.sh`
+   and `make form` in both repos, all 52 fixtures building; the golden
+   cases and the port, "The port of `-X`".]
 2. Ada first: `Format_Sheet`, with the field placement checked against
    rendered pages, then continuation pages and the portrait. Then port
    `OvaSheet` here.
@@ -860,6 +901,15 @@ The Ada version comes first, as this repo's rule says (the user,
    the new paths.
 
 ## Open questions
+
+- ~~**alibfyaml's location in the Ada errors** (found 2026-11-12).~~
+  Since alibfyaml `717b71e`, an optional field's value of the wrong
+  kind came out of the Ada version with its location,
+  `ova_fmt: error processing FILE: 3:13: /0/fragment: not a valid
+  boolean: "maybe"`, and the port had none. Decided (the user,
+  2026-11-12): keep the location, in gcc style with the file named
+  once, a YAML syntax error's too, in both versions (Decisions, "Error
+  lines are gcc style").
 
 - **The official sheet as PDF** (above), to be decided before work
   starts:

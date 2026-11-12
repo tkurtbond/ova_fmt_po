@@ -1,0 +1,50 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "All Three",
+        "Defense": "2*/3*/4*",
+        "Health": "40",
+        "Endurance": "40"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "No Third",
+        "Defense": "2/3",
+        "Health": "40",
+        "Endurance": "40"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Both Names",
+        "Defense": "2/3*",
+        "Health": "40",
+        "Endurance": "40"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Free Form",
+        "Defense": "2 (4 vs. magic)/*/*",
+        "Health": "40",
+        "Endurance": "40"
+      }
+    }
+  ]
+]

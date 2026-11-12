@@ -1,0 +1,31 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Rock & Roll <Star>",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Attack (Sword & Shield <Reinforced>)",
+        "Abilities Dice2": "+3",
+        "Ability 2": "Knowledge (Tom & Jerry <Cartoons>)",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Obsession (Cats & Dogs)",
+        "Attack 1": "Slash & Burn",
+        "roll": "4",
+        "dx": "3",
+        "end": "5",
+        "Defense": "4",
+        "Health": "30",
+        "Endurance": "20"
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Rock & Roll <Star>: Attacks\nSlash & Burn: A wild <swing> that cuts & burns everything nearby."
+      }
+    }
+  ]
+]

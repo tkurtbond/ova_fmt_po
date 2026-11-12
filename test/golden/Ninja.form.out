@@ -1,0 +1,29 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Ninja",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Art of Invisibility",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Attack (Katana)",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Quick",
+        "Weakness Dice 1": "-3",
+        "Weakness 1": "Code of Conduct (Will Die Before Revealing Information)",
+        "Background": "It doesn't matter that a **Ninja** and his comrades go down easily and by the dozen, or that years of assassin's training count for little. The work is his whole life, and no odds, however hopeless, will make him betray it."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Ninja: Lines in Full\n-3 Code of Conduct (Will Die Before Revealing Information)"
+      }
+    }
+  ]
+]

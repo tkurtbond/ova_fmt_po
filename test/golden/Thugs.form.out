@@ -1,0 +1,20 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Thugs",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Attack (Length of Chain)",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Combat Expert",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Dense",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Easily Distracted",
+        "Background": "**Thugs** haunt every dark alley and make for the classic quick fight. Maybe life dealt them a bad hand, but let's be honest: they exist for the PCs to beat up."
+      }
+    }
+  ]
+]

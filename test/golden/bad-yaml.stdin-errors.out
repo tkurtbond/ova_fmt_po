@@ -1,3 +1,2 @@
-ova_fmt: error processing (stdin): (stdin):4:1: error: flow sequence without a closing bracket
-
+(stdin):4:1: error: flow sequence without a closing bracket
 ==== exit 1 ====

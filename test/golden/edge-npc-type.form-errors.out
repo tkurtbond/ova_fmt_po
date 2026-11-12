@@ -1,0 +1,43 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Edge Type",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Tough",
+        "Combat Notes": "NPC Type: Secondary",
+        "Defense": "2",
+        "Health": "40",
+        "Endurance": "40"
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Edge Type: Character Hooks\nTwo lines of hooks."
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Edge Fragment",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Tough",
+        "Combat Notes": "NPC Type: Extra"
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Edge Fragment: Character Hooks\nHooks."
+      }
+    }
+  ]
+]

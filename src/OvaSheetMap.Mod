@@ -1,0 +1,328 @@
+MODULE OvaSheetMap; (* An entity mapped onto the official character sheet's slots *)
+
+(* The Ada Ova_Fmt.Sheet_Map: what goes on which copy of page 1 of the
+   official OVA character sheet, which has 17 Ability lines, 17
+   Weakness lines and 4 attack boxes (PLAN.md, "The official character
+   sheet as PDF").  It measures nothing; OvaForm (-X) does.
+
+   The rows follow the rulebook's Sample Characters:
+   - an Ability's Transformation rows (its granted Abilities, then its
+     granted Weaknesses) and its spells go under it, in the Abilities
+     column;
+   - a parent and its rows are one block, kept together: a block that
+     doesn't fit in what is left of the column moves whole to the next
+     copy, and only one taller than the column is split, the next copy
+     repeating the parent as "Name (continued)";
+   - a Companion or Vehicle is one row in its parent's column, and its
+     own boxes go on copies of page 1 of their own, titled "Arasuni
+     (Karis's Companion)" -- a Fragment one too.
+   What isn't a slot (the prose, an item's note, an attack's
+   description) is left to the format.
+
+   The Ada vectors are a Seq here, of Things that a type guard takes
+   out.  Rows, attacks and pages are made once and never changed, so
+   the copies of page 1 can share them. *)
+
+IMPORT OvaCommon, OvaEntities, OvaText, Ropes;
+
+CONST
+  AbilitySlots* = 17;
+  WeaknessSlots* = 17;
+  AttackSlots* = 4;
+
+  (* A row's kind (the Ada Row_Kind).  Item: an Ability or Weakness of
+     the sheet's owner, its level in the Dice column.  Sub: one granted
+     by the Item above it (a Transformation's), its level in the name
+     column.  Spell: a spell of the Item above it, with no level. *)
+  Item* = 0; Sub* = 1; Spell* = 2;
+
+TYPE
+  Rope = Ropes.Rope;
+
+  Thing* = POINTER TO ThingDesc;
+  ThingDesc* = RECORD END;
+  Things = POINTER TO ARRAY OF Thing;
+
+  (* A growable list: items[0 .. n-1].  Clear one before its first
+     use. *)
+  Seq* = RECORD
+    items-: Things;
+    n-: INTEGER
+  END;
+
+  (* level is "+2", or NIL for a Spell or a repeated parent.  note is
+     the item's note: as "Barrier: note text", for the format to place
+     off the row, since the rulebook doesn't print it there. *)
+  Row* = POINTER TO RowDesc;
+  RowDesc* = RECORD (ThingDesc)
+    kind-: INTEGER;
+    level-, text-: Rope;
+    hasNote-: BOOLEAN;
+    note-: Rope
+  END;
+
+  (* clause is "Affinity: Love; Perks: Ranged", or NIL if the attack
+     has none: never empty when it has one, so it needs no flag. *)
+  AttackSlot* = POINTER TO AttackSlotDesc;
+  AttackSlotDesc* = RECORD (ThingDesc)
+    name-, clause-, roll-, dx-, endurance-: Rope;
+    hasDescription-: BOOLEAN;
+    description-: Rope
+  END;
+
+  (* One copy of page 1.  owner names whose boxes these are ("Fukiko",
+     "Arasuni"), title is the Character Name field.  The Combat Stats
+     boxes are on the owner's first copy only.  threatValue and npcType
+     are NIL when there is none, as the Ada "" is: neither is ever
+     empty when there is one. *)
+  Page* = POINTER TO PageDesc;
+  PageDesc* = RECORD (ThingDesc)
+    owner-, title-: Rope;
+    continued-: BOOLEAN;                  (* not the owner's first copy *)
+    hasPlayer-: BOOLEAN; player-: Rope;
+    abilities-: Seq;                      (* of Row, at most AbilitySlots *)
+    weaknesses-: Seq;                     (* of Row, at most WeaknessSlots *)
+    attacks-: Seq;                        (* of AttackSlot, at most AttackSlots *)
+    hasStats-: BOOLEAN;
+    defense-, health-, endurance-, threatValue-: Rope;
+    npcType-: Rope;
+    hasCombatNotes-: BOOLEAN; combatNotes-: Rope
+  END;
+
+  (* A parent row and the rows under it, kept together, with the parent
+     as it is repeated if the block has to be split. *)
+  Block = POINTER TO BlockDesc;
+  BlockDesc = RECORD (ThingDesc)
+    rows: Seq;                            (* of Row *)
+    continued: Row
+  END;
+
+  (* One column's rows on one copy of page 1. *)
+  Column = POINTER TO ColumnDesc;
+  ColumnDesc = RECORD (ThingDesc)
+    rows: Seq                             (* of Row *)
+  END;
+
+(* ---- Seq ---- *)
+
+PROCEDURE Clear*(VAR s: Seq);
+BEGIN s.items := NIL; s.n := 0
+END Clear;
+
+PROCEDURE Append*(VAR s: Seq; t: Thing);
+  VAR a: Things; i: INTEGER;
+BEGIN
+  IF s.items = NIL THEN NEW(s.items, 8); s.n := 0
+  ELSIF s.n = LEN(s.items^) THEN
+    NEW(a, 2 * s.n);
+    FOR i := 0 TO s.n - 1 DO a[i] := s.items[i] END;
+    s.items := a
+  END;
+  s.items[s.n] := t; INC(s.n)
+END Append;
+
+(* ---- Rows ---- *)
+
+PROCEDURE NewRow(kind: INTEGER; level, text: Rope; hasNote: BOOLEAN; note: Rope): Row;
+  VAR r: Row;
+BEGIN
+  NEW(r); r.kind := kind; r.level := level; r.text := text; r.hasNote := hasNote; r.note := note;
+  RETURN r
+END NewRow;
+
+(* "Name (detail): note", or NIL without a note. *)
+PROCEDURE NoteOf(s: OvaEntities.SubItem): Rope;
+  VAR r: Rope;
+BEGIN
+  IF ~s.hasNote THEN RETURN NIL END;
+  r := OvaCommon.NameDetail(s.name, s.hasDetail, s.detail); OvaText.Add(r, ": ");
+  RETURN Ropes.Cat(r, s.note)
+END NoteOf;
+
+(* "Name (detail)", then (half TV) with -O, then the bracket: an
+   Ability's or a SubItem's text. *)
+PROCEDURE SubItemText(s: OvaEntities.SubItem): Rope;
+  VAR r: Rope;
+BEGIN
+  r := OvaCommon.NameDetail(s.name, s.hasDetail, s.detail);
+  r := Ropes.Cat(r, OvaCommon.HalfTVText(s));
+  RETURN Ropes.Cat(r, OvaCommon.FormatModifiersBracket(s, TRUE))
+END SubItemText;
+
+PROCEDURE SubItemRow(s: OvaEntities.SubItem; kind: INTEGER): Row;
+BEGIN RETURN NewRow(kind, OvaCommon.SignedImg(s.level), SubItemText(s), s.hasNote, NoteOf(s))
+END SubItemRow;
+
+PROCEDURE Single(r: Row): Block;
+  VAR b: Block;
+BEGIN
+  NEW(b); Clear(b.rows); Append(b.rows, r); b.continued := r;
+  RETURN b
+END Single;
+
+(* The Ability's own row, then its Transformation's granted Abilities
+   and Weaknesses, then its spells. *)
+PROCEDURE AbilityBlock(a: OvaEntities.Ability): Block;
+  VAR b: Block; name, text: Rope; i: INTEGER;
+BEGIN
+  NEW(b); Clear(b.rows);
+  name := OvaCommon.NameDetail(a.name, a.hasDetail, a.detail);
+  Append(b.rows, NewRow(Item, OvaCommon.SignedImg(a.level), SubItemText(a), a.hasNote, NoteOf(a)));
+  FOR i := 0 TO a.subAbilities.n - 1 DO
+    Append(b.rows, SubItemRow(a.subAbilities.items[i](OvaEntities.SubItem), Sub))
+  END;
+  FOR i := 0 TO a.subWeaknesses.n - 1 DO
+    Append(b.rows, SubItemRow(a.subWeaknesses.items[i](OvaEntities.SubItem), Sub))
+  END;
+  FOR i := 0 TO a.spells.n - 1 DO
+    Append(b.rows, NewRow(Spell, NIL,
+      OvaCommon.FormatShortSpellLine(a.spells.items[i](OvaEntities.Spell), TRUE), FALSE, NIL))
+  END;
+  text := name; OvaText.Add(text, " (continued)");
+  b.continued := NewRow(Item, NIL, text, FALSE, NIL);
+  RETURN b
+END AbilityBlock;
+
+(* ---- Place ---- *)
+
+(* Ends the current column, cur, appending it to columns. *)
+PROCEDURE NextColumn(VAR columns: Seq; VAR cur: Column);
+BEGIN Append(columns, cur); NEW(cur); Clear(cur.rows)
+END NextColumn;
+
+(* Blocks into columns of slots rows, one column per copy of page 1,
+   keeping each block together when it can. *)
+PROCEDURE Place(blocks: Seq; slots: INTEGER; VAR columns: Seq);
+  VAR cur: Column; b: Block; i, j: INTEGER;
+BEGIN
+  Clear(columns); NEW(cur); Clear(cur.rows);
+  FOR i := 0 TO blocks.n - 1 DO
+    b := blocks.items[i](Block);
+    IF b.rows.n <= slots - cur.rows.n THEN
+      FOR j := 0 TO b.rows.n - 1 DO Append(cur.rows, b.rows.items[j]) END
+    ELSIF b.rows.n <= slots THEN
+      NextColumn(columns, cur);
+      FOR j := 0 TO b.rows.n - 1 DO Append(cur.rows, b.rows.items[j]) END
+    ELSE
+      (* Taller than the column: split, starting here unless there isn't
+         room for the parent and one row under it. *)
+      IF (slots - cur.rows.n < 2) & (cur.rows.n > 0) THEN NextColumn(columns, cur) END;
+      FOR j := 0 TO b.rows.n - 1 DO
+        IF cur.rows.n = slots THEN NextColumn(columns, cur); Append(cur.rows, b.continued) END;
+        Append(cur.rows, b.rows.items[j])
+      END
+    END
+  END;
+  IF cur.rows.n > 0 THEN NextColumn(columns, cur) END
+END Place;
+
+(* ---- Copies of page 1 ---- *)
+
+PROCEDURE AttackOf(a: OvaEntities.Attack): AttackSlot;
+  VAR s: AttackSlot; clause: Rope;
+BEGIN
+  NEW(s);
+  s.name := a.name;
+  (* Without the parentheses: the box is the attack's own. *)
+  clause := OvaCommon.FormatAttackClause(a);
+  s.clause := Ropes.Substring(clause, 1, Ropes.Length(clause) - 2);
+  s.roll := OvaCommon.Marked(OvaCommon.NumberImg(a.roll), OvaEntities.OvRoll, a.overrides, TRUE);
+  s.dx := OvaCommon.Marked(a.dx, OvaEntities.OvDx, a.overrides, TRUE);
+  s.endurance := OvaCommon.Marked(OvaCommon.TrimImg(a.endurance), OvaEntities.OvEndurance, a.overrides, TRUE);
+  s.hasDescription := a.hasDescription; s.description := a.description;
+  RETURN s
+END AttackOf;
+
+PROCEDURE Max(a, b: INTEGER): INTEGER;
+BEGIN
+  IF a > b THEN RETURN a END;
+  RETURN b
+END Max;
+
+PROCEDURE Min(a, b: INTEGER): INTEGER;
+BEGIN
+  IF a < b THEN RETURN a END;
+  RETURN b
+END Min;
+
+(* The owner's copies, appended to pages: the first titled title, the
+   rest title " (continued)".  npcType is NIL for none. *)
+PROCEDURE AddCopies(VAR pages: Seq; owner, title: Rope; hasPlayer: BOOLEAN; player: Rope;
+                    abilities, weaknesses: Seq; combat: OvaEntities.Combat; npcType: Rope);
+  VAR aColumns, wColumns: Seq; p: Page; attacks, copies, n, i: INTEGER;
+BEGIN
+  Place(abilities, AbilitySlots, aColumns);
+  Place(weaknesses, WeaknessSlots, wColumns);
+  IF combat.hasCombat THEN attacks := combat.attacks.n ELSE attacks := 0 END;
+  copies := Max(1, Max(Max(aColumns.n, wColumns.n), (attacks + AttackSlots - 1) DIV AttackSlots));
+  FOR n := 1 TO copies DO
+    NEW(p);
+    p.owner := owner;
+    p.continued := n > 1;
+    IF n = 1 THEN p.title := title
+    ELSE p.title := title; OvaText.Add(p.title, " (continued)")
+    END;
+    p.hasPlayer := FALSE; p.player := NIL;
+    IF n = 1 THEN p.hasPlayer := hasPlayer; p.player := player END;
+    Clear(p.abilities); Clear(p.weaknesses); Clear(p.attacks);
+    IF n <= aColumns.n THEN p.abilities := aColumns.items[n - 1](Column).rows END;
+    IF n <= wColumns.n THEN p.weaknesses := wColumns.items[n - 1](Column).rows END;
+    FOR i := (n - 1) * AttackSlots TO Min(n * AttackSlots, attacks) - 1 DO
+      Append(p.attacks, AttackOf(combat.attacks.items[i](OvaEntities.Attack)))
+    END;
+    p.hasStats := FALSE; p.hasCombatNotes := FALSE;
+    p.defense := NIL; p.health := NIL; p.endurance := NIL; p.threatValue := NIL; p.combatNotes := NIL;
+    IF (n = 1) & combat.hasCombat THEN
+      p.hasStats := TRUE;
+      p.defense := OvaCommon.DefenseText(combat, TRUE);
+      p.health := OvaCommon.Marked(OvaCommon.TrimImg(combat.health), OvaEntities.OvHealth, combat.overrides, TRUE);
+      p.endurance := OvaCommon.Marked(OvaCommon.TrimImg(combat.endurance), OvaEntities.OvEndurance,
+        combat.overrides, TRUE);
+      IF combat.hasThreatValue THEN
+        p.threatValue := OvaCommon.Marked(OvaCommon.TrimImg(combat.threatValue), OvaEntities.OvThreatValue,
+          combat.overrides, TRUE)
+      END;
+      p.hasCombatNotes := combat.hasNotes; p.combatNotes := combat.notes
+    END;
+    p.npcType := NIL;
+    IF n = 1 THEN p.npcType := npcType END;
+    Append(pages, p)
+  END
+END AddCopies;
+
+(* pages: e's copies of page 1, of Page: its own first (at least one, titled
+   with its name; any more "Name (continued)"), then each Companion's
+   or Vehicle's, in the order of the Abilities granting them.  The
+   numbers are as in raw tables: ASCII "*" for an override. *)
+PROCEDURE Fill*(e: OvaEntities.Entity; VAR pages: Seq);
+  VAR abilities, weaknesses, sAbl, sWk: Seq; a: OvaEntities.Ability; w: OvaEntities.Weakness;
+    se: OvaEntities.SubEntity; title: Rope; i, j: INTEGER;
+BEGIN
+  Clear(pages); Clear(abilities); Clear(weaknesses);
+  FOR i := 0 TO e.abilities.n - 1 DO Append(abilities, AbilityBlock(e.abilities.items[i](OvaEntities.Ability))) END;
+  FOR i := 0 TO e.weaknesses.n - 1 DO
+    w := e.weaknesses.items[i](OvaEntities.Weakness);
+    Append(weaknesses, Single(NewRow(Item, OvaCommon.SignedImg(w.level),
+      OvaCommon.NameDetail(w.name, w.hasDetail, w.detail), FALSE, NIL)))
+  END;
+  AddCopies(pages, e.name, e.name, e.hasPlayer, e.player, abilities, weaknesses, e.combat,
+    OvaCommon.NpcTypeText(e));
+
+  FOR i := 0 TO e.abilities.n - 1 DO
+    a := e.abilities.items[i](OvaEntities.Ability);
+    IF a.subEntity # NIL THEN
+      se := a.subEntity;
+      Clear(sAbl); Clear(sWk);
+      FOR j := 0 TO se.abilities.n - 1 DO Append(sAbl, Single(SubItemRow(se.abilities.items[j](OvaEntities.SubItem), Item))) END;
+      FOR j := 0 TO se.weaknesses.n - 1 DO Append(sWk, Single(SubItemRow(se.weaknesses.items[j](OvaEntities.SubItem), Item))) END;
+      (* Nothing of its own to show: its parent's row names it. *)
+      IF (sAbl.n > 0) OR (sWk.n > 0) OR se.combat.hasCombat THEN
+        title := se.name; OvaText.Add(title, " ("); title := Ropes.Cat(title, e.name);
+        OvaText.Add(title, "'s "); title := Ropes.Cat(title, se.label); title := Ropes.AppendChar(title, ")");
+        AddCopies(pages, se.name, title, FALSE, NIL, sAbl, sWk, se.combat, NIL)
+      END
+    END
+  END
+END Fill;
+
+END OvaSheetMap.

@@ -10,9 +10,10 @@ IMPORT Ropes;
 
 CONST
   (* Output formats (the Ada Output_Format).  Terse (reST prose) is the
-     default; -g, -M, -H, -G, -m and -i choose the others, and the last one
-     given wins. *)
+     default; -g, -M, -H, -G, -m, -i and -X choose the others, and the last
+     one given wins. *)
   Terse* = 0; Gemtext* = 1; Markdown* = 2; HtmlInRst* = 3; GroffInRst* = 4; Hmm* = 5; Inline* = 6;
+  Form* = 7;
 
 VAR
   format*: INTEGER;

@@ -1,0 +1,37 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Beat Cop",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Attack (Pistol)",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Combat Expert",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Knowledge (The City In and Out)",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Knowledge (Writing)",
+        "Abilities Dice5": "+1",
+        "Ability 5": "Perceptive",
+        "Abilities Dice6": "+2",
+        "Ability 6": "Position of Power (Police Officer)",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Secret (Writing Aspirations)",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Servitude (Police Department and the Common Good)",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Soft Spot (Dessert)",
+        "Background": "The **Beat Cop** is the neighborhood's friendly face: young, new to the force, and always glad to give directions or lend a hand. On quiet shifts he jots down notes for the crime novel he's writing, as long as his boss doesn't catch him at it."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Beat Cop: Lines in Full\n-2 Servitude (Police Department and the Common Good)"
+      }
+    }
+  ]
+]

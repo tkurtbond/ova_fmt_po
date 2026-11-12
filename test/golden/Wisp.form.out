@@ -1,0 +1,17 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Wisp",
+        "Abilities Dice1": "+3",
+        "Ability 1": "Incorporeal Form",
+        "Defense": "2/6*",
+        "Health": "40",
+        "Endurance": "40",
+        "TV": "9"
+      }
+    }
+  ]
+]

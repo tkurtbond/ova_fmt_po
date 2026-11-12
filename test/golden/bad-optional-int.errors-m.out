@@ -1,2 +1,2 @@
-ova_fmt: error processing test/data/bad-optional-int.yaml: not a valid integer: "zz"
+test/data/bad-optional-int.yaml:6:18: error: /0/abilities/0/endurance: not a valid integer: "zz"
 ==== exit 1 ====

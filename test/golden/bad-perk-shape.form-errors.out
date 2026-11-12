@@ -1,0 +1,3 @@
+ova_fmt: error processing test/data/bad-perk-shape.yaml: unrecognized Perk/Flaw shape
+[]
+==== exit 1 ====

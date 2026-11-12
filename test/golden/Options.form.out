@@ -1,0 +1,26 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "All Options",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Quick",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Clumsy"
+      }
+    }
+  ],
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "One Option",
+        "Abilities Dice1": "+3",
+        "Ability 1": "Strong"
+      }
+    }
+  ]
+]

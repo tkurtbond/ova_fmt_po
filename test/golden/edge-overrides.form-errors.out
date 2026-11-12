@@ -1,0 +1,20 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Edge Overrides",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Flight",
+        "Attack 1": "Punch",
+        "roll": "2",
+        "dx": "1",
+        "end": "0",
+        "Defense": "2",
+        "Health": "20",
+        "Endurance": "30"
+      }
+    }
+  ]
+]

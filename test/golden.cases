@@ -42,6 +42,14 @@ ada    inline      [A-Z]*   -i
 ada    inline-n-O  [A-Z]*   -i -n -O
 ada:all inline-all @(Karis|Fragment|Vehicle)   -i
 
+# ---- -X: the sheet's form fields as JSON, one array across every file ----
+ada    form        [A-Z]*   -X
+ada:all form-all   @(Fukiko|Karis|Fragment|Vehicle)   -X
+ada:all form-none  @(edge-empty|Broken)   -X
+ada:stdin form-stdin  @(Karis|Broken)   -X
+ada:file form-o-file  @(Fukiko)   -X
+ada    form-errors @(bad-*|edge-*)   -X
+
 # ---- Options ----
 ada    terse-O     [A-Z]*   -O
 ada    terse-n     [A-Z]*   -n

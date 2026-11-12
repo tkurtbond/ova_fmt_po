@@ -1,0 +1,26 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Wild Beast",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Attack (Tooth & Claw)",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Intimidating",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Quick",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Easily Distracted",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Short-Tempered",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Stubborn",
+        "Background": "Every kind of **Wild Beast** roams beyond the bustle of human society, some bigger and some faster. Take these as a starting point for exciting run-ins with nature."
+      }
+    }
+  ]
+]

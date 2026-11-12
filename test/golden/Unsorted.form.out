@@ -1,0 +1,71 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": ["Ability 5", "Ability 6", "Ability 9", "Ability 10", "Ability 11", "Ability 12", "Ability 13"],
+      "fields": {
+        "Character Name": "Unsorted",
+        "Abilities Dice1": "+3",
+        "Ability 1": "Attack (Sword) [Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon]",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Combat Expert",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Companion (Sidekick)",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Magic, Testing",
+        "Ability 5": "    Zephyr Blast (Attack +2, 5 END)",
+        "Ability 6": "    Aegis Ward (Combat Expert +1, 3 END)",
+        "Abilities Dice7": "+2",
+        "Ability 7": "Quick",
+        "Abilities Dice8": "+1",
+        "Ability 8": "Transformation",
+        "Ability 9": "    +1 Armored",
+        "Ability 10": "    +1 Evasive",
+        "Ability 11": "    +2 Strong",
+        "Ability 12": "    -1 Bizarre Appearance",
+        "Ability 13": "    -1 Slow",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Clumsy",
+        "Weakness Dice 2": "-2",
+        "Weakness 2": "Obsession (Winning)",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Short-Tempered",
+        "Attack 1": "Wild Swing",
+        "Attack Description 1": "Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon",
+        "roll": "4",
+        "dx": "3",
+        "end": "0",
+        "Attack 2": "First Strike",
+        "roll_2": "3",
+        "dx_2": "2",
+        "end_2": "0",
+        "Defense": "4",
+        "Health": "20",
+        "Endurance": "15",
+        "TV": "5"
+      }
+    },
+    {
+      "pages": [1],
+      "sub": [],
+      "fields": {
+        "Character Name": "Sidekick (Unsorted's Companion)",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Tough",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Frail",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Quirk"
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Unsorted: Lines in Full\n+3 Attack (Sword) [Perks: Armor Piercing, Ranged; Flaws: Ineffective, Weapon]"
+      }
+    }
+  ]
+]

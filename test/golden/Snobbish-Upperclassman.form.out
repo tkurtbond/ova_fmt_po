@@ -1,0 +1,41 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Snobbish Upperclassman",
+        "Abilities Dice1": "+2",
+        "Ability 1": "Agile",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Beautiful",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Knowledge (Kendo)",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Minions (Her Clique)",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Quick",
+        "Abilities Dice6": "+2",
+        "Ability 6": "Smart",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Arrogant",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Emotionless",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Obsession (Meeting Her Mother's Lofty Expectations)",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Overconfident",
+        "Weakness Dice 5": "-1",
+        "Weakness 5": "Short-Tempered",
+        "Background": "The **Snobbish Upperclassman** is top of her class, star of the kendo team, and the most popular girl in school, and she's well aware of it. Don't expect her to give you the time of day."
+      }
+    },
+    {
+      "pages": [2],
+      "sub": [],
+      "fields": {
+        "Background": "Snobbish Upperclassman: Lines in Full\n-2 Obsession (Meeting Her Mother's Lofty Expectations)"
+      }
+    }
+  ]
+]

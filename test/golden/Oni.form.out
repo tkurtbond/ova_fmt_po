@@ -1,0 +1,28 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Oni",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Attack (Iron Club)",
+        "Abilities Dice2": "+2",
+        "Ability 2": "Intimidating",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Strong",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Tough",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Awkward Size (Big)",
+        "Weakness Dice 2": "-3",
+        "Weakness 2": "Bizarre Appearance",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Short-Tempered",
+        "Weakness Dice 4": "-1",
+        "Weakness 4": "Slow",
+        "Background": "**Oni** are Japanese ogres with horned, demonic faces and unearthly red or blue skin, said to carry iron clubs and possess tremendous strength. Not every oni is evil, but inviting one to tea to find out may be unwise."
+      }
+    }
+  ]
+]

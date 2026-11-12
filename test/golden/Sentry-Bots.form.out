@@ -1,0 +1,28 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Sentry Bots",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Armored",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Attack (Laser Rifle)",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Combat Expert",
+        "Abilities Dice4": "+2",
+        "Ability 4": "Heightened Sense (Vision)",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Quick",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Clumsy",
+        "Weakness Dice 2": "-3",
+        "Weakness 2": "Emotionless",
+        "Weakness Dice 3": "-2",
+        "Weakness 3": "Vulnerability (Electricity)",
+        "Background": "Spider-like **Sentry Bots** are quicker than the Spider Tank and, fortunately, far less deadly. Even so, the laser rifle mounted on each one's head deserves respect."
+      }
+    }
+  ]
+]

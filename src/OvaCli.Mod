@@ -55,6 +55,11 @@ PROCEDURE DoInline(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.Inline; RETURN TRUE
 END DoInline;
 
+(* -X writes numbers for a PDF form, which wants ASCII. *)
+PROCEDURE DoForm(): BOOLEAN;
+BEGIN OvaConfig.format := OvaConfig.Form; OvaConfig.unicodeMinus := FALSE; RETURN TRUE
+END DoForm;
+
 PROCEDURE DoHtml(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.HtmlInRst; RETURN TRUE
 END DoHtml;
@@ -127,6 +132,9 @@ BEGIN
   Opt(ArgParser.MakeOption("i", "inline",
     "Output each entity as one Markdown paragraph, an inline stat block like an adventure's cast list, instead of reST.",
     DoInline));
+  Opt(ArgParser.MakeOption("X", "form",
+    "Output the official character sheet's form fields as JSON fills for ova_form.sh, which fills the sheet's PDF with qpdf. Implies -n/--no-unicode-minus.",
+    DoForm));
   Opt(ArgParser.MakeOption("H", "html",
     "Output reST with nested HTML tables (a `.. raw:: html` block) for Abilities/Weaknesses/Combat/Attacks, instead of terse prose.",
     DoHtml));

@@ -1,0 +1,30 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Magical Fairies",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Charismatic",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Cute!",
+        "Abilities Dice3": "+2",
+        "Ability 3": "Flight",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Magic, Arcane",
+        "Abilities Dice5": "+2",
+        "Ability 5": "Quick",
+        "Weakness Dice 1": "-3",
+        "Weakness 1": "Awkward Size (Tiny)",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Frail",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Quirk (Nonsensical Talk)",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Weak",
+        "Background": "**Magical Fairies** can be helpful or mischievous, and it's hard to tell which kind you've met -- their riddling, singsong way of talking certainly doesn't help."
+      }
+    }
+  ]
+]

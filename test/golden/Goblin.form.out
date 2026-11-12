@@ -1,0 +1,26 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Goblin",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Attack (Rusty Sword)",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Combat Expert",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Quick",
+        "Weakness Dice 1": "-2",
+        "Weakness 1": "Bizarre Appearance",
+        "Weakness Dice 2": "-1",
+        "Weakness 2": "Dense",
+        "Weakness Dice 3": "-1",
+        "Weakness 3": "Greedy",
+        "Weakness Dice 4": "-2",
+        "Weakness 4": "Rude",
+        "Background": "Dirty, hideous, and spiteful, a **Goblin** is an unwelcome encounter. They can use any sort of scavenged weapon, and their small size hides a real eagerness for mayhem."
+      }
+    }
+  ]
+]

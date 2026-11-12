@@ -1,0 +1,8 @@
+test/data/Broken.yaml: error: /1/abilities/1/name: missing required key "name"
+test/data/Broken.yaml:24:13: error: /1/abilities/2/level: missing required key "level"
+test/data/Broken.yaml:27:13: error: /1/weaknesses/0/level: missing required key "level"
+test/data/Broken.yaml:34:15: error: /1/combat/attacks/0/dx: missing required key "dx"
+test/data/Broken.yaml:34:15: error: /1/combat/attacks/0/endurance: missing required key "endurance"
+ova_fmt: 5 error(s) in test/data/Broken.yaml; no output produced
+[]
+==== exit 1 ====
