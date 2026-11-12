@@ -669,7 +669,7 @@ entity, in the input's order. A fill is one copy of the sheet:
          "fields": {"Character Name": "Fukiko (continued)",
                     "Ability 1": "Extra Ability Eighteen", ...}},
         {"pages": [2], "sub": [],
-         "fields": {"Background": "Fukiko: Linked Abilities\n..."}} ],
+         "fields": {"Background": "Fukiko: Lines in Full\n..."}} ],
       [ ...the next character's fills... ] ]
 
 - The main sheet is one fill for both pages, since no field name is
@@ -724,10 +724,92 @@ A typical use:
 Abilities, 6 Weaknesses and 4 attacks fit; `fukiko.pdf` is two
 editable pages. With 18 Abilities and a fifth attack, a `[1]` fill
 adds "Fukiko (continued)" as page 2, and her own page 2 becomes page
-3; with linked Abilities, a `[2]` fill adds a last page whose
-Background starts "Fukiko: Linked Abilities". `ova_fmt_po -X
+3; with rows too wide for their lines, a `[2]` fill adds a last page
+whose Background starts "Fukiko: Lines in Full". `ova_fmt_po -X
 Party.yaml | ova_form.sh -o party.pdf` gives one PDF, each
 character's pages in turn.
+
+### What `-X` puts where [done in Ada]
+
+Settled while writing `Sheet_Map` and `Format_Form` (2026-11-12),
+where the plan above left it open. Each is checked on the fixtures
+with `make form` in the Ada repo.
+
+- **Copies of page 1.** A block that doesn't fit what is left of its
+  column goes whole to the next copy. One taller than the column (17
+  rows) is split, starting on the current copy unless fewer than 2
+  slots are left; the next copy opens with a "Name (detail)
+  (continued)" row with no level. A copy past the first is titled
+  "Fukiko (continued)"; the combat stats, Player Name and NPC type
+  are on the owner's first copy only.
+- **Companions and Vehicles.** One with any abilities, weaknesses or
+  combat gets its own copies, titled "Azyrus (Fukiko's Companion)",
+  a Fragment one too, so every sub-entity is handled alike. One with
+  nothing of its own gets none: its parent's row names it.
+- **Rows.** An Item's Level goes in the Dice field and its text is
+  "Name (detail) (half TV) [perks; flaws; N Endurance]". A Sub row is
+  "+2 Barrier [...]" in the Ability field, a Spell row "Break (Frail
+  -2, 10 END)" (`Format_Short_Spell_Line`), each indented four
+  spaces; both are in the fill's `sub`. A Transformation's granted Abilities come first,
+  then its granted Weaknesses, then its spells.
+- **Attacks.** The Attack Description box holds the attack clause
+  without its parentheses, "Affinity: Love; Perks: Ranged". roll,
+  dx, end and the stats carry `*` for an override, as raw tables do.
+  TV is left empty when there is none.
+- **Combat Notes** is "NPC Type: Heroic" (when there is one), a line
+  break, then the notes.
+- **Prose** is reflowed: each line trimmed, a blank line a paragraph
+  break, a paragraph's lines joined with spaces and paragraphs with a
+  single LF. The form wraps it.
+- **Fitting.** `-X` measures after all, against the plan's "fits by
+  counting slots": a field's text that won't fit has to go somewhere,
+  and only a measure says what doesn't. Widths are Helvetica's (the
+  face the fields are restyled in) and Helvetica-Bold's, from groff's
+  devpdf `HR` and `HB` files, for ASCII. A UTF-8 continuation byte
+  counts 0 and any other non-ASCII byte 556. They are **tables in
+  the program**, not read from groff at run time, so the golden files
+  don't depend on the installed groff and `-X` runs without it (the
+  user, 2026-11-12). Each field's inner
+  size is its rectangle less 2 pt a side, in tenths of a point; a
+  width in 1/1000 em times the size is compared with the width in
+  tenths times 100, and a field holds height / (size × 12) lines
+  (leading 1.2 × size): all integers, so the port agrees to the byte.
+  Wrapping is greedy at spaces; a word wider than the field takes as
+  many lines as it needs, and a field always takes at least one word.
+- **Page-2 sections**, each opening with a label line, in this order:
+  1. the rest of the main Background, Appearance, Personality and
+     Other Notes: "Fukiko: Appearance (continued)";
+  2. per owner, in copy order: "Fukiko: Lines in Full" (each row too
+     wide for its line, an Item measured at 8 pt, a Sub or Spell row
+     at 7 pt with its indent), "Fukiko: Ability Notes" (each `note:`,
+     "Barrier: ..."), "Fukiko: Attacks" ("Name (clause): description"
+     for each attack with a description or whose name or clause is
+     clipped; the clause only when clipped), "Fukiko: Combat Notes
+     (continued)";
+  3. the `notes:` callouts, "Fukiko: Lovely Savior Myu Myu";
+  4. "Fukiko: Character Hooks".
+
+  They are laid into a page-2 copy's Background, Appearance,
+  Personality and Other Notes in turn, separated by a blank line in a
+  field. A section that doesn't fit takes what does, and goes on in
+  the next field or copy under its label and " (continued)"; if none
+  of its text fits beside what a field already holds, it starts in
+  the next. The tagline, summary, fluff and options are left out: the
+  sheet has no place for them.
+- **JSON layout**, fixed for the golden files: two-space indentation,
+  each fill's `"pages"` and `"sub"` on a line of their own, one field
+  per line; `[]` for no entities. Fields are in sheet order: Character
+  Name, Player Name, each row's `Abilities DiceN` and `Ability N`,
+  each `Weakness Dice N` and `Weakness N`, each attack's `Attack N`,
+  `Attack Description N`, `roll`/`dx`/`end` (`_N` from the second),
+  then Combat Notes, Defense, Health, Endurance, TV, and the page-2
+  fields. A page-2 copy has no Character Name: page 2 has no such
+  field. JSON escaping: `"`, `\`, LF, CR, HT, BS and FF by their
+  escapes, other control characters as `\u00xx`, UTF-8 as is.
+- **`ova_form.sh`** takes Helvetica-Oblique's object number as one past
+  the sheet's highest, and reads `sub` for the 7 pt rows. It needs
+  `-o` with standard input, and an empty array is an error ("no
+  fills").
 
 ### Build and tests
 
@@ -768,7 +850,9 @@ The Ada version comes first, as this repo's rule says (the user,
 
 1. Ada first: `Sheet_Map` and `Format_Form`, with golden files, and
    `make form` there. Then port them here (`OvaSheetMap`, `OvaForm`)
-   and check byte for byte.
+   and check byte for byte. [Ada done, 2026-11-12: `-X`, `ova_form.sh`
+   and `make form`, all 52 fixtures building. Next: the golden cases
+   and the port.]
 2. Ada first: `Format_Sheet`, with the field placement checked against
    rendered pages, then continuation pages and the portrait. Then port
    `OvaSheet` here.
@@ -847,8 +931,12 @@ The Ada version comes first, as this repo's rule says (the user,
   - ~~How are text widths measured?~~ In the program, from groff's
     font description files, so the page breaks are deterministic and
     the golden files fix them (the user, 2026-11-12).
-    Only `-S` needs this: the form's rows clip, so `-X` fits by
-    counting slots.
+    ~~Only `-S` needs this: the form's rows clip, so `-X` fits by
+    counting slots.~~ `-X` measures too ("What `-X` puts where").
+  - ~~Should the widths be read from groff's files at run time, rather
+    than built into the program as tables taken from them?~~ Tables
+    (the user, 2026-11-12): they keep the golden files independent of
+    the installed groff.
 
 - The Ada version's own open questions (direct-to-Lout output, a
   nested-table Markdown mode) are features still to design there; a
