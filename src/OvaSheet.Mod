@@ -216,15 +216,23 @@ BEGIN
   WHILE (i < LEN(a)) & (a[i] # 0X) DO AddChar(s, a[i], l); INC(i) END
 END AddStr;
 
-(* Appends r, upper-cased (faked small caps) if upper. *)
+(* Appends r, upper-cased (faked small caps) if upper, each "--" an
+   em dash, U+2014 in UTF-8, as the rulebook sets one (the Ada
+   Dashes).  Here, before anything is measured, so that lines are broken
+   with the dash's own width; what is cut is cut from s, not r.  groff
+   reads it through preconv (ova_sheet.sh's -k). *)
 PROCEDURE AddRope(s: Styled; r: Rope; l: Look; upper: BOOLEAN);
   VAR i, n: INTEGER; c: CHAR;
 BEGIN
-  n := SHORT(Ropes.Length(r));
-  FOR i := 0 TO n - 1 DO
+  n := SHORT(Ropes.Length(r)); i := 0;
+  WHILE i < n DO
     c := Ropes.Fetch(r, i);
-    IF upper & (c >= "a") & (c <= "z") THEN c := CHR(ORD(c) - 32) END;
-    AddChar(s, c, l)
+    IF (c = "-") & (i + 1 < n) & (Ropes.Fetch(r, i + 1) = "-") THEN
+      AddChar(s, 0E2X, l); AddChar(s, 80X, l); AddChar(s, 94X, l); INC(i, 2)
+    ELSE
+      IF upper & (c >= "a") & (c <= "z") THEN c := CHR(ORD(c) - 32) END;
+      AddChar(s, c, l); INC(i)
+    END
   END
 END AddRope;
 
@@ -369,13 +377,14 @@ END BlockLines;
 (* text split into what fits r at l and leading and the rest, r taking
    at least one word. *)
 PROCEDURE FitBlock(text: Rope; l: Look; r: Rect; leading: INTEGER; VAR fitted, rest: Rope);
-  VAR ls: Lines; cut: INTEGER;
+  VAR ls: Lines; cut: INTEGER; st: Styled;
 BEGIN
-  ls.first := NIL;
-  Break(Plain(text, l), r.w - 2 * Pad, r.w - 2 * Pad, BlockLines(r, l, leading), ls, cut);
+  ls.first := NIL; st := Plain(text, l);
+  Break(st, r.w - 2 * Pad, r.w - 2 * Pad, BlockLines(r, l, leading), ls, cut);
   IF (cut = 0) & (ls.n > 0) THEN cut := ls.last[0] + 1 END;
-  fitted := OvaText.Trim(Ropes.Substring(text, 0, cut));
-  rest := OvaText.Trim(Ropes.Substring(text, cut, Ropes.Length(text) - cut))
+  (* From st, whose dashes are no longer the text's "--". *)
+  fitted := OvaText.Trim(Ropes.FromSubchars(st.t^, 0, cut));
+  rest := OvaText.Trim(Ropes.FromSubchars(st.t^, cut, st.n - cut))
 END FitBlock;
 
 (* text in r, top-aligned, a line at a time. *)
@@ -597,7 +606,14 @@ PROCEDURE PutText(r: Rope; from, to: INTEGER);
   VAR i: INTEGER;
 BEGIN
   OvaOut.String("\&");
-  FOR i := from TO to - 1 DO Escape(Ropes.Fetch(r, i)) END;
+  i := from;
+  WHILE i < to DO
+    IF (Ropes.Fetch(r, i) = "-") & (i + 1 < to) & (Ropes.Fetch(r, i + 1) = "-") THEN
+      OvaOut.Char(0E2X); OvaOut.Char(80X); OvaOut.Char(94X); INC(i, 2)   (* as AddRope's *)
+    ELSE
+      Escape(Ropes.Fetch(r, i)); INC(i)
+    END
+  END;
   OvaOut.Ln
 END PutText;
 

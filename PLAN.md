@@ -1149,10 +1149,14 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
   - prose fills its boxes on page 2, the rest on a continuation page
     after the entity's sheets and before the next entity's.
 
-  One thing to consider, not done: the YAML's ` -- ` prints as two
-  hyphens, on the sheet and on the continuation pages. `\(em` (or
-  `\(en` with spaces) would look like the rulebook. It would change
-  the golden files, so it goes into the Ada version first.
+  The YAML's ` -- ` printed as two hyphens, on the sheet and on the
+  continuation pages. Fixed in the Ada version first (its PLAN.md,
+  "`-S` sets `--` as an em dash"), then here: `AddRope` puts U+2014,
+  in UTF-8, for each `--`, so lines break with the dash's own width;
+  `FitBlock` cuts the styled text, not the YAML's, since the two no
+  longer have the same length; and `PutText` writes the dash too.
+  Only `-S` changed (the 24 sheet golden files and `sheet-all`); `-X`
+  still fills the form with `--`.
 
 ### Order
 
