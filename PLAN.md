@@ -351,10 +351,12 @@ rulebook instead:
   - `Spell`: no level, indented.
 
   A `Sub` row's text comes from `FormatSubItemLine`. A `Spell` row
-  uses the rulebook's "Name (Ability +L; N Endurance)", which is
-  `FormatSpellLine` in parentheses. There is one form for both
-  characters: Acacia's "10 END" is the rulebook being inconsistent,
-  not a second form to copy. The `*` override marks are as in `raw`.
+  uses Acacia's shorter form, "Name (Ability L, N END)": "Break (Frail
+  −2, 10 END)", "Mana Shield (Barrier +2, 10+ END)". It saves width
+  on the narrow column, and is used for every spell, Auren's too (the
+  user, 2026-11-12). `OvaCommon` gets a formatter for it beside
+  `FormatSpellLine`, which stays as it is for the other formats. The
+  `*` override marks are as in `raw`.
   An item's `note` stays off the row, as in the rulebook, and goes on
   the continuation page.
 - **Granted Weaknesses go in the Abilities column**, in the
@@ -367,43 +369,76 @@ rulebook instead:
 - **Size and spacing.** The sheet rules its lines 13 pt apart; the
   rulebook sets built-under rows about a quarter smaller and closer
   together. The overlay sets `Item` rows at 8 pt and `Sub` and `Spell`
-  rows at about 6.5 pt, one row per ruled line. If a column would
-  overflow, it first packs the sub-rows about 9 pt apart, as the
-  rulebook does, ignoring the ruling, and only then moves blocks to
-  the continuation page. Whether the packed rows look right over the
-  dotted ruling is to be checked by eye in step 2 of the order below.
-  A sub-row too wide for the column wraps with a hanging indent, as
+  rows at about 6.5 pt, **always one row per ruled line**: rows are
+  never packed closer than the ruling, even though the rulebook packs
+  its sub-rows about 9 pt apart. What doesn't fit goes to the
+  continuation page (the user, 2026-11-12). A sub-row too wide for the column wraps with a hanging indent, as
   Miho's and Fukiko's do, and each wrapped line counts as a row. Small
   caps for the perks, flaws and Endurance (`\s-1` and upper case, as
   the overlay font has no real small caps) are optional.
-- **In XFDF** each row is one line field, and the Dice field can only
-  hold an `Item`'s level. A `Sub` row goes in the Ability field as
-  "  +2 Combat Expert" and a `Spell` row as "  Mana Shield (Barrier
-  +2; 10+ Endurance)", with the Dice field empty. Consolas is
-  monospaced, so the indent lines up. The form can't wrap or shrink,
-  so long rows are cut off (the limit noted in "Two ways" below).
+- **In the filled form** each row is one line field, and the Dice
+  field can only hold an `Item`'s level. A `Sub` row goes in the
+  Ability field, indented with four spaces, as "    +2 Combat Expert",
+  and a `Spell` row as "    Mana Shield (Barrier +2, 10+ END)", with
+  the Dice field empty. The field is set in Helvetica-Oblique at 7 pt
+  instead of 8, as the rulebook sets these rows smaller. Since every
+  sub-row starts with the same four spaces, the indent lines up in the
+  proportional face too (tested, Fukiko). The form can't wrap or
+  shrink, so long rows are cut off (the limit noted in "Two ways"
+  below). The rows that don't fit the slots go on a continuation page,
+  as with `-S`.
 - **A Companion or Vehicle is not rows.** Its parent row on the sheet
   reads "Companion (Arasuni)". Its own Abilities and Weaknesses box
   and its Attacks & Combat Stats box go on the continuation page, as
   Karis's Arasuni does in the rulebook. A Fragment Companion is prose
   with an Attributes line, as Azyrus is.
-- **Acacia's one-column block** is the model for an NPC sheet, part of
-  the open question about redrawing the sheet. That layout puts a
-  faint rule between the Abilities and the Weaknesses, and the same
-  rows go above it.
+- **Acacia's one-column block** is its own option; the two-column
+  sheet is the default (the user, 2026-11-12). It is a layout for the
+  redrawn sheet, since the Dyskami sheet has two columns. One column
+  holds the Abilities, a faint rule, then the Weaknesses, beside an
+  "Attacks & Combat Stats" box, and the same kinds of rows go in it.
+  Its option letter is an open question.
 
 ### Tools
 
 All are packaged on Fedora, Debian and the BSDs' ports/pkgsrc. All but
-pypdf are installed here.
+pypdf are installed here. **No Java** (the user, 2026-11-12), so not
+pdftk.
 
-- **pdftk** (pdftk-java): `fill_form` with XFDF, `flatten`,
-  `dump_data_fields_utf8`, `multistamp`. Tested: it fills and flattens
-  this form. qpdf and pdfcpu can fill forms too.
-- **qpdf**: `--overlay`/`--underlay` puts one PDF's pages over
-  another's, `--flatten-annotations=all` bakes in a filled form, and
-  `--pages` appends continuation pages. Tested: a groff page laid over
-  the flattened sheet lands where it was placed.
+- **qpdf** (12.3 here): `--overlay`/`--underlay` puts one PDF's pages
+  over another's, `--flatten-annotations=all` bakes in a filled form,
+  and `--pages` appends continuation pages and joins PDFs. It also
+  **fills the form**: `--json-output=2` dumps the whole PDF as JSON,
+  and `--json-input` writes a PDF back from it. Tested: a groff page
+  laid over the flattened sheet lands where it was placed, and the
+  form fills and restyles (see "Two ways"). qpdf reads no XFDF or FDF.
+  - `--update-from-json` (an update with only the changed objects)
+    fills the values too, but in qpdf 12.3.2, on this sheet, it
+    **silently ignores any change to the form's `/DR` font
+    resources**. It still applies other changes to the same
+    dictionary, and it exits 0. So a font can't be added that way. The
+    full round trip through `--json-input` keeps the change (tested
+    2026-11-12), so the fill uses that. A small hand-made form, and
+    the sheet rewritten with `--object-streams=disable`, don't show the
+    bug; the sheet rewritten by default or with `--qdf` does. The
+    write-up, with a script that reproduces it, is
+    `doc/qpdf-update-from-json-dr.md`. It is not submitted: the user
+    wants to check qpdf's policy on AI-written reports first.
+- **jq**: turns a flat `{"Field Name": "value"}` map into the edited
+  JSON. It sets each field's `/V` and its `/DA` (font, size, colour),
+  drops the field's old `/AP`, adds Helvetica-Oblique to `/DR`, and
+  sets the AcroForm's `/NeedAppearances`. A filter of about 30 lines,
+  kept in the repo. Every other object must pass through unchanged,
+  since `--json-input` needs the whole file. The filter has to accept
+  only string `/T` values: one object in this sheet has a numeric
+  `/T`.
+- **pdfcpu** (0.8): ruled out for filling. `pdfcpu form fill` refuses
+  this sheet with "user font not loaded: Consolas", and Consolas isn't
+  free to install.
+- **pdftk** (pdftk-java): fills and flattens this form (tested), but
+  is Java. Not used. The `/DR` problem above isn't a reason to go back
+  to it: the round trip works, and pdftk can't restyle the fields
+  either. It draws them in the font they name, Consolas.
 - **groff** (1.23, `-Tpdf`, with `-k`/preconv for UTF-8): typesets the
   overlay. Absolute placement is easy (`.sp |Np`, `\h'|Np'`). It fills
   and hyphenates multi-line boxes, and gropdf embeds fonts. `.PDFPIC`
@@ -426,19 +461,72 @@ pypdf are installed here.
 
 ### Two ways, and the findings that decide between them
 
-1. **Fill the form.** ova_fmt writes XFDF (UTF-8 XML, one `<field>` per
-   form field). Then `pdftk SHEET fill_form X.xfdf output OUT.pdf
-   [flatten]`. This is the simplest way, and the result is still a
-   form the player can edit in a PDF reader. Tested, it has limits:
-   - The fields' font is Consolas with **WinAnsi encoding**, so pdftk
-     drops any character outside it: "Tōdō" came out "T d". Characters
-     in WinAnsi, such as the em dash, survive. Japanese names, U+2212
-     minus and the like are lost unless the reader regenerates the
-     appearances (`need_appearances`, which flattening can't use).
+1. **Fill the form.** ova_fmt writes the field values, and qpdf puts
+   them in the form (pdftk is Java, and pdfcpu can't load the form's
+   font; see "Tools"). qpdf reads no XFDF, so the program writes a
+   flat JSON map, `{"Field Name": "value", ...}`, and jq edits qpdf's
+   JSON of the sheet with it:
+
+       qpdf --json-output=2 SHEET blank.json   # once; 2.3 MB
+       ova_fmt_po -X x.yaml > vals.json
+       jq --slurpfile v vals.json -f sheet-fill.jq blank.json > filled.json
+       qpdf --json-input filled.json out.pdf
+
+   The result is still a form the player can edit in a PDF reader, and
+   it is **left editable, not flattened** (the user, 2026-11-12: "the
+   most useful").
+
+   **The fields are restyled in proportional faces.** The sheet's
+   fields name Consolas, which the user liked less than the
+   rulebook's proportional type with its differing styles. Each
+   field's `/DA` names its own font, size and colour, so the jq filter
+   rewrites them with the rulebook's emphasis ("Fonts and type
+   styles"), in the PDF standard fonts, which every reader has and
+   which need nothing embedded:
+
+   | Fields | Face |
+   |---|---|
+   | `Ability N`, `Weakness N` | Helvetica-Oblique 8; built-under and spell rows 7 |
+   | `Attack N` | Helvetica-Bold 8, dark red (`0.47 0.11 0.13 rg`) |
+   | `Attack Description N` | Helvetica-Bold 7 |
+   | `roll`, `dx`, `end` (`_2`..`_4`) | Helvetica-Bold, auto-sized (`0 Tf`) |
+   | `Defense`, `Health`, `Endurance`, `TV` | Helvetica-Bold 18 |
+   | `Character Name` | Helvetica 12 |
+   | `Combat Notes` | Helvetica 6 |
+   | the Dice fields and the prose | Helvetica 8 |
+
+   The sheet's `/DR` already has Helvetica (`/Helv`) and Helvetica-Bold
+   (`/HeBo`); the filter adds Helvetica-Oblique as `/HeOb`. Tested on
+   Fukiko (2026-11-12), which the user said "looks much better".
+   Restyled, the attack descriptions and Combat Notes now wrap within
+   their fields. Noto Sans would have to be embedded in the form, and
+   a reader redraws an edited field in the font the field names, so
+   the standard fonts are the practical choice; each reader
+   substitutes its own Helvetica (Nimbus Sans here).
+
+   Tested (2026-11-12, Fukiko), it has limits:
+   - The fields' fonts use **WinAnsi encoding**. Flattened
+     (`--generate-appearances --flatten-annotations=all`), qpdf turns
+     every character outside it into "?": "Tōdō" came out "T?d?", and
+     U+2212 "?2". It also drops the newlines in multi-line fields.
+     pdftk's flattening did much the same ("T d").
+   - Left unflattened, with `/NeedAppearances` set, the reader draws
+     the fields itself. With Consolas, MuPDF showed "Tōdō", "−2" and
+     the newlines, in a fallback serif; poppler kept the newlines but
+     dropped ō and −. So with `-X` the program writes ASCII `-` for a
+     minus, as `-n` does (the user, 2026-11-12: it is what a player
+     would type anyway).
    - Single-line fields **clip** without wrapping or shrinking, so a
      long "Name (detail) [perks]" is cut at the field's edge.
-   - Text can't overflow to another page. The portrait button needs
-     its own image stamp.
+   - Text can't overflow into the form, so whatever doesn't fit goes
+     on a **continuation page added with qpdf**, as with `-S` (the
+     user, 2026-11-12): groff sets it, and `qpdf out.pdf --pages .
+     cont.pdf --` appends it. The portrait button needs its own image
+     stamp.
+   - Several characters are one PDF, a filled sheet each. `qpdf
+     --empty --pages a.pdf b.pdf -- both.pdf` keeps both forms working:
+     tested, it renames the second copy's fields ("Weakness Dice 9+1"),
+     200 fields in all.
 2. **Overlay typeset text on the blank sheet.** ova_fmt writes a groff
    document at the sheet's page size. Each value goes in its field's
    rectangle, in a font with the characters it needs. If a value is
@@ -462,8 +550,9 @@ pypdf are installed here.
 The user decided (2026-11-12): a proportional font, as in the
 rulebook's sample characters, and that font is **Noto Sans**. Not
 monospace: Consolas was only ever proposed to match the form's own
-fields. The XFDF path still gets Consolas, since the form's fields
-name it and pdftk uses what they name.
+fields. The filled form (`-X`) can't embed Noto Sans practically, so
+it gets the same emphasis in the PDF standard Helvetica faces ("Two
+ways", 1).
 
 The rulebook uses Calluna Sans (`pdffonts` on PDF page 33), which is
 commercial; Noto Sans is free and on every system here. Each part of
@@ -518,10 +607,10 @@ the text the same way over either background. For NPCs,
 Acacia's one-column block is the model, as noted under "Sub-Abilities"
 above.
 
-**Proposed:** do both, the overlay first. It is the complete output,
-and XFDF then costs little, since its field mapping is the same code.
-The form-filled PDF is the one for a player who wants to keep editing
-it.
+All three are planned: the overlay first, since it is the complete
+output, then the filled form, which costs little, since its field
+mapping is the same code. The filled form is the one for a player who
+wants to keep editing it.
 
 ### Modules (each in the Ada version first, then ported)
 
@@ -529,31 +618,36 @@ it.
 |---|---|---|
 | `OvaSheetMap` | `Ova_Fmt.Sheet_Map` | Shared: the field table above (name, page, rectangle, size, single/multi-line) as constants, and `Fill(e)`. `Fill` maps an entity onto slots: Abilities and Weaknesses sorted as now (`OvaCommon`), each "Name (detail) [perks/flaws/endurance]" with the level in the Dice column. Built-under content becomes `Sub` and `Spell` rows in blocks kept together ("Sub-Abilities, as the rulebook prints them"). Attacks go to name / "Affinity; perks; flaws" / Roll, DX, End. Defense is `OvaCommon.DefenseText`, and `*` marks overrides, as `raw` does. Prose fields are trimmed and joined (`AllOneLine` where a field is one line). Whatever didn't fit goes on an overflow list. |
 | `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw`, only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). |
-| `OvaXfdf` | `Ova_Fmt.Format_Xfdf` | `-X`/`--xfdf`: XFDF for `pdftk fill_form`, XML-escaped (`&`, `<`, `>`, `"`). Overflow becomes one line at the end of Other Notes ("More on the continuation sheet"), or, with an option, goes to standard error. |
+| `OvaXfdf` | `Ova_Fmt.Format_Xfdf` | `-X`/`--xfdf`: the flat JSON field map for qpdf ("Two ways"), JSON-escaped (`"`, `\`, control characters; a multi-line field's newlines as `\n`). One object per main entity. The overflow goes on a continuation page set by groff (how the program writes that page is an open question). The module's and option's names date from XFDF and may change. |
 | `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size. A macro `FLD page x y w h size` places each value. Two passes per value: measure with `\w`, shrink to the floor, then wrap in an `.ev` with `.ll` set to the field's width. The continuation pages are in `-ms` style: linked Abilities, then the sections the sheet has no place for, reusing `OvaCommon`'s Formatter callbacks, as `OvaHmm` does. `-P FILE`/`--portrait FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file, as in `-H`. |
 
 They fit the existing structure. `OvaConfig` gets `Xfdf` and `Sheet`
 (exclusive with the other format flags, as now). `OvaFmt` dispatches
-to them per entity. A file of several entities becomes several sheets,
-one per main entity, each with its own linked Abilities on its
-continuation pages. Subentities are not sheets of their own.
+to them per entity. A file of several entities becomes **one PDF**
+with a sheet per main entity (the user, 2026-11-12), each with its own
+linked Abilities on its continuation pages. Subentities are not sheets
+of their own. For the overlay, each sheet's two pages go over the
+blank sheet and its continuation pages follow it; the qpdf page ranges
+come from a page count the program writes (a comment, or a file
+beside the output).
 
 Escaping in `OvaSheet`: troff needs `\` written as `\e`, and a line
 that would start with `.` or `'` gets `\&` in front. Only the program
-writes requests. `OvaText` gains the XML escape and the troff escape,
+writes requests. `OvaText` gains the JSON escape and the troff escape,
 with unit tests in `TestText.Mod`.
 
 ### Build and tests
 
 - `make sheet`: `build/%.sheet.pdf` from each fixture, by the pipeline
-  above. `make xfdf`: `build/%.xfdf` and `build/%.form.pdf` through
-  `pdftk fill_form ... flatten`. The blank sheet's path is a make
+  above. `make xfdf`: `build/%.fields.json` and `build/%.form.pdf`
+  through jq and `qpdf --json-input`, unflattened. The blank
+  sheet's path is a make
   variable (`OVA_SHEET`) that defaults to the Reference copy. **The
   sheet itself is not copied into either repo**: it is Dyskami's.
-- Golden cases fix the program's own output (the XFDF and the troff),
-  from the Ada binary as for every other format. They don't fix the
-  PDFs, which depend on the groff, pdftk and qpdf versions.
-- `test/sheet.sh` (run by `make test` only when pdftk, qpdf and groff
+- Golden cases fix the program's own output (the JSON field map and
+  the troff), from the Ada binary as for every other format. They
+  don't fix the PDFs, which depend on the groff and qpdf versions.
+- `test/sheet.sh` (run by `make test` only when qpdf, jq and groff
   are present) builds a few fixtures to PDF. With `pdftotext -layout`
   it checks that each value appears and that p1 and p2 are two pages,
   plus one more page if there is overflow. Checks:
@@ -563,8 +657,10 @@ with unit tests in `TestText.Mod`.
   - A block that doesn't fit moves whole, and one taller than the
     column splits with "(continued)" (an `edge-sheet-sub.yaml`).
   - A non-WinAnsi name survives the overlay.
-  - The XFDF escapes.
+  - The JSON map escapes, and `jq` accepts it.
+  - The filled form's values read back (`qpdf --json-key=acroform`).
   - A Companion goes to a continuation page.
+  - Two characters give one PDF with two sheets.
 
   As always, prove each check by planting its bug.
 - Review by eye: render with `pdftoppm -r 110` and compare with the
@@ -573,6 +669,9 @@ with unit tests in `TestText.Mod`.
   Companion), Natsuki (overrides), a Fragment and `Defenses.yaml`.
 
 ### Order
+
+The Ada version comes first, as this repo's rule says (the user,
+2026-11-12).
 
 1. Ada first: `Sheet_Map` and `Format_Xfdf`, with golden files, and
    `make xfdf` there. Then port them here (`OvaSheetMap`, `OvaXfdf`)
@@ -596,24 +695,51 @@ with unit tests in `TestText.Mod`.
     2026-11-12): "Redrawing the sheet".
   - ~~Which fonts?~~ Noto Sans, proportional, with the rulebook's
     emphasis (the user, 2026-11-12): "Fonts and type styles".
-  - Order of work: should the Ada version come first, as this repo's
-    rule for a new format says, or this port first, as with the inline
-    format?
-  - Fitting rows: may built-under rows be packed closer than the
-    sheet's dotted ruling, before blocks move to a continuation page?
-    Or should they keep to the ruled lines, and more go to the next
-    page?
-  - Spell form: Auren's "Mana Shield (Barrier +2; 10+ Endurance)" for
-    every spell (proposed), or Acacia's shorter "Break (Frail −2, 10
-    END)", which saves width?
-  - XFDF overflow: should it be a line at the end of Other Notes, a
-    warning on standard error, or a continuation page appended with
-    qpdf, as in the overlay?
-  - Several characters in one file: one sheet per main entity, all in
-    one PDF (proposed), or one PDF for each?
-  - pdftk is Java (pdftk-java). Should `make test` skip the PDF checks
-    when it isn't installed (proposed), or should the form be filled
-    with qpdf or pdfcpu alone, so Java isn't needed?
+  - ~~Order of work: Ada first, or this port first?~~ The Ada version
+    first (the user, 2026-11-12).
+  - ~~Fitting rows: pack built-under rows closer than the ruling?~~
+    No: they always stay on the ruled lines, and more goes to the next
+    page (the user, 2026-11-12).
+  - ~~Spell form: Auren's or Acacia's?~~ Acacia's shorter "Break
+    (Frail −2, 10 END)", for every spell (the user, 2026-11-12).
+  - ~~XFDF overflow: a line in Other Notes, standard error, or a
+    continuation page?~~ A continuation page added with qpdf, as with
+    `-S` (the user, 2026-11-12).
+  - ~~Several characters in one file: one PDF, or one each?~~ One PDF
+    with a sheet per main character (the user, 2026-11-12).
+  - ~~pdftk is Java: skip the checks without it, or fill the form
+    another way?~~ Fill it with qpdf or pdfcpu alone, so Java isn't
+    needed (the user, 2026-11-12). pdfcpu can't load the form's
+    Consolas, so it is qpdf, with jq ("Two ways").
+  - ~~Acacia's one-column block: the NPC layout, or an option?~~ Its
+    own option, with the two-column sheet the default (the user,
+    2026-11-12).
+
+  Raised by those answers, still open:
+
+  - The one-column option's letters: `-C`/`--one-column` (proposed;
+    `-C` is free)? And is it only for the redrawn sheet (`-R`), as
+    proposed, since the Dyskami sheet's art has two columns?
+  - `-X`/`--xfdf` no longer writes XFDF, but a JSON field map for qpdf
+    and jq. Keep the letter and rename the long option (`--form`,
+    proposed), or keep both?
+  - How the `-X` continuation page is written: a second run, `-S` with
+    an option that writes only the continuation pages (proposed), or
+    `-X` writing the troff to a second file beside the JSON?
+  - ~~Is the filled form left editable, not flattened?~~ Yes (the
+    user, 2026-11-12), and its fields are restyled in Helvetica faces.
+  - ~~With `-X`, should a minus be ASCII `-`?~~ Yes (the user,
+    2026-11-12): it is what a player would type anyway.
+  - ~~qpdf's `--update-from-json` ignores `/DR` changes: go back to
+    pdftk and Java?~~ No: the full `--json-input` round trip works
+    ("Tools"). ~~Report it to qpdf?~~ Written up in
+    `doc/qpdf-update-from-json-dr.md`, not submitted until the user has
+    checked qpdf's policy on AI-written reports.
+  - Fitting needs text widths, to know when a row wraps and where the
+    column runs out. Measure them in the program from the groff font
+    description files (deterministic, so golden files fix the
+    page breaks; proposed), or let groff measure with diversions and
+    `\w` (simpler program, but the breaks aren't in the golden files)?
 
 - The Ada version's own open questions (direct-to-Lout output, a
   nested-table Markdown mode) are features still to design there; a
