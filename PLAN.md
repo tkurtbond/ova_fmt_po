@@ -1132,6 +1132,28 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
   (Transformation), Auren and Acacia (spells), Karis (nested
   Companion), Natsuki (overrides), a Fragment and `Defenses.yaml`.
 
+  Reviewed 2026-11-12, at `pdftoppm -r 110`: Miho (all four pages),
+  Fukiko (pages 1 and 2), Acacia (pages 1 to 3), Natsuki, Fragment
+  and Defenses (page 1) by eye; Karis and Auren, and Acacia's later
+  pages, only by their text. Nothing is misplaced:
+  - rows sit on the sheet's rules; a wrapped row (Fukiko's Barrier,
+    "Focus (Powers Require Neko Transformation Locket)") hangs
+    indented; sub-rows (Transformation's, Acacia's spells, Miho's
+    granted Weakness) are small and indented under their Ability;
+  - the attacks fill the four Combat Stats rows, the fifth on a copy
+    of page 1 (Miho); overrides show as `3*` and `2/4/6*`, the `*`
+    unexplained, as in every other format;
+  - `NPC Type` goes to Combat Notes (Acacia); a Companion with no
+    stats of its own (Azyrus) has an empty Combat Stats box, as the
+    YAML gives none; a Fragment the same;
+  - prose fills its boxes on page 2, the rest on a continuation page
+    after the entity's sheets and before the next entity's.
+
+  One thing to consider, not done: the YAML's ` -- ` prints as two
+  hyphens, on the sheet and on the continuation pages. `\(em` (or
+  `\(en` with spaces) would look like the rulebook. It would change
+  the golden files, so it goes into the Ada version first.
+
 ### Order
 
 The Ada version comes first, as this repo's rule says (the user,
