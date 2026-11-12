@@ -132,21 +132,26 @@ Found 2026-11-12, and fixed the same day in both:
   covers `-S`; with the limits taken out of the port, its
   `sheet-edge` case fails. `-X`'s limit was checked by hand with
   words of 1,000,000 and 3,000,000 characters, the two versions'
-  output the same (the port with a larger stack; see below), since a
+  output the same (the port first needed a larger stack; see below), since a
   fixture that size isn't worth its golden files.
 
-Found 2026-11-12 and left as is, for the user to decide:
+Found 2026-11-12, and fixed the same day in Ropes:
 
-- **The port crashes on a scalar of a few megabytes.**
+- **The port crashed on a scalar of a few megabytes.**
   `Ropes.FromString` and `Ropes.FromSubstring` take their array by
-  value, and pass it by value on to `NewLeaf`, so poc copies it to
-  the stack twice. A 5 MB `background:` overflows the 8 MB stack
+  value, and passed it by value on to `NewLeaf`, so poc copied it to
+  the stack twice. A 5 MB `background:` overflowed the 8 MB stack
   while loading, in every format (SIGSEGV, status 139), where the Ada
   version reads it. `OvaForm.Escape`, which builds a buffer six times
-  a field's length, does the same with a word of 1,000,000
-  characters under `-X`. The fix is in Ropes (`VAR` parameters inside
-  it, at least for `NewLeaf`), which needs the user's go-ahead. No
-  real character comes near it.
+  a field's length, did the same with a word of 1,000,000 characters
+  under `-X`. Ropes now takes the array by reference inside
+  (`StrLen`, `NewLeaf`), and has `FromChars` and `FromSubchars`,
+  `FromString` and `FromSubstring` with a `VAR` parameter. The port
+  uses them for every heap buffer (`t^`, a YAML scalar, path or
+  error message; `Escape`'s). Checked by hand at the default 8 MB
+  stack: words of 1,000,000 and 5,000,000 characters, in the default
+  format, `-S` and `-X`, give the Ada version's output byte for byte.
+  `FromString` of a literal or a small array is left as it was.
 
 ## The inline format [done]
 

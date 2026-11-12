@@ -87,7 +87,7 @@ BEGIN
       RETURN
     END
   END;
-  msg := Ropes.FromString(err.msg^);
+  msg := Ropes.FromChars(err.msg^);
   prefix := Ropes.AppendChar(source, ":");
   IF (Ropes.Length(msg) > Ropes.Length(prefix))
      & Ropes.Equal(Ropes.Substring(msg, 0, Ropes.Length(prefix)), prefix) THEN

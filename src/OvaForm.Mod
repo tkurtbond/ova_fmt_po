@@ -236,7 +236,7 @@ BEGIN
     ELSE t[k] := c; INC(k)
     END
   END;
-  RETURN Ropes.FromSubstring(t^, 0, k)
+  RETURN Ropes.FromSubchars(t^, 0, k)
 END Escape;
 
 PROCEDURE Str(s: ARRAY OF CHAR): Rope;

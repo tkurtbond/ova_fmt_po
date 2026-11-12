@@ -281,7 +281,7 @@ END ResetErrors;
 PROCEDURE ErrorText(err: Fyaml.Error): Rope;
   VAR r, p: Rope; i: LONGINT;
 BEGIN
-  r := Ropes.FromString(err.msg^);
+  r := Ropes.FromChars(err.msg^);
   i := Ropes.Find(r, ": error: ", 0);
   IF i >= 0 THEN r := Ropes.Substring(r, i + 9, Ropes.Length(r) - i - 9) END;
   IF err.path # NIL THEN
@@ -298,7 +298,7 @@ END ErrorText;
 (* n's path, in polibfyaml's ByPath syntax ("/1/abilities/2"). *)
 PROCEDURE PathOf(n: Fyaml.Node): Rope;
   VAR p: Fyaml.String;
-BEGIN p := n.Path(); RETURN Ropes.FromString(p^)
+BEGIN p := n.Path(); RETURN Ropes.FromChars(p^)
 END PathOf;
 
 (* Records an error for key in mapping m: the Ada Record_Error.  The
@@ -370,7 +370,7 @@ BEGIN
     msg := Ropes.FromString('missing required key "'); OvaText.Add(msg, key); OvaText.Add(msg, '"');
     Record(m, key, msg)
   ELSIF ~v.IsScalar() THEN Record(m, key, NotScalar(key))
-  ELSE t := v.Scalar(); s := Ropes.FromString(t^)
+  ELSE t := v.Scalar(); s := Ropes.FromChars(t^)
   END
 END RequireString;
 
@@ -399,7 +399,7 @@ BEGIN
   v := m.Value(key); has := v # NIL;
   IF has THEN
     IF ~v.IsScalar() THEN RETURN FailValue(m, key, v, NotScalar(key)) END;
-    t := v.Scalar(); s := Ropes.FromString(t^)
+    t := v.Scalar(); s := Ropes.FromChars(t^)
   END;
   RETURN TRUE
 END OptString;
@@ -574,7 +574,7 @@ PROCEDURE LoadPerkFlaw(n: Fyaml.Node; VAR pf: PerkFlaw): BOOLEAN;
 BEGIN
   NEW(pf);
   IF n.IsScalar() THEN
-    t := n.Scalar(); pf.name := Ropes.FromString(t^);
+    t := n.Scalar(); pf.name := Ropes.FromChars(t^);
     RETURN TRUE
   ELSIF n.IsMapping() THEN
     RequireString(n, "name", pf.name);
