@@ -76,14 +76,17 @@ $(OBJ)/Test%: test/Test%.Mod $(TESTSUPPORT) $(PROGSRC) $(SHAREDLIBMANIFESTS) | $
 	$(POC) $(POCFLAGS) $(IMPORTS) -import-path test -output-dir $(OBJ) $(LINK) -o $@ $<
 
 # Every unit test, then the command-line checks of test/cli.sh, then
-# the golden-output comparison of test/golden.sh; fail at the end if any
-# failed.
+# the golden-output comparison of test/golden.sh, then test/sheet.sh's
+# checks of the PDFs -S and -X make (skipped without OVA_SHEET or the
+# tools); fail at the end if any failed.
 test: $(PROGRAM) $(TESTBINS)
 	@status=0; for t in $(TESTS); do \
 	  echo "== $$t"; (cd $(OBJ) && ./$$t) || status=1; \
 	done; \
 	echo "== cli.sh"; test/cli.sh ./$(PROGRAM) || status=1; \
 	echo "== golden.sh"; test/golden.sh check ./$(PROGRAM) || status=1; \
+	echo "== sheet.sh"; OVA_SHEET="$(OVA_SHEET)" SHEET_FONTS="$(SHEET_FONTS)" \
+	  test/sheet.sh ./$(PROGRAM) || status=1; \
 	exit $$status
 
 # Rewrite test/golden/ from the Ada ova_fmt; see test/golden.cases.
@@ -115,10 +118,11 @@ valgrind: $(PROGRAM) | $(OBJ)
 	     || ! grep -q 'are still reachable' $$log; then \
 	    echo "FAIL - valgrind $$*"; sed 's/^/    /' $$log; status=1; fi; }; \
 	for f in test/data/*.yaml; do \
-	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X"; do vg $$fl $$f </dev/null; done; \
+	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X" "-S" "-S -P x.png"; do vg $$fl $$f </dev/null; done; \
 	done; \
 	vg test/data/*.yaml </dev/null; \
 	vg -X test/data/*.yaml </dev/null; \
+	vg -S test/data/*.yaml </dev/null; \
 	vg -U '~' <test/data/Options.yaml; \
 	vg </dev/null; \
 	vg -o $(OBJ)/valgrind.out test/data/Karis.yaml </dev/null; \

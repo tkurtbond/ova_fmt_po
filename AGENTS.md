@@ -40,7 +40,7 @@ working around any of those libraries.
 
 ```sh
 make            # obj/ (poc output) and ./ova_fmt_po
-make test       # unit tests, test/cli.sh, test/golden.sh check
+make test       # unit tests, test/cli.sh, test/golden.sh check, test/sheet.sh
 make golden     # regenerate test/golden/ from the Ada binary
 make valgrind   # the program under valgrind over every fixture and path
 make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline, form, sheet
@@ -86,6 +86,11 @@ make print-VAR  # show a makefile variable
   Markdown block). What can't be a golden file (a missing
   input file, an `-o` that can't be created or written) is checked in
   `test/cli.sh`.
+- **`test/sheet.sh`** reads back the PDFs `-S` and `-X` make through
+  `ova_sheet.sh` and `ova_form.sh`. It needs the blank sheet
+  (`OVA_SHEET`, which the makefile defaults) and skips, passing,
+  without it or without qpdf, jq, groff or poppler's tools; say so
+  when a run skipped it. PLAN.md, "Build and tests", lists its checks.
 - Fixtures: the capitalized ones in `test/data/` are the Ada repo's
   `test-data/` (copy any new one over, and keep them the same);
   `bad-*` and `edge-*` are this repo's. `[A-Z]*` cases take every

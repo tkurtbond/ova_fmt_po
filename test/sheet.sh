@@ -1,0 +1,251 @@
+#!/usr/bin/env bash
+# The official character sheet as PDF, end to end: -S through
+# ova_sheet.sh and -X through ova_form.sh, read back with pdftotext,
+# pdfinfo, pdfimages and qpdf (PLAN.md, "Build and tests").  The golden
+# files fix the program's troff and JSON; this checks what becomes of
+# them, so it doesn't fix the PDFs, which depend on the groff and qpdf
+# versions.  Run from the repo root by `make test`, as
+#
+#   test/sheet.sh [program]
+#
+# with the blank sheet $OVA_SHEET (it is Dyskami's, and isn't in the
+# repo) and the faces sheet_fonts.sh builds in $SHEET_FONTS, or, if
+# that has none, built here.  Prints ok/FAIL per check, as test/cli.sh
+# does, and exits 1 if any failed; without the sheet or a tool it
+# needs, it says what it skipped and exits 0.
+
+prog=${1:-./ova_fmt_po}
+data=test/data
+sheet=${OVA_SHEET-}
+fonts=${SHEET_FONTS:-build/font}
+failed=0
+
+skip() { echo "skip - sheet.sh: $*"; exit 0; }
+
+for tool in qpdf jq groff pdftotext pdfinfo pdfimages; do
+  command -v $tool >/dev/null 2>&1 || skip "$tool not found"
+done
+[ -n "$sheet" ] || skip "no blank sheet: set OVA_SHEET"
+[ -r "$sheet" ] || skip "can't read the blank sheet $sheet"
+
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/ova-sheet-test.XXXXXX") || exit 1
+trap 'rm -rf "$tmp"' EXIT
+
+if [ ! -f "$fonts/devpdf/NSR" ]; then
+  command -v fontforge >/dev/null 2>&1 || skip "no faces in $fonts, and no fontforge to build them"
+  fonts=$tmp/font
+  ./sheet_fonts.sh "$fonts" >"$tmp/fonts.log" 2>&1 || {
+    echo "FAIL - sheet_fonts.sh"; sed 's/^/    /' "$tmp/fonts.log"; exit 1; }
+fi
+
+ok() { echo "ok   - $1"; }
+fail() { echo "FAIL - $1"; [ $# -lt 2 ] || printf '%s\n' "$2" | sed 's/^/    /'; failed=$((failed + 1)); }
+
+# pages PDF: its page count.
+pages() { pdfinfo "$1" 2>/dev/null | awk '$1 == "Pages:" { print $2 }'; }
+
+# norm: standard input with all white space one blank, so that a line
+# broken by groff or pdftotext still matches, and a right quote an
+# apostrophe, as groff sets one.
+norm() { tr -s ' \t\n\f' '    ' | sed "s/^ //; s/ \$//; s/\xe2\x80\x99/'/g"; }
+
+# text PDF [FIRST [LAST]]: its text, or pages FIRST to LAST's, normalized.
+text() {
+  local f=$1 a=() ; [ $# -lt 2 ] || a=(-f "$2" -l "${3:-$2}")
+  pdftotext -raw "${a[@]}" "$f" - 2>/dev/null | norm
+  echo
+}
+
+# crop PDF PAGE X Y W H: the text inside that rectangle of PAGE, in
+# points from the top left, normalized.
+crop() {
+  pdftotext -raw -f "$2" -l "$2" -x "$3" -y "$4" -W "$5" -H "$6" "$1" - 2>/dev/null | norm
+  echo
+}
+
+# has TEXT NEEDLE: whether TEXT holds NEEDLE as a plain string.
+has() { [[ $1 == *"$2"* ]]; }
+
+# sheet NAME ARGS...: NAME.tr from prog -S ARGS, then NAME.pdf from
+# ova_sheet.sh.  Fails the "NAME: builds" check if either fails.
+sheet() {
+  local name=$1; shift
+  if ! "$prog" -S "$@" >"$tmp/$name.tr" 2>"$tmp/$name.err" </dev/null; then
+    fail "$name: -S" "$(cat "$tmp/$name.err")"; return 1
+  fi
+  if ! ./ova_sheet.sh -s "$sheet" -F "$fonts" -o "$tmp/$name.pdf" "$tmp/$name.tr" \
+       >"$tmp/$name.err" 2>&1; then
+    fail "$name: ova_sheet.sh" "$(cat "$tmp/$name.err")"; return 1
+  fi
+  ok "$name: builds"
+}
+
+# placed NAME: every line of text NAME.tr places or sets, without its
+# escapes, one per line: the lines after .L, and a continuation page's
+# \& lines.
+placed() {
+  awk '/^\.L / { getline; if ($0 !~ /^\./) print; next } /^\\&/ { print }' "$tmp/$1.tr" |
+    sed -E 's/\\[fsm]\[[^]]*\]//g; s/^\\&//; s/\\e/\\/g' |
+    while IFS= read -r line; do printf '%s' "$line" | norm; echo; done | grep -v '^$'
+}
+
+# check_sheet NAME: NAME.pdf has a page per .SP, and more if there are
+# .CP pages, and every line NAME.tr places is in its text.
+check_sheet() {
+  local name=$1 nsp ncp n all missing=
+  nsp=$(grep -c '^\.SP ' "$tmp/$name.tr"); ncp=$(grep -c '^\.CP' "$tmp/$name.tr")
+  n=$(pages "$tmp/$name.pdf")
+  if { [ "$ncp" -eq 0 ] && [ "$n" -eq "$nsp" ]; } || { [ "$ncp" -gt 0 ] && [ "$n" -ge $((nsp + ncp)) ]; }; then
+    ok "$name: $n pages for $nsp sheet pages and $ncp continuations"
+  else
+    fail "$name: $n pages for $nsp sheet pages and $ncp continuations"
+  fi
+  # The blank sheet under each sheet page, told by words printed on
+  # only one of its pages, which no character's text runs together.
+  local want1 want2 got1=0 got2=0 i t
+  want1=$(grep -c '^\.SP p1' "$tmp/$name.tr"); want2=$(grep -c '^\.SP p2' "$tmp/$name.tr")
+  for ((i = 1; i <= n; i++)); do
+    t=$(text "$tmp/$name.pdf" $i)
+    ! has "$t" COMBATNOTES || got1=$((got1 + 1))
+    ! has "$t" CHARACTERPORTRAIT || got2=$((got2 + 1))
+  done
+  if [ "$got1" -eq "$want1" ] && [ "$got2" -eq "$want2" ]; then
+    ok "$name: $want1 pages over the sheet's page 1, $want2 over its page 2"
+  else
+    fail "$name: $got1 pages over the sheet's page 1 and $got2 over its page 2, not $want1 and $want2"
+  fi
+  all=$(text "$tmp/$name.pdf")
+  while IFS= read -r line; do
+    has "$all" "$line" || { missing=$line; break; }
+  done < <(placed "$name")
+  if [ -z "$missing" ]; then ok "$name: every line is in the PDF's text"
+  else fail "$name: a line isn't in the PDF's text" "$missing"
+  fi
+}
+
+# expect LABEL TEXT NEEDLE / expect_not LABEL TEXT NEEDLE
+expect() { if has "$2" "$3"; then ok "$1"; else fail "$1" "no \"$3\" in: ${2:0:300}"; fi; }
+expect_not() { if has "$2" "$3"; then fail "$1" "\"$3\" in: ${2:0:300}"; else ok "$1"; fi; }
+
+# ---- -S, through ova_sheet.sh ----
+
+for f in Fukiko Miho Karis Sheet Vehicle Fragment Auren Escaping edge-sheet-overflow edge-sheet-sub; do
+  sheet "$f" "$data/$f.yaml" && check_sheet "$f"
+done
+
+# Miho's Transformation grants a Weakness, set in the Abilities column
+# under the Transformation, not among her own Weaknesses.  The columns
+# split at the page's middle; the rows run from 110 pt to 330 pt.
+if [ -f "$tmp/Miho.pdf" ]; then
+  expect "Miho: the granted Weakness is in the Abilities column" \
+    "$(crop "$tmp/Miho.pdf" 1 0 110 210 220)" "Loss of Control"
+  expect_not "Miho: the granted Weakness isn't in the Weaknesses column" \
+    "$(crop "$tmp/Miho.pdf" 1 210 110 210 220)" "Loss of Control"
+fi
+
+# 18 Abilities and a fifth attack: a second copy of page 1, taking the
+# rows past the 17th (sorted, so "Ability Number 9" is the last).  Its
+# long name is cut on the copy.
+if [ -f "$tmp/edge-sheet-overflow.pdf" ]; then
+  expect_not "edge-sheet-overflow: the last rows aren't on page 1" \
+    "$(text "$tmp/edge-sheet-overflow.pdf" 1)" "Ability Number 9"
+  expect "edge-sheet-overflow: they're on the copy" \
+    "$(text "$tmp/edge-sheet-overflow.pdf" 2)" "Ability Number 9"
+  expect "edge-sheet-overflow: the fifth attack is on the copy" \
+    "$(text "$tmp/edge-sheet-overflow.pdf" 2)" "$(awk '/^\.SP/ { n++ } n == 2 && /ovared/ { print; exit }' \
+       "$tmp/edge-sheet-overflow.tr" | sed -E 's/\\[fsm]\[[^]]*\]//g')"
+fi
+
+# A block that doesn't fit what's left of the column moves whole; one
+# taller than the column is split, and goes on under "(continued)".
+# The name is outside WinAnsi.
+if [ -f "$tmp/edge-sheet-sub.pdf" ]; then
+  p1=$(text "$tmp/edge-sheet-sub.pdf" 1); p2=$(text "$tmp/edge-sheet-sub.pdf" 2)
+  p3=$(text "$tmp/edge-sheet-sub.pdf" 3)
+  expect "edge-sheet-sub: a name outside WinAnsi survives" "$p1" "Ōtori Łukasz"
+  expect "edge-sheet-sub: page 1 holds the plain rows" "$p1" "Plain Ability 13"
+  expect_not "edge-sheet-sub: the block that doesn't fit isn't on page 1" "$p1" "Moving Block"
+  expect "edge-sheet-sub: it moves whole to the next copy" "$p2" "Transformation (Moving Block) +1 Moved Ability 1"
+  expect "edge-sheet-sub: all of it" "$p2" "Moved Ability 5"
+  expect "edge-sheet-sub: the tall block starts on the same copy" "$p2" "Split Ability 01"
+  expect_not "edge-sheet-sub: and is split" "$p2" "Split Ability 11"
+  expect "edge-sheet-sub: going on under (continued)" "$p3" "Unique Ability (Split Block) (continued)"
+  expect "edge-sheet-sub: to its end" "$p3" "Split Ability 20"
+fi
+
+# Karis's Companion has a copy of page 1 of its own, after Karis's.
+if [ -f "$tmp/Karis.pdf" ]; then
+  expect_not "Karis: page 1 is Karis's own" "$(crop "$tmp/Karis.pdf" 1 0 30 420 30)" "Arasuni"
+  expect "Karis: page 2 is Arasuni's" "$(crop "$tmp/Karis.pdf" 2 0 30 420 30)" "Arasuni (Karis's Companion)"
+fi
+
+# Two characters, one PDF: each one's pages in turn.
+if [ -f "$tmp/Karis.pdf" ] && [ -f "$tmp/Fukiko.pdf" ] && sheet two "$data/Karis.yaml" "$data/Fukiko.yaml"; then
+  check_sheet two
+  nk=$(pages "$tmp/Karis.pdf"); nf=$(pages "$tmp/Fukiko.pdf"); n=$(pages "$tmp/two.pdf")
+  if [ "$n" -eq $((nk + nf)) ]; then ok "two: Karis's $nk pages and Fukiko's $nf"
+  else fail "two: $n pages, not Karis's $nk and Fukiko's $nf"
+  fi
+  expect "two: Fukiko's sheet follows Karis's" "$(crop "$tmp/two.pdf" $((nk + 1)) 0 30 420 30)" "Fukiko"
+fi
+
+# The portrait: -P's image lands on the sheet's page 2, beside the
+# sheet's own images.
+if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
+  im=$(command -v magick || command -v convert)
+  "$im" -size 60x90 xc:red "$tmp/me.png"
+  if sheet portrait -P "$tmp/me.png" "$data/Fukiko.yaml" && [ -f "$tmp/Fukiko.pdf" ]; then
+    pg=$(grep '^\.SP ' "$tmp/portrait.tr" | grep -n 'p2' | head -1 | cut -d: -f1)
+    without=$(pdfimages -list -f "$pg" -l "$pg" "$tmp/Fukiko.pdf" | tail -n +3 | wc -l)
+    with=$(pdfimages -list -f "$pg" -l "$pg" "$tmp/portrait.pdf" | tail -n +3 | wc -l)
+    if [ "$with" -gt "$without" ]; then ok "portrait: on page $pg, the sheet's page 2"
+    else fail "portrait: page $pg has $with images, and $without without it"
+    fi
+  fi
+else
+  echo "skip - portrait: no ImageMagick"
+fi
+
+# ---- -X, through ova_form.sh ----
+
+# form NAME FILES...: NAME.json from prog -X, NAME.pdf from ova_form.sh;
+# jq must accept the JSON, the PDF must have a page per page of each
+# fill, and every field's value must read back from it (a copy's field
+# is renamed "Background+1" and so on when the copies are joined).
+form() {
+  local name=$1; shift
+  if ! "$prog" -X "$@" >"$tmp/$name.json" 2>"$tmp/$name.err" </dev/null; then
+    fail "$name: -X" "$(cat "$tmp/$name.err")"; return
+  fi
+  if jq -e . "$tmp/$name.json" >/dev/null 2>"$tmp/$name.err"; then ok "$name: jq reads the JSON"
+  else fail "$name: jq reads the JSON" "$(cat "$tmp/$name.err")"; return
+  fi
+  if ! ./ova_form.sh -s "$sheet" -o "$tmp/$name.pdf" "$tmp/$name.json" >"$tmp/$name.err" 2>&1; then
+    fail "$name: ova_form.sh" "$(cat "$tmp/$name.err")"; return
+  fi
+  local want n
+  want=$(jq '[.[][] | .pages | length] | add' "$tmp/$name.json"); n=$(pages "$tmp/$name.pdf")
+  if [ "$n" -eq "$want" ]; then ok "$name: $n pages"
+  else fail "$name: $n pages, not $want"
+  fi
+  qpdf --json --json-key=acroform "$tmp/$name.pdf" >"$tmp/$name.acro.json" 2>"$tmp/$name.err" || {
+    fail "$name: qpdf reads the form" "$(cat "$tmp/$name.err")"; return; }
+  local missing
+  missing=$(jq -r --slurpfile have "$tmp/$name.acro.json" '
+      ([$have[0].acroform.fields[] | select(.value != null)
+        | [(.fullname | sub("\\+[0-9]+$"; "")), (.value | sub("^u:"; ""))]]) as $h
+      | [.[][] | .fields | to_entries[] | [.key, .value]] - $h
+      | .[] | "\(.[0]): \(.[1])"' "$tmp/$name.json")
+  if [ -z "$missing" ]; then ok "$name: every value reads back"
+  else fail "$name: values that don't read back" "$missing"
+  fi
+}
+
+for f in Escaping Fukiko Karis Vehicle edge-sheet-overflow edge-sheet-sub; do
+  form "form-$f" "$data/$f.yaml"
+done
+form form-two "$data/Karis.yaml" "$data/Fukiko.yaml"
+
+if [ "$failed" -eq 0 ]; then echo "All checks passed."
+else echo "$failed check(s) failed."; exit 1
+fi

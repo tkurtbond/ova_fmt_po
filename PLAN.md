@@ -254,7 +254,10 @@ each failed between 2 and 20 cases.
   300 copies of a character in one file, which runs the collector many
   times.
 - `test/TestText.Mod`: `OvaText`, on ropes of several leaves too.
-- `make valgrind`: 533 runs, clean, with polibfyaml's suppressions and
+- `test/sheet.sh`: the PDFs `-S` and `-X` make, read back ("The
+  official character sheet as PDF", "Build and tests").
+- `make valgrind`: 945 runs (each fixture in every format, `-X`, `-S`
+  and `-S -P` among them), clean, with polibfyaml's suppressions and
   `test/poc-gc.supp` (the conservative stack scan's reports in
   `DrainMarkStack`, which this program's frames reach too).
 - The rendered outputs (`make rst gemtext hmm`, and so on) are the same
@@ -321,12 +324,12 @@ alias, four values allowed) fail the golden check; `DefenseText`'s
 stop at the third slot can't be reached, since a fourth value is a
 load error.
 
-## The official character sheet as PDF [planned]
+## The official character sheet as PDF [done]
 
 Asked for 2026-11-12: a plan for PDF output like the official
 `~/Reference/RPG/OVA/OVA-Blank-Character-Sheet-Form-Fillable.pdf`,
 filled from the YAML, with open source tools found on Linux and the
-BSDs. Nothing below is built yet. By this repo's rule a new format goes
+BSDs. All of it is built now, in both versions ("Order"). By this repo's rule a new format goes
 into the Ada version first, so each step is "Ada, then port".
 
 ### What the sheet is
@@ -997,9 +1000,9 @@ Ported 2026-11-12, byte for byte: every `-S` golden case passes,
   `Set_Source_Dir` does. A relative `portrait:` gives the same path in
   both versions whether the file is named `data/X.yaml`,
   `./data/X.yaml` or `../test/data/X.yaml`.
-- `-S` runs clean under the makefile's valgrind settings (Karis,
-  Sheet, `edge-sheet-overflow`). `make valgrind` itself takes `-S` in
-  step 3.
+- `-S` runs clean under the makefile's valgrind settings. `make
+  valgrind` takes `-S` and `-S -P` on each fixture, and `-S` on all of
+  them in one run (step 3, 2026-11-12).
 
 ### The faces and their widths [done]
 
@@ -1084,22 +1087,46 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
 - Golden cases fix the program's own output (the JSON field map and
   the troff), from the Ada binary as for every other format. They
   don't fix the PDFs, which depend on the groff and qpdf versions.
-- `test/sheet.sh` (run by `make test` only when qpdf, jq and groff
-  are present) builds a few fixtures to PDF. With `pdftotext -layout`
-  it checks that each value appears and that p1 and p2 are two pages,
-  plus one more page if there is overflow. Checks:
-  - 18 Abilities overflow (an `edge-sheet-overflow.yaml`).
-  - Miho's granted Weakness is in the Abilities column: `pdftotext`
-    with `-x -y -W -H` set to that column's rectangle.
-  - A block that doesn't fit moves whole, and one taller than the
-    column splits with "(continued)" (an `edge-sheet-sub.yaml`).
-  - A non-WinAnsi name survives the overlay.
-  - The JSON map escapes, and `jq` accepts it.
-  - The filled form's values read back (`qpdf --json-key=acroform`).
-  - A Companion goes to a continuation page.
-  - Two characters give one PDF with two sheets.
+- `test/sheet.sh [PROGRAM]` [done, 2026-11-12], the last step of
+  `make test`, which passes it `OVA_SHEET` and `SHEET_FONTS`. It skips
+  (exit 0) without qpdf, jq, groff, pdftotext, pdfinfo or pdfimages,
+  or a readable `OVA_SHEET`; without the faces it builds them with
+  `sheet_fonts.sh` if fontforge is there. Its work goes in a
+  `mktemp -d` under `TMPDIR`, removed on exit. 74 checks, about 6 s:
+  - For each of Fukiko, Miho, Karis, Sheet, Vehicle, Fragment, Auren,
+    Escaping, `edge-sheet-overflow` and `edge-sheet-sub`, through
+    `ova_sheet.sh`: the page count (one per `.SP`, at least one more
+    per `.CP`); as many pages over the sheet's page 1 and page 2 as
+    there are `.SP p1` and `.SP p2`, told by the sheet's own
+    `COMBATNOTES` and `CHARACTERPORTRAIT`; and every line the troff
+    places (after `.L`, or `\&` on a continuation page) in the PDF's
+    text.
+  - Text is `pdftotext -raw`, white space made one blank and groff's
+    `’` an apostrophe. Not the default mode: it takes a `--` ending a
+    line for a hyphen and joins it to the next word.
+  - Miho's granted Weakness is in the Abilities column and not the
+    Weaknesses one: `pdftotext -x -y -W -H` on each column.
+  - `edge-sheet-overflow`: the last rows ("Ability Number 9", sorted
+    last) and the fifth attack are on the copy of page 1, not page 1.
+    Its long name is cut there, so "(continued)" can't be looked for.
+  - `edge-sheet-sub.yaml` (new): a block that doesn't fit moves whole
+    to the next copy, one taller than the column splits there and goes
+    on under "(continued)" on a third, and "Ōtori Łukasz", outside
+    WinAnsi, survives.
+  - Karis's Companion has its own copy of page 1; Karis then Fukiko
+    give one PDF, Fukiko's sheet after all of Karis's pages.
+  - `-P` puts an image on the sheet's page 2 (the PDF page of the
+    first `.SP p2`): `pdfimages` counts more than without it.
+  - `-X`, on Escaping (escapes), Fukiko, Karis, Vehicle, the two edge
+    fixtures and Karis with Fukiko: `jq` reads the JSON, `ova_form.sh`
+    fills the sheet, a page per fill page, and every field's value
+    reads back from `qpdf --json-key=acroform` (a joined copy's field
+    renamed `NAME+1`, a value prefixed `u:`).
 
-  As always, prove each check by planting its bug.
+  Each check was proved by planting its bug: the Abilities at the
+  Weaknesses' x, `-P` ignored, a split block without "(continued)",
+  `--repeat=1` for the page 2 underlay, placed lines dropped before
+  groff, and a form value changed in `ova_form.sh`.
 - Review by eye: render with `pdftoppm -r 110` and compare with the
   blank sheet, and with the rulebook's own pages. Check Miho, Fukiko
   (Transformation), Auren and Acacia (spells), Karis (nested
@@ -1123,7 +1150,8 @@ The Ada version comes first, as this repo's rule says (the user,
    `test/golden.cases`). Port done, 2026-11-12: "The port of
    `-S`".]
 3. `test/sheet.sh`, `make sheet`/`make form`, and the valgrind runs for
-   the new paths.
+   the new paths. [done, 2026-11-12: "Build and tests"; `make
+   valgrind` takes `-S` and `-S -P`, 945 runs, clean.]
 
 ## Open questions
 

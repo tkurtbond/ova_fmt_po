@@ -1,0 +1,84 @@
+[
+  [
+    {
+      "pages": [1, 2],
+      "sub": [],
+      "fields": {
+        "Character Name": "Ōtori Łukasz",
+        "Player Name": "Test Player",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Plain Ability 01",
+        "Abilities Dice2": "+1",
+        "Ability 2": "Plain Ability 02",
+        "Abilities Dice3": "+1",
+        "Ability 3": "Plain Ability 03",
+        "Abilities Dice4": "+1",
+        "Ability 4": "Plain Ability 04",
+        "Abilities Dice5": "+1",
+        "Ability 5": "Plain Ability 05",
+        "Abilities Dice6": "+1",
+        "Ability 6": "Plain Ability 06",
+        "Abilities Dice7": "+1",
+        "Ability 7": "Plain Ability 07",
+        "Abilities Dice8": "+1",
+        "Ability 8": "Plain Ability 08",
+        "Abilities Dice9": "+1",
+        "Ability 9": "Plain Ability 09",
+        "Abilities Dice10": "+1",
+        "Ability 10": "Plain Ability 10",
+        "Abilities Dice11": "+1",
+        "Ability 11": "Plain Ability 11",
+        "Abilities Dice12": "+1",
+        "Ability 12": "Plain Ability 12",
+        "Abilities Dice13": "+1",
+        "Ability 13": "Plain Ability 13",
+        "Weakness Dice 1": "-1",
+        "Weakness 1": "Unique Weakness (Test Weakness)"
+      }
+    },
+    {
+      "pages": [1],
+      "sub": ["Ability 2", "Ability 3", "Ability 4", "Ability 5", "Ability 6", "Ability 8", "Ability 9", "Ability 10", "Ability 11", "Ability 12", "Ability 13", "Ability 14", "Ability 15", "Ability 16", "Ability 17"],
+      "fields": {
+        "Character Name": "Ōtori Łukasz (continued)",
+        "Abilities Dice1": "+1",
+        "Ability 1": "Transformation (Moving Block)",
+        "Ability 2": "    +1 Moved Ability 1",
+        "Ability 3": "    +1 Moved Ability 2",
+        "Ability 4": "    +1 Moved Ability 3",
+        "Ability 5": "    +1 Moved Ability 4",
+        "Ability 6": "    +1 Moved Ability 5",
+        "Abilities Dice7": "+3",
+        "Ability 7": "Unique Ability (Split Block)",
+        "Ability 8": "    +1 Split Ability 01",
+        "Ability 9": "    +1 Split Ability 02",
+        "Ability 10": "    +1 Split Ability 03",
+        "Ability 11": "    +1 Split Ability 04",
+        "Ability 12": "    +1 Split Ability 05",
+        "Ability 13": "    +1 Split Ability 06",
+        "Ability 14": "    +1 Split Ability 07",
+        "Ability 15": "    +1 Split Ability 08",
+        "Ability 16": "    +1 Split Ability 09",
+        "Ability 17": "    +1 Split Ability 10"
+      }
+    },
+    {
+      "pages": [1],
+      "sub": ["Ability 2", "Ability 3", "Ability 4", "Ability 5", "Ability 6", "Ability 7", "Ability 8", "Ability 9", "Ability 10", "Ability 11"],
+      "fields": {
+        "Character Name": "Ōtori Łukasz (continued)",
+        "Ability 1": "Unique Ability (Split Block) (continued)",
+        "Ability 2": "    +1 Split Ability 11",
+        "Ability 3": "    +1 Split Ability 12",
+        "Ability 4": "    +1 Split Ability 13",
+        "Ability 5": "    +1 Split Ability 14",
+        "Ability 6": "    +1 Split Ability 15",
+        "Ability 7": "    +1 Split Ability 16",
+        "Ability 8": "    +1 Split Ability 17",
+        "Ability 9": "    +1 Split Ability 18",
+        "Ability 10": "    +1 Split Ability 19",
+        "Ability 11": "    +1 Split Ability 20"
+      }
+    }
+  ]
+]

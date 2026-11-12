@@ -1,0 +1,182 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Ōtori Łukasz
+.L 49.31 284.10
+\f[NSR]\s[12]Test Player
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Plain Ability 01
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Plain Ability 02
+.L 142.70 39.47
+\f[NSR]\s[8]+1
+.L 142.70 59.20
+\f[NSI]\s[8]Plain Ability 03
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Plain Ability 04
+.L 168.70 39.47
+\f[NSR]\s[8]+1
+.L 168.70 59.20
+\f[NSI]\s[8]Plain Ability 05
+.L 181.70 39.47
+\f[NSR]\s[8]+1
+.L 181.70 59.20
+\f[NSI]\s[8]Plain Ability 06
+.L 194.70 39.47
+\f[NSR]\s[8]+1
+.L 194.70 59.20
+\f[NSI]\s[8]Plain Ability 07
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Plain Ability 08
+.L 220.70 39.47
+\f[NSR]\s[8]+1
+.L 220.70 59.20
+\f[NSI]\s[8]Plain Ability 09
+.L 233.70 39.47
+\f[NSR]\s[8]+1
+.L 233.70 59.20
+\f[NSI]\s[8]Plain Ability 10
+.L 246.70 39.47
+\f[NSR]\s[8]+1
+.L 246.70 59.20
+\f[NSI]\s[8]Plain Ability 11
+.L 259.70 39.47
+\f[NSR]\s[8]+1
+.L 259.70 59.20
+\f[NSI]\s[8]Plain Ability 12
+.L 272.70 39.47
+\f[NSR]\s[8]+1
+.L 272.70 59.20
+\f[NSI]\s[8]Plain Ability 13
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Unique Weakness (Test Weakness)
+.SP p1
+.L 48.77 148.50
+\f[NSR]\s[10.5]Ōtori Łukasz (continued)
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Transformation (Moving Block)
+.L 129.70 67.20
+\f[NSLI]\s[6.5]+1 Moved Ability 1
+.L 142.70 67.20
+\f[NSLI]\s[6.5]+1 Moved Ability 2
+.L 155.70 67.20
+\f[NSLI]\s[6.5]+1 Moved Ability 3
+.L 168.70 67.20
+\f[NSLI]\s[6.5]+1 Moved Ability 4
+.L 181.70 67.20
+\f[NSLI]\s[6.5]+1 Moved Ability 5
+.L 194.70 39.47
+\f[NSR]\s[8]+3
+.L 194.70 59.20
+\f[NSI]\s[8]Unique Ability (Split Block)
+.L 207.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 01
+.L 220.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 02
+.L 233.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 03
+.L 246.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 04
+.L 259.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 05
+.L 272.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 06
+.L 285.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 07
+.L 298.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 08
+.L 311.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 09
+.L 324.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 10
+.SP p1
+.L 48.77 148.50
+\f[NSR]\s[10.5]Ōtori Łukasz (continued)
+.L 116.70 59.20
+\f[NSI]\s[8]Unique Ability (Split Block) (continued)
+.L 129.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 11
+.L 142.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 12
+.L 155.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 13
+.L 168.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 14
+.L 181.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 15
+.L 194.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 16
+.L 207.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 17
+.L 220.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 18
+.L 233.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 19
+.L 246.70 67.20
+\f[NSLI]\s[6.5]+1 Split Ability 20
+.SP p2

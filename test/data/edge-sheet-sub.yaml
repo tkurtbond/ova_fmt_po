@@ -1,0 +1,104 @@
+# Blocks of sub-rows on the sheet's Abilities column (17 lines): a
+# Transformation of 6 rows that doesn't fit what is left after 13 rows,
+# so it moves whole to the next copy of page 1, and a Unique Ability of 21 rows,
+# taller than the column, which is split and goes on under "(continued)".
+# The name is outside WinAnsi (O macron, L stroke), for test/sheet.sh.
+- name: Ōtori Łukasz
+  player: Test Player
+  abilities:
+    - name: Plain Ability 01
+      level: 1
+    - name: Plain Ability 02
+      level: 1
+    - name: Plain Ability 03
+      level: 1
+    - name: Plain Ability 04
+      level: 1
+    - name: Plain Ability 05
+      level: 1
+    - name: Plain Ability 06
+      level: 1
+    - name: Plain Ability 07
+      level: 1
+    - name: Plain Ability 08
+      level: 1
+    - name: Plain Ability 09
+      level: 1
+    - name: Plain Ability 10
+      level: 1
+    - name: Plain Ability 11
+      level: 1
+    - name: Plain Ability 12
+      level: 1
+    - name: Plain Ability 13
+      level: 1
+    - name: Transformation
+      level: 1
+      detail: Moving Block
+      abilities:
+        - name: Moved Ability 1
+          level: 1
+        - name: Moved Ability 2
+          level: 1
+        - name: Moved Ability 3
+          level: 1
+        - name: Moved Ability 4
+          level: 1
+        - name: Moved Ability 5
+          level: 1
+    - name: Unique Ability
+      level: 3
+      detail: Split Block
+      abilities:
+        - name: Split Ability 01
+          level: 1
+        - name: Split Ability 02
+          level: 1
+        - name: Split Ability 03
+          level: 1
+        - name: Split Ability 04
+          level: 1
+        - name: Split Ability 05
+          level: 1
+        - name: Split Ability 06
+          level: 1
+        - name: Split Ability 07
+          level: 1
+        - name: Split Ability 08
+          level: 1
+        - name: Split Ability 09
+          level: 1
+        - name: Split Ability 10
+          level: 1
+        - name: Split Ability 11
+          level: 1
+        - name: Split Ability 12
+          level: 1
+        - name: Split Ability 13
+          level: 1
+        - name: Split Ability 14
+          level: 1
+        - name: Split Ability 15
+          level: 1
+        - name: Split Ability 16
+          level: 1
+        - name: Split Ability 17
+          level: 1
+        - name: Split Ability 18
+          level: 1
+        - name: Split Ability 19
+          level: 1
+        - name: Split Ability 20
+          level: 1
+  weaknesses:
+    - name: Unique Weakness
+      level: -1
+      detail: Test Weakness
+  attacks:
+    - name: Strike
+      roll: 3
+      dx: 15
+      end: 0
+  defense: 3
+  health: 40
+  endurance: 40
