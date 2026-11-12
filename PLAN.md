@@ -265,8 +265,274 @@ alias, four values allowed) fail the golden check; `DefenseText`'s
 stop at the third slot can't be reached, since a fourth value is a
 load error.
 
+## The official character sheet as PDF [planned]
+
+Asked for 2026-11-12: a plan for PDF output like the official
+`~/Reference/RPG/OVA/OVA-Blank-Character-Sheet-Form-Fillable.pdf`,
+filled from the YAML, with open source tools found on Linux and the
+BSDs. Nothing below is built yet. By this repo's rule a new format goes
+into the Ada version first, so each step is "Ada, then port".
+
+### What the sheet is
+
+Two A5 pages (419.528 x 595.276 pt), made in InDesign. It is an
+AcroForm with 100 fields (`pdftk ... dump_data_fields_utf8`; the
+rectangles came from pypdf). These are the Ada PLAN.md's §5 field
+set:
+
+| Field(s) | Where | Notes |
+|---|---|---|
+| `Character Name`, `Player Name` | p1 header | Consolas 12 |
+| `Abilities Dice1`..`17`, `Ability 1`..`17` | p1 left | level and "name (detail) [perks]", one line each, Consolas 8, about 152 pt wide |
+| `Weakness Dice 1`..`17`, `Weakness 1`..`17` | p1 right | the same |
+| `Attack 1`..`4` / `Attack Description 1`..`4` | p1 Combat Stats | name, then a two-line description (Affinity, perks/flaws) |
+| `roll`, `dx`, `end` (`_2`..`_4`) | p1 | auto-sized (`0 Tf`) |
+| `Defense`, `Health`, `Endurance`, `TV` | p1 bottom | `Defense` holds `D/A/A` |
+| `Combat Notes` | p1 left | multi-line, Consolas 6 |
+| `Background`, `Appearance`, `Personality`, `Other Notes` | p2 | multi-line, Consolas 8 |
+| `Portrait` | p2 right | a button (an image field), 163 x 287 pt |
+
+The slots are fixed: 17 Abilities, 17 Weaknesses, 4 attacks. A
+character with more needs another page. So does one with a Companion,
+Vehicle or Transformation (a linked Ability, which gets its own
+block), a Fragment's parent, or `notes:` callouts. The sheet has no
+place for the tagline, character hooks, fluff or `options`.
+
+### Sub-Abilities, as the rulebook prints them
+
+The rulebook (`~/Reference/RPG/OVA/OVA_The_Anime_Role-Playing_Game.pdf`,
+A5 like the sheet) prints its Sample Characters and Sample NPCs in the
+sheet's own layout. They show the sheet filled in, including what it
+has no lines for: an Ability with Abilities built under it. The page
+numbers below are printed ones; the PDF's page is two more (printed 31
+is PDF page 33). I read each block at 300 dpi (2026-11-12):
+
+- **Miho** (p. 31), Transformation +1. The rows built under it are in
+  smaller italic, indented into the name column, with a level column
+  of their own: "+2 Combat Expert", "+2 Endurance Reserve", "−3 Unique
+  Weakness". The last one's detail, "(Loss of Control)", wraps onto a
+  hanging line under the name. The granted Weakness stays **in the
+  Abilities column, inside the Transformation**, after its granted
+  Abilities. It is not in the Weaknesses column.
+- **Fukiko** (p. 37), Transformation +4, in the same form: "+2 Attack",
+  then "+3 Barrier (AREA EFFECT; ELABORATE GESTURES; 5 END)", with the
+  perks, flaws and Endurance in small caps, wrapping with a hanging
+  indent. Then "+2 Combat Expert", "+2 Healer" and "−1 Bizarre
+  Appearance (Cat Features)". Barrier's `note` isn't printed: its
+  effect is the second Defense value, "4/5".
+- **Auren** (p. 39), Magic, Arcane +3: six spells in smaller italic,
+  in document order, aligned with the name column, with no level
+  column: "Mana Shield (Barrier +2; 10+ Endurance)" through "Atlas Arm
+  (Strong +3; 20 Endurance)".
+- **Acacia** (p. 134, Sample NPCs), Magic, Witchcraft +3: three
+  spells, indented a little further, in the form "Break (Frail −2, 10
+  END)". Her stat block is simpler. A single column holds the
+  Abilities, a faint rule, then the Weaknesses. It sits beside an
+  "Attacks & Combat Stats (HEROIC)" box, which names her NPC type.
+- Related, but not built-under rows:
+  - Karis's Companion Arasuni (p. 29) has its own Abilities and
+    Weaknesses box and a second "Attacks & Combat Stats (ARASUNI)" box
+    on the same page.
+  - Fukiko's Companion Azyrus, a Fragment, is prose with an
+    "Attributes:" line.
+
+In ova_fmt these are an `Ability`'s `subAbilities` and `subWeaknesses`
+(`SubItem`, sorted, which matches Fukiko's order) and its `spells`
+(`Spell`, in document order, which matches Auren's). `-G` already
+prints them, as nested `hd` tables. The sheet output follows the
+rulebook instead:
+
+- **Rows, not lines.** `OvaSheetMap.Fill` turns each column into a
+  list of rows, each with a kind:
+  - `Item`: the level goes in the Dice field, the name in the Ability
+    or Weakness field.
+  - `Sub`: the level and the name both go in the name field, indented,
+    with the level in a narrow column of its own.
+  - `Spell`: no level, indented.
+
+  A `Sub` row's text comes from `FormatSubItemLine`. A `Spell` row
+  uses the rulebook's "Name (Ability +L; N Endurance)", which is
+  `FormatSpellLine` in parentheses. There is one form for both
+  characters: Acacia's "10 END" is the rulebook being inconsistent,
+  not a second form to copy. The `*` override marks are as in `raw`.
+  An item's `note` stays off the row, as in the rulebook, and goes on
+  the continuation page.
+- **Granted Weaknesses go in the Abilities column**, in the
+  Transformation's block, after its granted Abilities, as Miho's and
+  Fukiko's are. The Weaknesses column holds only the character's own.
+- **A parent and its rows are one block, kept together.** If a block
+  doesn't fit in the column's remaining lines, all of it moves to the
+  continuation page. Only a block taller than the whole column is
+  split; the next page then repeats the parent as "Name (continued)".
+- **Size and spacing.** The sheet rules its lines 13 pt apart; the
+  rulebook sets built-under rows about a quarter smaller and closer
+  together. The overlay sets `Item` rows at 8 pt and `Sub` and `Spell`
+  rows at about 6.5 pt, one row per ruled line. If a column would
+  overflow, it first packs the sub-rows about 9 pt apart, as the
+  rulebook does, ignoring the ruling, and only then moves blocks to
+  the continuation page. Whether the packed rows look right over the
+  dotted ruling is to be checked by eye in step 2 of the order below.
+  A sub-row too wide for the column wraps with a hanging indent, as
+  Miho's and Fukiko's do, and each wrapped line counts as a row. Small
+  caps for the perks, flaws and Endurance (`\s-1` and upper case, as
+  the overlay font has no real small caps) are optional.
+- **In XFDF** each row is one line field, and the Dice field can only
+  hold an `Item`'s level. A `Sub` row goes in the Ability field as
+  "  +2 Combat Expert" and a `Spell` row as "  Mana Shield (Barrier
+  +2; 10+ Endurance)", with the Dice field empty. Consolas is
+  monospaced, so the indent lines up. The form can't wrap or shrink,
+  so long rows are cut off (the limit noted in "Two ways" below).
+- **A Companion or Vehicle is not rows.** Its parent row on the sheet
+  reads "Companion (Arasuni)". Its own Abilities and Weaknesses box
+  and its Attacks & Combat Stats box go on the continuation page, as
+  Karis's Arasuni does in the rulebook. A Fragment Companion is prose
+  with an Attributes line, as Azyrus is.
+- **Acacia's one-column block** is the model for an NPC sheet, part of
+  the open question about redrawing the sheet. That layout puts a
+  faint rule between the Abilities and the Weaknesses, and the same
+  rows go above it.
+
+### Tools
+
+All are packaged on Fedora, Debian and the BSDs' ports/pkgsrc. All but
+pypdf are installed here.
+
+- **pdftk** (pdftk-java): `fill_form` with XFDF, `flatten`,
+  `dump_data_fields_utf8`, `multistamp`. Tested: it fills and flattens
+  this form. qpdf and pdfcpu can fill forms too.
+- **qpdf**: `--overlay`/`--underlay` puts one PDF's pages over
+  another's, `--flatten-annotations=all` bakes in a filled form, and
+  `--pages` appends continuation pages. Tested: a groff page laid over
+  the flattened sheet lands where it was placed.
+- **groff** (1.23, `-Tpdf`, with `-k`/preconv for UTF-8): typesets the
+  overlay. Absolute placement is easy (`.sp |Np`, `\h'|Np'`). It fills
+  and hyphenates multi-line boxes, and gropdf embeds fonts. `.PDFPIC`
+  places the portrait, a PDF that **rsvg-convert** or **ImageMagick**
+  makes from a PNG, JPEG or SVG. This program already writes groff
+  (`-G`).
+- **Lout**: the other choice for the overlay, and what the Ada PLAN.md
+  §9 step 7 already plans for a direct-to-Lout backend. Absolute
+  placement is clumsier in Lout than in groff, and its PostScript
+  output needs ps2pdf.
+- **Ghostscript** (`ps2pdf`, and for checking), **poppler-utils**
+  (`pdftoppm` to render pages for review, `pdftotext` for tests,
+  `pdffonts`), **mutool** (MuPDF) as a second renderer.
+- Not chosen: LaTeX (`textpos`/`pdfpages`), typst and Inkscape. They
+  are able, but each is a large dependency the toolchain doesn't
+  already have.
+
+### Two ways, and the findings that decide between them
+
+1. **Fill the form.** ova_fmt writes XFDF (UTF-8 XML, one `<field>` per
+   form field). Then `pdftk SHEET fill_form X.xfdf output OUT.pdf
+   [flatten]`. This is the simplest way, and the result is still a
+   form the player can edit in a PDF reader. Tested, it has limits:
+   - The fields' font is Consolas with **WinAnsi encoding**, so pdftk
+     drops any character outside it: "Tōdō" came out "T d". Characters
+     in WinAnsi, such as the em dash, survive. Japanese names, U+2212
+     minus and the like are lost unless the reader regenerates the
+     appearances (`need_appearances`, which flattening can't use).
+   - Single-line fields **clip** without wrapping or shrinking, so a
+     long "Name (detail) [perks]" is cut at the field's edge.
+   - Text can't overflow to another page. The portrait button needs
+     its own image stamp.
+2. **Overlay typeset text on the blank sheet.** ova_fmt writes a groff
+   document at the sheet's page size. Each value goes in its field's
+   rectangle, in a font with the characters it needs. If a value is
+   too long, its point size steps down to a floor, then it wraps. The
+   overflow goes on continuation pages: linked Abilities, extra
+   attacks, notes, hooks, and whatever the slots couldn't hold.
+   Then:
+
+       qpdf --flatten-annotations=all --remove-restrictions SHEET blank.pdf   # once
+       ova_fmt_po -S x.yaml | groff -k -Tpdf -P-p595.276p,419.528p > text.pdf
+       qpdf blank.pdf --overlay text.pdf --to=1-2 -- --pages . text.pdf 3-z -- out.pdf
+
+   (A one-page variant just for p1 or p2 comes from the `--to` range.
+   `--pages` appends the continuation pages, which are plain pages and
+   need no background.) Tested: positioning works, and UTF-8 needs
+   `-k`. This gives full Unicode, wrapping and fitting, the portrait
+   (`.PDFPIC`), and no fixed limits.
+
+**Proposed:** do both, the overlay first. It is the complete output,
+and XFDF then costs little, since its field mapping is the same code.
+The form-filled PDF is the one for a player who wants to keep editing
+it.
+
+### Modules (each in the Ada version first, then ported)
+
+| Oberon module | Ada unit | Writes |
+|---|---|---|
+| `OvaSheetMap` | `Ova_Fmt.Sheet_Map` | Shared: the field table above (name, page, rectangle, size, single/multi-line) as constants, and `Fill(e)`. `Fill` maps an entity onto slots: Abilities and Weaknesses sorted as now (`OvaCommon`), each "Name (detail) [perks/flaws/endurance]" with the level in the Dice column. Built-under content becomes `Sub` and `Spell` rows in blocks kept together ("Sub-Abilities, as the rulebook prints them"). Attacks go to name / "Affinity; perks; flaws" / Roll, DX, End. Defense is `OvaCommon.DefenseText`, and `*` marks overrides, as `raw` does. Prose fields are trimmed and joined (`AllOneLine` where a field is one line). Whatever didn't fit goes on an overflow list. |
+| `OvaXfdf` | `Ova_Fmt.Format_Xfdf` | `-X`/`--xfdf`: XFDF for `pdftk fill_form`, XML-escaped (`&`, `<`, `>`, `"`). Overflow becomes one line at the end of Other Notes ("More on the continuation sheet"), or, with an option, goes to standard error. |
+| `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size. A macro `FLD page x y w h size` places each value. Two passes per value: measure with `\w`, shrink to the floor, then wrap in an `.ev` with `.ll` set to the field's width. The continuation pages are in `-ms` style: linked Abilities, then the sections the sheet has no place for, reusing `OvaCommon`'s Formatter callbacks, as `OvaHmm` does. `-P FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file, as in `-H`. |
+
+They fit the existing structure. `OvaConfig` gets `Xfdf` and `Sheet`
+(exclusive with the other format flags, as now). `OvaFmt` dispatches
+to them per entity. A file of several entities becomes several sheets,
+one per main entity, each with its own linked Abilities on its
+continuation pages. Subentities are not sheets of their own.
+
+Escaping in `OvaSheet`: troff needs `\` written as `\e`, and a line
+that would start with `.` or `'` gets `\&` in front. Only the program
+writes requests. `OvaText` gains the XML escape and the troff escape,
+with unit tests in `TestText.Mod`.
+
+### Build and tests
+
+- `make sheet`: `build/%.sheet.pdf` from each fixture, by the pipeline
+  above. `make xfdf`: `build/%.xfdf` and `build/%.form.pdf` through
+  `pdftk fill_form ... flatten`. The blank sheet's path is a make
+  variable (`OVA_SHEET`) that defaults to the Reference copy. **The
+  sheet itself is not copied into either repo**: it is Dyskami's.
+- Golden cases fix the program's own output (the XFDF and the troff),
+  from the Ada binary as for every other format. They don't fix the
+  PDFs, which depend on the groff, pdftk and qpdf versions.
+- `test/sheet.sh` (run by `make test` only when pdftk, qpdf and groff
+  are present) builds a few fixtures to PDF. With `pdftotext -layout`
+  it checks that each value appears and that p1 and p2 are two pages,
+  plus one more page if there is overflow. Checks:
+  - 18 Abilities overflow (an `edge-sheet-overflow.yaml`).
+  - Miho's granted Weakness is in the Abilities column: `pdftotext`
+    with `-x -y -W -H` set to that column's rectangle.
+  - A block that doesn't fit moves whole, and one taller than the
+    column splits with "(continued)" (an `edge-sheet-sub.yaml`).
+  - A non-WinAnsi name survives the overlay.
+  - The XFDF escapes.
+  - A Companion goes to a continuation page.
+
+  As always, prove each check by planting its bug.
+- Review by eye: render with `pdftoppm -r 110` and compare with the
+  blank sheet, and with the rulebook's own pages. Check Miho, Fukiko
+  (Transformation), Auren and Acacia (spells), Karis (nested
+  Companion), Natsuki (overrides), a Fragment and `Defenses.yaml`.
+
+### Order
+
+1. Ada first: `Sheet_Map` and `Format_Xfdf`, with golden files, and
+   `make xfdf` there. Then port them here (`OvaSheetMap`, `OvaXfdf`)
+   and check byte for byte.
+2. Ada first: `Format_Sheet`, with the field placement checked against
+   rendered pages, then continuation pages and the portrait. Then port
+   `OvaSheet` here.
+3. `test/sheet.sh`, `make sheet`/`make xfdf`, and the valgrind runs for
+   the new paths.
+
 ## Open questions
 
-- None yet. The Ada version's own open questions (direct-to-Lout
-  output, a nested-table Markdown mode) are features still to design
-  there; a change to the Ada program belongs here too.
+- **The official sheet as PDF** (above), to be decided before work
+  starts:
+  - Should the overlay be in groff (proposed: easy absolute placement,
+    and the program already writes it) or Lout (the Ada plan's
+    direct-to-Lout backend)?
+  - Which option letters: `-S` and `-X` (free now), and `-P` for the
+    portrait?
+  - Should there be a third mode that redraws the whole sheet
+    ourselves, with no Dyskami artwork? Only that mode's output could
+    be shared freely beyond personal use.
+  - Which fonts should the overlay use? Consolas, to match the form,
+    isn't free; DejaVu Sans Mono or Noto have the coverage.
+
+- The Ada version's own open questions (direct-to-Lout output, a
+  nested-table Markdown mode) are features still to design there; a
+  change to the Ada program belongs here too.
