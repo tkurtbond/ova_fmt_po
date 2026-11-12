@@ -25,6 +25,11 @@ IMPORT OvaCommon, OvaConfig, OvaEntities, OvaOut, OvaSheetFonts, OvaSheetMap, Ov
 CONST
   LF = 0AX;
 
+  (* Where Width stops counting: 20,000 points, far wider than any
+     line, and small enough that Break's sum of two such widths is
+     still an INTEGER. *)
+  MaxWidth = 200000000;
+
   (* ---- The sheet's geometry, in centipoints, from its form fields'
      rectangles: X and Y0 the lower left corner, Y0 from the bottom of
      the page, as PDF measures. ---- *)
@@ -90,8 +95,10 @@ TYPE
   Lines = RECORD first, last: Ints; n: INTEGER END;
 
   (* An owner's parts of the continuation pages, gathered over its
-     copies of page 1. *)
-  OwnerParts = RECORD abilityNotes, attacks, combatNotes: Rope END;
+     copies of page 1: the Character Name and Player Name fields in full
+     when cut (the first cut copy's), and the notes, attacks and combat
+     notes that don't fit. *)
+  OwnerParts = RECORD name, player, abilityNotes, attacks, combatNotes: Rope END;
 
   (* The parts of the continuation pages: a heading, then each line of
      its content a paragraph. *)
@@ -226,8 +233,8 @@ PROCEDURE Plain(r: Rope; l: Look): Styled;
 BEGIN s := NewStyled(); AddRope(s, r, l, FALSE); RETURN s
 END Plain;
 
-(* The width of s's bytes first .. last, in ten-thousandths of a point:
-   a run of one look at a time. *)
+(* The width of s's bytes first .. last, in ten-thousandths of a point,
+   up to MaxWidth: a run of one look at a time. *)
 PROCEDURE Width(s: Styled; first, last: INTEGER): INTEGER;
   VAR w, i, j: INTEGER;
 BEGIN
@@ -236,6 +243,7 @@ BEGIN
     j := i;
     WHILE (j < last) & SameLook(s.looks[j + 1], s.looks[i]) DO INC(j) END;
     w := w + OvaSheetFonts.TextWidth(s.t^, i, j + 1, s.looks[i].face) * s.looks[i].size;
+    IF w > MaxWidth THEN w := MaxWidth END;
     i := j + 1
   END;
   RETURN w
@@ -535,8 +543,15 @@ PROCEDURE PutPage1(p: OvaSheetMap.Page; VAR parts: OwnerParts);
 BEGIN
   stat := OvaSheetWidths.CondensedSemibold;
   Line(".SP p1");
-  PutIn(p.title, OvaSheetWidths.Regular, 120, 80, characterName, FALSE);
-  IF p.hasPlayer THEN PutIn(p.player, OvaSheetWidths.Regular, 120, 80, playerName, FALSE) END;
+  IF ~PutLineIn(p.title, OvaSheetWidths.Regular, 120, 80, characterName, FALSE, FALSE)
+     & (Ropes.Length(parts.name) = 0) THEN
+    parts.name := p.title
+  END;
+  IF p.hasPlayer
+     & ~PutLineIn(p.player, OvaSheetWidths.Regular, 120, 80, playerName, FALSE, FALSE)
+     & (Ropes.Length(parts.player) = 0) THEN
+    parts.player := p.player
+  END;
   PutRows(parts, p.abilities, AbilityDiceX, AbilityNameX);
   PutRows(parts, p.weaknesses, WeaknessDiceX, WeaknessNameX);
   PutAttacks(parts, p.attacks);
@@ -569,6 +584,8 @@ END Label;
 
 PROCEDURE AddOwnerSections(VAR ss: Sections; owner: Rope; parts: OwnerParts);
 BEGIN
+  AddSection(ss, Label(owner, ": Name"), parts.name);
+  AddSection(ss, Label(owner, ": Player Name"), parts.player);
   AddSection(ss, Label(owner, ": Ability Notes"), parts.abilityNotes);
   AddSection(ss, Label(owner, ": Attacks"), parts.attacks);
   AddSection(ss, Label(owner, ": Combat Notes (continued)"), parts.combatNotes)
@@ -726,6 +743,7 @@ BEGIN
   OvaSheetMap.Fill(e, RowLines, pages);
   OvaText.Clear(ss.labels); OvaText.Clear(ss.contents);
   FOR i := 0 TO ProseFields - 1 DO fitted[i] := NIL END;
+  parts.name := NIL; parts.player := NIL;
   parts.abilityNotes := NIL; parts.attacks := NIL; parts.combatNotes := NIL;
 
   IF firstEntity THEN PutPreamble; firstEntity := FALSE END;
@@ -739,6 +757,7 @@ BEGIN
     page := pages.items[i](OvaSheetMap.Page);
     IF (i > 0) & ~page.continued THEN
       AddOwnerSections(ss, pages.items[i - 1](OvaSheetMap.Page).owner, parts);
+      parts.name := NIL; parts.player := NIL;
       parts.abilityNotes := NIL; parts.attacks := NIL; parts.combatNotes := NIL
     END;
     PutPage1(page, parts)

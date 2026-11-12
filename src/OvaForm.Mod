@@ -30,6 +30,13 @@ IMPORT OvaCommon, OvaEntities, OvaOut, OvaSheetMap, OvaText, Ropes;
 CONST
   LF = 0AX;
 
+  (* Where a width stops counting, whether a text's (in thousandths of
+     an em) or a word's times its size: wider than any field, by more
+     lines than any field holds, and small enough that times a size, or
+     added to a line's width, it is still an INTEGER.  A word of a
+     million characters would otherwise overflow it. *)
+  TooWide = 100000000;
+
   (* Inner widths and heights of the fields, in tenths of a point;
      leading is 1.2 times the size, so a field of height h at size s
      takes h DIV (s * 12) lines. *)
@@ -116,7 +123,10 @@ PROCEDURE FitsLine(r: Rope; size: INTEGER; bold: BOOLEAN; width: INTEGER): BOOLE
   VAR s: String; i, w: INTEGER;
 BEGIN
   s := OvaText.Chars(r); w := 0;
-  FOR i := 0 TO SHORT(LEN(s^)) - 2 DO w := w + CharWidth(s[i], bold) END;
+  FOR i := 0 TO SHORT(LEN(s^)) - 2 DO
+    w := w + CharWidth(s[i], bold);
+    IF w > TooWide THEN w := TooWide END
+  END;
   RETURN w * size <= width * 100
 END FitsLine;
 
@@ -140,7 +150,11 @@ BEGIN
     ELSIF s[i] = " " THEN INC(i)
     ELSE
       j := i; w := 0;
-      WHILE (j < n) & (s[j] # " ") & (s[j] # LF) DO w := w + CharWidth(s[j], bold) * size; INC(j) END;
+      WHILE (j < n) & (s[j] # " ") & (s[j] # LF) DO
+        w := w + CharWidth(s[j], bold) * size;
+        IF w > TooWide THEN w := TooWide END;
+        INC(j)
+      END;
       IF ~fresh THEN
         IF cur + space + w <= limit THEN cur := cur + space + w
         ELSE INC(lines); fresh := TRUE

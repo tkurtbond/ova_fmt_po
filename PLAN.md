@@ -112,16 +112,41 @@ fixed to match the port, and this port and polibfyaml changed with it:
   message twice; both now print `Invalid value for option
   -u/--underliner: takes exactly one character, got "xx"`.
 
-Found 2026-11-12 and left as is:
+Found 2026-11-12, and fixed the same day in both:
 
-- **`-S` and a word too wide to measure.** A width in `-S` is a
-  32-bit integer in both versions (Ada `Natural`, poc `INTEGER` under
-  `-OC`). A single word of some 30,000 characters overflows it. The
-  Ada version then stops with status 2 and `ova_fmt: invalid numeric
-  option argument` (the Constraint_Error reaches the command line's
-  handler). The port's arithmetic wraps, and it writes troff with
-  that word somewhere. Checked with a `background:` of 40,000 `W`s.
-  No real character has such a word.
+- **A word too wide to measure.** A width is a 32-bit integer in both
+  versions (Ada `Natural`, poc `INTEGER` under `-OC`). In `-S` a
+  single word of some 30,000 characters overflowed it, in `-X` one of
+  about 300,000. The Ada version then stopped with status 2 and
+  `ova_fmt: invalid numeric option argument` (the Constraint_Error
+  reached the command line's handler); the port's arithmetic wrapped,
+  and it wrote the output with the word placed wrongly. Now widths
+  stop counting at a limit far wider than any line or field:
+  `Sheet_Fonts.Max_Text_Width` (1,000 ems) and `Format_Sheet.Max_Width`
+  (20,000 pt) for `-S`, `Format_Form.Too_Wide` for `-X`; and
+  `OvaSheetFonts.MaxTextWidth`, `OvaSheet.MaxWidth` and
+  `OvaForm.TooWide` in the port. A capped width is still wider than
+  every limit it's compared with, and in `-X` still counts more lines
+  than any field holds, so nothing that fit before stops fitting.
+  `edge-wide-word.yaml` (a `background:` with a word of 40,000 `W`s)
+  covers `-S`; with the limits taken out of the port, its
+  `sheet-edge` case fails. `-X`'s limit was checked by hand with
+  words of 1,000,000 and 3,000,000 characters, the two versions'
+  output the same (the port with a larger stack; see below), since a
+  fixture that size isn't worth its golden files.
+
+Found 2026-11-12 and left as is, for the user to decide:
+
+- **The port crashes on a scalar of a few megabytes.**
+  `Ropes.FromString` and `Ropes.FromSubstring` take their array by
+  value, and pass it by value on to `NewLeaf`, so poc copies it to
+  the stack twice. A 5 MB `background:` overflows the 8 MB stack
+  while loading, in every format (SIGSEGV, status 139), where the Ada
+  version reads it. `OvaForm.Escape`, which builds a buffer six times
+  a field's length, does the same with a word of 1,000,000
+  characters under `-X`. The fix is in Ropes (`VAR` parameters inside
+  it, at least for `NewLeaf`), which needs the user's go-ahead. No
+  real character comes near it.
 
 ## The inline format [done]
 
@@ -900,7 +925,12 @@ notes too long for their boxes).
   run to their boxes' edges.
 - **One-line fields** start at a size and step down half a point to
   a floor until the text fits; if it doesn't fit even then, the words
-  that fit are placed. The baseline centres the cap height (0.714 em
+  that fit are placed. A Character Name or Player Name cut that way
+  is given in full on the continuation pages, as "Owner: Name" and
+  "Owner: Player Name", first among the owner's sections (added
+  2026-11-12; until then they were cut silently, Vehicle's
+  "Thunderhawk (Test Pilot's Vehicle)" among them). Only the first
+  cut copy's is kept, so the "(continued)" copies don't repeat it. The baseline centres the cap height (0.714 em
   in Noto Sans) in the field. Name and Player Name: Regular, 12 pt to
   8 pt, at the left. Attack name: Bold, dark red, 8 pt to 6.5 pt.
   Roll, DX, End: Condensed SemiBold, 16 pt to 8 pt, centred; Defense,
@@ -932,7 +962,8 @@ notes too long for their boxes).
 - **Continuation pages**, unlike `-X`'s page-2 copies, are plain
   pages: half-inch margins, a 10 pt Bold heading per section, its
   lines 9 pt Regular paragraphs. The sections, in order: each prose
-  field's rest; per owner, in copy order, "Ability Notes", "Attacks"
+  field's rest; per owner, in copy order, "Name" and "Player Name"
+  (when cut), "Ability Notes", "Attacks"
   (as `-X`'s) and "Combat Notes (continued)"; the `notes:` callouts;
   "Character Hooks". The tagline, summary, fluff and options are left
   out, as for `-X`.

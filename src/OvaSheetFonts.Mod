@@ -16,6 +16,12 @@ CONST
      UTF-8 sequence, measured as an unmeasured character. *)
   Invalid = MAX(INTEGER);
 
+  (* Where TextWidth stops counting: 1,000 ems, wider than any line on
+     the sheet, and small enough that times a size in tenths of a point
+     (180 at most) it is still an INTEGER.  A word of a million
+     characters would otherwise overflow it. *)
+  MaxTextWidth* = 1000000;
+
 (* The face's groff name: "NSR", "NSI", ... *)
 PROCEDURE Name*(f: INTEGER; VAR name: ARRAY OF CHAR);
 BEGIN
@@ -45,7 +51,7 @@ BEGIN
 END CharWidth;
 
 (* The width of s[from .. to - 1], UTF-8, in face f, in thousandths of
-   an em.  A byte that doesn't start or continue a valid sequence counts
+   an em, up to MaxTextWidth.  A byte that doesn't start or continue a valid sequence counts
    as an unmeasured character; control characters count nothing. *)
 PROCEDURE TextWidth*(VAR s: ARRAY OF CHAR; from, to, f: INTEGER): INTEGER;
   VAR w, i, b, code, more: INTEGER;
@@ -68,7 +74,10 @@ BEGIN
         code := Invalid; more := 0
       END
     END;
-    IF code >= 32 THEN w := w + CharWidth(code, f) END
+    IF code >= 32 THEN
+      w := w + CharWidth(code, f);
+      IF w > MaxTextWidth THEN w := MaxTextWidth END
+    END
   END;
   RETURN w
 END TextWidth;
