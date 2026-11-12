@@ -19,7 +19,8 @@
 # and ~ from them), combining, Greek (and the micro sign from it),
 # punctuation, currency, letterlike, arrow and minus blocks, leaving
 # about 260 KB. The widths ova_fmt measures with (Ova_Fmt.Sheet_Widths,
-# from sheet_widths.sh) are taken from the faces this builds.
+# from sheet_widths.sh) are taken from the faces this builds, but for
+# NSXCB, which only -R's labels use, scaled to a fixed width.
 #
 # The poc port (ova_fmt_po) has a copy of this script; keep them the same.
 
@@ -57,7 +58,7 @@ fi
 mkdir -p "$out"
 : >"$out/download.new"
 # groff name, then the face's file name after "NotoSans-".
-for face in NSR:Regular NSI:Italic NSLI:LightItalic NSB:Bold NSCSB:CondensedSemiBold; do
+for face in NSR:Regular NSI:Italic NSLI:LightItalic NSB:Bold NSCSB:CondensedSemiBold NSXCB:ExtraCondensedBold; do
   name=${face%%:*} file=NotoSans-${face#*:}
   ttf=$noto/$file.ttf
   [ -f "$ttf" ] || { echo "$prog: $ttf not found" >&2; exit 1; }

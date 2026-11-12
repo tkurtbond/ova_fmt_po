@@ -56,6 +56,9 @@ ada:all sheet-all  @(Sheet|Karis|Fragment|Vehicle)   -S
 ada:stdin sheet-stdin  @(Sheet|Broken)   -S
 ada    sheet-P     @(Sheet|Auren|Vehicle)   -S -P me.png
 ada    sheet-edge  @(bad-*|edge-*)   -S
+ada    sheet-R     @(Sheet|Karis|Vehicle)   -S -R
+ada:all sheet-R-all  @(Sheet|Fragment|Vehicle)   -S --redraw
+ada    terse-R     @(Sheet)   -R
 
 # ---- Options ----
 ada    terse-O     [A-Z]*   -O

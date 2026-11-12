@@ -4,7 +4,8 @@
 #
 # Usage: ova_sheet.sh [-s SHEET] [-F FONTDIR] [-o OUT.pdf] [-k] [FILE.tr]
 #
-#   -s SHEET    the blank sheet; default $OVA_SHEET
+#   -s SHEET    the blank sheet; default $OVA_SHEET (not needed for
+#               ova_fmt -S -R)
 #   -F FONTDIR  the font directory sheet_fonts.sh built; default
 #               $OVA_SHEET_FONTS
 #   -o OUT.pdf  the output; default FILE with .tr replaced by .pdf
@@ -21,6 +22,10 @@
 # groff's standard error as "ova-sheet-page N p1" (or p2), and qpdf
 # lays that page of the sheet, its form flattened, under page N. The
 # continuation pages are left plain.
+#
+# Troff from `ova_fmt -S -R` draws the sheet itself, and says so in a
+# comment line, `.\" ova-sheet-redrawn`; then no sheet is needed, and
+# none is laid under it. Its labels need the font directory's NSXCB.
 #
 # gropdf embeds only PDF, so each portrait the troff names (a comment
 # line, `.\" ova-sheet-portrait N W H PATH`, W and H the box's size in
@@ -64,11 +69,7 @@ die() {
     exit 1
 }
 
-for tool in qpdf "$groff"; do
-    command -v $tool >/dev/null 2>&1 || die "$tool not found"
-done
-[ -n "$sheet" ] || die "no sheet: give -s SHEET or set OVA_SHEET"
-[ -r "$sheet" ] || die "can't read the sheet $sheet"
+command -v "$groff" >/dev/null 2>&1 || die "$groff not found"
 [ -n "$fonts" ] || die "no font directory: give -F FONTDIR or set OVA_SHEET_FONTS"
 [ -f "$fonts/devpdf/NSR" ] || die "$fonts/devpdf has no NSR: build it with sheet_fonts.sh"
 if [ -z "$out" ]; then
@@ -97,9 +98,19 @@ else
     cp "$in" "$work/sheet.tr" || die "can't read $in"
 fi
 
+redrawn=false
+if grep -q '^\.\\" ova-sheet-redrawn$' "$work/sheet.tr"; then redrawn=true; fi
+if $redrawn; then
+    [ -f "$fonts/devpdf/NSXCB" ] || die "$fonts/devpdf has no NSXCB: rebuild it with sheet_fonts.sh"
+else
+    command -v qpdf >/dev/null 2>&1 || die "qpdf not found"
+    [ -n "$sheet" ] || die "no sheet: give -s SHEET or set OVA_SHEET"
+    [ -r "$sheet" ] || die "can't read the sheet $sheet"
+fi
+
 # The sheet's form fields are empty, but would still draw their
 # borders and highlights, and take clicks, over the text.
-run_qpdf --flatten-annotations=all --remove-restrictions "$sheet" "$work/blank.pdf"
+$redrawn || run_qpdf --flatten-annotations=all --remove-restrictions "$sheet" "$work/blank.pdf"
 
 warn() {
     echo "$prog: $*" >&2
@@ -162,6 +173,11 @@ pages() {
 p1=$(pages p1)
 p2=$(pages p2)
 [ -n "$p1$p2" ] || die "$name: no sheet pages (is it ova_fmt -S output?)"
+
+if $redrawn; then
+    cp "$work/text.pdf" "$out" || die "can't write $out"
+    exit 0
+fi
 
 set --
 [ -z "$p1" ] || set -- "$@" --underlay "$work/blank.pdf" --to="$p1" --from= --repeat=1 --
