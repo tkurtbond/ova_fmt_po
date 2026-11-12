@@ -390,7 +390,9 @@ rulebook instead:
 - **A Companion or Vehicle is not rows.** Its parent row on the sheet
   reads "Companion (Arasuni)". Its own Abilities and Weaknesses box
   and its Attacks & Combat Stats box go on the continuation page, as
-  Karis's Arasuni does in the rulebook. A Fragment Companion is prose
+  Karis's Arasuni does in the rulebook. On the filled form (`-X`) they
+  go on a page-1 copy of their own, named "Arasuni (Karis's
+  Companion)" (the user, 2026-11-12). A Fragment Companion is prose
   with an Attributes line, as Azyrus is.
 - **Acacia's one-column block** is its own option; the two-column
   sheet is the default (the user, 2026-11-12). It is a layout for the
@@ -831,7 +833,8 @@ The Ada version comes first, as this repo's rule says (the user,
       field of the copy opens with a label line of the program's own:
       "Fukiko: Linked Abilities" in Background, "Fukiko: Appearance
       (continued)" and so on. A Companion's or Vehicle's own boxes go
-      on a page-1 copy named "Arasuni (Karis's Companion)" (proposed).
+      on a page-1 copy named "Arasuni (Karis's Companion)" (the user,
+      2026-11-12).
   - ~~Is the filled form left editable, not flattened?~~ Yes (the
     user, 2026-11-12), and its fields are restyled in Helvetica faces.
   - ~~With `-X`, should a minus be ASCII `-`?~~ Yes (the user,
