@@ -10,10 +10,10 @@ IMPORT Ropes;
 
 CONST
   (* Output formats (the Ada Output_Format).  Terse (reST prose) is the
-     default; -g, -M, -H, -G, -m, -i and -X choose the others, and the last
-     one given wins. *)
+     default; -g, -M, -H, -G, -m, -i, -X and -S choose the others, and the
+     last one given wins. *)
   Terse* = 0; Gemtext* = 1; Markdown* = 2; HtmlInRst* = 3; GroffInRst* = 4; Hmm* = 5; Inline* = 6;
-  Form* = 7;
+  Form* = 7; Sheet* = 8;
 
 VAR
   format*: INTEGER;
@@ -27,6 +27,16 @@ VAR
      its own. *)
   outputFile*: Ropes.Rope;      (* -o/--output *)
   hasOutputFile*: BOOLEAN;      (* off: standard output *)
+
+  (* With -S/--sheet, the portrait for every main entity, in place of
+     its own `portrait:` (PLAN.md, "The portrait"). *)
+  portrait*: Ropes.Rope;        (* -P/--portrait *)
+  hasPortrait*: BOOLEAN;        (* off: each entity's own *)
+
+  (* The directory of the file being read, with its final "/"; NIL (empty)
+     for one in the current directory or standard input: a relative
+     `portrait:` path is relative to the YAML file.  OvaFmt sets it. *)
+  sourceDir*: Ropes.Rope;
 
   underliner*: CHAR;            (* -u/--underliner *)
   subunderliner*: CHAR;         (* -U/--subunderliner; 0X = not given *)
@@ -42,6 +52,7 @@ BEGIN
   hmmDepth := 0; hmmCompactLists := FALSE; hmmPlain := FALSE;
   gemtextEmphasis := FALSE;
   outputFile := NIL; hasOutputFile := FALSE;
+  portrait := NIL; hasPortrait := FALSE; sourceDir := NIL;
   underliner := "="; subunderliner := 0X;
   unicodeMinus := TRUE;
   showOptions := FALSE

@@ -1,0 +1,255 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Acacia
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Black Magic)
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Barrier [\f[NSR]\s[7]PERKS: EFFECTIVE; 5 ENDURANCE\f[NSI]\s[8]]
+.L 155.70 39.47
+\f[NSR]\s[8]+3
+.L 155.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Flight
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Incorporeal Form
+.L 194.70 39.47
+\f[NSR]\s[8]+2
+.L 194.70 59.20
+\f[NSI]\s[8]Knowledge (Magic)
+.L 207.70 39.47
+\f[NSR]\s[8]+3
+.L 207.70 59.20
+\f[NSI]\s[8]Magic, Witchcraft
+.L 220.70 67.20
+\f[NSLI]\s[6.5]Break (Frail −2, 10 END)
+.L 233.70 67.20
+\f[NSLI]\s[6.5]Impede (Slow −2, 10 END)
+.L 246.70 67.20
+\f[NSLI]\s[6.5]Wither (Weak −3, 20 END)
+.L 259.70 39.47
+\f[NSR]\s[8]+2
+.L 259.70 59.20
+\f[NSI]\s[8]Vigorous
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Arrogant
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Focus (Flight/Incorporeal Form Require
+.L 142.70 246.30
+\f[NSI]\s[8]Hat)
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Impulsive
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Love Interest (Saspar)
+.L 181.70 220.66
+\f[NSR]\s[8]−2
+.L 181.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 194.70 220.66
+\f[NSR]\s[8]−3
+.L 194.70 240.30
+\f[NSI]\s[8]Servitude (Chaos)
+.L 207.70 220.66
+\f[NSR]\s[8]−2
+.L 207.70 240.30
+\f[NSI]\s[8]Vulnerability (Light/Holy)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Lock Heaven's Door\m[default]
+.L 393.50 145.30
+\f[NSR]\s[6.5]PERKS: FATIGUING, UNIQUE PERK:
+.L 401.50 145.30
+\f[NSR]\s[6.5]PREVENTS HEALING/RECOVERING UNTIL
+.L 409.50 145.30
+\f[NSR]\s[6.5]BATTLE'S END
+.L 405.04 295.11
+\f[NSCSB]\s[16]3
+.L 405.04 328.61
+\f[NSCSB]\s[16]3
+.L 405.04 358.47
+\f[NSCSB]\s[16]10
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Devil's Breath\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]AFFINITY: DARK; PERKS: BLINDING; FLAWS:
+.L 445.10 145.30
+\f[NSR]\s[6.5]FEATHER BLOW
+.L 443.79 295.11
+\f[NSCSB]\s[16]3
+.L 443.79 328.61
+\f[NSCSB]\s[16]3
+.L 443.79 358.47
+\f[NSCSB]\s[16]15
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Heroic
+.L 564.95 168.12
+\f[NSCSB]\s[18]4
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]60
+.L 564.95 354.00
+\f[NSCSB]\s[18]14
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Acacia serves the Order of Chaos, a group bent on
+.L 57.69 38.70
+\f[NSR]\s[8]reviving ancient magic to usher in an age of
+.L 67.69 38.70
+\f[NSR]\s[8]discord. Alongside her partner Saspar she carries
+.L 77.69 38.70
+\f[NSR]\s[8]out whatever the Order asks, armed with witchcraft
+.L 87.69 38.70
+\f[NSR]\s[8]and a retinue of demons. The Order's goals mean
+.L 97.69 38.70
+\f[NSR]\s[8]little to her, though: she's devoted to Saspar, and
+.L 107.69 38.70
+\f[NSR]\s[8]serves Chaos only because he does, hoping one
+.L 117.69 38.70
+\f[NSR]\s[8]day to be more to him than a partner.
+.CP
+.SH
+\&Acacia: Attacks
+.PP
+\&Lock Heaven's Door: A stroke of her finger saps the target's energy and fills them with dread.
+.PP
+\&Devil's Breath: A chilling breath clouds the target's mind.
+.SH
+\&Acacia: Character Hooks
+.PP
+\&The Order of Chaos makes Acacia and Saspar natural enemies for anyone defending the world from evil -- Fukiko and Auren, whose backgrounds both feature a vague darkness to be fought, fit especially well. They can also serve as magical rivals.
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Sazza and Fraz
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Attack [\f[NSR]\s[7]PERKS: EFFECTIVE X3, RANGED;
+.L 129.70 65.20
+\f[NSR]\s[7]FLAWS: ASSISTED\f[NSI]\s[8]]
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Quick
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Frail
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Weak
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Secondary
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]**Sazza and Fraz**, twin lesser demons of mischief
+.L 57.69 38.70
+\f[NSR]\s[8]in Acacia's service, always appear together. Alone,
+.L 67.69 38.70
+\f[NSR]\s[8]each is feeble; as a pair they hit startlingly hard.
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]High Fructo Cezar
+.L 116.70 39.47
+\f[NSR]\s[8]+3
+.L 116.70 59.20
+\f[NSI]\s[8]Strong
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Tough
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Clumsy
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Slow
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Secondary
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]**High Fructo Cezar**, another of Acacia's
+.L 57.69 38.70
+\f[NSR]\s[8]demons, once held real power, until a single act of
+.L 67.69 38.70
+\f[NSR]\s[8]kindness cost him his rank and sealed away most
+.L 77.69 38.70
+\f[NSR]\s[8]of his strength. He resents it, but he stays mostly
+.L 87.69 38.70
+\f[NSR]\s[8]loyal to Acacia.

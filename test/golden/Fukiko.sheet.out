@@ -1,0 +1,252 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Fukiko
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Companion (Azyrus)
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Cute!
+.L 142.70 39.47
+\f[NSR]\s[8]+1
+.L 142.70 59.20
+\f[NSI]\s[8]Iron-Willed
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Knowledge (Shoujo Manga)
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Quick
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Shape-Shifter
+.L 194.70 39.47
+\f[NSR]\s[8]+4
+.L 194.70 59.20
+\f[NSI]\s[8]Transformation
+.L 207.70 67.20
+\f[NSLI]\s[6.5]+2 Attack
+.L 220.70 67.20
+\f[NSLI]\s[6.5]+3 Barrier [\f[NSR]\s[5.5]PERKS: AREA EFFECT; FLAWS: ELABORATE
+.L 233.70 73.20
+\f[NSR]\s[5.5]GESTURES; 5 ENDURANCE\f[NSLI]\s[6.5]]
+.L 246.70 67.20
+\f[NSLI]\s[6.5]+2 Combat Expert
+.L 259.70 67.20
+\f[NSLI]\s[6.5]+2 Healer
+.L 272.70 67.20
+\f[NSLI]\s[6.5]−1 Bizarre Appearance (Cat Features)
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Ageism
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Crybaby
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Easily Distracted
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Focus (Powers Require Neko
+.L 168.70 246.30
+\f[NSI]\s[8]Transformation Locket)
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Frail
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Naive
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Neko Neko Catnip Cantrip\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: LOVE; PERKS: RANGED
+.L 405.04 295.11
+\f[NSCSB]\s[16]4
+.L 405.04 328.61
+\f[NSCSB]\s[16]3
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Neko Neko Heart Burst\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]AFFINITY: LOVE; PERKS: EFFECTIVE X2,
+.L 445.10 145.30
+\f[NSR]\s[6.5]RANGED
+.L 443.79 295.11
+\f[NSCSB]\s[16]4
+.L 443.79 328.61
+\f[NSCSB]\s[16]5
+.L 443.79 358.47
+\f[NSCSB]\s[16]10
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Neko Neko Wave\m[default]
+.L 476.70 145.30
+\f[NSR]\s[6.5]AFFINITY: LOVE; PERKS: AREA EFFECT X2,
+.L 484.70 145.30
+\f[NSR]\s[6.5]STUNNING; FLAWS: NO DAMAGE
+.L 483.39 295.11
+\f[NSCSB]\s[16]4
+.L 483.39 328.61
+\f[NSCSB]\s[16]0
+.L 483.39 358.47
+\f[NSCSB]\s[16]10
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Neko Neko Yarn Entangle\m[default]
+.L 519.80 145.30
+\f[NSR]\s[6.5]AFFINITY: LOVE; PERKS: PARALYZING
+.L 522.39 295.11
+\f[NSCSB]\s[16]4
+.L 522.39 328.61
+\f[NSCSB]\s[16]3
+.L 522.39 358.47
+\f[NSCSB]\s[16]10
+.L 564.95 160.20
+\f[NSCSB]\s[18]4/5
+.L 564.95 225.35
+\f[NSCSB]\s[18]30
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]12
+.SP p1
+.L 48.24 148.50
+\f[NSR]\s[9]Azyrus (Fukiko's Companion)
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Flight
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Quick
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Smart
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Awkward Size (Small)
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Frail
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Raised on shoujo manga, Fukiko never expected
+.L 57.69 38.70
+\f[NSR]\s[8]her own fantasies to come true -- until a strange
+.L 67.69 38.70
+\f[NSR]\s[8]winged cat named Azyrus appeared at her window
+.L 77.69 38.70
+\f[NSR]\s[8]one night and revealed that her late mother had
+.L 87.69 38.70
+\f[NSR]\s[8]secretly been a magical crime fighter. Fukiko's
+.L 97.69 38.70
+\f[NSR]\s[8]locket, a keepsake from her mother, turned out to
+.L 107.69 38.70
+\f[NSR]\s[8]hold that same power, and so the heroine Lovely
+.L 117.69 38.70
+\f[NSR]\s[8]Savior Myu Myu was born.
+.L 367.69 217.40
+\f[NSR]\s[8]Strong-willed and naive, Fukiko expects
+.L 377.69 217.40
+\f[NSR]\s[8]the world to play fair by her own rules.
+.L 387.69 217.40
+\f[NSR]\s[8]That same faith lets her see the good in
+.L 397.69 217.40
+\f[NSR]\s[8]bad situations, though her childish streak
+.L 407.69 217.40
+\f[NSR]\s[8]can also mean a fair amount of whining.
+.CP
+.SH
+\&Fukiko: Ability Notes
+.PP
+\&Barrier: provides an alternate Defense Roll (the second Defense value in Combat, below)
+.SH
+\&Fukiko: Attacks
+.PP
+\&Neko Neko Catnip Cantrip: In her magical girl form, Fukiko can perform a variety of mystical attacks of love.
+.PP
+\&Neko Neko Heart Burst: Fukiko forms her hands into the shape of a heart over her chest and emits a barrage of magical heart-shaped bursts.
+.PP
+\&Neko Neko Wave: With a waving motion of her arms, Fukiko pushes away all opponents around her.
+.PP
+\&Neko Neko Yarn Entangle: A ball of yarn magically appears and wraps around her target.
+.SH
+\&Fukiko: Lovely Savior Myu Myu
+.PP
+\&Clutching her locket and shouting her transformation phrase turns Fukiko into her cat-themed magical-girl form, right down to a bell collar and a whole new outfit -- villains seem oddly willing to wait out the sequence. She can also use this power just to change her appearance, but not while also using Shape-Shifter.
+.SH
+\&Fukiko: Azyrus
+.PP
+\&Beneath his cute exterior, Azyrus is a steady source of advice for Fukiko, even when her naivete exasperates him.

@@ -1,0 +1,2 @@
+test/data/bad-count-int.yaml:4:10: error: /0/count: not a valid integer: "many"
+==== exit 1 ====

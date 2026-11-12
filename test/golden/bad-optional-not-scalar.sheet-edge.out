@@ -1,0 +1,2 @@
+test/data/bad-optional-not-scalar.yaml:3:3: error: /0/tagline: key "tagline" is not a scalar value
+==== exit 1 ====

@@ -1,0 +1,96 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Shinto Priest
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Intuitive
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Sixth Sense
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Spirit Medium
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Frail
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Pacifist
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Restricted Freedom (Rarely Strays Far
+.L 155.70 246.30
+\f[NSI]\s[8]from Shrine)
+.L 168.70 220.66
+\f[NSR]\s[8]−1
+.L 168.70 240.30
+\f[NSI]\s[8]Weak
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]A **Shinto Priest** keeps a little shrine hidden in a
+.L 57.69 38.70
+\f[NSR]\s[8]corner of town. He's not as nimble as he used to be,
+.L 67.69 38.70
+\f[NSR]\s[8]but he can still be relied on to handle a
+.L 77.69 38.70
+\f[NSR]\s[8]troublesome spirit, or to offer some advice.

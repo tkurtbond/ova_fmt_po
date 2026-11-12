@@ -1,0 +1,249 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Natsuki
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Iron Fist)
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Intimidating
+.L 168.70 39.47
+\f[NSR]\s[8]+4
+.L 168.70 59.20
+\f[NSI]\s[8]Knowledge (Business)
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (Flowers)
+.L 194.70 39.47
+\f[NSR]\s[8]+2
+.L 194.70 59.20
+\f[NSI]\s[8]Minions
+.L 207.70 39.47
+\f[NSR]\s[8]+3
+.L 207.70 59.20
+\f[NSI]\s[8]Position of Power (Malicron President)
+.L 220.70 39.47
+\f[NSR]\s[8]+2
+.L 220.70 59.20
+\f[NSI]\s[8]Quick
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Strong
+.L 246.70 39.47
+\f[NSR]\s[8]+5
+.L 246.70 59.20
+\f[NSI]\s[8]Wealthy
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Arrogant
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Fear (Being Held Against Will)
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Focus (Strong Requires Gauntlet)
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Greedy
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Hatred (The Y Chromosome)
+.L 181.70 220.66
+\f[NSR]\s[8]−2
+.L 181.70 240.30
+\f[NSI]\s[8]Infamous (Ruthless Man-Hater)
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Loner
+.L 207.70 220.66
+\f[NSR]\s[8]−2
+.L 207.70 240.30
+\f[NSI]\s[8]Obsession (Proving Her Superiority)
+.L 220.70 220.66
+\f[NSR]\s[8]−2
+.L 220.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 233.70 220.66
+\f[NSR]\s[8]−1
+.L 233.70 240.30
+\f[NSI]\s[8]Quirk (Obnoxious Laugh)
+.L 246.70 220.66
+\f[NSR]\s[8]−2
+.L 246.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.L 259.70 220.66
+\f[NSR]\s[8]−1
+.L 259.70 240.30
+\f[NSI]\s[8]Soft Spot (Flowers)
+.L 272.70 220.66
+\f[NSR]\s[8]−2
+.L 272.70 240.30
+\f[NSI]\s[8]Stubborn
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Gauntlet Bull\m[default]
+.L 397.50 145.30
+\f[NSR]\s[6.5]PERKS: STUNNING; FLAWS: INACCURATE,
+.L 405.50 145.30
+\f[NSR]\s[6.5]WEAPON
+.L 405.04 295.11
+\f[NSCSB]\s[16]3
+.L 405.04 328.61
+\f[NSCSB]\s[16]6
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Gauntlet Bear\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: PARALYZING; FLAWS: INEFFECTIVE,
+.L 445.10 145.30
+\f[NSR]\s[6.5]WEAPON
+.L 443.79 295.11
+\f[NSCSB]\s[16]4
+.L 443.79 328.61
+\f[NSCSB]\s[16]5
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Gauntlet Crash\m[default]
+.L 476.70 145.30
+\f[NSR]\s[6.5]PERKS: AREA EFFECT, STUNNING; FLAWS:
+.L 484.70 145.30
+\f[NSR]\s[6.5]INEFFECTIVE, WEAPON
+.L 483.39 295.11
+\f[NSCSB]\s[16]4
+.L 483.39 328.61
+\f[NSCSB]\s[16]5
+.L 483.39 358.47
+\f[NSCSB]\s[16]10
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Stiletto Kick\m[default]
+.L 519.80 145.30
+\f[NSR]\s[6.5]AFFINITY: MARTIAL ARTS
+.L 522.39 295.11
+\f[NSCSB]\s[16]4
+.L 522.39 324.91
+\f[NSCSB]\s[16]3*
+.L 522.39 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]4
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]14
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Natsuki fought her way up the corporate ladder at
+.L 57.69 38.70
+\f[NSR]\s[8]Malicron only to find herself treated as a trophy
+.L 67.69 38.70
+\f[NSR]\s[8]rather than a talent. Once she finally seized control
+.L 77.69 38.70
+\f[NSR]\s[8]of the company, she purged its male staff entirely
+.L 87.69 38.70
+\f[NSR]\s[8]and built a gauntlet capable of enforcing her will by
+.L 97.69 38.70
+\f[NSR]\s[8]force, determined that no man would ever hold
+.L 107.69 38.70
+\f[NSR]\s[8]power over her again.
+.L 367.69 217.40
+\f[NSR]\s[8]Commanding, intimidating, and openly
+.L 377.69 217.40
+\f[NSR]\s[8]contemptuous of men, Natsuki carries
+.L 387.69 217.40
+\f[NSR]\s[8]herself with an air of intense, calculated
+.L 397.69 217.40
+\f[NSR]\s[8]authority.
+.CP
+.SH
+\&Natsuki: Attacks
+.PP
+\&Gauntlet Bull: A fierce punch with speed and power can bowl over even stalwart foes.
+.PP
+\&Gauntlet Bear: Natsuki grasps her opponent in her clutches and doesn't let go.
+.PP
+\&Gauntlet Crash: Natsuki pounds the ground, sending out a shockwave of destruction all around her.
+.PP
+\&Stiletto Kick: Even without her signature gauntlet, Natsuki proves a formidable fighter.
+.SH
+\&Natsuki: Malicron Corporation
+.PP
+\&As head of a military-technology powerhouse, Natsuki can call on a wide range of vehicles, equipment, and arms, and can summon trained security officers (armed guards with a modest Ranged Attack bonus) to her side at will.
+.SH
+\&Natsuki: A Secret Garden
+.PP
+\&Atop Malicron's headquarters, Natsuki keeps a hidden flower garden -- a private sanctuary where she can set aside her public persona, known to almost no one.

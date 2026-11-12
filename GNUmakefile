@@ -61,7 +61,7 @@ ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-
 $(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POCLIBDIR)/*/OC/$(l).library),,$(error the $(l) library is not in $(POCLIBDIR); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
-.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form install uninstall clean testclean
+.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form sheet fonts widths install uninstall clean testclean
 .NOTPARALLEL:
 
 all: $(PROGRAM)
@@ -150,6 +150,14 @@ INLINE_OUTPUT     := $(BASES:%=$(BUILD)/%.inline.md)
 OVA_SHEET ?= $(HOME)/Reference/RPG/OVA/OVA-Blank-Character-Sheet-Form-Fillable.pdf
 FORM_OUTPUT       := $(BASES:%=$(BUILD)/%.form.pdf)
 
+# The same sheet with -S/--sheet's text typeset over it (ova_sheet.sh,
+# the Ada repo's copy), in the Noto Sans faces sheet_fonts.sh builds
+# into SHEET_FONTS.  Rerun `make widths` only when the faces change: the
+# widths -S measures with are built into the program
+# (src/OvaSheetWidths.Mod, from sheet_widths.sh -O).
+SHEET_FONTS ?= $(BUILD)/font
+SHEET_OUTPUT      := $(BASES:%=$(BUILD)/%.sheet.pdf)
+
 rst: $(TERSE_OUTPUT)
 pdf: rst $(PDF_OUTPUT)
 gemtext: $(GEMTEXT_OUTPUT)
@@ -159,6 +167,16 @@ groff: $(GROFF_OUTPUT)
 hmm: $(HMM_OUTPUT)
 inline: $(INLINE_OUTPUT)
 form: $(FORM_OUTPUT)
+sheet: fonts $(SHEET_OUTPUT)
+
+fonts: $(SHEET_FONTS)/devpdf/download
+
+$(SHEET_FONTS)/devpdf/download: sheet_fonts.sh
+	./sheet_fonts.sh $(SHEET_FONTS)
+
+widths: fonts
+	./sheet_widths.sh -O $(SHEET_FONTS) >src/OvaSheetWidths.Mod.new
+	mv src/OvaSheetWidths.Mod.new src/OvaSheetWidths.Mod
 
 $(BUILD):
 	mkdir -p $@
@@ -191,6 +209,10 @@ $(BUILD)/%.fields.json: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -X $< >$@
 $(BUILD)/%.form.pdf: $(BUILD)/%.fields.json ova_form.sh
 	./ova_form.sh -s "$(OVA_SHEET)" -o $@ $<
+$(BUILD)/%.sheet.tr: test/data/%.yaml $(PROGRAM) | $(BUILD)
+	./$(PROGRAM) -S $< >$@
+$(BUILD)/%.sheet.pdf: $(BUILD)/%.sheet.tr ova_sheet.sh $(SHEET_FONTS)/devpdf/download
+	./ova_sheet.sh -s "$(OVA_SHEET)" -F $(SHEET_FONTS) -o $@ $<
 
 #MS_COLUMNS = -V twocolumns
 $(BUILD)/%.rst.ms.pdf: $(BUILD)/%.gen.rst
@@ -201,14 +223,14 @@ $(BUILD)/%.md.ms.pdf: $(BUILD)/%.md
 .PRECIOUS: $(BUILD)/%.gen.rst $(BUILD)/%.rst.ms.pdf $(BUILD)/%.gmi $(BUILD)/%.emp.gmi $(BUILD)/%.md \
   $(BUILD)/%.md.ms.pdf $(BUILD)/%.html.gen.rst $(BUILD)/%.html $(BUILD)/%.hmm $(BUILD)/%.compact.hmm \
   $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf $(BUILD)/%.inline.md \
-  $(BUILD)/%.fields.json $(BUILD)/%.form.pdf
+  $(BUILD)/%.fields.json $(BUILD)/%.form.pdf $(BUILD)/%.sheet.tr $(BUILD)/%.sheet.pdf
 
 # ---- Installation ----
 #
 # To $(PREFIX)/bin, $HOME/local/bin by default as in the Ada version
 # (its ova_fmt.gpr's Install package), under its own name, beside the
 # Ada ova_fmt, with ova_form.sh, which fills the sheet from -X's
-# output.  DESTDIR is prepended, for staging.
+# output, and ova_sheet.sh, which typesets -S's over it.  DESTDIR is prepended, for staging.
 PREFIX ?= $(HOME)/local
 BINDIR ?= $(PREFIX)/bin
 
@@ -216,9 +238,10 @@ install: $(PROGRAM)
 	install -d $(DESTDIR)$(BINDIR)
 	install -m 755 $(PROGRAM) $(DESTDIR)$(BINDIR)/$(PROGRAM)
 	install -m 755 ova_form.sh $(DESTDIR)$(BINDIR)/ova_form.sh
+	install -m 755 ova_sheet.sh $(DESTDIR)$(BINDIR)/ova_sheet.sh
 
 uninstall:
-	rm -f $(DESTDIR)$(BINDIR)/$(PROGRAM) $(DESTDIR)$(BINDIR)/ova_form.sh
+	rm -f $(DESTDIR)$(BINDIR)/$(PROGRAM) $(DESTDIR)$(BINDIR)/ova_form.sh $(DESTDIR)$(BINDIR)/ova_sheet.sh
 
 clean: testclean
 	rm -rf $(OBJ) $(PROGRAM)

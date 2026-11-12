@@ -1,0 +1,193 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Ai
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Art of Invisibility
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Telekinetic Power)
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Barrier [\f[NSR]\s[7]PERKS: NO GESTURE; 5
+.L 155.70 65.20
+\f[NSR]\s[7]ENDURANCE\f[NSI]\s[8]]
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Dexterous
+.L 181.70 39.47
+\f[NSR]\s[8]+1
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (String Games)
+.L 194.70 39.47
+\f[NSR]\s[8]+3
+.L 194.70 59.20
+\f[NSI]\s[8]Psychic
+.L 207.70 39.47
+\f[NSR]\s[8]+2
+.L 207.70 59.20
+\f[NSI]\s[8]Quick
+.L 220.70 39.47
+\f[NSR]\s[8]+3
+.L 220.70 59.20
+\f[NSI]\s[8]Sixth Sense
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Telekinesis
+.L 116.70 220.66
+\f[NSR]\s[8]−3
+.L 116.70 240.30
+\f[NSI]\s[8]Amnesia
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Fear (Men in Black Suits)
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Frail
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Pacifist
+.L 168.70 220.66
+\f[NSR]\s[8]−3
+.L 168.70 240.30
+\f[NSI]\s[8]Shy
+.L 181.70 220.66
+\f[NSR]\s[8]−3
+.L 181.70 240.30
+\f[NSI]\s[8]Wanted (Men in Black)
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Weak
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Telekinetic Push\m[default]
+.L 397.50 145.30
+\f[NSR]\s[6.5]PERKS: NO GESTURE, RANGED, STUNNING;
+.L 405.50 145.30
+\f[NSR]\s[6.5]FLAWS: INEFFECTIVE, LOW PENETRATION
+.L 405.04 295.11
+\f[NSCSB]\s[16]2
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 362.36
+\f[NSCSB]\s[16]5
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Mind Break\m[default]
+.L 433.10 145.30
+\f[NSR]\s[6.5]PERKS: ARMOR PIERCING, FATIGUING, NO
+.L 441.10 145.30
+\f[NSR]\s[6.5]GESTURE, RANGED, WILL ATTACK; FLAWS:
+.L 449.10 145.30
+\f[NSR]\s[6.5]CANCEL: UNLIVING (−5)
+.L 443.79 295.11
+\f[NSCSB]\s[16]2
+.L 443.79 328.61
+\f[NSCSB]\s[16]5
+.L 443.79 362.36
+\f[NSCSB]\s[16]5
+.L 564.95 160.20
+\f[NSCSB]\s[18]4/5
+.L 564.95 225.35
+\f[NSCSB]\s[18]20
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]10
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Ai awoke in an alley with no memory of who she
+.L 57.69 38.70
+\f[NSR]\s[8]was. As she wandered Tokyo trying to survive, she
+.L 67.69 38.70
+\f[NSR]\s[8]discovered she could sense others' thoughts and
+.L 77.69 38.70
+\f[NSR]\s[8]emotions, and even move objects with her mind.
+.L 87.69 38.70
+\f[NSR]\s[8]Worse, she found herself doggedly pursued by
+.L 97.69 38.70
+\f[NSR]\s[8]strange, unsettling men in black suits.
+.L 367.69 217.40
+\f[NSR]\s[8]Shy and withdrawn, Ai struggles to
+.L 377.69 217.40
+\f[NSR]\s[8]connect with people and finds it hard to
+.L 387.69 217.40
+\f[NSR]\s[8]put her feelings into words. She'd rather
+.L 397.69 217.40
+\f[NSR]\s[8]avoid a problem than face it -- though her
+.L 407.69 217.40
+\f[NSR]\s[8]real trouble is that she has nowhere left to
+.L 417.69 217.40
+\f[NSR]\s[8]run.
+.CP
+.SH
+\&Ai: Ability Notes
+.PP
+\&Barrier: provides an alternate Defense Roll (the second Defense value below)
+.SH
+\&Ai: Attacks
+.PP
+\&Telekinetic Push: Ai lashes out with her telekinetic powers, pushing the target away.
+.PP
+\&Mind Break: Ai fills another's mind with a confusing din of psychic energy, draining the opponent.

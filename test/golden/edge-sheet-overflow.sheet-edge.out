@@ -1,0 +1,442 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 47.88 148.50
+\f[NSR]\s[8]Overflowing Character With An
+.L 47.88 284.10
+\f[NSR]\s[8]A Player Whose Name Is Also
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Ability Number 1 (A rather long detail
+.L 129.70 65.20
+\f[NSI]\s[8]that will need to wrap onto a second
+.L 142.70 65.20
+\f[NSI]\s[8]line 0)
+.L 155.70 39.47
+\f[NSR]\s[8]+5
+.L 155.70 59.20
+\f[NSI]\s[8]Ability Number 10
+.L 168.70 39.47
+\f[NSR]\s[8]+1
+.L 168.70 59.20
+\f[NSI]\s[8]Ability Number 11
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Ability Number 12
+.L 194.70 39.47
+\f[NSR]\s[8]+3
+.L 194.70 59.20
+\f[NSI]\s[8]Ability Number 13 (A rather long detail
+.L 207.70 65.20
+\f[NSI]\s[8]that will need to wrap onto a second
+.L 220.70 65.20
+\f[NSI]\s[8]line 12)
+.L 233.70 39.47
+\f[NSR]\s[8]+4
+.L 233.70 59.20
+\f[NSI]\s[8]Ability Number 14
+.L 246.70 39.47
+\f[NSR]\s[8]+5
+.L 246.70 59.20
+\f[NSI]\s[8]Ability Number 15
+.L 259.70 39.47
+\f[NSR]\s[8]+1
+.L 259.70 59.20
+\f[NSI]\s[8]Ability Number 16
+.L 272.70 39.47
+\f[NSR]\s[8]+2
+.L 272.70 59.20
+\f[NSI]\s[8]Ability Number 17 (A rather long detail
+.L 285.70 65.20
+\f[NSI]\s[8]that will need to wrap onto a second
+.L 298.70 65.20
+\f[NSI]\s[8]line 16)
+.L 311.70 39.47
+\f[NSR]\s[8]+3
+.L 311.70 59.20
+\f[NSI]\s[8]Ability Number 18
+.L 324.70 39.47
+\f[NSR]\s[8]+4
+.L 324.70 59.20
+\f[NSI]\s[8]Ability Number 19
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Weakness 1
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Weakness 2
+.L 142.70 220.66
+\f[NSR]\s[8]−3
+.L 142.70 240.30
+\f[NSI]\s[8]Weakness 3
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Weakness 4
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Weakness 5
+.L 181.70 220.66
+\f[NSR]\s[8]−3
+.L 181.70 240.30
+\f[NSI]\s[8]Weakness 6
+.L 382.10 145.30
+\m[ovared]\f[NSB]\s[6.5]A Spectacularly Overlong Attack Name\m[default]
+.L 393.14 145.30
+\f[NSR]\s[5.5]PERKS: ACCURATE, AREA EFFECT, ARMOR
+.L 401.14 145.30
+\f[NSR]\s[5.5]PIERCING, CONTINUED EFFECT, IMPAIRING,
+.L 409.14 145.30
+\f[NSR]\s[5.5]OVERWHELMING, PARALYZING, RANGED…
+.L 405.04 295.11
+\f[NSCSB]\s[16]5
+.L 405.04 328.61
+\f[NSCSB]\s[16]3
+.L 405.04 358.47
+\f[NSCSB]\s[16]20
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Attack 2\m[default]
+.L 432.74 145.30
+\f[NSR]\s[5.5]PERKS: ACCURATE, AREA EFFECT, ARMOR
+.L 440.74 145.30
+\f[NSR]\s[5.5]PIERCING, CONTINUED EFFECT, IMPAIRING,
+.L 448.74 145.30
+\f[NSR]\s[5.5]OVERWHELMING, PARALYZING, RANGED…
+.L 443.79 295.11
+\f[NSCSB]\s[16]5
+.L 443.79 328.61
+\f[NSCSB]\s[16]3
+.L 443.79 358.47
+\f[NSCSB]\s[16]20
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Attack 3\m[default]
+.L 472.34 145.30
+\f[NSR]\s[5.5]PERKS: ACCURATE, AREA EFFECT, ARMOR
+.L 480.34 145.30
+\f[NSR]\s[5.5]PIERCING, CONTINUED EFFECT, IMPAIRING,
+.L 488.34 145.30
+\f[NSR]\s[5.5]OVERWHELMING, PARALYZING, RANGED…
+.L 483.39 295.11
+\f[NSCSB]\s[16]5
+.L 483.39 328.61
+\f[NSCSB]\s[16]3
+.L 483.39 358.47
+\f[NSCSB]\s[16]20
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Attack 4\m[default]
+.L 511.44 145.30
+\f[NSR]\s[5.5]PERKS: ACCURATE, AREA EFFECT, ARMOR
+.L 519.44 145.30
+\f[NSR]\s[5.5]PIERCING, CONTINUED EFFECT, IMPAIRING,
+.L 527.44 145.30
+\f[NSR]\s[5.5]OVERWHELMING, PARALYZING, RANGED…
+.L 522.39 295.11
+\f[NSCSB]\s[16]5
+.L 522.39 328.61
+\f[NSCSB]\s[16]3
+.L 522.39 358.47
+\f[NSCSB]\s[16]20
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Heroic
+.L 404.27 34.10
+\f[NSR]\s[7]The quick brown fox jumps
+.L 412.77 34.10
+\f[NSR]\s[7]over the lazy dog while the
+.L 421.27 34.10
+\f[NSR]\s[7]sorcerer contemplates the
+.L 429.77 34.10
+\f[NSR]\s[7]many failings of the modern
+.L 438.27 34.10
+\f[NSR]\s[7]world and its inhabitants, who
+.L 446.77 34.10
+\f[NSR]\s[7]never seem to remember
+.L 455.27 34.10
+\f[NSR]\s[7]what matters. The quick
+.L 463.77 34.10
+\f[NSR]\s[7]brown fox jumps over the lazy
+.L 472.27 34.10
+\f[NSR]\s[7]dog while the sorcerer
+.L 480.77 34.10
+\f[NSR]\s[7]contemplates the many
+.L 489.27 34.10
+\f[NSR]\s[7]failings of the modern world
+.L 497.77 34.10
+\f[NSR]\s[7]and its inhabitants, who never
+.L 506.27 34.10
+\f[NSR]\s[7]seem to remember what
+.L 514.77 34.10
+\f[NSR]\s[7]matters. The quick brown fox
+.L 523.27 34.10
+\f[NSR]\s[7]jumps over the lazy dog while
+.L 531.77 34.10
+\f[NSR]\s[7]the sorcerer contemplates the
+.L 540.27 34.10
+\f[NSR]\s[7]many failings of the modern
+.L 564.95 168.12
+\f[NSCSB]\s[18]4
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]60
+.L 564.95 354.00
+\f[NSCSB]\s[18]18
+.SP p1
+.L 47.88 148.50
+\f[NSR]\s[8]Overflowing Character With An
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Ability Number 2
+.L 129.70 39.47
+\f[NSR]\s[8]+5
+.L 129.70 59.20
+\f[NSI]\s[8]Ability Number 20
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Ability Number 3
+.L 155.70 39.47
+\f[NSR]\s[8]+4
+.L 155.70 59.20
+\f[NSI]\s[8]Ability Number 4
+.L 168.70 39.47
+\f[NSR]\s[8]+5
+.L 168.70 59.20
+\f[NSI]\s[8]Ability Number 5 (A rather long detail
+.L 181.70 65.20
+\f[NSI]\s[8]that will need to wrap onto a second
+.L 194.70 65.20
+\f[NSI]\s[8]line 4)
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Ability Number 6
+.L 220.70 39.47
+\f[NSR]\s[8]+2
+.L 220.70 59.20
+\f[NSI]\s[8]Ability Number 7
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Ability Number 8
+.L 246.70 39.47
+\f[NSR]\s[8]+4
+.L 246.70 59.20
+\f[NSI]\s[8]Ability Number 9 (A rather long detail
+.L 259.70 65.20
+\f[NSI]\s[8]that will need to wrap onto a second
+.L 272.70 65.20
+\f[NSI]\s[8]line 8)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Attack 5\m[default]
+.L 393.14 145.30
+\f[NSR]\s[5.5]PERKS: ACCURATE, AREA EFFECT, ARMOR
+.L 401.14 145.30
+\f[NSR]\s[5.5]PIERCING, CONTINUED EFFECT, IMPAIRING,
+.L 409.14 145.30
+\f[NSR]\s[5.5]OVERWHELMING, PARALYZING, RANGED…
+.L 405.04 295.11
+\f[NSCSB]\s[16]5
+.L 405.04 328.61
+\f[NSCSB]\s[16]3
+.L 405.04 358.47
+\f[NSCSB]\s[16]20
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]The quick brown fox jumps over the lazy dog while
+.L 57.69 38.70
+\f[NSR]\s[8]the sorcerer contemplates the many failings of the
+.L 67.69 38.70
+\f[NSR]\s[8]modern world and its inhabitants, who never seem
+.L 77.69 38.70
+\f[NSR]\s[8]to remember what matters. The quick brown fox
+.L 87.69 38.70
+\f[NSR]\s[8]jumps over the lazy dog while the sorcerer
+.L 97.69 38.70
+\f[NSR]\s[8]contemplates the many failings of the modern
+.L 107.69 38.70
+\f[NSR]\s[8]world and its inhabitants, who never seem to
+.L 117.69 38.70
+\f[NSR]\s[8]remember what matters. The quick brown fox
+.L 127.69 38.70
+\f[NSR]\s[8]jumps over the lazy dog while the sorcerer
+.L 137.69 38.70
+\f[NSR]\s[8]contemplates the many failings of the modern
+.L 147.69 38.70
+\f[NSR]\s[8]world and its inhabitants, who never seem to
+.L 157.69 38.70
+\f[NSR]\s[8]remember what matters.
+.L 167.69 38.70
+\f[NSR]\s[8]The quick brown fox jumps over the lazy dog while
+.L 177.69 38.70
+\f[NSR]\s[8]the sorcerer contemplates the many failings of the
+.L 187.69 38.70
+\f[NSR]\s[8]modern world and its inhabitants, who never seem
+.L 197.69 38.70
+\f[NSR]\s[8]to remember what matters. The quick brown fox
+.L 207.69 38.70
+\f[NSR]\s[8]jumps over the lazy dog while the sorcerer
+.L 217.69 38.70
+\f[NSR]\s[8]contemplates the many failings of the modern
+.L 227.69 38.70
+\f[NSR]\s[8]world and its inhabitants, who never seem to
+.L 237.69 38.70
+\f[NSR]\s[8]remember what matters. The quick brown fox
+.L 247.69 38.70
+\f[NSR]\s[8]jumps over the lazy dog while the sorcerer
+.L 257.69 38.70
+\f[NSR]\s[8]contemplates the many failings of the modern
+.L 267.69 38.70
+\f[NSR]\s[8]world and its inhabitants, who never seem to
+.L 277.69 38.70
+\f[NSR]\s[8]remember what matters.
+.L 287.69 38.70
+\f[NSR]\s[8]The quick brown fox jumps over the lazy dog while
+.L 297.69 38.70
+\f[NSR]\s[8]the sorcerer contemplates the many failings of the
+.L 307.69 38.70
+\f[NSR]\s[8]modern world and its inhabitants, who never seem
+.L 317.69 38.70
+\f[NSR]\s[8]to remember what matters. The quick brown fox
+.L 367.69 37.70
+\f[NSR]\s[8]The quick brown fox jumps over the lazy
+.L 377.69 37.70
+\f[NSR]\s[8]dog while the sorcerer contemplates the
+.L 387.69 37.70
+\f[NSR]\s[8]many failings of the modern world and its
+.L 397.69 37.70
+\f[NSR]\s[8]inhabitants, who never seem to
+.L 407.69 37.70
+\f[NSR]\s[8]remember what matters. The quick brown
+.L 417.69 37.70
+\f[NSR]\s[8]fox jumps over the lazy dog while the
+.L 427.69 37.70
+\f[NSR]\s[8]sorcerer contemplates the many failings
+.L 437.69 37.70
+\f[NSR]\s[8]of the modern world and its inhabitants,
+.L 447.69 37.70
+\f[NSR]\s[8]who never seem to remember what
+.L 457.69 37.70
+\f[NSR]\s[8]matters. The quick brown fox jumps over
+.L 467.69 37.70
+\f[NSR]\s[8]the lazy dog while the sorcerer
+.L 477.69 37.70
+\f[NSR]\s[8]contemplates the many failings of the
+.L 487.69 37.70
+\f[NSR]\s[8]modern world and its inhabitants, who
+.L 497.69 37.70
+\f[NSR]\s[8]never seem to remember what matters.
+.L 367.69 217.40
+\f[NSR]\s[8]The quick brown fox jumps over the lazy
+.L 377.69 217.40
+\f[NSR]\s[8]dog while the sorcerer contemplates the
+.L 387.69 217.40
+\f[NSR]\s[8]many failings of the modern world and its
+.L 397.69 217.40
+\f[NSR]\s[8]inhabitants, who never seem to
+.L 407.69 217.40
+\f[NSR]\s[8]remember what matters. The quick brown
+.L 417.69 217.40
+\f[NSR]\s[8]fox jumps over the lazy dog while the
+.L 427.69 217.40
+\f[NSR]\s[8]sorcerer contemplates the many failings
+.L 437.69 217.40
+\f[NSR]\s[8]of the modern world and its inhabitants,
+.L 447.69 217.40
+\f[NSR]\s[8]who never seem to remember what
+.L 457.69 217.40
+\f[NSR]\s[8]matters.
+.L 542.79 37.70
+\f[NSR]\s[8]The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many
+.L 552.79 37.70
+\f[NSR]\s[8]failings of the modern world and its inhabitants, who never seem to remember what
+.L 562.79 37.70
+\f[NSR]\s[8]matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the
+.CP
+.SH
+\&Overflowing Character With An Extraordinarily Long Name Indeed: Background (continued)
+.PP
+\&jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+.PP
+\&The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+.SH
+\&Overflowing Character With An Extraordinarily Long Name Indeed: Appearance (continued)
+.PP
+\&The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+.SH
+\&Overflowing Character With An Extraordinarily Long Name Indeed: Other Notes (continued)
+.PP
+\&many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+.SH
+\&Overflowing Character With An Extraordinarily Long Name Indeed: Attacks
+.PP
+\&A Spectacularly Overlong Attack Name That Cannot Fit (Perks: Accurate, Area Effect, Armor Piercing, Continued Effect, Impairing, Overwhelming, Paralyzing, Ranged, Stunning; Flaws: Delayed, Feather Blow, Ineffective)
+.PP
+\&Attack 2 (Perks: Accurate, Area Effect, Armor Piercing, Continued Effect, Impairing, Overwhelming, Paralyzing, Ranged, Stunning; Flaws: Delayed, Feather Blow, Ineffective)
+.PP
+\&Attack 3 (Perks: Accurate, Area Effect, Armor Piercing, Continued Effect, Impairing, Overwhelming, Paralyzing, Ranged, Stunning; Flaws: Delayed, Feather Blow, Ineffective)
+.PP
+\&Attack 4 (Perks: Accurate, Area Effect, Armor Piercing, Continued Effect, Impairing, Overwhelming, Paralyzing, Ranged, Stunning; Flaws: Delayed, Feather Blow, Ineffective)
+.PP
+\&Attack 5 (Perks: Accurate, Area Effect, Armor Piercing, Continued Effect, Impairing, Overwhelming, Paralyzing, Ranged, Stunning; Flaws: Delayed, Feather Blow, Ineffective)
+.SH
+\&Overflowing Character With An Extraordinarily Long Name Indeed: Combat Notes (continued)
+.PP
+\&world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.

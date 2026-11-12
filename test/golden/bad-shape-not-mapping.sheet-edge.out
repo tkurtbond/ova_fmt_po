@@ -1,0 +1,2 @@
+ova_fmt: error processing test/data/bad-shape-not-mapping.yaml: /0/abilities/0: not a mapping
+==== exit 1 ====

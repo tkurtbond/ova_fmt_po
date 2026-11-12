@@ -1,10 +1,10 @@
-MODULE TestForm; (* Unit tests for OvaForm's measuring and text *)
+MODULE TestForm; (* Unit tests for OvaForm's measuring and text, and OvaCommon.Reflow *)
 
 (* The golden files check -X's output as a whole; these check FitCut's
    edge cases, Reflow, and the escapes no fixture holds (a control
    character other than LF). *)
 
-IMPORT Check, OvaForm, Ropes;
+IMPORT Check, OvaCommon, OvaForm, Ropes;
 
 TYPE Rope = Ropes.Rope;
 
@@ -67,12 +67,12 @@ END Ctl;
 
 PROCEDURE TestReflow;
 BEGIN
-  Check.Check(Ropes.Equal(OvaForm.Reflow(Ctl("  one  |two y||~three z^ | ")), Ctl("one two y|three z")),
+  Check.Check(Ropes.Equal(OvaCommon.Reflow(Ctl("  one  |two y||~three z^ | ")), Ctl("one two y|three z")),
     "Reflow: lines trimmed and joined, paragraphs on lines of their own");
-  Check.Check(Ropes.Equal(OvaForm.Reflow(Ctl("|||a||||b|||")), Ctl("a|b")),
+  Check.Check(Ropes.Equal(OvaCommon.Reflow(Ctl("|||a||||b|||")), Ctl("a|b")),
     "Reflow: one LF between paragraphs, none around them");
-  Check.Check(OvaForm.Reflow(Ctl(" | ~ ^ ")) = NIL, "Reflow of blank lines is NIL");
-  Check.Check(OvaForm.Reflow(NIL) = NIL, "Reflow of NIL is NIL")
+  Check.Check(OvaCommon.Reflow(Ctl(" | ~ ^ ")) = NIL, "Reflow of blank lines is NIL");
+  Check.Check(OvaCommon.Reflow(NIL) = NIL, "Reflow of NIL is NIL")
 END TestReflow;
 
 PROCEDURE TestEscape;

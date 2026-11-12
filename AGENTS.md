@@ -7,8 +7,11 @@ reST, gemtext, Markdown, reST with HTML or groff `hd` tables, an
 h-m-m outline, the inline format (`-i`, `OvaInline`: a Markdown
 paragraph per entity; PLAN.md, "The inline format"), or the official
 character sheet's form fields as JSON (`-X`, `OvaSheetMap` and
-`OvaForm`), which `ova_form.sh` fills the sheet's PDF with (PLAN.md,
-"The official character sheet as PDF").
+`OvaForm`), which `ova_form.sh` fills the sheet's PDF with, or troff
+to typeset over that sheet (`-S`, with `-P` for no portrait;
+`OvaSheet`, measuring with `OvaSheetFonts` and the generated
+`OvaSheetWidths`), which `ova_sheet.sh` lays over it (PLAN.md, "The
+official character sheet as PDF").
 
 It is a port of the Ada `ova_fmt` (`~/Repos/RPG/Tools/ova_fmt`); see
 PLAN.md for the port, and the Ada repo's `PLAN.md` for the design of
@@ -40,8 +43,8 @@ make            # obj/ (poc output) and ./ova_fmt_po
 make test       # unit tests, test/cli.sh, test/golden.sh check
 make golden     # regenerate test/golden/ from the Ada binary
 make valgrind   # the program under valgrind over every fixture and path
-make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline, form
-make install    # ova_fmt_po and ova_form.sh to $(PREFIX)/bin, default ~/local/bin (DESTDIR for staging)
+make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline, form, sheet
+make install    # ova_fmt_po, ova_form.sh and ova_sheet.sh to $(PREFIX)/bin, default ~/local/bin (DESTDIR for staging)
 make uninstall
 make clean      # rm -rf obj ova_fmt_po build
 make testclean  # rm -rf build

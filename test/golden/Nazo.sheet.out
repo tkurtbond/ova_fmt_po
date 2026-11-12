@@ -1,0 +1,175 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Nazo
+.L 116.70 39.47
+\f[NSR]\s[8]+4
+.L 116.70 59.20
+\f[NSI]\s[8]Charismatic
+.L 129.70 39.47
+\f[NSR]\s[8]+5
+.L 129.70 59.20
+\f[NSI]\s[8]Illusionist
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Incorporeal Form
+.L 155.70 39.47
+\f[NSR]\s[8]+3
+.L 155.70 59.20
+\f[NSI]\s[8]Magic, Witchcraft
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Psychic
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Resistance (Physical)
+.L 194.70 39.47
+\f[NSR]\s[8]+5
+.L 194.70 59.20
+\f[NSI]\s[8]Shape-Shifter
+.L 207.70 39.47
+\f[NSR]\s[8]+2
+.L 207.70 59.20
+\f[NSI]\s[8]Telekinesis
+.L 220.70 39.47
+\f[NSR]\s[8]+3
+.L 220.70 59.20
+\f[NSI]\s[8]Teleport
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Vigorous
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Compulsion (Curiosity)
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Obsession (Human Nature)
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Outcast (Other Kitsune)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Soft Spot (Green Tea)
+.L 181.70 220.66
+\f[NSR]\s[8]−3
+.L 181.70 240.30
+\f[NSI]\s[8]Unique Weakness (Priests Immune to
+.L 194.70 246.30
+\f[NSI]\s[8]Illusions)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Fox Fire\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: SPIRIT
+.L 405.04 295.11
+\f[NSCSB]\s[16]2
+.L 405.04 328.61
+\f[NSCSB]\s[16]3
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Heroic
+.L 564.95 168.12
+\f[NSCSB]\s[18]5
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]70
+.L 564.95 354.00
+\f[NSCSB]\s[18]16
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Nazo is a kitsune, one of the Japanese fox spirits
+.L 57.69 38.70
+\f[NSR]\s[8]notorious for tricking and toying with mortals. She
+.L 67.69 38.70
+\f[NSR]\s[8]keeps her distance from other kitsune, though,
+.L 77.69 38.70
+\f[NSR]\s[8]because she won't follow their traditions: she
+.L 87.69 38.70
+\f[NSR]\s[8]reveals what she is without a second thought, and
+.L 97.69 38.70
+\f[NSR]\s[8]her interest in people goes past simply fooling
+.L 107.69 38.70
+\f[NSR]\s[8]them -- she truly wants to understand them, and
+.L 117.69 38.70
+\f[NSR]\s[8]some say she envies them. With shapeshifting,
+.L 127.69 38.70
+\f[NSR]\s[8]illusions, and curses she devises intricate schemes
+.L 137.69 38.70
+\f[NSR]\s[8]to test what her targets believe in, and leaves them
+.L 147.69 38.70
+\f[NSR]\s[8]be only once her curiosity is satisfied.
+.CP
+.SH
+\&Nazo: Attacks
+.PP
+\&Fox Fire: Nazo dazzles the opponent with a brilliant illusionary display before overwhelming them with spiritual power.
+.SH
+\&Nazo: Character Hooks
+.PP
+\&Equally at home as a fox, a child, or a beautiful woman, Nazo can fit alongside almost any character, and one of her carefully plotted schemes could fill a whole adventure. She could also be the "old bag" from Daisuke's background or the evil spirit from Cora's.

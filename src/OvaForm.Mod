@@ -197,32 +197,6 @@ END Fit;
 
 (* ---- Text ---- *)
 
-(* YAML prose as a field holds it: each line trimmed (of blanks, tabs,
-   LFs and CRs, as OvaText.Trim does), a paragraph's lines joined with
-   blanks, paragraphs (separated by blank lines) with a single LF.  The
-   form wraps the lines itself.  Exported for TestForm. *)
-PROCEDURE Reflow*(r: Rope): Rope;
-  VAR result, line: Rope; inPara, break: BOOLEAN; from, to, n: LONGINT;
-BEGIN
-  result := NIL; inPara := FALSE; break := FALSE;
-  n := Ropes.Length(r); from := 0;
-  WHILE from <= n DO
-    to := Ropes.IndexChar(r, LF, from);
-    IF to < 0 THEN to := n END;
-    line := OvaText.Trim(Ropes.Substring(r, from, to - from));
-    IF Ropes.Length(line) = 0 THEN break := inPara
-    ELSE
-      IF inPara THEN
-        IF break THEN result := Ropes.AppendChar(result, LF) ELSE result := Ropes.AppendChar(result, " ") END
-      END;
-      result := Ropes.Cat(result, line);
-      inPara := TRUE; break := FALSE
-    END;
-    from := to + 1
-  END;
-  RETURN result
-END Reflow;
-
 (* r as a JSON string's contents.  Exported for TestForm. *)
 PROCEDURE Escape*(r: Rope): Rope;
   VAR s, t: String; i, k: INTEGER; c: CHAR; hex: ARRAY 17 OF CHAR;
@@ -348,7 +322,7 @@ BEGIN
     Set(f, name, RowText(r));
     IF r.kind # OvaSheetMap.Item THEN OvaText.Append(f.sub, name) END;
     IF ~RowFits(r) THEN AddLine(parts.linesInFull, RowInFull(r)) END;
-    IF r.hasNote THEN AddLine(parts.abilityNotes, Reflow(r.note)) END
+    IF r.hasNote THEN AddLine(parts.abilityNotes, OvaCommon.Reflow(r.note)) END
   END
 END SetRows;
 
@@ -368,7 +342,7 @@ BEGIN
     IF a.hasDescription OR clipped OR ~FitsLine(a.name, AttackSize, TRUE, AttackWidth) THEN
       entry := a.name;
       IF clipped THEN OvaText.Add(entry, " ("); entry := Ropes.AppendChar(Ropes.Cat(entry, a.clause), ")") END;
-      IF a.hasDescription THEN OvaText.Add(entry, ": "); entry := Ropes.Cat(entry, Reflow(a.description)) END;
+      IF a.hasDescription THEN OvaText.Add(entry, ": "); entry := Ropes.Cat(entry, OvaCommon.Reflow(a.description)) END;
       AddLine(parts.attacks, entry)
     END
   END
@@ -385,7 +359,7 @@ BEGIN
   SetAttacks(f, parts, p.attacks);
   notes := NIL;
   IF Ropes.Length(p.npcType) > 0 THEN notes := Ropes.Cat(Str("NPC Type: "), p.npcType) END;
-  IF p.hasCombatNotes THEN AddLine(notes, Reflow(p.combatNotes)) END;
+  IF p.hasCombatNotes THEN AddLine(notes, OvaCommon.Reflow(p.combatNotes)) END;
   IF Ropes.Length(notes) > 0 THEN
     Fit(notes, CombatSize, FALSE, CombatWidth, MaxLines(CombatHeight, CombatSize), fitted, parts.combatNotes);
     SetS(f, "Combat Notes", fitted)
@@ -506,7 +480,7 @@ PROCEDURE MainProse(p: INTEGER; has: BOOLEAN; text, name: Rope; VAR main2: Prose
                     VAR sections: OvaSheetMap.Seq);
   VAR content, rest, label: Rope;
 BEGIN
-  IF has THEN content := Reflow(text) ELSE content := NIL END;
+  IF has THEN content := OvaCommon.Reflow(text) ELSE content := NIL END;
   IF Ropes.Length(content) > 0 THEN
     Fit(content, ProseSize, FALSE, proseWidth[p], MaxLines(proseHeight[p], ProseSize), main2[p], rest);
     label := Label(name, ": "); OvaText.Add(label, proseName[p]); OvaText.Add(label, " (continued)");
@@ -519,7 +493,7 @@ PROCEDURE ProcessEntity*(e: OvaEntities.Entity);
   VAR pages, fills, sections: OvaSheetMap.Seq; main2: ProseValues; parts, none: OwnerParts;
     page: OvaSheetMap.Page; note: OvaEntities.Note; main: Fill; i: INTEGER;
 BEGIN
-  OvaSheetMap.Fill(e, pages);
+  OvaSheetMap.Fill(e, NIL, pages);
   OvaSheetMap.Clear(fills); OvaSheetMap.Clear(sections);
   FOR i := 0 TO NProse - 1 DO main2[i] := NIL END;
   none.linesInFull := NIL; none.abilityNotes := NIL; none.attacks := NIL; none.combatNotes := NIL;
@@ -542,10 +516,10 @@ BEGIN
 
   FOR i := 0 TO e.notes.n - 1 DO
     note := e.notes.items[i](OvaEntities.Note);
-    AddSection(sections, Ropes.Cat(Label(e.name, ": "), note.header), Reflow(note.text))
+    AddSection(sections, Ropes.Cat(Label(e.name, ": "), note.header), OvaCommon.Reflow(note.text))
   END;
   IF e.hasCharacterHooks THEN
-    AddSection(sections, Label(e.name, ": Character Hooks"), Reflow(e.characterHooks))
+    AddSection(sections, Label(e.name, ": Character Hooks"), OvaCommon.Reflow(e.characterHooks))
   END;
 
   (* The main sheet is both pages. *)

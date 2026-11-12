@@ -1,0 +1,201 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Daisuke
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Kung Faux)
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Famous
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (Motorcycles)
+.L 194.70 39.47
+\f[NSR]\s[8]+3
+.L 194.70 59.20
+\f[NSI]\s[8]Performer
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Quick
+.L 220.70 39.47
+\f[NSR]\s[8]+1
+.L 220.70 59.20
+\f[NSI]\s[8]Vigorous
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Wealthy
+.L 116.70 220.66
+\f[NSR]\s[8]−3
+.L 116.70 240.30
+\f[NSI]\s[8]Accidental Transformation (Black Bunny)
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Impulsive
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Lecherous
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Love Interest (Himself)
+.L 168.70 220.66
+\f[NSR]\s[8]−3
+.L 168.70 240.30
+\f[NSI]\s[8]Love Magnet
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Quirk (Odd Food Demands)
+.L 207.70 220.66
+\f[NSR]\s[8]−1
+.L 207.70 240.30
+\f[NSI]\s[8]Rude
+.L 220.70 220.66
+\f[NSR]\s[8]−1
+.L 220.70 240.30
+\f[NSI]\s[8]Weak-Willed
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Crouching Rabbit, Hidden Bunny\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: MARTIAL ARTS
+.L 405.04 295.11
+\f[NSCSB]\s[16]5
+.L 405.04 328.61
+\f[NSCSB]\s[16]2
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]This Axe Goes to 11!\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: EFFECTIVE X3; FLAWS:
+.L 445.10 145.30
+\f[NSR]\s[6.5]AMMUNITION X3
+.L 443.79 295.11
+\f[NSCSB]\s[16]5
+.L 443.79 328.61
+\f[NSCSB]\s[16]5
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]3
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]50
+.L 564.95 354.00
+\f[NSCSB]\s[18]11
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]A wealthy, womanizing pop idol, Daisuke rudely
+.L 57.69 38.70
+\f[NSR]\s[8]dismissed an elderly fan who asked for an
+.L 67.69 38.70
+\f[NSR]\s[8]autograph -- and she cursed him on the spot. Now
+.L 77.69 38.70
+\f[NSR]\s[8]any woman's amorous touch turns him into a
+.L 87.69 38.70
+\f[NSR]\s[8]handsome black rabbit until he escapes her sight,
+.L 97.69 38.70
+\f[NSR]\s[8]clothes and all left behind. Chastened but hardly
+.L 107.69 38.70
+\f[NSR]\s[8]reformed, he's determined to track the old woman
+.L 117.69 38.70
+\f[NSR]\s[8]down and get the curse lifted.
+.L 367.69 217.40
+\f[NSR]\s[8]Lecherous, self-absorbed, and far too
+.L 377.69 217.40
+\f[NSR]\s[8]famous for his own good, Daisuke's
+.L 387.69 217.40
+\f[NSR]\s[8]biggest problems are entirely of his own
+.L 397.69 217.40
+\f[NSR]\s[8]making -- when he isn't chasing girls, he's
+.L 407.69 217.40
+\f[NSR]\s[8]complaining about his food.
+.CP
+.SH
+\&Daisuke: Attacks
+.PP
+\&Crouching Rabbit, Hidden Bunny: Daisuke's fondness for martial arts movies has led to spending megabucks on tutors.
+.PP
+\&This Axe Goes to 11!: In desperation, Daisuke can sacrifice his guitar to save his hide…
+.SH
+\&Daisuke: Black Bunny!
+.PP
+\&While transformed, Daisuke loses nearly all his Abilities but gains Quick +2 and Awkward Size -2. He reverts to human form once he's out of the sight of the woman who triggered the change -- his clothes, unfortunately, do not come with him.

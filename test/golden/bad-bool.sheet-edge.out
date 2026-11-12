@@ -1,0 +1,2 @@
+test/data/bad-bool.yaml:3:13: error: /0/fragment: not a valid boolean: "maybe"
+==== exit 1 ====

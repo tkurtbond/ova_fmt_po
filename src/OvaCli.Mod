@@ -60,6 +60,16 @@ PROCEDURE DoForm(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.Form; OvaConfig.unicodeMinus := FALSE; RETURN TRUE
 END DoForm;
 
+PROCEDURE DoSheet(): BOOLEAN;
+BEGIN OvaConfig.format := OvaConfig.Sheet; RETURN TRUE
+END DoSheet;
+
+PROCEDURE DoPortrait(VAR arg: ARRAY OF CHAR): BOOLEAN;
+BEGIN
+  OvaConfig.portrait := Ropes.FromString(arg); OvaConfig.hasPortrait := TRUE;
+  RETURN TRUE
+END DoPortrait;
+
 PROCEDURE DoHtml(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.HtmlInRst; RETURN TRUE
 END DoHtml;
@@ -135,6 +145,12 @@ BEGIN
   Opt(ArgParser.MakeOption("X", "form",
     "Output the official character sheet's form fields as JSON fills for ova_form.sh, which fills the sheet's PDF with qpdf. Implies -n/--no-unicode-minus.",
     DoForm));
+  Opt(ArgParser.MakeOption("S", "sheet",
+    "Output troff placing the values on the official character sheet, for ova_sheet.sh, which typesets it with groff and lays it over the blank sheet.",
+    DoSheet));
+  Opt(ArgParser.MakeStringOption("P", "portrait",
+    "With -S/--sheet, the portrait image for every main entity, in place of its own portrait: path. ova_sheet.sh converts it to PDF.",
+    DoPortrait));
   Opt(ArgParser.MakeOption("H", "html",
     "Output reST with nested HTML tables (a `.. raw:: html` block) for Abilities/Weaknesses/Combat/Attacks, instead of terse prose.",
     DoHtml));

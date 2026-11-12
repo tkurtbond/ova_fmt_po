@@ -1,0 +1,282 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Yuu
+.L 116.70 39.47
+\f[NSR]\s[8]+4
+.L 116.70 59.20
+\f[NSI]\s[8]Companion (Fenrir)
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Evasive
+.L 142.70 39.47
+\f[NSR]\s[8]+1
+.L 142.70 59.20
+\f[NSI]\s[8]Intuitive
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Iron-Willed
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Knowledge (Monsters)
+.L 181.70 39.47
+\f[NSR]\s[8]+3
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (Video Games)
+.L 194.70 39.47
+\f[NSR]\s[8]+2
+.L 194.70 59.20
+\f[NSI]\s[8]Quick
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Unique Ability (Trust)
+.L 220.70 39.47
+\f[NSR]\s[8]+1
+.L 220.70 59.20
+\f[NSI]\s[8]Vigorous
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Ageism
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Compulsion (Finding Things Out)
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Guardian (Sister)
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Impulsive
+.L 168.70 220.66
+\f[NSR]\s[8]−1
+.L 168.70 240.30
+\f[NSI]\s[8]Kind-Hearted
+.L 181.70 220.66
+\f[NSR]\s[8]−3
+.L 181.70 240.30
+\f[NSI]\s[8]Wanted (Men in Black)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Struggle\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: NORMAL TYPE
+.L 405.04 295.11
+\f[NSCSB]\s[16]2
+.L 405.04 328.61
+\f[NSCSB]\s[16]1
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]5
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]50
+.L 564.95 358.37
+\f[NSCSB]\s[18]9
+.SP p1
+.L 48.77 148.50
+\f[NSR]\s[10.5]Fenrir (Yuu's Companion)
+.L 116.70 39.47
+\f[NSR]\s[8]+3
+.L 116.70 59.20
+\f[NSI]\s[8]Attack
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Quick
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Tough
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Vigorous
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Bizarre Appearance
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Fear (Enclosed Spaces)
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Guardian (Yuu)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Mute
+.L 168.70 220.66
+\f[NSR]\s[8]−1
+.L 168.70 240.30
+\f[NSI]\s[8]Servitude (Yuu)
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Maul\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: NORMAL TYPE
+.L 405.04 295.11
+\f[NSCSB]\s[16]4
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Quick Attack\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: STUNNING; FLAWS: REQUIREMENT:
+.L 445.10 145.30
+\f[NSR]\s[6.5]TRUST +1 (−5)
+.L 443.79 295.11
+\f[NSCSB]\s[16]4
+.L 443.79 328.61
+\f[NSCSB]\s[16]4
+.L 443.79 362.36
+\f[NSCSB]\s[16]5
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Lance\m[default]
+.L 472.70 145.30
+\f[NSR]\s[6.5]PERKS: ARMOR PIERCING X2, EFFECTIVE X3;
+.L 480.70 145.30
+\f[NSR]\s[6.5]FLAWS: DELAYED, REQUIREMENT: TRUST +2
+.L 488.70 145.30
+\f[NSR]\s[6.5](−10)
+.L 483.39 295.11
+\f[NSCSB]\s[16]4
+.L 483.39 328.61
+\f[NSCSB]\s[16]7
+.L 483.39 358.47
+\f[NSCSB]\s[16]10
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Lightning Rod\m[default]
+.L 515.80 145.30
+\f[NSR]\s[6.5]AFFINITY: LIGHTNING; PERKS: EFFECTIVE
+.L 523.80 145.30
+\f[NSR]\s[6.5]X6; FLAWS: REQUIREMENT: TRUST +3 (−15)
+.L 522.39 295.11
+\f[NSCSB]\s[16]4
+.L 522.39 324.72
+\f[NSCSB]\s[16]10
+.L 522.39 358.47
+\f[NSCSB]\s[16]15
+.L 564.95 168.12
+\f[NSCSB]\s[18]5
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]50
+.L 564.95 354.00
+\f[NSCSB]\s[18]14
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Yuu's beloved older sister vanished without a trace
+.L 57.69 38.70
+\f[NSR]\s[8]-- and, stranger still, everyone around him seems to
+.L 67.69 38.70
+\f[NSR]\s[8]have forgotten she ever existed. Chasing a
+.L 77.69 38.70
+\f[NSR]\s[8]shadowy figure fleeing the scene, Yuu instead
+.L 87.69 38.70
+\f[NSR]\s[8]found a caged, wolf-like creature left behind:
+.L 97.69 38.70
+\f[NSR]\s[8]Fenrir. Certain it was fate, Yuu freed him, and the
+.L 107.69 38.70
+\f[NSR]\s[8]two have been inseparable since, determined to
+.L 117.69 38.70
+\f[NSR]\s[8]find Yuu's sister together.
+.L 367.69 217.40
+\f[NSR]\s[8]Endlessly curious and unable to leave a
+.L 377.69 217.40
+\f[NSR]\s[8]wrong unrighted, Yuu's good nature gets
+.L 387.69 217.40
+\f[NSR]\s[8]him into trouble as often as it wins him
+.L 397.69 217.40
+\f[NSR]\s[8]friends -- Fenrir very much included.
+.CP
+.SH
+\&Yuu: Attacks
+.PP
+\&Struggle: Though he doesn't have any special moves, Yuu can still put up a fight if he needs to.
+.SH
+\&Fenrir: Attacks
+.PP
+\&Maul: Fenrir leaps at the target and attacks with beastly fury.
+.PP
+\&Quick Attack: Fenrir strikes repeatedly in the blink of an eye.
+.PP
+\&Lance: Fenrir charges up a skewering headbutt.
+.PP
+\&Lightning Rod: A bolt of lightning comes down from above, charging Fenrir's horn with power.
+.SH
+\&Yuu: Fenrir and Trust
+.PP
+\&Fenrir has several Attacks Yuu can only use as he earns Fenrir's trust (raising his Trust Ability). Trust may also be rolled when directing Fenrir through especially complicated or dangerous tasks.

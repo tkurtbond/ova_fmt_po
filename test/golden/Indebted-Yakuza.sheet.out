@@ -1,0 +1,96 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Indebted Yakuza
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Attack (Illegal Firearm)
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Intimidating
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Knowledge (Gambling)
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Tough
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Bizarre Appearance (Full-Body Tattoos)
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Pacifist
+.L 142.70 220.66
+\f[NSR]\s[8]−3
+.L 142.70 240.30
+\f[NSI]\s[8]Servitude (Yakuza)
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]The **Indebted Yakuza** owes his life to his crime
+.L 57.69 38.70
+\f[NSR]\s[8]family, so he has become a loyal and honored
+.L 67.69 38.70
+\f[NSR]\s[8]member of it -- though all he really wants is to stay
+.L 77.69 38.70
+\f[NSR]\s[8]away from violence. The conflict between the two
+.L 87.69 38.70
+\f[NSR]\s[8]sides of him torments him.

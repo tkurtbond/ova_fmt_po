@@ -1,0 +1,229 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Shou
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+3
+.L 129.70 59.20
+\f[NSI]\s[8]Art of Invisibility
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Attack (Ninjutsu)
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Evasive
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (Food)
+.L 194.70 39.47
+\f[NSR]\s[8]+2
+.L 194.70 59.20
+\f[NSI]\s[8]Perceptive
+.L 207.70 39.47
+\f[NSR]\s[8]+3
+.L 207.70 59.20
+\f[NSI]\s[8]Quick
+.L 220.70 39.47
+\f[NSR]\s[8]+1
+.L 220.70 59.20
+\f[NSI]\s[8]Strong
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Teleport
+.L 246.70 39.47
+\f[NSR]\s[8]+2
+.L 246.70 59.20
+\f[NSI]\s[8]Tough
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Easily Distracted
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Impulsive
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Infamous (Assassin)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Quirk (Playfulness at All Times)
+.L 181.70 220.66
+\f[NSR]\s[8]−2
+.L 181.70 240.30
+\f[NSI]\s[8]Rival (Raine)
+.L 194.70 220.66
+\f[NSR]\s[8]−2
+.L 194.70 240.30
+\f[NSI]\s[8]Rude
+.L 207.70 220.66
+\f[NSR]\s[8]−2
+.L 207.70 240.30
+\f[NSI]\s[8]Servitude (Clan Cave Fox)
+.L 220.70 220.66
+\f[NSR]\s[8]−2
+.L 220.70 240.30
+\f[NSI]\s[8]Soft Spot (Food)
+.L 233.70 220.66
+\f[NSR]\s[8]−2
+.L 233.70 240.30
+\f[NSI]\s[8]Vulnerability (Light)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Bladed Tonfas\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]PERKS: DEFENSIVE; FLAWS: WEAPON
+.L 405.04 295.11
+\f[NSCSB]\s[16]5
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Sweep Kick\m[default]
+.L 441.10 145.30
+\f[NSR]\s[6.5]PERKS: STUNNING; FLAWS: INEFFECTIVE X2
+.L 443.79 295.11
+\f[NSCSB]\s[16]5
+.L 443.79 328.61
+\f[NSCSB]\s[16]2
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Pressure Strike\m[default]
+.L 480.70 145.30
+\f[NSR]\s[6.5]PERKS: IMPAIRING; FLAWS: INEFFECTIVE X2
+.L 483.39 295.11
+\f[NSCSB]\s[16]5
+.L 483.39 328.61
+\f[NSCSB]\s[16]2
+.L 483.39 362.36
+\f[NSCSB]\s[16]0
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Dark Spark\m[default]
+.L 515.80 145.30
+\f[NSR]\s[6.5]AFFINITY: DARKNESS; PERKS: EFFECTIVE X2,
+.L 523.80 145.30
+\f[NSR]\s[6.5]RANGED; FLAWS: BACKLASH X2
+.L 522.39 295.11
+\f[NSCSB]\s[16]5
+.L 522.39 328.61
+\f[NSCSB]\s[16]5
+.L 522.39 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]7
+.L 564.95 225.35
+\f[NSCSB]\s[18]60
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]18
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Raised from childhood by the assassins of Clan
+.L 57.69 38.70
+\f[NSR]\s[8]Cave Fox, Shou never had to grow up -- his skill let
+.L 67.69 38.70
+\f[NSR]\s[8]him treat killing as a game. He spent years close to
+.L 77.69 38.70
+\f[NSR]\s[8]his fellow assassin Raine, until Raine broke from
+.L 87.69 38.70
+\f[NSR]\s[8]the Clan. Now Shou has been sent to track his old
+.L 97.69 38.70
+\f[NSR]\s[8]friend down, and he's treating the hunt as the best
+.L 107.69 38.70
+\f[NSR]\s[8]game yet.
+.L 367.69 217.40
+\f[NSR]\s[8]Cheerful, playful, and utterly without
+.L 377.69 217.40
+\f[NSR]\s[8]remorse, Shou brings a childlike energy to
+.L 387.69 217.40
+\f[NSR]\s[8]a very adult occupation. He's easily won
+.L 397.69 217.40
+\f[NSR]\s[8]over by food, at least for a little while.
+.CP
+.SH
+\&Shou: Attacks
+.PP
+\&Bladed Tonfas: The addition of a gleaming edge makes these otherwise humble weapons deadly.
+.PP
+\&Sweep Kick: Shou unbalances his opponent with a swift, low kick.
+.PP
+\&Pressure Strike: A precise blow that impedes the opponent's ability to fight.
+.PP
+\&Dark Spark: By focusing dark magics and striking his blades together, Shou sends out a bolt of energy that devours light in its path.
+.SH
+\&Shou: Dark World
+.PP
+\&A dead elder of Clan Cave Fox once trained Shou in shadow magic -- letting him become living shadow, cross distances in an instant, and strike with darkness-empowered blows. The bargain that granted these powers left his soul tainted, and he's vulnerable to light.

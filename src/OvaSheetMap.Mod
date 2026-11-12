@@ -17,7 +17,9 @@ MODULE OvaSheetMap; (* An entity mapped onto the official character sheet's slot
      own boxes go on copies of page 1 of their own, titled "Arasuni
      (Karis's Companion)" -- a Fragment one too.
    What isn't a slot (the prose, an item's note, an attack's
-   description) is left to the format.
+   description) is left to the format.  -X clips a row at its line, so
+   a row is a line; -S wraps a row onto the ruled lines below it, so it
+   gives Fill a procedure counting a row's lines.
 
    The Ada vectors are a Seq here, of Things that a type guard takes
    out.  Rows, attacks and pages are made once and never changed, so
@@ -50,13 +52,17 @@ TYPE
     n-: INTEGER
   END;
 
-  (* level is "+2", or NIL for a Spell or a repeated parent.  note is
-     the item's note: as "Barrier: note text", for the format to place
-     off the row, since the rulebook doesn't print it there. *)
+  (* level is "+2", or NIL for a Spell or a repeated parent.  text is
+     "Barrier [Perks: ...; 5 Endurance]"; plain and mods are its two
+     parts, for -S's faked small caps: plain without the bracket
+     ("Barrier"), mods what is inside it ("Perks: ...; 5 Endurance"),
+     NIL if there is none.  note is the item's note: as "Barrier: note
+     text", for the format to place off the row, since the rulebook
+     doesn't print it there. *)
   Row* = POINTER TO RowDesc;
   RowDesc* = RECORD (ThingDesc)
     kind-: INTEGER;
-    level-, text-: Rope;
+    level-, text-, plain-, mods-: Rope;
     hasNote-: BOOLEAN;
     note-: Rope
   END;
@@ -97,6 +103,9 @@ TYPE
     continued: Row
   END;
 
+  (* How many ruled lines a row takes, at least 1. *)
+  RowLines* = PROCEDURE (r: Row): INTEGER;
+
   (* One column's rows on one copy of page 1. *)
   Column = POINTER TO ColumnDesc;
   ColumnDesc = RECORD (ThingDesc)
@@ -123,10 +132,15 @@ END Append;
 
 (* ---- Rows ---- *)
 
-PROCEDURE NewRow(kind: INTEGER; level, text: Rope; hasNote: BOOLEAN; note: Rope): Row;
+(* A row of kind with level, its text plain and bracket (" [...]" from
+   FormatModifiersBracket, or NIL). *)
+PROCEDURE NewRow(kind: INTEGER; level, plain, bracket: Rope; hasNote: BOOLEAN; note: Rope): Row;
   VAR r: Row;
 BEGIN
-  NEW(r); r.kind := kind; r.level := level; r.text := text; r.hasNote := hasNote; r.note := note;
+  NEW(r); r.kind := kind; r.level := level;
+  r.text := Ropes.Cat(plain, bracket); r.plain := plain; r.mods := NIL;
+  IF Ropes.Length(bracket) > 0 THEN r.mods := Ropes.Substring(bracket, 2, Ropes.Length(bracket) - 3) END;
+  r.hasNote := hasNote; r.note := note;
   RETURN r
 END NewRow;
 
@@ -140,17 +154,13 @@ BEGIN
 END NoteOf;
 
 (* "Name (detail)", then (half TV) with -O, then the bracket: an
-   Ability's or a SubItem's text. *)
-PROCEDURE SubItemText(s: OvaEntities.SubItem): Rope;
-  VAR r: Rope;
-BEGIN
-  r := OvaCommon.NameDetail(s.name, s.hasDetail, s.detail);
-  r := Ropes.Cat(r, OvaCommon.HalfTVText(s));
-  RETURN Ropes.Cat(r, OvaCommon.FormatModifiersBracket(s, TRUE))
-END SubItemText;
-
+   Ability's or a SubItem's row. *)
 PROCEDURE SubItemRow(s: OvaEntities.SubItem; kind: INTEGER): Row;
-BEGIN RETURN NewRow(kind, OvaCommon.SignedImg(s.level), SubItemText(s), s.hasNote, NoteOf(s))
+  VAR plain: Rope;
+BEGIN
+  plain := Ropes.Cat(OvaCommon.NameDetail(s.name, s.hasDetail, s.detail), OvaCommon.HalfTVText(s));
+  RETURN NewRow(kind, OvaCommon.SignedImg(s.level), plain, OvaCommon.FormatModifiersBracket(s, TRUE),
+    s.hasNote, NoteOf(s))
 END SubItemRow;
 
 PROCEDURE Single(r: Row): Block;
@@ -167,7 +177,7 @@ PROCEDURE AbilityBlock(a: OvaEntities.Ability): Block;
 BEGIN
   NEW(b); Clear(b.rows);
   name := OvaCommon.NameDetail(a.name, a.hasDetail, a.detail);
-  Append(b.rows, NewRow(Item, OvaCommon.SignedImg(a.level), SubItemText(a), a.hasNote, NoteOf(a)));
+  Append(b.rows, SubItemRow(a, Item));
   FOR i := 0 TO a.subAbilities.n - 1 DO
     Append(b.rows, SubItemRow(a.subAbilities.items[i](OvaEntities.SubItem), Sub))
   END;
@@ -176,44 +186,73 @@ BEGIN
   END;
   FOR i := 0 TO a.spells.n - 1 DO
     Append(b.rows, NewRow(Spell, NIL,
-      OvaCommon.FormatShortSpellLine(a.spells.items[i](OvaEntities.Spell), TRUE), FALSE, NIL))
+      OvaCommon.FormatShortSpellLine(a.spells.items[i](OvaEntities.Spell), TRUE), NIL, FALSE, NIL))
   END;
   text := name; OvaText.Add(text, " (continued)");
-  b.continued := NewRow(Item, NIL, text, FALSE, NIL);
+  b.continued := NewRow(Item, NIL, text, NIL, FALSE, NIL);
   RETURN b
 END AbilityBlock;
 
 (* ---- Place ---- *)
 
+(* The lines r takes: lines(r), or 1 if lines is NIL. *)
+PROCEDURE Height(r: Thing; lines: RowLines): INTEGER;
+BEGIN
+  IF lines = NIL THEN RETURN 1 END;
+  RETURN lines(r(Row))
+END Height;
+
+PROCEDURE RowsHeight(rows: Seq; lines: RowLines): INTEGER;
+  VAR h, i: INTEGER;
+BEGIN
+  h := 0;
+  FOR i := 0 TO rows.n - 1 DO h := h + Height(rows.items[i], lines) END;
+  RETURN h
+END RowsHeight;
+
+(* Adds r to cur, whose rows take used lines. *)
+PROCEDURE Add(cur: Column; VAR used: INTEGER; r: Thing; lines: RowLines);
+BEGIN Append(cur.rows, r); used := used + Height(r, lines)
+END Add;
+
 (* Ends the current column, cur, appending it to columns. *)
-PROCEDURE NextColumn(VAR columns: Seq; VAR cur: Column);
-BEGIN Append(columns, cur); NEW(cur); Clear(cur.rows)
+PROCEDURE NextColumn(VAR columns: Seq; VAR cur: Column; VAR used: INTEGER);
+BEGIN Append(columns, cur); NEW(cur); Clear(cur.rows); used := 0
 END NextColumn;
 
-(* Blocks into columns of slots rows, one column per copy of page 1,
-   keeping each block together when it can. *)
-PROCEDURE Place(blocks: Seq; slots: INTEGER; VAR columns: Seq);
-  VAR cur: Column; b: Block; i, j: INTEGER;
+(* Blocks into columns of slots lines, one column per copy of page 1,
+   keeping each block together when it can.  left is what is left of
+   the column, never negative: a row taller than the column overfills
+   one. *)
+PROCEDURE Place(blocks: Seq; slots: INTEGER; lines: RowLines; VAR columns: Seq);
+  VAR cur: Column; b: Block; i, j, used, left, h, first: INTEGER;
 BEGIN
-  Clear(columns); NEW(cur); Clear(cur.rows);
+  Clear(columns); NEW(cur); Clear(cur.rows); used := 0;
   FOR i := 0 TO blocks.n - 1 DO
     b := blocks.items[i](Block);
-    IF b.rows.n <= slots - cur.rows.n THEN
-      FOR j := 0 TO b.rows.n - 1 DO Append(cur.rows, b.rows.items[j]) END
-    ELSIF b.rows.n <= slots THEN
-      NextColumn(columns, cur);
-      FOR j := 0 TO b.rows.n - 1 DO Append(cur.rows, b.rows.items[j]) END
+    h := RowsHeight(b.rows, lines);
+    IF used >= slots THEN left := 0 ELSE left := slots - used END;
+    IF h <= left THEN
+      FOR j := 0 TO b.rows.n - 1 DO Add(cur, used, b.rows.items[j], lines) END
+    ELSIF h <= slots THEN
+      NextColumn(columns, cur, used);
+      FOR j := 0 TO b.rows.n - 1 DO Add(cur, used, b.rows.items[j], lines) END
     ELSE
       (* Taller than the column: split, starting here unless there isn't
          room for the parent and one row under it. *)
-      IF (slots - cur.rows.n < 2) & (cur.rows.n > 0) THEN NextColumn(columns, cur) END;
+      first := Height(b.rows.items[0], lines);
+      IF b.rows.n > 1 THEN first := first + Height(b.rows.items[1], lines) END;
+      IF (left < first) & (cur.rows.n > 0) THEN NextColumn(columns, cur, used) END;
       FOR j := 0 TO b.rows.n - 1 DO
-        IF cur.rows.n = slots THEN NextColumn(columns, cur); Append(cur.rows, b.continued) END;
-        Append(cur.rows, b.rows.items[j])
+        IF used >= slots THEN left := 0 ELSE left := slots - used END;
+        IF (Height(b.rows.items[j], lines) > left) & (cur.rows.n > 0) THEN
+          NextColumn(columns, cur, used); Add(cur, used, b.continued, lines)
+        END;
+        Add(cur, used, b.rows.items[j], lines)
       END
     END
   END;
-  IF cur.rows.n > 0 THEN NextColumn(columns, cur) END
+  IF cur.rows.n > 0 THEN NextColumn(columns, cur, used) END
 END Place;
 
 (* ---- Copies of page 1 ---- *)
@@ -248,11 +287,12 @@ END Min;
 (* The owner's copies, appended to pages: the first titled title, the
    rest title " (continued)".  npcType is NIL for none. *)
 PROCEDURE AddCopies(VAR pages: Seq; owner, title: Rope; hasPlayer: BOOLEAN; player: Rope;
-                    abilities, weaknesses: Seq; combat: OvaEntities.Combat; npcType: Rope);
+                    abilities, weaknesses: Seq; combat: OvaEntities.Combat; npcType: Rope;
+                    lines: RowLines);
   VAR aColumns, wColumns: Seq; p: Page; attacks, copies, n, i: INTEGER;
 BEGIN
-  Place(abilities, AbilitySlots, aColumns);
-  Place(weaknesses, WeaknessSlots, wColumns);
+  Place(abilities, AbilitySlots, lines, aColumns);
+  Place(weaknesses, WeaknessSlots, lines, wColumns);
   IF combat.hasCombat THEN attacks := combat.attacks.n ELSE attacks := 0 END;
   copies := Max(1, Max(Max(aColumns.n, wColumns.n), (attacks + AttackSlots - 1) DIV AttackSlots));
   FOR n := 1 TO copies DO
@@ -293,8 +333,10 @@ END AddCopies;
 (* pages: e's copies of page 1, of Page: its own first (at least one, titled
    with its name; any more "Name (continued)"), then each Companion's
    or Vehicle's, in the order of the Abilities granting them.  The
-   numbers are as in raw tables: ASCII "*" for an override. *)
-PROCEDURE Fill*(e: OvaEntities.Entity; VAR pages: Seq);
+   numbers are as in raw tables: ASCII "*" for an override.  A column
+   holds AbilitySlots lines, each row taking lines(row) of them, or one
+   if lines is NIL. *)
+PROCEDURE Fill*(e: OvaEntities.Entity; lines: RowLines; VAR pages: Seq);
   VAR abilities, weaknesses, sAbl, sWk: Seq; a: OvaEntities.Ability; w: OvaEntities.Weakness;
     se: OvaEntities.SubEntity; title: Rope; i, j: INTEGER;
 BEGIN
@@ -303,10 +345,10 @@ BEGIN
   FOR i := 0 TO e.weaknesses.n - 1 DO
     w := e.weaknesses.items[i](OvaEntities.Weakness);
     Append(weaknesses, Single(NewRow(Item, OvaCommon.SignedImg(w.level),
-      OvaCommon.NameDetail(w.name, w.hasDetail, w.detail), FALSE, NIL)))
+      OvaCommon.NameDetail(w.name, w.hasDetail, w.detail), NIL, FALSE, NIL)))
   END;
   AddCopies(pages, e.name, e.name, e.hasPlayer, e.player, abilities, weaknesses, e.combat,
-    OvaCommon.NpcTypeText(e));
+    OvaCommon.NpcTypeText(e), lines);
 
   FOR i := 0 TO e.abilities.n - 1 DO
     a := e.abilities.items[i](OvaEntities.Ability);
@@ -319,7 +361,7 @@ BEGIN
       IF (sAbl.n > 0) OR (sWk.n > 0) OR se.combat.hasCombat THEN
         title := se.name; OvaText.Add(title, " ("); title := Ropes.Cat(title, e.name);
         OvaText.Add(title, "'s "); title := Ropes.Cat(title, se.label); title := Ropes.AppendChar(title, ")");
-        AddCopies(pages, se.name, title, FALSE, NIL, sAbl, sWk, se.combat, NIL)
+        AddCopies(pages, se.name, title, FALSE, NIL, sAbl, sWk, se.combat, NIL, lines)
       END
     END
   END

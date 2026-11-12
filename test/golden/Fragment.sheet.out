@@ -1,0 +1,158 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Shady Teacher
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Art of Invisibility
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Perceptive
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Smart
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Absent-Minded
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Fussy
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Quirk (Always Wears Sunglasses)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Secret (To Everybody)
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]The **Shady Teacher** is new to the school but
+.L 57.69 38.70
+\f[NSR]\s[8]seems to be knowledgeable enough. Yet there's
+.L 67.69 38.70
+\f[NSR]\s[8]something...off about him. Maybe it's because he
+.L 77.69 38.70
+\f[NSR]\s[8]wears sunglasses even indoors or that students are
+.L 87.69 38.70
+\f[NSR]\s[8]suspiciously disappearing from his class...
+.SP p1
+.L 48.77 148.50
+\f[NSR]\s[10.5]Snobbish Upperclassman
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Knowledge (Kendo)
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Minions (Her Clique)
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Quick
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Smart
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Arrogant
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Emotionless
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Obsession (Meeting Her Mother's Lofty
+.L 155.70 246.30
+\f[NSI]\s[8]Expectations)
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]The **Snobbish Upperclassman** is the school's
+.L 57.69 38.70
+\f[NSR]\s[8]academic darling, the kendo team's star athlete,
+.L 67.69 38.70
+\f[NSR]\s[8]and easily the most popular girl on campus -- and
+.L 77.69 38.70
+\f[NSR]\s[8]she knows it. You'd be lucky if she gave you the
+.L 87.69 38.70
+\f[NSR]\s[8]time of day...or honored you by allowing you to tell
+.L 97.69 38.70
+\f[NSR]\s[8]it to her.

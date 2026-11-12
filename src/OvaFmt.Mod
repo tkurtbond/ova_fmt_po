@@ -1,4 +1,4 @@
-MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown, h-m-m or form JSON *)
+MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown, h-m-m, form JSON or sheet troff *)
 
 (* Oberon-2 port of the Ada ova_fmt (ova_fmt_main.adb), with every
    string a Ropes.Rope.  See PLAN.md.
@@ -11,7 +11,7 @@ MODULE OvaFmt; (* ova_fmt: an OVA character in YAML to reST, gemtext, Markdown, 
    MESSAGE".  Either way the run goes on with the next file, and ends
    with status 1. *)
 
-IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaForm, OvaHmm, OvaInline, OvaOut, OvaRst,
+IMPORT Err, Fyaml, FyamlStreams, OvaCli, OvaCommon, OvaConfig, OvaEntities, OvaForm, OvaHmm, OvaInline, OvaOut, OvaRst, OvaSheet,
   OvaText, Out, Platform, Ropes, Strings, SYSTEM;
 
 TYPE
@@ -168,9 +168,23 @@ BEGIN
   | OvaConfig.Hmm: OvaHmm.ProcessEntity(e, entityNo)
   | OvaConfig.Inline: OvaInline.ProcessEntity(e, entityNo)
   | OvaConfig.Form: OvaForm.ProcessEntity(e)
+  | OvaConfig.Sheet: OvaSheet.ProcessEntity(e)
   | OvaConfig.Terse, OvaConfig.HtmlInRst, OvaConfig.GroffInRst: OvaRst.ProcessEntity(e, entityNo)
   END
 END Write;
+
+(* OvaConfig.sourceDir: name up to and including its last "/", for
+   -S's relative portrait paths; NIL for standard input. *)
+PROCEDURE SetSourceDir(name: Ropes.Rope; stdin: BOOLEAN);
+  VAR i: LONGINT;
+BEGIN
+  OvaConfig.sourceDir := NIL;
+  IF ~stdin THEN
+    i := Ropes.Length(name) - 1;
+    WHILE (i >= 0) & (Ropes.Fetch(name, i) # "/") DO DEC(i) END;
+    OvaConfig.sourceDir := Ropes.Substring(name, 0, i + 1)
+  END
+END SetSourceDir;
 
 (* One file, or standard input if stdin. *)
 PROCEDURE ProcessOne(name: Ropes.Rope; stdin: BOOLEAN);
@@ -178,6 +192,7 @@ PROCEDURE ProcessOne(name: Ropes.Rope; stdin: BOOLEAN);
     source, msg: Ropes.Rope; path: OvaText.String; es: Entities; n, i: INTEGER; ok: BOOLEAN;
 BEGIN
   OvaEntities.ResetErrors;
+  SetSourceDir(name, stdin);
   IF stdin THEN source := Ropes.FromString("(stdin)"); s := FyamlStreams.OpenStdin(err)
   ELSE source := name; path := OvaText.Chars(name); s := FyamlStreams.OpenFile(path^, err)
   END;

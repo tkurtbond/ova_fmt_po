@@ -1,0 +1,262 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Miho
+.L 116.70 39.47
+\f[NSR]\s[8]+3
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+3
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Robo-Powered Arsenal)
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 155.70 39.47
+\f[NSR]\s[8]+3
+.L 155.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Heightened Sense (Sight)
+.L 181.70 39.47
+\f[NSR]\s[8]+3
+.L 181.70 59.20
+\f[NSI]\s[8]Life Support
+.L 194.70 39.47
+\f[NSR]\s[8]+3
+.L 194.70 59.20
+\f[NSI]\s[8]Quick
+.L 207.70 39.47
+\f[NSR]\s[8]+3
+.L 207.70 59.20
+\f[NSI]\s[8]Strong
+.L 220.70 39.47
+\f[NSR]\s[8]+1
+.L 220.70 59.20
+\f[NSI]\s[8]Transformation
+.L 233.70 67.20
+\f[NSLI]\s[6.5]+2 Combat Expert
+.L 246.70 67.20
+\f[NSLI]\s[6.5]+2 Endurance Reserve
+.L 259.70 67.20
+\f[NSLI]\s[6.5]−3 Unique Weakness (Loss of Control)
+.L 272.70 39.47
+\f[NSR]\s[8]+1
+.L 272.70 59.20
+\f[NSI]\s[8]Unique Ability (Quick Calculator)
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Bizarre Appearance (Robot Features)
+.L 129.70 220.66
+\f[NSR]\s[8]−3
+.L 129.70 240.30
+\f[NSI]\s[8]Dependency (Sun)
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Guardian (Braun)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Ineptitude (Cooking)
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Kind-Hearted
+.L 181.70 220.66
+\f[NSR]\s[8]−2
+.L 181.70 240.30
+\f[NSI]\s[8]Naive
+.L 194.70 220.66
+\f[NSR]\s[8]−2
+.L 194.70 240.30
+\f[NSI]\s[8]Trigger (Transformation If Critical)
+.L 207.70 220.66
+\f[NSR]\s[8]−1
+.L 207.70 240.30
+\f[NSI]\s[8]Unique Weakness (Excessive Density)
+.L 220.70 220.66
+\f[NSR]\s[8]−3
+.L 220.70 240.30
+\f[NSI]\s[8]Vulnerability (Electricity)
+.L 233.70 220.66
+\f[NSR]\s[8]−3
+.L 233.70 240.30
+\f[NSI]\s[8]Wanted (Malicron Corporation)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Mode 1: Hand-to-Hand\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: MARTIAL ARTS
+.L 405.04 295.11
+\f[NSCSB]\s[16]8
+.L 405.04 328.61
+\f[NSCSB]\s[16]7
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Mode 2: Gatling Gun\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: OVERWHELMING, RANGED; FLAWS:
+.L 445.10 145.30
+\f[NSR]\s[6.5]INACCURATE X3
+.L 443.79 295.11
+\f[NSCSB]\s[16]5
+.L 443.79 328.61
+\f[NSCSB]\s[16]4
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Mode 3: Missile Launcher\m[default]
+.L 476.70 145.30
+\f[NSR]\s[6.5]PERKS: AREA EFFECT, RANGED, STUNNING;
+.L 484.70 145.30
+\f[NSR]\s[6.5]FLAWS: DELAYED, INACCURATE X3
+.L 483.39 295.11
+\f[NSCSB]\s[16]5
+.L 483.39 328.61
+\f[NSCSB]\s[16]4
+.L 483.39 362.36
+\f[NSCSB]\s[16]0
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Mode 4: Sniper Rifle\m[default]
+.L 511.80 145.30
+\f[NSR]\s[6.5]PERKS: ACCURATE, ARMOR PIERCING,
+.L 519.80 145.30
+\f[NSR]\s[6.5]IMPAIRING, RANGED; FLAWS:
+.L 527.80 145.30
+\f[NSR]\s[6.5]CONCENTRATION: AIMING
+.L 522.39 295.11
+\f[NSCSB]\s[16]9
+.L 522.39 328.61
+\f[NSCSB]\s[16]4
+.L 522.39 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]5
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]20
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Miho (continued)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Mode SP: Miho Ray\m[default]
+.L 393.50 145.30
+\f[NSR]\s[6.5]PERKS: EFFECTIVE X6, RANGED; FLAWS:
+.L 401.50 145.30
+\f[NSR]\s[6.5]REQUIREMENT: SELF-PRESERVATION MODE
+.L 409.50 145.30
+\f[NSR]\s[6.5](−20)
+.L 405.04 291.22
+\f[NSCSB]\s[16]10
+.L 405.04 324.72
+\f[NSCSB]\s[16]10
+.L 405.04 358.47
+\f[NSCSB]\s[16]10
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Built as a self-aware war machine by the Malicron
+.L 57.69 38.70
+\f[NSR]\s[8]Corporation, Miho escaped when her creators tried
+.L 67.69 38.70
+\f[NSR]\s[8]to reclaim her by force, critically damaged. She was
+.L 77.69 38.70
+\f[NSR]\s[8]found and repaired by a young inventor, Braun,
+.L 87.69 38.70
+\f[NSR]\s[8]and has stayed by his side ever since, hoping to live
+.L 97.69 38.70
+\f[NSR]\s[8]a normal, human life despite her origins.
+.L 367.69 217.40
+\f[NSR]\s[8]Innocent, kind-hearted, and eager to learn
+.L 377.69 217.40
+\f[NSR]\s[8]everything she can about the world, Miho
+.L 387.69 217.40
+\f[NSR]\s[8]wants nothing more than to help -- even if
+.L 397.69 217.40
+\f[NSR]\s[8]her enormous strength and destructive
+.L 407.69 217.40
+\f[NSR]\s[8]potential sometimes make that harder
+.L 417.69 217.40
+\f[NSR]\s[8]than it should be.
+.CP
+.SH
+\&Miho: Attacks
+.PP
+\&Mode 1: Hand-to-Hand: Even barehanded, Miho is a competent combatant.
+.PP
+\&Mode 2: Gatling Gun: She's packin'! The more bullets, the better!
+.PP
+\&Mode 3: Missile Launcher: Speak softly and launch a big missile!
+.PP
+\&Mode 4: Sniper Rifle: Miho takes them out with robotic precision.
+.PP
+\&Mode SP: Miho Ray: Nothing will remain to hurt her.
+.SH
+\&Miho: Robot Characteristics
+.PP
+\&Miho draws energy from the sun, and without regular sunbaths switches to a weaker backup supply after a day. Her considerable density makes her hard to carry and can strain weak floors, and her robotic nature is hard to fully disguise.
+.SH
+\&Miho: Self-Preservation Mode
+.PP
+\&If her combined Health and Endurance drop to 10, Miho's consciousness shuts down and she single-mindedly eliminates any threat, friend or foe alike -- returning to normal with no memory of what happened once the danger has passed.

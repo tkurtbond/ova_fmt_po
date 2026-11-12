@@ -1,0 +1,259 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Raine
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Art of Invisibility
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Attack (Kaze Satsujinsha)
+.L 155.70 39.47
+\f[NSR]\s[8]+4
+.L 155.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 168.70 39.47
+\f[NSR]\s[8]+4
+.L 168.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Evasive
+.L 194.70 39.47
+\f[NSR]\s[8]+1
+.L 194.70 59.20
+\f[NSI]\s[8]Intuitive
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Iron-Willed
+.L 220.70 39.47
+\f[NSR]\s[8]+2
+.L 220.70 59.20
+\f[NSI]\s[8]Knowledge (Origami)
+.L 233.70 39.47
+\f[NSR]\s[8]+2
+.L 233.70 59.20
+\f[NSI]\s[8]Knowledge (Wilderness)
+.L 246.70 39.47
+\f[NSR]\s[8]+1
+.L 246.70 59.20
+\f[NSI]\s[8]Quick
+.L 259.70 39.47
+\f[NSR]\s[8]+2
+.L 259.70 59.20
+\f[NSI]\s[8]Sixth Sense
+.L 272.70 39.47
+\f[NSR]\s[8]+2
+.L 272.70 59.20
+\f[NSI]\s[8]Vigorous
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Airhead
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Code of Conduct (Will Not Fight Surprised
+.L 142.70 246.30
+\f[NSI]\s[8]or Defenseless Opponents)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Guardian (Those in Need)
+.L 168.70 220.66
+\f[NSR]\s[8]−3
+.L 168.70 240.30
+\f[NSI]\s[8]Ineptitude (Home Economics)
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Pacifist
+.L 194.70 220.66
+\f[NSR]\s[8]−3
+.L 194.70 240.30
+\f[NSI]\s[8]Poor
+.L 207.70 220.66
+\f[NSR]\s[8]−2
+.L 207.70 240.30
+\f[NSI]\s[8]Rival (Shou)
+.L 220.70 220.66
+\f[NSR]\s[8]−2
+.L 220.70 240.30
+\f[NSI]\s[8]Secret (Past as an Assassin)
+.L 233.70 220.66
+\f[NSR]\s[8]−1
+.L 233.70 240.30
+\f[NSI]\s[8]Sensitivity (Sexual Misidentification)
+.L 246.70 220.66
+\f[NSR]\s[8]−1
+.L 246.70 240.30
+\f[NSI]\s[8]Unique Weakness (Nightmares)
+.L 259.70 220.66
+\f[NSR]\s[8]−3
+.L 259.70 240.30
+\f[NSI]\s[8]Wanted (Clan Cave Fox)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Kaze Satsujinsha\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]PERKS: ARMOR PIERCING; FLAWS: WEAPON
+.L 405.04 295.11
+\f[NSCSB]\s[16]7
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Raging Thunder Slash\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]AFFINITY: ELECTRICITY; PERKS: EFFECTIVE
+.L 445.10 145.30
+\f[NSR]\s[6.5]X3; FLAWS: WEAPON
+.L 443.79 295.11
+\f[NSCSB]\s[16]7
+.L 443.79 328.61
+\f[NSCSB]\s[16]7
+.L 443.79 358.47
+\f[NSCSB]\s[16]10
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Electrical Storm\m[default]
+.L 472.52 145.30
+\f[NSR]\s[6]AFFINITY: ELECTRICITY; PERKS: AREA EFFECT
+.L 480.52 145.30
+\f[NSR]\s[6]X2, EFFECTIVE; FLAWS: REQUIREMENT: MUST
+.L 488.52 145.30
+\f[NSR]\s[6]BE OUTSIDE (−10), WEAPON
+.L 483.39 295.11
+\f[NSCSB]\s[16]7
+.L 483.39 328.61
+\f[NSCSB]\s[16]5
+.L 483.39 358.47
+\f[NSCSB]\s[16]10
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Mist Touch\m[default]
+.L 515.80 145.30
+\f[NSR]\s[6.5]AFFINITY: SPIRIT; PERKS: CONTINUED
+.L 523.80 145.30
+\f[NSR]\s[6.5]EFFECT, FATIGUING, WILL ATTACK
+.L 522.39 295.11
+\f[NSCSB]\s[16]7
+.L 522.39 328.61
+\f[NSCSB]\s[16]4
+.L 522.39 358.47
+\f[NSCSB]\s[16]10
+.L 564.95 168.12
+\f[NSCSB]\s[18]5
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]60
+.L 564.95 354.00
+\f[NSCSB]\s[18]18
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Once a skilled assassin for the Clan Cave Fox, Raine
+.L 57.69 38.70
+\f[NSR]\s[8]broke from the clan after discovering that a
+.L 67.69 38.70
+\f[NSR]\s[8]contract kill was, in fact, his own estranged father.
+.L 77.69 38.70
+\f[NSR]\s[8]Disgusted with himself, he abandoned that life --
+.L 87.69 38.70
+\f[NSR]\s[8]but the clan doesn't let members leave, and
+.L 97.69 38.70
+\f[NSR]\s[8]dispatched his old comrade Shou to hunt him
+.L 107.69 38.70
+\f[NSR]\s[8]down. Raine now wanders, trying to atone by
+.L 117.69 38.70
+\f[NSR]\s[8]helping those he can.
+.L 367.69 217.40
+\f[NSR]\s[8]Reserved and thoughtful, Raine speaks
+.L 377.69 217.40
+\f[NSR]\s[8]only when he has something worth
+.L 387.69 217.40
+\f[NSR]\s[8]saying, and his mind often wanders even
+.L 397.69 217.40
+\f[NSR]\s[8]when he's paying close attention -- a habit
+.L 407.69 217.40
+\f[NSR]\s[8]that leads people to underestimate him.
+.L 417.69 217.40
+\f[NSR]\s[8]He practices swordsmanship and origami
+.L 427.69 217.40
+\f[NSR]\s[8]in his spare time, often folding paper to
+.L 437.69 217.40
+\f[NSR]\s[8]help himself think.
+.CP
+.SH
+\&Raine: Attacks
+.PP
+\&Kaze Satsujinsha: Raine's skill with a sword is extraordinary. His legendary katana is a suitable companion.
+.PP
+\&Raging Thunder Slash: Raine whispers across his blade before striking with crackling electrical energy.
+.PP
+\&Electrical Storm: Raine summons the power of nature to cut swaths through legions of enemies.
+.PP
+\&Mist Touch: Raine concentrates his energies to project his very spirit into the opponent's mind.
+.SH
+\&Raine: Nightmares
+.PP
+\&Raine is plagued by nightmares of his violent past, especially his father's death, and rarely sleeps soundly -- his sudden awakenings can startle anyone nearby.

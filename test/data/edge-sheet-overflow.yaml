@@ -1,0 +1,173 @@
+---
+- name: Overflowing Character With An Extraordinarily Long Name Indeed
+  player: A Player Whose Name Is Also Rather Long
+  npc-type: Heroic
+  background: |
+    The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+
+    The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+
+    The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+
+    The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+
+  appearance: The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+  personality: The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+  other-notes: The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+  abilities:
+    - name: Ability Number 1
+      level: 1
+      detail: A rather long detail that will need to wrap onto a second line 0
+    - name: Ability Number 2
+      level: 2
+    - name: Ability Number 3
+      level: 3
+    - name: Ability Number 4
+      level: 4
+    - name: Ability Number 5
+      level: 5
+      detail: A rather long detail that will need to wrap onto a second line 4
+    - name: Ability Number 6
+      level: 1
+    - name: Ability Number 7
+      level: 2
+    - name: Ability Number 8
+      level: 3
+    - name: Ability Number 9
+      level: 4
+      detail: A rather long detail that will need to wrap onto a second line 8
+    - name: Ability Number 10
+      level: 5
+    - name: Ability Number 11
+      level: 1
+    - name: Ability Number 12
+      level: 2
+    - name: Ability Number 13
+      level: 3
+      detail: A rather long detail that will need to wrap onto a second line 12
+    - name: Ability Number 14
+      level: 4
+    - name: Ability Number 15
+      level: 5
+    - name: Ability Number 16
+      level: 1
+    - name: Ability Number 17
+      level: 2
+      detail: A rather long detail that will need to wrap onto a second line 16
+    - name: Ability Number 18
+      level: 3
+    - name: Ability Number 19
+      level: 4
+    - name: Ability Number 20
+      level: 5
+  weaknesses:
+    - name: Weakness 1
+      level: -1
+    - name: Weakness 2
+      level: -2
+    - name: Weakness 3
+      level: -3
+    - name: Weakness 4
+      level: -1
+    - name: Weakness 5
+      level: -2
+    - name: Weakness 6
+      level: -3
+  combat:
+    defense: 4
+    health: 40
+    endurance: 60
+    threat-value: 18
+    notes: The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters. The quick brown fox jumps over the lazy dog while the sorcerer contemplates the many failings of the modern world and its inhabitants, who never seem to remember what matters.
+    attacks:
+      - name: A Spectacularly Overlong Attack Name That Cannot Fit
+        perks:
+          - Area Effect
+          - Armor Piercing
+          - Overwhelming
+          - Ranged
+          - Accurate
+          - Stunning
+          - Impairing
+          - Paralyzing
+          - Continued Effect
+        flaws:
+          - Feather Blow
+          - Ineffective
+          - Delayed
+        roll: 5
+        dx: 3
+        endurance: 20
+      - name: Attack 2
+        perks:
+          - Area Effect
+          - Armor Piercing
+          - Overwhelming
+          - Ranged
+          - Accurate
+          - Stunning
+          - Impairing
+          - Paralyzing
+          - Continued Effect
+        flaws:
+          - Feather Blow
+          - Ineffective
+          - Delayed
+        roll: 5
+        dx: 3
+        endurance: 20
+      - name: Attack 3
+        perks:
+          - Area Effect
+          - Armor Piercing
+          - Overwhelming
+          - Ranged
+          - Accurate
+          - Stunning
+          - Impairing
+          - Paralyzing
+          - Continued Effect
+        flaws:
+          - Feather Blow
+          - Ineffective
+          - Delayed
+        roll: 5
+        dx: 3
+        endurance: 20
+      - name: Attack 4
+        perks:
+          - Area Effect
+          - Armor Piercing
+          - Overwhelming
+          - Ranged
+          - Accurate
+          - Stunning
+          - Impairing
+          - Paralyzing
+          - Continued Effect
+        flaws:
+          - Feather Blow
+          - Ineffective
+          - Delayed
+        roll: 5
+        dx: 3
+        endurance: 20
+      - name: Attack 5
+        perks:
+          - Area Effect
+          - Armor Piercing
+          - Overwhelming
+          - Ranged
+          - Accurate
+          - Stunning
+          - Impairing
+          - Paralyzing
+          - Continued Effect
+        flaws:
+          - Feather Blow
+          - Ineffective
+          - Delayed
+        roll: 5
+        dx: 3
+        endurance: 20
+...

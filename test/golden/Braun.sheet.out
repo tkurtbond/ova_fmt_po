@@ -1,0 +1,175 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Braun
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Connected
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Dimensional Pocket
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Inventor
+.L 155.70 39.47
+\f[NSR]\s[8]+4
+.L 155.70 59.20
+\f[NSI]\s[8]Knowledge (Computer Whiz)
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Knowledge (Cosplay)
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (Games, Anime, & Manga)
+.L 194.70 39.47
+\f[NSR]\s[8]+1
+.L 194.70 59.20
+\f[NSI]\s[8]Pilot
+.L 207.70 39.47
+\f[NSR]\s[8]+3
+.L 207.70 59.20
+\f[NSI]\s[8]Smart
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Absent-Minded
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Clumsy
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Compulsion (Honesty)
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Nosebleeder
+.L 168.70 220.66
+\f[NSR]\s[8]−1
+.L 168.70 240.30
+\f[NSI]\s[8]Shy
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Weak
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Weak-Willed
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]First Day of Sale Shove!\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: NERDY
+.L 405.04 287.02
+\f[NSCSB]\s[16]−2*
+.L 405.04 321.57
+\f[NSCSB]\s[16]1/2
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]2
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 358.37
+\f[NSCSB]\s[18]0
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]A brilliant but socially awkward inventor, Braun
+.L 57.69 38.70
+\f[NSR]\s[8]lived alone surrounded by half-finished gadgets,
+.L 67.69 38.70
+\f[NSR]\s[8]always chasing the one breakthrough that would
+.L 77.69 38.70
+\f[NSR]\s[8]make his mark. That breakthrough turned out to
+.L 87.69 38.70
+\f[NSR]\s[8]be Miho, a damaged android he found discarded
+.L 97.69 38.70
+\f[NSR]\s[8]and repaired -- who has stayed loyally by his side
+.L 107.69 38.70
+\f[NSR]\s[8]ever since, upending his quiet, solitary life.
+.L 367.69 217.40
+\f[NSR]\s[8]Introverted and easily flustered, especially
+.L 377.69 217.40
+\f[NSR]\s[8]around women, Braun is nonetheless kind
+.L 387.69 217.40
+\f[NSR]\s[8]and honest to a fault -- a terrible liar who
+.L 397.69 217.40
+\f[NSR]\s[8]wears his feelings openly. He can be
+.L 407.69 217.40
+\f[NSR]\s[8]absent-minded, and is an easy target for
+.L 417.69 217.40
+\f[NSR]\s[8]bullies.
+.CP
+.SH
+\&Braun: Attacks
+.PP
+\&First Day of Sale Shove!: When a new Draconic Quest game is out, Braun can hold his place in line. Sometimes.
+.SH
+\&Braun: Inventions
+.PP
+\&Braun constantly scraps and rebuilds his inventions, but a few see regular use: a laptop with built-in hacking aids, and a pair of ordinary-looking glasses with several extrasensory functions, both kept handy via his Dimensional Pocket.
+.SH
+\&Braun: Connections & Cosplay
+.PP
+\&Braun occasionally trades in black-market parts he can't get otherwise, and sews and sells cosplay costumes for extra cash -- including most of Miho's own wardrobe.

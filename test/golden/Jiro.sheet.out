@@ -1,0 +1,191 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Jiro
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Armored (Bulletproof Vest)
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Police Training)
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Evasive
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Intimidating
+.L 181.70 39.47
+\f[NSR]\s[8]+3
+.L 181.70 59.20
+\f[NSI]\s[8]Minions (Officers)
+.L 194.70 39.47
+\f[NSR]\s[8]+1
+.L 194.70 59.20
+\f[NSI]\s[8]Perceptive
+.L 207.70 39.47
+\f[NSR]\s[8]+2
+.L 207.70 59.20
+\f[NSI]\s[8]Position of Power
+.L 220.70 39.47
+\f[NSR]\s[8]+2
+.L 220.70 59.20
+\f[NSI]\s[8]Strong
+.L 233.70 39.47
+\f[NSR]\s[8]+1
+.L 233.70 59.20
+\f[NSI]\s[8]Tough
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Compulsion (Trigger-Happy)
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Dependency (Coffee)
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Jittery
+.L 155.70 220.66
+\f[NSR]\s[8]−3
+.L 155.70 240.30
+\f[NSI]\s[8]Obsession (Work)
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Servitude (Police Force)
+.L 181.70 220.66
+\f[NSR]\s[8]−3
+.L 181.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Stubborn
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Desk-Side Revolver\m[default]
+.L 397.50 145.30
+\f[NSR]\s[6.5]PERKS: EFFECTIVE X2, RANGED; FLAWS:
+.L 405.50 145.30
+\f[NSR]\s[6.5]AMMUNITION, WEAPON
+.L 405.04 295.11
+\f[NSCSB]\s[16]4
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Bare Knuckle\m[default]
+.L 441.10 145.30
+\f[NSR]\s[6.5]PERKS: STUNNING; FLAWS: INACCURATE
+.L 443.79 295.11
+\f[NSCSB]\s[16]3
+.L 443.79 328.61
+\f[NSCSB]\s[16]4
+.L 443.79 362.36
+\f[NSCSB]\s[16]5
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Secondary
+.L 564.95 168.12
+\f[NSCSB]\s[18]3
+.L 564.95 225.35
+\f[NSCSB]\s[18]30
+.L 564.95 294.85
+\f[NSCSB]\s[18]20
+.L 564.95 358.37
+\f[NSCSB]\s[18]9
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]As the local police captain, Jiro keeps the force
+.L 57.69 38.70
+\f[NSR]\s[8]running, and the strain shows: he's jumpy, irritable,
+.L 67.69 38.70
+\f[NSR]\s[8]and always juggling several unrelated jobs at once,
+.L 77.69 38.70
+\f[NSR]\s[8]sometimes answering phones, barking orders, and
+.L 87.69 38.70
+\f[NSR]\s[8]doing paperwork all at the same time. His
+.L 97.69 38.70
+\f[NSR]\s[8]colleagues keep urging him to take time off, but
+.L 107.69 38.70
+\f[NSR]\s[8]he's never missed a day, and some suspect he's
+.L 117.69 38.70
+\f[NSR]\s[8]been saving up vacation for decades. Whether from
+.L 127.69 38.70
+\f[NSR]\s[8]stress or something darker, he tends to aim his
+.L 137.69 38.70
+\f[NSR]\s[8]gun at anything he considers an unwanted
+.L 147.69 38.70
+\f[NSR]\s[8]intrusion.
+.CP
+.SH
+\&Jiro: Attacks
+.PP
+\&Desk-Side Revolver: Jiro's constant companion and likely only friend.
+.PP
+\&Bare Knuckle: While he prefers "civilized" weaponry like his revolver, Jiro can throw a mean punch.
+.SH
+\&Jiro: Character Hooks
+.PP
+\&For all his near-psychotic devotion to the job, Captain Jiro generally does it well. Still, even well-behaved PCs can find themselves under police scrutiny.

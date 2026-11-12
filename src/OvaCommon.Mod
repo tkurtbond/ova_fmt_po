@@ -140,6 +140,32 @@ BEGIN
   RETURN Ropes.Map(r, ToSpace)
 END AllOneLine;
 
+(* YAML prose as the sheet formats (-X, -S) hold it: each line trimmed
+   (of blanks, tabs, LFs and CRs, as OvaText.Trim does), a paragraph's
+   lines joined with blanks, paragraphs (separated by blank lines) with
+   a single LF.  They wrap the lines themselves. *)
+PROCEDURE Reflow*(r: Rope): Rope;
+  VAR result, line: Rope; inPara, break: BOOLEAN; from, to, n: LONGINT;
+BEGIN
+  result := NIL; inPara := FALSE; break := FALSE;
+  n := Ropes.Length(r); from := 0;
+  WHILE from <= n DO
+    to := Ropes.IndexChar(r, 0AX, from);
+    IF to < 0 THEN to := n END;
+    line := OvaText.Trim(Ropes.Substring(r, from, to - from));
+    IF Ropes.Length(line) = 0 THEN break := inPara
+    ELSE
+      IF inPara THEN
+        IF break THEN result := Ropes.AppendChar(result, 0AX) ELSE result := Ropes.AppendChar(result, " ") END
+      END;
+      result := Ropes.Cat(result, line);
+      inPara := TRUE; break := FALSE
+    END;
+    from := to + 1
+  END;
+  RETURN result
+END Reflow;
+
 (* ---- The keys added for the character generator ---- *)
 
 (* What follows a number its mapping's overrides: list names: NIL if

@@ -1,0 +1,578 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Shady Teacher
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Art of Invisibility
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Perceptive
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Smart
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Absent-Minded
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Fussy
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Quirk (Always Wears Sunglasses)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Secret (To Everybody)
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]The **Shady Teacher** is new to the school but
+.L 57.69 38.70
+\f[NSR]\s[8]seems to be knowledgeable enough. Yet there's
+.L 67.69 38.70
+\f[NSR]\s[8]something...off about him. Maybe it's because he
+.L 77.69 38.70
+\f[NSR]\s[8]wears sunglasses even indoors or that students are
+.L 87.69 38.70
+\f[NSR]\s[8]suspiciously disappearing from his class...
+.SP p1
+.L 48.77 148.50
+\f[NSR]\s[10.5]Snobbish Upperclassman
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Beautiful
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Knowledge (Kendo)
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Minions (Her Clique)
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Quick
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Smart
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Arrogant
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Emotionless
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Obsession (Meeting Her Mother's Lofty
+.L 155.70 246.30
+\f[NSI]\s[8]Expectations)
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Overconfident
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]The **Snobbish Upperclassman** is the school's
+.L 57.69 38.70
+\f[NSR]\s[8]academic darling, the kendo team's star athlete,
+.L 67.69 38.70
+\f[NSR]\s[8]and easily the most popular girl on campus -- and
+.L 77.69 38.70
+\f[NSR]\s[8]she knows it. You'd be lucky if she gave you the
+.L 87.69 38.70
+\f[NSR]\s[8]time of day...or honored you by allowing you to tell
+.L 97.69 38.70
+\f[NSR]\s[8]it to her.
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Karis
+.L 116.70 39.47
+\f[NSR]\s[8]+3
+.L 116.70 59.20
+\f[NSI]\s[8]Agile
+.L 129.70 39.47
+\f[NSR]\s[8]+3
+.L 129.70 59.20
+\f[NSI]\s[8]Attack (Boomerang)
+.L 142.70 39.47
+\f[NSR]\s[8]+1
+.L 142.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Companion (Arasuni)
+.L 168.70 39.47
+\f[NSR]\s[8]+1
+.L 168.70 59.20
+\f[NSI]\s[8]Cute!
+.L 181.70 39.47
+\f[NSR]\s[8]+1
+.L 181.70 59.20
+\f[NSI]\s[8]Evasive
+.L 194.70 39.47
+\f[NSR]\s[8]+1
+.L 194.70 59.20
+\f[NSI]\s[8]Intuitive
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Perceptive
+.L 220.70 39.47
+\f[NSR]\s[8]+3
+.L 220.70 59.20
+\f[NSI]\s[8]Quick
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Bizarre Appearance (Strange Ears)
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Impulsive
+.L 142.70 220.66
+\f[NSR]\s[8]−3
+.L 142.70 240.30
+\f[NSI]\s[8]Obsession (Kill Shadowman)
+.L 155.70 220.66
+\f[NSR]\s[8]−2
+.L 155.70 240.30
+\f[NSI]\s[8]Quirk (Stranger in a Strange Land)
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Sensitivity (Chest)
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.L 194.70 220.66
+\f[NSR]\s[8]−1
+.L 194.70 240.30
+\f[NSI]\s[8]Soft Spot (Stuffed Animals)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Kinetic Boomerang\m[default]
+.L 397.50 145.30
+\f[NSR]\s[6.5]PERKS: ARMOR PIERCING, RANGED; FLAWS:
+.L 405.50 145.30
+\f[NSR]\s[6.5]WEAPON
+.L 405.04 295.11
+\f[NSCSB]\s[16]6
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Trick Shot\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: DISARMING, RANGED; FLAWS:
+.L 445.10 145.30
+\f[NSR]\s[6.5]INEFFECTIVE, WEAPON
+.L 443.79 295.11
+\f[NSCSB]\s[16]6
+.L 443.79 328.61
+\f[NSCSB]\s[16]3
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Sweeping Strike\m[default]
+.L 476.70 145.30
+\f[NSR]\s[6.5]PERKS: MULTIPLE TARGETS, RANGED;
+.L 484.70 145.30
+\f[NSR]\s[6.5]FLAWS: INEFFECTIVE, WEAPON
+.L 483.39 295.11
+\f[NSCSB]\s[16]6
+.L 483.39 328.61
+\f[NSCSB]\s[16]3
+.L 483.39 362.36
+\f[NSCSB]\s[16]0
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Flex-Steel Cable\m[default]
+.L 515.80 145.30
+\f[NSR]\s[6.5]PERKS: PARALYZING X2, RANGED; FLAWS:
+.L 523.80 145.30
+\f[NSR]\s[6.5]INEFFECTIVE X3, WEAPON
+.L 522.39 295.11
+\f[NSCSB]\s[16]6
+.L 522.39 328.61
+\f[NSCSB]\s[16]1
+.L 522.39 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]6
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]16
+.SP p1
+.L 48.42 148.50
+\f[NSR]\s[9.5]Arasuni (Karis's Companion)
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Armored
+.L 129.70 39.47
+\f[NSR]\s[8]+1
+.L 129.70 59.20
+\f[NSI]\s[8]Attack
+.L 142.70 39.47
+\f[NSR]\s[8]+1
+.L 142.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 155.70 39.47
+\f[NSR]\s[8]+1
+.L 155.70 59.20
+\f[NSI]\s[8]Evasive
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Life Support
+.L 181.70 39.47
+\f[NSR]\s[8]+3
+.L 181.70 59.20
+\f[NSI]\s[8]Strong
+.L 194.70 39.47
+\f[NSR]\s[8]+2
+.L 194.70 59.20
+\f[NSI]\s[8]Tough
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Unique Ability (Computerized Brain)
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Awkward Size (Large)
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Bizarre Appearance
+.L 142.70 220.66
+\f[NSR]\s[8]−2
+.L 142.70 240.30
+\f[NSI]\s[8]Emotionless
+.L 155.70 220.66
+\f[NSR]\s[8]−1
+.L 155.70 240.30
+\f[NSI]\s[8]Quirk (Quoting Earth)
+.L 168.70 220.66
+\f[NSR]\s[8]−3
+.L 168.70 240.30
+\f[NSI]\s[8]Servitude (Karis)
+.L 181.70 220.66
+\f[NSR]\s[8]−1
+.L 181.70 240.30
+\f[NSI]\s[8]Slow
+.L 194.70 220.66
+\f[NSR]\s[8]−2
+.L 194.70 240.30
+\f[NSI]\s[8]Vulnerability (Electricity)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Iron Knuckle\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]AFFINITY: MIGHTY ROBOT
+.L 405.04 295.11
+\f[NSCSB]\s[16]3
+.L 405.04 328.61
+\f[NSCSB]\s[16]5
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Stun Pulse Rifle\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: IMPAIRING, RANGED; FLAWS:
+.L 445.10 145.30
+\f[NSR]\s[6.5]INACCURATE, WEAPON
+.L 443.79 295.11
+\f[NSCSB]\s[16]2
+.L 443.79 328.61
+\f[NSCSB]\s[16]2
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]2
+.L 564.95 225.35
+\f[NSCSB]\s[18]40
+.L 564.95 294.85
+\f[NSCSB]\s[18]20
+.L 564.95 354.00
+\f[NSCSB]\s[18]10
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Karis is the daughter of Dromar d'Ori, a renowned
+.L 57.69 38.70
+\f[NSR]\s[8]bounty hunter for the Galactic Peace Legion. When
+.L 67.69 38.70
+\f[NSR]\s[8]the elusive criminal Shadowman killed her father,
+.L 77.69 38.70
+\f[NSR]\s[8]Karis dedicated herself to hunting him down,
+.L 87.69 38.70
+\f[NSR]\s[8]eventually tracking him to an unfamiliar,
+.L 97.69 38.70
+\f[NSR]\s[8]underdeveloped world: Earth. She's accompanied
+.L 107.69 38.70
+\f[NSR]\s[8]by Arasuni, a GPL-issued assistant robot.
+.L 367.69 217.40
+\f[NSR]\s[8]Quick-witted and sharp-tongued, Karis
+.L 377.69 217.40
+\f[NSR]\s[8]tends to act before she thinks. Earth's
+.L 387.69 217.40
+\f[NSR]\s[8]customs leave her thoroughly out of her
+.L 397.69 217.40
+\f[NSR]\s[8]depth, and she has a short fuse --
+.L 407.69 217.40
+\f[NSR]\s[8]especially when teased about her
+.L 417.69 217.40
+\f[NSR]\s[8]appearance.
+.CP
+.SH
+\&Karis: Attacks
+.PP
+\&Kinetic Boomerang: Karis's signature weapon can be wielded versatilely, both as a blade and a boomerang.
+.PP
+\&Trick Shot: With finesse, Karis throws her weapon in a tight arc to disarm opponents.
+.PP
+\&Sweeping Strike: Take down multiple foes in a single throw!
+.PP
+\&Flex-Steel Cable: Her weapon can release a super-strong cable to entangle foes, among other creative uses.
+.SH
+\&Arasuni: Attacks
+.PP
+\&Iron Knuckle: Arasuni's immense size and strength allow him to deal a crushing blow.
+.PP
+\&Stun Pulse Rifle: While not the most powerful of weapons, it is useful for subduing stubborn foes.
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Hana Mori
+.L 49.31 284.10
+\f[NSR]\s[12]Sam
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Companion (Mochi)
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Knowledge (Weather)
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Magic, Arcane
+.L 155.70 67.20
+\f[NSLI]\s[6.5]Still Air (Barrier +1, 15* END)
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Telekinesis [\f[NSR]\s[7]5* ENDURANCE\f[NSI]\s[8]]
+.L 181.70 39.47
+\f[NSR]\s[8]+3
+.L 181.70 59.20
+\f[NSI]\s[8]Transformation
+.L 194.70 67.20
+\f[NSLI]\s[6.5]+2 Barrier
+.L 207.70 67.20
+\f[NSLI]\s[6.5]+2 Flight [\f[NSR]\s[5.5]5* ENDURANCE\f[NSLI]\s[6.5]]
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Short-Tempered
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Gust\m[default]
+.L 405.04 291.41
+\f[NSCSB]\s[16]3*
+.L 405.04 324.91
+\f[NSCSB]\s[16]3*
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Storm Front\m[default]
+.L 443.79 295.11
+\f[NSCSB]\s[16]2
+.L 443.79 328.61
+\f[NSCSB]\s[16]1
+.L 443.79 354.77
+\f[NSCSB]\s[16]10*
+.L 395.77 34.10
+\f[NSR]\s[7]Took 10 damage from the
+.L 404.27 34.10
+\f[NSR]\s[7]<Hollow> & lost her scarf.
+.L 412.77 34.10
+\f[NSR]\s[7].Still shaken.
+.L 564.95 151.89
+\f[NSCSB]\s[18]3*/4*
+.L 564.95 221.19
+\f[NSCSB]\s[18]40*
+.L 564.95 290.69
+\f[NSCSB]\s[18]50*
+.L 564.95 354.21
+\f[NSCSB]\s[18]9*
+.SP p1
+.L 47.88 148.50
+\f[NSR]\s[8]Mochi (Hana Mori's Companion)
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Quick
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Awkward Size (Small)
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Nip\m[default]
+.L 405.04 295.11
+\f[NSCSB]\s[16]2
+.L 405.04 328.61
+\f[NSCSB]\s[16]1
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 564.95 168.12
+\f[NSCSB]\s[18]3
+.L 564.95 221.19
+\f[NSCSB]\s[18]20*
+.L 564.95 294.85
+\f[NSCSB]\s[18]20
+.L 564.95 358.37
+\f[NSCSB]\s[18]2
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Hana found out she could push things without
+.L 57.69 38.70
+\f[NSR]\s[8]touching them the day her bicycle chain snapped
+.L 67.69 38.70
+\f[NSR]\s[8]on a hill.
+.L 77.69 38.70
+\f[NSR]\s[8]The pendant she found afterward lets her become
+.L 87.69 38.70
+\f[NSR]\s[8]the Gale.
+.L 367.69 37.70
+\f[NSR]\s[8]Short, with a red scarf she never takes off;
+.L 377.69 37.70
+\f[NSR]\s[8]as the Gale, a grey coat that never stops
+.L 387.69 37.70
+\f[NSR]\s[8]moving.
+.L 367.69 217.40
+\f[NSR]\s[8]Cheerful and stubborn, and quick to take
+.L 377.69 217.40
+\f[NSR]\s[8]a dare.
+.L 542.79 37.70
+\f[NSR]\s[8]Owes the shrine keeper a favor.
+.\" ova-sheet-portrait 1 154.80 279.10 test/data/images/hana.png
+.L 33.28 244.40
+.PT 1 154.80 279.10
+.CP
+.SH
+\&Hana Mori: Ability Notes
+.PP
+\&Barrier: the second Defense value
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Test Pilot
+.L 116.70 39.47
+\f[NSR]\s[8]+3
+.L 116.70 59.20
+\f[NSI]\s[8]Vehicle (Thunderhawk)
+.SP p1
+.L 47.88 148.50
+\f[NSR]\s[8]Thunderhawk (Test Pilot's
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Flight
+.L 129.70 39.47
+\f[NSR]\s[8]+3
+.L 129.70 59.20
+\f[NSI]\s[8]Tough
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Awkward Size
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Missile Barrage\m[default]
+.L 405.04 295.11
+\f[NSCSB]\s[16]5
+.L 405.04 328.61
+\f[NSCSB]\s[16]4
+.L 405.04 358.47
+\f[NSCSB]\s[16]10
+.L 564.95 168.12
+\f[NSCSB]\s[18]3
+.L 564.95 225.35
+\f[NSCSB]\s[18]60
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.SP p2

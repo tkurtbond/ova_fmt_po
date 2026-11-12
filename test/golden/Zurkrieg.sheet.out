@@ -1,0 +1,225 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Zurkrieg
+.L 116.70 39.47
+\f[NSR]\s[8]+3
+.L 116.70 59.20
+\f[NSI]\s[8]Attack (Power & Control)
+.L 129.70 39.47
+\f[NSR]\s[8]+3
+.L 129.70 59.20
+\f[NSI]\s[8]Combat Expert
+.L 142.70 39.47
+\f[NSR]\s[8]+2
+.L 142.70 59.20
+\f[NSI]\s[8]Evasive
+.L 155.70 39.47
+\f[NSR]\s[8]+3
+.L 155.70 59.20
+\f[NSI]\s[8]Intimidating
+.L 168.70 39.47
+\f[NSR]\s[8]+2
+.L 168.70 59.20
+\f[NSI]\s[8]Iron-Willed
+.L 181.70 39.47
+\f[NSR]\s[8]+4
+.L 181.70 59.20
+\f[NSI]\s[8]Knowledge (Economics)
+.L 194.70 39.47
+\f[NSR]\s[8]+4
+.L 194.70 59.20
+\f[NSI]\s[8]Minions (Men in Black)
+.L 207.70 39.47
+\f[NSR]\s[8]+2
+.L 207.70 59.20
+\f[NSI]\s[8]Smart
+.L 220.70 39.47
+\f[NSR]\s[8]+3
+.L 220.70 59.20
+\f[NSI]\s[8]Strong
+.L 233.70 39.47
+\f[NSR]\s[8]+2
+.L 233.70 59.20
+\f[NSI]\s[8]Tough
+.L 246.70 39.47
+\f[NSR]\s[8]+5
+.L 246.70 59.20
+\f[NSI]\s[8]Wealthy
+.L 116.70 220.66
+\f[NSR]\s[8]−2
+.L 116.70 240.30
+\f[NSI]\s[8]Arrogant
+.L 129.70 220.66
+\f[NSR]\s[8]−1
+.L 129.70 240.30
+\f[NSI]\s[8]Code of Conduct (Must Have Fair Duels)
+.L 142.70 220.66
+\f[NSR]\s[8]−3
+.L 142.70 240.30
+\f[NSI]\s[8]Fear (Drowning, from Childhood
+.L 155.70 246.30
+\f[NSI]\s[8]Accident)
+.L 168.70 220.66
+\f[NSR]\s[8]−2
+.L 168.70 240.30
+\f[NSI]\s[8]Hatred (Weakness)
+.L 181.70 220.66
+\f[NSR]\s[8]−3
+.L 181.70 240.30
+\f[NSI]\s[8]Obsession (Power)
+.L 194.70 220.66
+\f[NSR]\s[8]−3
+.L 194.70 240.30
+\f[NSI]\s[8]Secret (Illegal Research)
+.L 207.70 220.66
+\f[NSR]\s[8]−3
+.L 207.70 240.30
+\f[NSI]\s[8]Stubborn
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Extending Cane\m[default]
+.L 401.50 145.30
+\f[NSR]\s[6.5]PERKS: REACH; FLAWS: WEAPON
+.L 405.04 295.11
+\f[NSCSB]\s[16]5
+.L 405.04 328.61
+\f[NSCSB]\s[16]7
+.L 405.04 362.36
+\f[NSCSB]\s[16]0
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]The World's Strongest\m[default]
+.L 437.10 145.30
+\f[NSR]\s[6.5]PERKS: STUNNING; FLAWS: INEFFECTIVE,
+.L 445.10 145.30
+\f[NSR]\s[6.5]UNWIELDY
+.L 443.79 295.11
+\f[NSCSB]\s[16]5
+.L 443.79 328.61
+\f[NSCSB]\s[16]6
+.L 443.79 362.36
+\f[NSCSB]\s[16]0
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Heroic
+.L 564.95 168.12
+\f[NSCSB]\s[18]4
+.L 564.95 225.35
+\f[NSCSB]\s[18]60
+.L 564.95 294.85
+\f[NSCSB]\s[18]40
+.L 564.95 354.00
+\f[NSCSB]\s[18]18
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Grant Zurkrieg grew up poor in Europe and has
+.L 57.69 38.70
+\f[NSR]\s[8]craved power ever since. A gift for economics made
+.L 67.69 38.70
+\f[NSR]\s[8]him a millionaire by his mid-twenties; when money
+.L 77.69 38.70
+\f[NSR]\s[8]wasn't enough, he built his body into a fighting
+.L 87.69 38.70
+\f[NSR]\s[8]machine, and that wasn't enough either. Now his
+.L 97.69 38.70
+\f[NSR]\s[8]Men in Black scour the world for its most powerful
+.L 107.69 38.70
+\f[NSR]\s[8]people, so that he can make them join him or crush
+.L 117.69 38.70
+\f[NSR]\s[8]them.
+.CP
+.SH
+\&Zurkrieg: Attacks
+.PP
+\&Extending Cane: Zurkrieg's cane is engineered to extend, giving him command of any situation.
+.PP
+\&The World's Strongest: While fond enough of his cane, Zurkrieg enjoys finishing off opponents barehanded.
+.SH
+\&Zurkrieg: Character Hooks
+.PP
+\&Anyone with remarkable skill or power can catch Zurkrieg's eye, and his lavishly funded experiments can cause trouble of their own -- as in Ai's and Yuu's backgrounds.
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Men in Black
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Strong
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Tough
+.L 116.70 220.66
+\f[NSR]\s[8]−3
+.L 116.70 240.30
+\f[NSI]\s[8]Emotionless
+.L 129.70 220.66
+\f[NSR]\s[8]−3
+.L 129.70 240.30
+\f[NSI]\s[8]Servitude
+.L 142.70 220.66
+\f[NSR]\s[8]−1
+.L 142.70 240.30
+\f[NSI]\s[8]Slow
+.SP p2
+.L 47.69 38.70
+\f[NSR]\s[8]Zurkrieg's **Men in Black** are cyborgs,
+.L 57.69 38.70
+\f[NSR]\s[8]assembled from the terminally ill, the brain-dead,
+.L 67.69 38.70
+\f[NSR]\s[8]and even the dead: part human, part machine.
+.L 77.69 38.70
+\f[NSR]\s[8]They're slow but tireless and strong, and they carry
+.L 87.69 38.70
+\f[NSR]\s[8]out his orders exactly.

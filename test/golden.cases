@@ -50,6 +50,13 @@ ada:stdin form-stdin  @(Karis|Broken)   -X
 ada:file form-o-file  @(Fukiko)   -X
 ada    form-errors @(bad-*|edge-*)   -X
 
+# ---- -S: the sheet's text as troff, for ova_sheet.sh ----
+ada    sheet       [A-Z]*   -S
+ada:all sheet-all  @(Sheet|Karis|Fragment|Vehicle)   -S
+ada:stdin sheet-stdin  @(Sheet|Broken)   -S
+ada    sheet-P     @(Sheet|Auren|Vehicle)   -S -P me.png
+ada    sheet-edge  @(bad-*|edge-*)   -S
+
 # ---- Options ----
 ada    terse-O     [A-Z]*   -O
 ada    terse-n     [A-Z]*   -n
