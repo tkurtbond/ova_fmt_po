@@ -73,7 +73,7 @@
         "Endurance": "40",
         "TV": "20",
         "Background": "Built as a self-aware war machine by the Malicron Corporation, Miho escaped when her creators tried to reclaim her by force, critically damaged. She was found and repaired by a young inventor, Braun, and has stayed by his side ever since, hoping to live a normal, human life despite her origins.",
-        "Personality": "Innocent, kind-hearted, and eager to learn everything she can about the world, Miho wants nothing more than to help -- even if her enormous strength and destructive potential sometimes make that harder than it should be."
+        "Personality": "Innocent, kind-hearted, and eager to learn everything she can about the world, Miho wants nothing more than to help — even if her enormous strength and destructive potential sometimes make that harder than it should be."
       }
     },
     {
@@ -92,7 +92,7 @@
       "pages": [2],
       "sub": [],
       "fields": {
-        "Background": "Miho: Attacks\nMode 1: Hand-to-Hand: Even barehanded, Miho is a competent combatant.\nMode 2: Gatling Gun: She's packin'! The more bullets, the better!\nMode 3: Missile Launcher: Speak softly and launch a big missile!\nMode 4: Sniper Rifle (Perks: Accurate, Armor Piercing, Impairing, Ranged; Flaws: Concentration: Aiming): Miho takes them out with robotic precision.\nMode SP: Miho Ray (Perks: Effective x6, Ranged; Flaws: Requirement: Self-Preservation Mode (-20)): Nothing will remain to hurt her.\n\nMiho: Robot Characteristics\nMiho draws energy from the sun, and without regular sunbaths switches to a weaker backup supply after a day. Her considerable density makes her hard to carry and can strain weak floors, and her robotic nature is hard to fully disguise.\n\nMiho: Self-Preservation Mode\nIf her combined Health and Endurance drop to 10, Miho's consciousness shuts down and she single-mindedly eliminates any threat, friend or foe alike -- returning to normal with no memory of what happened once the danger has passed."
+        "Background": "Miho: Attacks\nMode 1: Hand-to-Hand: Even barehanded, Miho is a competent combatant.\nMode 2: Gatling Gun: She's packin'! The more bullets, the better!\nMode 3: Missile Launcher: Speak softly and launch a big missile!\nMode 4: Sniper Rifle (Perks: Accurate, Armor Piercing, Impairing, Ranged; Flaws: Concentration: Aiming): Miho takes them out with robotic precision.\nMode SP: Miho Ray (Perks: Effective x6, Ranged; Flaws: Requirement: Self-Preservation Mode (-20)): Nothing will remain to hurt her.\n\nMiho: Robot Characteristics\nMiho draws energy from the sun, and without regular sunbaths switches to a weaker backup supply after a day. Her considerable density makes her hard to carry and can strain weak floors, and her robotic nature is hard to fully disguise.\n\nMiho: Self-Preservation Mode\nIf her combined Health and Endurance drop to 10, Miho's consciousness shuts down and she single-mindedly eliminates any threat, friend or foe alike — returning to normal with no memory of what happened once the danger has passed."
       }
     }
   ]

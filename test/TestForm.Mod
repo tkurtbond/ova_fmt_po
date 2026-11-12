@@ -39,6 +39,11 @@ BEGIN
   s[0] := 0C3X; s[1] := 0A9X; s[2] := 0C3X; s[3] := 0A9X; s[4] := 0X;
   Check.Check(OvaForm.FitCut(Str(s), 10, FALSE, 112, 1) = 4, "FitCut: UTF-8 counted by character");
   Check.Check(OvaForm.FitCut(Str(s), 10, FALSE, 111, 1) = 0, "FitCut: UTF-8, too wide");
+  (* "--" is an em dash, 1000; "---" a dash and a hyphen, 1333. *)
+  Check.Check(OvaForm.FitCut(Str("--"), 10, FALSE, 100, 1) = 2, "FitCut: -- is an em dash");
+  Check.Check(OvaForm.FitCut(Str("--"), 10, FALSE, 99, 1) = 0, "FitCut: -- as wide as an em dash");
+  Check.Check(OvaForm.FitCut(Str("---"), 10, FALSE, 134, 1) = 3, "FitCut: --- is a dash and a hyphen");
+  Check.Check(OvaForm.FitCut(Str("---"), 10, FALSE, 133, 1) = 0, "FitCut: ---, too wide");
   Check.Check(OvaForm.FitCut(NIL, 10, FALSE, 100, 1) = 0, "FitCut of nothing")
 END TestFitCut;
 

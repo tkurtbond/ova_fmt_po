@@ -37,6 +37,9 @@ CONST
      million characters would otherwise overflow it. *)
   TooWide = 100000000;
 
+  (* "--" is written as an em dash (Dashes), 1000 wide in both faces. *)
+  EmDashWidth = 1000;
+
   (* Inner widths and heights of the fields, in tenths of a point;
      leading is 1.2 times the size, so a field of height h at size s
      takes h DIV (s * 12) lines. *)
@@ -116,16 +119,37 @@ BEGIN
   RETURN 0
 END CharWidth;
 
+(* Whether s[i], of s[0 .. n - 1], starts a "--". *)
+PROCEDURE IsDash(VAR s: ARRAY OF CHAR; i, n: INTEGER): BOOLEAN;
+BEGIN RETURN (s[i] = "-") & (i + 1 < n) & (s[i + 1] = "-")
+END IsDash;
+
+(* The width of what starts at s[i]: an em dash for "--", the Ada
+   Width_At. *)
+PROCEDURE WidthAt(VAR s: ARRAY OF CHAR; i, n: INTEGER; bold: BOOLEAN): INTEGER;
+BEGIN
+  IF IsDash(s, i, n) THEN RETURN EmDashWidth END;
+  RETURN CharWidth(s[i], bold)
+END WidthAt;
+
+(* How many bytes that is: 2 for "--", else 1, the Ada Step. *)
+PROCEDURE Step(VAR s: ARRAY OF CHAR; i, n: INTEGER): INTEGER;
+BEGIN
+  IF IsDash(s, i, n) THEN RETURN 2 END;
+  RETURN 1
+END Step;
+
 (* Whether r fits on one line of a field width tenths of a point wide:
    inside a 2 pt padding each side, a text of width W at size points
    fits when W * size <= width * 100. *)
 PROCEDURE FitsLine(r: Rope; size: INTEGER; bold: BOOLEAN; width: INTEGER): BOOLEAN;
-  VAR s: String; i, w: INTEGER;
+  VAR s: String; i, n, w: INTEGER;
 BEGIN
-  s := OvaText.Chars(r); w := 0;
-  FOR i := 0 TO SHORT(LEN(s^)) - 2 DO
-    w := w + CharWidth(s[i], bold);
-    IF w > TooWide THEN w := TooWide END
+  s := OvaText.Chars(r); n := SHORT(LEN(s^)) - 1; w := 0; i := 0;
+  WHILE i < n DO
+    w := w + WidthAt(s^, i, n, bold);
+    IF w > TooWide THEN w := TooWide END;
+    i := i + Step(s^, i, n)
   END;
   RETURN w * size <= width * 100
 END FitsLine;
@@ -151,9 +175,9 @@ BEGIN
     ELSE
       j := i; w := 0;
       WHILE (j < n) & (s[j] # " ") & (s[j] # LF) DO
-        w := w + CharWidth(s[j], bold) * size;
+        w := w + WidthAt(s^, j, n, bold) * size;
         IF w > TooWide THEN w := TooWide END;
-        INC(j)
+        j := j + Step(s^, j, n)
       END;
       IF ~fresh THEN
         IF cur + space + w <= limit THEN cur := cur + space + w
@@ -210,6 +234,25 @@ BEGIN
 END Fit;
 
 (* ---- Text ---- *)
+
+(* r with each "--" an em dash, U+2014 in UTF-8, as the rulebook sets
+   one (and -S does); the Ada Dashes.  Done only as a value is written:
+   the measuring above counts "--" as the dash, and a field is cut only
+   at a blank, so never inside one. *)
+PROCEDURE Dashes(r: Rope): Rope;
+  VAR s, t: String; i, k, n: INTEGER;
+BEGIN
+  s := OvaText.Chars(r); n := SHORT(LEN(s^)) - 1;
+  NEW(t, 2 * n + 1); i := 0; k := 0;
+  WHILE i < n DO
+    IF IsDash(s^, i, n) THEN
+      t[k] := 0E2X; t[k + 1] := 80X; t[k + 2] := 94X; INC(k, 3)
+    ELSE t[k] := s[i]; INC(k)
+    END;
+    i := i + Step(s^, i, n)
+  END;
+  RETURN Ropes.FromSubchars(t^, 0, k)
+END Dashes;
 
 (* r as a JSON string's contents.  Exported for TestForm. *)
 PROCEDURE Escape*(r: Rope): Rope;
@@ -480,7 +523,7 @@ BEGIN
   OvaOut.String("],"); OvaOut.Ln;
   OvaOut.String('      "fields": {'); OvaOut.Ln;
   FOR i := 0 TO f.names.n - 1 DO
-    OvaOut.String("        "); PutString(f.names.items[i]); OvaOut.String(": "); PutString(f.values.items[i]);
+    OvaOut.String("        "); PutString(f.names.items[i]); OvaOut.String(": "); PutString(Dashes(f.values.items[i]));
     IF i < f.names.n - 1 THEN OvaOut.Char(",") END;
     OvaOut.Ln
   END;

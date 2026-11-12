@@ -1155,8 +1155,11 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
   in UTF-8, for each `--`, so lines break with the dash's own width;
   `FitBlock` cuts the styled text, not the YAML's, since the two no
   longer have the same length; and `PutText` writes the dash too.
-  Only `-S` changed (the 24 sheet golden files and `sheet-all`); `-X`
-  still fills the form with `--`.
+  Then `-X` the same way (the Ada PLAN.md's entry): `OvaForm` measures
+  each `--` as an em dash, 1000 wide, and `Dashes` writes it as one in
+  each value, a field being cut only at a blank. Only the form golden
+  files changed, each `--` a dash and nothing cut differently; TestForm
+  checks the measuring, which no fixture shows.
 
 ### Order
 
