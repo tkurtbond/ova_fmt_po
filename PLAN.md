@@ -528,7 +528,7 @@ it.
 | Oberon module | Ada unit | Writes |
 |---|---|---|
 | `OvaSheetMap` | `Ova_Fmt.Sheet_Map` | Shared: the field table above (name, page, rectangle, size, single/multi-line) as constants, and `Fill(e)`. `Fill` maps an entity onto slots: Abilities and Weaknesses sorted as now (`OvaCommon`), each "Name (detail) [perks/flaws/endurance]" with the level in the Dice column. Built-under content becomes `Sub` and `Spell` rows in blocks kept together ("Sub-Abilities, as the rulebook prints them"). Attacks go to name / "Affinity; perks; flaws" / Roll, DX, End. Defense is `OvaCommon.DefenseText`, and `*` marks overrides, as `raw` does. Prose fields are trimmed and joined (`AllOneLine` where a field is one line). Whatever didn't fit goes on an overflow list. |
-| `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw` (the letter is proposed), and only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). |
+| `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw`, only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). |
 | `OvaXfdf` | `Ova_Fmt.Format_Xfdf` | `-X`/`--xfdf`: XFDF for `pdftk fill_form`, XML-escaped (`&`, `<`, `>`, `"`). Overflow becomes one line at the end of Other Notes ("More on the continuation sheet"), or, with an option, goes to standard error. |
 | `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size. A macro `FLD page x y w h size` places each value. Two passes per value: measure with `\w`, shrink to the floor, then wrap in an `.ev` with `.ll` set to the field's width. The continuation pages are in `-ms` style: linked Abilities, then the sections the sheet has no place for, reusing `OvaCommon`'s Formatter callbacks, as `OvaHmm` does. `-P FILE`/`--portrait FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file, as in `-H`. |
 
@@ -590,8 +590,8 @@ with unit tests in `TestText.Mod`.
   - ~~Should the overlay be in groff or Lout?~~ groff (the user,
     2026-11-12).
   - ~~Which option letters?~~ `-S`/`--sheet`, `-X`/`--xfdf` and
-    `-P`/`--portrait` (the user, 2026-11-12). `-R`/`--redraw` for the
-    redrawn sheet is proposed, not yet agreed.
+    `-P`/`--portrait`, and `-R`/`--redraw` for the redrawn sheet (the
+    user, 2026-11-12).
   - ~~A third mode that redraws the whole sheet?~~ Yes (the user,
     2026-11-12): "Redrawing the sheet".
   - ~~Which fonts?~~ Noto Sans, proportional, with the rulebook's
