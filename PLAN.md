@@ -663,12 +663,12 @@ all four embedded, "Tōdō Ōkami" and U+2212 came through `-k`, and the
 faked small caps looked right at 200 dpi. afmtodit warns that two Greek
 glyph names map to one code; that is harmless.
 
-### Redrawing the sheet [Ada done]
+### Redrawing the sheet [done]
 
 The user decided (2026-11-12) there will also be a third mode: groff
 draws the sheet itself, with no Dyskami artwork, so the output can be
 shared. `OvaSheetDraw` (Ada `Ova_Fmt.Sheet_Draw`) writes the frames.
-Built in the Ada version (2026-11-12); the port is next.
+Built in the Ada version (2026-11-12), then ported (2026-11-12).
 
 - **What it writes.** With `-R`, the preamble ends with the drawing's
   colours and macros, opening with `.\" ova-sheet-redrawn`, and each
@@ -711,6 +711,14 @@ Built in the Ada version (2026-11-12); the port is next.
 - Compared by eye at 100 dpi with the blank sheet: the panels, boxes,
   rules and labels fall where the sheet's do, and Sheet.yaml's values
   sit in them as on the real sheet, a portrait inside the frame.
+- **The port** [done, 2026-11-12]. `OvaSheetDraw` is the Ada table's
+  116 lines, generated from it, each a `Line` call; the one with both
+  quote marks (`.\" -R: the sheet's frames ...`) writes its `.\"`
+  apart, as `OvaSheet`'s preamble does. `OvaConfig.redraw` and `-R` in
+  `OvaCli`; `OvaSheet` writes `Page1`/`Page2` after each `.SP` and
+  `PutPreamble` after its own. The five `-R` golden cases pass byte
+  for byte. `make redraw` builds `build/*.redraw.pdf`, as in the Ada
+  version; `make fonts` rebuilt `build/font` with `NSXCB`.
 
 It uses the same field rectangles as the overlay, so `OvaSheet` places
 the text the same way over either background. For NPCs,
@@ -1124,10 +1132,25 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
   don't fix the PDFs, which depend on the groff and qpdf versions.
 - `test/sheet.sh [PROGRAM]` [done, 2026-11-12], the last step of
   `make test`, which passes it `OVA_SHEET` and `SHEET_FONTS`. It skips
-  (exit 0) without qpdf, jq, groff, pdftotext, pdfinfo or pdfimages,
-  or a readable `OVA_SHEET`; without the faces it builds them with
-  `sheet_fonts.sh` if fontforge is there. Its work goes in a
-  `mktemp -d` under `TMPDIR`, removed on exit. 74 checks, about 6 s:
+  (exit 0) without groff, pdftotext, pdfinfo, pdfimages or pdftoppm;
+  without qpdf, jq or a readable `OVA_SHEET` it runs only the `-S -R`
+  checks and skips the rest. Without the faces (all of them, `NSXCB`
+  too) it builds them with `sheet_fonts.sh` if fontforge is there. Its work goes in a
+  `mktemp -d` under `TMPDIR`, removed on exit. 124 checks:
+  - `-S -R` (2026-11-12), with no `OVA_SHEET` and a `qpdf` stub first
+    on `PATH` that leaves a mark and fails: Fukiko, Karis, Vehicle,
+    `edge-sheet-overflow` and `edge-null-name` build without it; the
+    page, sheet-page and every-line checks below pass with the drawn
+    labels (pdftotext reads them as the sheet's own, `COMBATNOTES`);
+    and no PDF has an image. On `edge-null-name`, whose sheet is
+    empty, `pdftoppm` at 72 dpi reads 12 pixels as red, grey or white:
+    page 1's name banner, name box, Abilities and Combat Stats boxes,
+    two grey panels and the page's corner; page 2's grey ground, red
+    tab and portrait frame, and two white boxes. With `-P`, the
+    portrait is the only image, on the sheet's page 2. Each was proved
+    by a planted bug: `ova_sheet.sh` calling qpdf, no `.FR-p1`, the
+    grey defined as white, a portrait on every sheet, and the portrait
+    placed twice.
   - For each of Fukiko, Miho, Karis, Sheet, Vehicle, Fragment, Auren,
     Escaping, `edge-sheet-overflow` and `edge-sheet-sub`, through
     `ova_sheet.sh`: the page count (one per `.SP`, at least one more
@@ -1218,10 +1241,11 @@ The Ada version comes first, as this repo's rule says (the user,
    valgrind` takes `-S` and `-S -P`, 945 runs, clean.]
 4. Ada first: `-R`/`--redraw` (`Sheet_Draw`), compared by eye with
    the sheet, and its golden cases (`sheet-R`, `sheet-R-all`,
-   `terse-R`). [Ada done, 2026-11-12: "Redrawing the sheet". The port
-   fails those five cases until it has `-R`.] Then port `OvaSheetDraw`
-   here, checked byte for byte, with `test/sheet.sh` checks and
-   valgrind runs for `-S -R`.
+   `terse-R`). [Ada done, 2026-11-12: "Redrawing the sheet".] Then port
+   `OvaSheetDraw` here, checked byte for byte, with `test/sheet.sh`
+   checks and valgrind runs for `-S -R`. [done, 2026-11-12: "Redrawing
+   the sheet", "Build and tests"; `make valgrind` takes `-S -R` too,
+   1043 runs, clean.]
 5. `-C`/`--one-column`, only with `-S -R`.
 
 ## Open questions

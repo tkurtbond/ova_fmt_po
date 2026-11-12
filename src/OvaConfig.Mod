@@ -33,6 +33,10 @@ VAR
   portrait*: Ropes.Rope;        (* -P/--portrait *)
   hasPortrait*: BOOLEAN;        (* off: each entity's own *)
 
+  (* With -S/--sheet, draw the sheet's frames and labels in the troff,
+     so that no blank sheet goes under it (OvaSheetDraw). *)
+  redraw*: BOOLEAN;             (* -R/--redraw *)
+
   (* The directory of the file being read, with its final "/"; NIL (empty)
      for one in the current directory or standard input: a relative
      `portrait:` path is relative to the YAML file.  OvaFmt sets it. *)
@@ -52,7 +56,7 @@ BEGIN
   hmmDepth := 0; hmmCompactLists := FALSE; hmmPlain := FALSE;
   gemtextEmphasis := FALSE;
   outputFile := NIL; hasOutputFile := FALSE;
-  portrait := NIL; hasPortrait := FALSE; sourceDir := NIL;
+  portrait := NIL; hasPortrait := FALSE; redraw := FALSE; sourceDir := NIL;
   underliner := "="; subunderliner := 0X;
   unicodeMinus := TRUE;
   showOptions := FALSE

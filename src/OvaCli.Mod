@@ -70,6 +70,10 @@ BEGIN
   RETURN TRUE
 END DoPortrait;
 
+PROCEDURE DoRedraw(): BOOLEAN;
+BEGIN OvaConfig.redraw := TRUE; RETURN TRUE
+END DoRedraw;
+
 PROCEDURE DoHtml(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.HtmlInRst; RETURN TRUE
 END DoHtml;
@@ -151,6 +155,9 @@ BEGIN
   Opt(ArgParser.MakeStringOption("P", "portrait",
     "With -S/--sheet, the portrait image for every main entity, in place of its own portrait: path. ova_sheet.sh converts it to PDF.",
     DoPortrait));
+  Opt(ArgParser.MakeOption("R", "redraw",
+    "With -S/--sheet, draw the sheet's frames and labels too, so that ova_sheet.sh needs no blank sheet and lays none under the pages.",
+    DoRedraw));
   Opt(ArgParser.MakeOption("H", "html",
     "Output reST with nested HTML tables (a `.. raw:: html` block) for Abilities/Weaknesses/Combat/Attacks, instead of terse prose.",
     DoHtml));

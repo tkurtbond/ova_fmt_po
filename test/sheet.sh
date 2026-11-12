@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
-# The official character sheet as PDF, end to end: -S through
-# ova_sheet.sh and -X through ova_form.sh, read back with pdftotext,
-# pdfinfo, pdfimages and qpdf (PLAN.md, "Build and tests").  The golden
+# The official character sheet as PDF, end to end: -S -R and -S
+# through ova_sheet.sh and -X through ova_form.sh, read back with
+# pdftotext, pdfinfo, pdfimages, pdftoppm and qpdf (PLAN.md, "Build and
+# tests").  The golden
 # files fix the program's troff and JSON; this checks what becomes of
 # them, so it doesn't fix the PDFs, which depend on the groff and qpdf
 # versions.  Run from the repo root by `make test`, as
 #
 #   test/sheet.sh [program]
 #
-# with the blank sheet $OVA_SHEET (it is Dyskami's, and isn't in the
-# repo) and the faces sheet_fonts.sh builds in $SHEET_FONTS, or, if
-# that has none, built here.  Prints ok/FAIL per check, as test/cli.sh
-# does, and exits 1 if any failed; without the sheet or a tool it
-# needs, it says what it skipped and exits 0.
+# with the faces sheet_fonts.sh builds in $SHEET_FONTS, or, if that
+# hasn't all of them, built here, and the blank sheet $OVA_SHEET (it is
+# Dyskami's, and isn't in the repo).  -S -R needs no blank sheet and no
+# qpdf, so its checks run without them, and only -S's and -X's are
+# skipped.  Prints ok/FAIL per check, as test/cli.sh does, and exits 1
+# if any failed; without a tool it needs, it says what it skipped and
+# exits 0.
 
 prog=${1:-./ova_fmt_po}
 data=test/data
@@ -22,16 +25,14 @@ failed=0
 
 skip() { echo "skip - sheet.sh: $*"; exit 0; }
 
-for tool in qpdf jq groff pdftotext pdfinfo pdfimages; do
+for tool in groff pdftotext pdfinfo pdfimages pdftoppm; do
   command -v $tool >/dev/null 2>&1 || skip "$tool not found"
 done
-[ -n "$sheet" ] || skip "no blank sheet: set OVA_SHEET"
-[ -r "$sheet" ] || skip "can't read the blank sheet $sheet"
 
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/ova-sheet-test.XXXXXX") || exit 1
 trap 'rm -rf "$tmp"' EXIT
 
-if [ ! -f "$fonts/devpdf/NSR" ]; then
+if [ ! -f "$fonts/devpdf/NSR" ] || [ ! -f "$fonts/devpdf/NSXCB" ]; then
   command -v fontforge >/dev/null 2>&1 || skip "no faces in $fonts, and no fontforge to build them"
   fonts=$tmp/font
   ./sheet_fonts.sh "$fonts" >"$tmp/fonts.log" 2>&1 || {
@@ -39,6 +40,12 @@ if [ ! -f "$fonts/devpdf/NSR" ]; then
 fi
 
 ok() { echo "ok   - $1"; }
+finish() {
+  if [ "$failed" -eq 0 ]; then echo "All checks passed."
+  else echo "$failed check(s) failed."; exit 1
+  fi
+  exit 0
+}
 fail() { echo "FAIL - $1"; [ $# -lt 2 ] || printf '%s\n' "$2" | sed 's/^/    /'; failed=$((failed + 1)); }
 
 # pages PDF: its page count.
@@ -126,6 +133,114 @@ check_sheet() {
 # expect LABEL TEXT NEEDLE / expect_not LABEL TEXT NEEDLE
 expect() { if has "$2" "$3"; then ok "$1"; else fail "$1" "no \"$3\" in: ${2:0:300}"; fi; }
 expect_not() { if has "$2" "$3"; then fail "$1" "\"$3\" in: ${2:0:300}"; else ok "$1"; fi; }
+
+# ---- -S -R, through ova_sheet.sh with no blank sheet ----
+
+# qpdf, for the -R runs: a stub that leaves a mark and fails, so that a
+# run that calls it shows.
+mkdir "$tmp/stub"
+printf '#!/bin/sh\ntouch "%s/qpdf-ran"\nexit 1\n' "$tmp" >"$tmp/stub/qpdf"
+chmod +x "$tmp/stub/qpdf"
+
+# redrawn NAME ARGS...: NAME.tr from prog -S -R ARGS, then NAME.pdf from
+# ova_sheet.sh with no sheet and the qpdf stub.  Fails the "NAME:
+# builds" check if either fails or qpdf ran.
+redrawn() {
+  local name=$1; shift
+  if ! "$prog" -S -R "$@" >"$tmp/$name.tr" 2>"$tmp/$name.err" </dev/null; then
+    fail "$name: -S -R" "$(cat "$tmp/$name.err")"; return 1
+  fi
+  rm -f "$tmp/qpdf-ran"
+  if ! OVA_SHEET= PATH="$tmp/stub:$PATH" ./ova_sheet.sh -F "$fonts" -o "$tmp/$name.pdf" \
+       "$tmp/$name.tr" >"$tmp/$name.err" 2>&1; then
+    fail "$name: ova_sheet.sh" "$(cat "$tmp/$name.err")"; return 1
+  fi
+  if [ -e "$tmp/qpdf-ran" ]; then fail "$name: builds without qpdf"; return 1; fi
+  ok "$name: builds with no blank sheet and no qpdf"
+}
+
+# images PDF [PAGE]: how many images it has, or PAGE has.
+images() {
+  local f=$1 a=() ; [ $# -lt 2 ] || a=(-f "$2" -l "$2")
+  pdfimages -list "${a[@]}" "$f" 2>/dev/null | tail -n +3 | wc -l
+}
+
+# colour PDF PAGE X Y: the colour of the pixel at (X, Y) points from
+# the top left of PAGE, at 72 dpi: white, grey (the sheet's panels),
+# red (its tabs and frames), or "other R G B".
+colour() {
+  local rgb
+  rgb=$(pdftoppm -r 72 -f "$2" -l "$2" -x "$3" -y "$4" -W 1 -H 1 -singlefile "$1" "$tmp/px" &&
+        tail -c 3 "$tmp/px.ppm" | od -An -tu1)
+  set -- $rgb
+  if [ $# -ne 3 ]; then echo "unread"
+  elif [ "$1" -ge 250 ] && [ "$2" -ge 250 ] && [ "$3" -ge 250 ]; then echo white
+  elif [ "$1" -ge 225 ] && [ "$1" -le 245 ] && [ "$2" -ge 215 ] && [ "$2" -le 235 ] &&
+       [ "$3" -ge 215 ] && [ "$3" -le 235 ]; then echo grey
+  elif [ "$1" -ge 90 ] && [ "$1" -le 140 ] && [ "$2" -le 50 ] && [ "$3" -le 50 ]; then echo red
+  else echo "other $1 $2 $3"
+  fi
+}
+
+# For each: the pages and text, as for -S, the sheet's labels being
+# drawn here; and no image, so nothing of the blank sheet.
+for f in Fukiko Karis Vehicle edge-sheet-overflow edge-null-name; do
+  if redrawn "R-$f" "$data/$f.yaml"; then
+    check_sheet "R-$f"
+    n=$(images "$tmp/R-$f.pdf")
+    if [ "$n" -eq 0 ]; then ok "R-$f: no images"
+    else fail "R-$f: $n image(s)"
+    fi
+  fi
+done
+
+# The frames, where the empty sheet has no text: page 1's red name
+# banner, white boxes and grey panels; page 2's grey ground, red tab
+# and portrait frame, and white boxes.
+if [ -f "$tmp/R-edge-null-name.pdf" ]; then
+  while read -r pg x y want what; do
+    got=$(colour "$tmp/R-edge-null-name.pdf" "$pg" "$x" "$y")
+    if [ "$got" = "$want" ]; then ok "R-edge-null-name: page $pg, $what is $want"
+    else fail "R-edge-null-name: page $pg, $what is $got, not $want"
+    fi
+  done <<'END'
+1 110 45 red the name banner
+1 200 45 white the character name box
+1 130 200 white the Abilities box
+1 300 450 white the Combat Stats box
+1 30 120 grey the left panel
+1 400 450 grey the lower panel
+1 5 590 white the page's corner
+2 5 5 grey the ground
+2 250 5 red the portrait's tab
+2 239 200 red the portrait's frame
+2 320 200 white the portrait box
+2 100 100 white the Background box
+END
+fi
+
+# The portrait: the only image, on the sheet's page 2.
+if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
+  im=$(command -v magick || command -v convert)
+  "$im" -size 60x90 xc:red "$tmp/me.png"
+  if redrawn R-portrait -P "$tmp/me.png" "$data/Fukiko.yaml"; then
+    pg=$(grep '^\.SP ' "$tmp/R-portrait.tr" | grep -n 'p2' | head -1 | cut -d: -f1)
+    n=$(images "$tmp/R-portrait.pdf"); np=$(images "$tmp/R-portrait.pdf" "$pg")
+    if [ "$n" -eq 1 ] && [ "$np" -eq 1 ]; then ok "R-portrait: the only image, on page $pg"
+    else fail "R-portrait: $n images, $np of them on page $pg, not 1 there only"
+    fi
+  fi
+else
+  echo "skip - R-portrait: no ImageMagick"
+fi
+
+# ---- The rest needs the blank sheet, qpdf and jq ----
+
+for tool in qpdf jq; do
+  command -v $tool >/dev/null 2>&1 || { echo "skip - -S and -X: $tool not found"; finish; }
+done
+[ -n "$sheet" ] || { echo "skip - -S and -X: no blank sheet: set OVA_SHEET"; finish; }
+[ -r "$sheet" ] || { echo "skip - -S and -X: can't read the blank sheet $sheet"; finish; }
 
 # ---- -S, through ova_sheet.sh ----
 
@@ -246,6 +361,4 @@ for f in Escaping Fukiko Karis Vehicle edge-sheet-overflow edge-sheet-sub; do
 done
 form form-two "$data/Karis.yaml" "$data/Fukiko.yaml"
 
-if [ "$failed" -eq 0 ]; then echo "All checks passed."
-else echo "$failed check(s) failed."; exit 1
-fi
+finish

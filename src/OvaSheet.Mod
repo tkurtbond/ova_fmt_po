@@ -20,7 +20,7 @@ MODULE OvaSheet; (* -S/--sheet: the official character sheet's values as troff *
    Indexes into text are from 0, so a cut (the Ada index of the last
    byte placed) is a count of bytes here. *)
 
-IMPORT OvaCommon, OvaConfig, OvaEntities, OvaOut, OvaSheetFonts, OvaSheetMap, OvaSheetWidths, OvaText, Ropes;
+IMPORT OvaCommon, OvaConfig, OvaEntities, OvaOut, OvaSheetDraw, OvaSheetFonts, OvaSheetMap, OvaSheetWidths, OvaText, Ropes;
 
 CONST
   LF = 0AX;
@@ -552,6 +552,7 @@ PROCEDURE PutPage1(p: OvaSheetMap.Page; VAR parts: OwnerParts);
 BEGIN
   stat := OvaSheetWidths.CondensedSemibold;
   Line(".SP p1");
+  IF OvaConfig.redraw THEN Line(OvaSheetDraw.Page1) END;
   IF ~PutLineIn(p.title, OvaSheetWidths.Regular, 120, 80, characterName, FALSE, FALSE)
      & (Ropes.Length(parts.name) = 0) THEN
     parts.name := p.title
@@ -762,7 +763,11 @@ BEGIN
   parts.name := NIL; parts.player := NIL;
   parts.abilityNotes := NIL; parts.attacks := NIL; parts.combatNotes := NIL;
 
-  IF firstEntity THEN PutPreamble; firstEntity := FALSE END;
+  IF firstEntity THEN
+    PutPreamble;
+    IF OvaConfig.redraw THEN OvaSheetDraw.PutPreamble END;
+    firstEntity := FALSE
+  END;
 
   MainProse(ss, fitted[Background], e.name, Background, e.hasBackground, e.background);
   MainProse(ss, fitted[Appearance], e.name, Appearance, e.hasAppearance, e.appearance);
@@ -789,6 +794,7 @@ BEGIN
   END;
 
   Line(".SP p2");
+  IF OvaConfig.redraw THEN Line(OvaSheetDraw.Page2) END;
   FOR i := 0 TO ProseFields - 1 DO PutBlock(fitted[i], proseLook, proseRect[i], ProseLeading) END;
   PutPortrait(e);
 

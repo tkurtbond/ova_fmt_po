@@ -61,7 +61,7 @@ ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-
 $(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POCLIBDIR)/*/OC/$(l).library),,$(error the $(l) library is not in $(POCLIBDIR); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
-.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form sheet fonts widths install uninstall clean testclean
+.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form sheet redraw fonts widths install uninstall clean testclean
 .NOTPARALLEL:
 
 all: $(PROGRAM)
@@ -77,8 +77,9 @@ $(OBJ)/Test%: test/Test%.Mod $(TESTSUPPORT) $(PROGSRC) $(SHAREDLIBMANIFESTS) | $
 
 # Every unit test, then the command-line checks of test/cli.sh, then
 # the golden-output comparison of test/golden.sh, then test/sheet.sh's
-# checks of the PDFs -S and -X make (skipped without OVA_SHEET or the
-# tools); fail at the end if any failed.
+# checks of the PDFs -S -R, -S and -X make (-S's and -X's skipped
+# without OVA_SHEET, and any skipped without the tools); fail at the end
+# if any failed.
 test: $(PROGRAM) $(TESTBINS)
 	@status=0; for t in $(TESTS); do \
 	  echo "== $$t"; (cd $(OBJ) && ./$$t) || status=1; \
@@ -118,11 +119,12 @@ valgrind: $(PROGRAM) | $(OBJ)
 	     || ! grep -q 'are still reachable' $$log; then \
 	    echo "FAIL - valgrind $$*"; sed 's/^/    /' $$log; status=1; fi; }; \
 	for f in test/data/*.yaml; do \
-	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X" "-S" "-S -P x.png"; do vg $$fl $$f </dev/null; done; \
+	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X" "-S" "-S -P x.png" "-S -R"; do vg $$fl $$f </dev/null; done; \
 	done; \
 	vg test/data/*.yaml </dev/null; \
 	vg -X test/data/*.yaml </dev/null; \
 	vg -S test/data/*.yaml </dev/null; \
+	vg -S -R test/data/*.yaml </dev/null; \
 	vg -U '~' <test/data/Options.yaml; \
 	vg </dev/null; \
 	vg -o $(OBJ)/valgrind.out test/data/Karis.yaml </dev/null; \
@@ -162,6 +164,10 @@ FORM_OUTPUT       := $(BASES:%=$(BUILD)/%.form.pdf)
 SHEET_FONTS ?= $(BUILD)/font
 SHEET_OUTPUT      := $(BASES:%=$(BUILD)/%.sheet.pdf)
 
+# The same with groff drawing the sheet's frames itself (-S -R/--redraw;
+# PLAN.md, "Redrawing the sheet"): no OVA_SHEET and no qpdf needed.
+REDRAW_OUTPUT     := $(BASES:%=$(BUILD)/%.redraw.pdf)
+
 rst: $(TERSE_OUTPUT)
 pdf: rst $(PDF_OUTPUT)
 gemtext: $(GEMTEXT_OUTPUT)
@@ -172,6 +178,7 @@ hmm: $(HMM_OUTPUT)
 inline: $(INLINE_OUTPUT)
 form: $(FORM_OUTPUT)
 sheet: fonts $(SHEET_OUTPUT)
+redraw: fonts $(REDRAW_OUTPUT)
 
 fonts: $(SHEET_FONTS)/devpdf/download
 
@@ -217,6 +224,10 @@ $(BUILD)/%.sheet.tr: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -S $< >$@
 $(BUILD)/%.sheet.pdf: $(BUILD)/%.sheet.tr ova_sheet.sh $(SHEET_FONTS)/devpdf/download
 	./ova_sheet.sh -s "$(OVA_SHEET)" -F $(SHEET_FONTS) -o $@ $<
+$(BUILD)/%.redraw.tr: test/data/%.yaml $(PROGRAM) | $(BUILD)
+	./$(PROGRAM) -S -R $< >$@
+$(BUILD)/%.redraw.pdf: $(BUILD)/%.redraw.tr ova_sheet.sh $(SHEET_FONTS)/devpdf/download
+	./ova_sheet.sh -F $(SHEET_FONTS) -o $@ $<
 
 #MS_COLUMNS = -V twocolumns
 $(BUILD)/%.rst.ms.pdf: $(BUILD)/%.gen.rst
@@ -227,7 +238,8 @@ $(BUILD)/%.md.ms.pdf: $(BUILD)/%.md
 .PRECIOUS: $(BUILD)/%.gen.rst $(BUILD)/%.rst.ms.pdf $(BUILD)/%.gmi $(BUILD)/%.emp.gmi $(BUILD)/%.md \
   $(BUILD)/%.md.ms.pdf $(BUILD)/%.html.gen.rst $(BUILD)/%.html $(BUILD)/%.hmm $(BUILD)/%.compact.hmm \
   $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf $(BUILD)/%.inline.md \
-  $(BUILD)/%.fields.json $(BUILD)/%.form.pdf $(BUILD)/%.sheet.tr $(BUILD)/%.sheet.pdf
+  $(BUILD)/%.fields.json $(BUILD)/%.form.pdf $(BUILD)/%.sheet.tr $(BUILD)/%.sheet.pdf \
+  $(BUILD)/%.redraw.tr $(BUILD)/%.redraw.pdf
 
 # ---- Installation ----
 #

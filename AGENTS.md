@@ -8,10 +8,12 @@ h-m-m outline, the inline format (`-i`, `OvaInline`: a Markdown
 paragraph per entity; PLAN.md, "The inline format"), or the official
 character sheet's form fields as JSON (`-X`, `OvaSheetMap` and
 `OvaForm`), which `ova_form.sh` fills the sheet's PDF with, or troff
-to typeset over that sheet (`-S`, with `-P` for no portrait;
+to typeset over that sheet (`-S`, with `-P` for the portrait;
 `OvaSheet`, measuring with `OvaSheetFonts` and the generated
 `OvaSheetWidths`), which `ova_sheet.sh` lays over it (PLAN.md, "The
-official character sheet as PDF").
+official character sheet as PDF"). With `-R` (`OvaSheetDraw`), that
+troff draws the sheet's frames itself, and needs no sheet under it
+(PLAN.md, "Redrawing the sheet").
 
 It is a port of the Ada `ova_fmt` (`~/Repos/RPG/Tools/ova_fmt`); see
 PLAN.md for the port, and the Ada repo's `PLAN.md` for the design of
@@ -43,7 +45,7 @@ make            # obj/ (poc output) and ./ova_fmt_po
 make test       # unit tests, test/cli.sh, test/golden.sh check, test/sheet.sh
 make golden     # regenerate test/golden/ from the Ada binary
 make valgrind   # the program under valgrind over every fixture and path
-make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline, form, sheet
+make rst        # build/*.gen.rst; also pdf, gemtext, markdown, html, groff, hmm, inline, form, sheet, redraw
 make install    # ova_fmt_po, ova_form.sh and ova_sheet.sh to $(PREFIX)/bin, default ~/local/bin (DESTDIR for staging)
 make uninstall
 make clean      # rm -rf obj ova_fmt_po build
@@ -86,11 +88,13 @@ make print-VAR  # show a makefile variable
   Markdown block). What can't be a golden file (a missing
   input file, an `-o` that can't be created or written) is checked in
   `test/cli.sh`.
-- **`test/sheet.sh`** reads back the PDFs `-S` and `-X` make through
-  `ova_sheet.sh` and `ova_form.sh`. It needs the blank sheet
-  (`OVA_SHEET`, which the makefile defaults) and skips, passing,
-  without it or without qpdf, jq, groff or poppler's tools; say so
-  when a run skipped it. PLAN.md, "Build and tests", lists its checks.
+- **`test/sheet.sh`** reads back the PDFs `-S -R`, `-S` and `-X`
+  make through `ova_sheet.sh` and `ova_form.sh`. `-S -R`'s checks need
+  only groff and poppler's tools; `-S`'s and `-X`'s also need the blank
+  sheet (`OVA_SHEET`, which the makefile defaults), qpdf and jq. It
+  skips, passing, what it lacks the tools or the sheet for; say so
+  when a run skipped any of it. PLAN.md, "Build and tests", lists its
+  checks.
 - Fixtures: the capitalized ones in `test/data/` are the Ada repo's
   `test-data/` (copy any new one over, and keep them the same);
   `bad-*` and `edge-*` are this repo's. `[A-Z]*` cases take every
