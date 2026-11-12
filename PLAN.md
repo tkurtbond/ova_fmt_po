@@ -532,6 +532,24 @@ with unit tests in `TestText.Mod`.
     be shared freely beyond personal use.
   - Which fonts should the overlay use? Consolas, to match the form,
     isn't free; DejaVu Sans Mono or Noto have the coverage.
+  - Order of work: should the Ada version come first, as this repo's
+    rule for a new format says, or this port first, as with the inline
+    format?
+  - Fitting rows: may built-under rows be packed closer than the
+    sheet's dotted ruling, before blocks move to a continuation page?
+    Or should they keep to the ruled lines, and more go to the next
+    page?
+  - Spell form: Auren's "Mana Shield (Barrier +2; 10+ Endurance)" for
+    every spell (proposed), or Acacia's shorter "Break (Frail −2, 10
+    END)", which saves width?
+  - XFDF overflow: should it be a line at the end of Other Notes, a
+    warning on standard error, or a continuation page appended with
+    qpdf, as in the overlay?
+  - Several characters in one file: one sheet per main entity, all in
+    one PDF (proposed), or one PDF for each?
+  - pdftk is Java (pdftk-java). Should `make test` skip the PDF checks
+    when it isn't installed (proposed), or should the form be filled
+    with qpdf or pdfcpu alone, so Java isn't needed?
 
 - The Ada version's own open questions (direct-to-Lout output, a
   nested-table Markdown mode) are features still to design there; a
