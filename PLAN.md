@@ -385,8 +385,8 @@ rulebook instead:
   sub-row starts with the same four spaces, the indent lines up in the
   proportional face too (tested, Fukiko). The form can't wrap or
   shrink, so long rows are cut off (the limit noted in "Two ways"
-  below). The rows that don't fit the slots go on a continuation page,
-  as with `-S`.
+  below). The rows that don't fit the slots go on a filled copy of
+  page 1 ("Two ways").
 - **A Companion or Vehicle is not rows.** Its parent row on the sheet
   reads "Companion (Arasuni)". Its own Abilities and Weaknesses box
   and its Attacks & Combat Stats box go on the continuation page, as
@@ -397,7 +397,8 @@ rulebook instead:
   redrawn sheet, since the Dyskami sheet has two columns. One column
   holds the Abilities, a faint rule, then the Weaknesses, beside an
   "Attacks & Combat Stats" box, and the same kinds of rows go in it.
-  Its option letter is an open question.
+  The option is `-C`/`--one-column`, allowed only with `-S -R` (the
+  user, 2026-11-12).
 
 ### Tools
 
@@ -519,10 +520,22 @@ pdftk.
    - Single-line fields **clip** without wrapping or shrinking, so a
      long "Name (detail) [perks]" is cut at the field's edge.
    - Text can't overflow into the form, so whatever doesn't fit goes
-     on a **continuation page added with qpdf**, as with `-S` (the
-     user, 2026-11-12): groff sets it, and `qpdf out.pdf --pages .
-     cont.pdf --` appends it. The portrait button needs its own image
-     stamp.
+     on a **second copy of page 1**, filled on its own and appended
+     with qpdf (the user's proposal, 2026-11-12). Its Character Name
+     reads "Fukiko (continued)". It takes the Ability and Weakness
+     rows past the 17 slots and the attacks past the four boxes, and
+     stays as editable as the first. Tested: each copy filled by the
+     jq filter, then `qpdf --empty --pages fill.pdf 1-2 cont.pdf 1 --
+     out.pdf` gave three pages and 195 working fields. qpdf renamed
+     the copy's fields ("Attack Description 1+1", "roll+1") and kept
+     their values, kept `/NeedAppearances`, and copied `/DR`'s fonts
+     (`/HeOb_1`), so the copy renders in the restyled faces. Since each
+     copy is filled before the join, the program never writes the
+     `+1` names. The pages can be in any order: `--pages fill.pdf 1
+     cont.pdf 1 fill.pdf 2` (tested) puts the copy between the sheet's
+     two pages, with the same 195 fields, since qpdf takes the two
+     mentions of `fill.pdf` as one file and renames none of its
+     fields. The portrait button needs its own image stamp.
    - Several characters are one PDF, a filled sheet each. `qpdf
      --empty --pages a.pdf b.pdf -- both.pdf` keeps both forms working:
      tested, it renames the second copy's fields ("Weakness Dice 9+1"),
@@ -618,10 +631,10 @@ wants to keep editing it.
 |---|---|---|
 | `OvaSheetMap` | `Ova_Fmt.Sheet_Map` | Shared: the field table above (name, page, rectangle, size, single/multi-line) as constants, and `Fill(e)`. `Fill` maps an entity onto slots: Abilities and Weaknesses sorted as now (`OvaCommon`), each "Name (detail) [perks/flaws/endurance]" with the level in the Dice column. Built-under content becomes `Sub` and `Spell` rows in blocks kept together ("Sub-Abilities, as the rulebook prints them"). Attacks go to name / "Affinity; perks; flaws" / Roll, DX, End. Defense is `OvaCommon.DefenseText`, and `*` marks overrides, as `raw` does. Prose fields are trimmed and joined (`AllOneLine` where a field is one line). Whatever didn't fit goes on an overflow list. |
 | `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw`, only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). |
-| `OvaXfdf` | `Ova_Fmt.Format_Xfdf` | `-X`/`--xfdf`: the flat JSON field map for qpdf ("Two ways"), JSON-escaped (`"`, `\`, control characters; a multi-line field's newlines as `\n`). One object per main entity. The overflow goes on a continuation page set by groff (how the program writes that page is an open question). The module's and option's names date from XFDF and may change. |
+| `OvaForm` | `Ova_Fmt.Format_Form` | `-X`/`--form`: the page fills for qpdf ("Two ways"), JSON-escaped (`"`, `\`, control characters; a multi-line field's newlines as `\n`). An array per main entity of fills `{"pages": [...], "sub": [...], "fields": {...}}`, which `ova_form.sh` turns into a PDF ("The form script"). The letter `-X` dates from XFDF, which it no longer writes (the user, 2026-11-12). |
 | `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size. A macro `FLD page x y w h size` places each value. Two passes per value: measure with `\w`, shrink to the floor, then wrap in an `.ev` with `.ll` set to the field's width. The continuation pages are in `-ms` style: linked Abilities, then the sections the sheet has no place for, reusing `OvaCommon`'s Formatter callbacks, as `OvaHmm` does. `-P FILE`/`--portrait FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file, as in `-H`. |
 
-They fit the existing structure. `OvaConfig` gets `Xfdf` and `Sheet`
+They fit the existing structure. `OvaConfig` gets `Form` and `Sheet`
 (exclusive with the other format flags, as now). `OvaFmt` dispatches
 to them per entity. A file of several entities becomes **one PDF**
 with a sheet per main entity (the user, 2026-11-12), each with its own
@@ -636,11 +649,89 @@ that would start with `.` or `'` gets `\&` in front. Only the program
 writes requests. `OvaText` gains the JSON escape and the troff escape,
 with unit tests in `TestText.Mod`.
 
+### The form script, `ova_form.sh` [decided]
+
+The program writes the fills; a script, `ova_form.sh`, runs jq and
+qpdf on them (the user, 2026-11-12). The program then starts no
+processes (untested in poc), and the golden files fix the JSON alone,
+which doesn't depend on the qpdf version.
+
+What `-X` writes: a JSON array with an array of fills per main
+entity, in the input's order. A fill is one copy of the sheet:
+
+    [ [ {"pages": [1, 2],
+         "sub": ["Ability 8", "Ability 9"],
+         "fields": {"Character Name": "Fukiko", "Ability 1": "...",
+                    "Abilities Dice1": "+2", "Background": "..."}},
+        {"pages": [1], "sub": [],
+         "fields": {"Character Name": "Fukiko (continued)",
+                    "Ability 1": "Extra Ability Eighteen", ...}},
+        {"pages": [2], "sub": [],
+         "fields": {"Background": "Fukiko: Linked Abilities\n..."}} ],
+      [ ...the next character's fills... ] ]
+
+- The main sheet is one fill for both pages, since no field name is
+  on both, so it costs one qpdf run.
+- `sub` names the fields holding sub-rows, which the script sets in
+  7 pt (the restyle table in "Two ways"); the test filter had them
+  written in.
+- `fields` holds only the fields with values; the rest stay empty.
+
+Usage:
+
+    ova_form.sh [-s SHEET] [-o OUT.pdf] [-k] [FILE.json]
+
+| Option | Meaning |
+|---|---|
+| `-s SHEET` | The blank sheet; default `$OVA_SHEET`. Neither given is an error: the sheet isn't ours to bundle. |
+| `-o OUT.pdf` | The output; default FILE with `.json` replaced by `.pdf`. Needed when the JSON comes from standard input. |
+| `-k` | Keep the work directory, for debugging. |
+
+Steps:
+
+1. Check that `qpdf` and `jq` are there.
+2. Make a work directory with `mktemp -d` under `$TMPDIR`, removed by
+   a `trap` on exit unless `-k`.
+3. `qpdf --json-output=2 SHEET blank.json`, once (about 2.3 MB).
+4. For each fill: the restyle filter (the test's `style.jq`, kept in
+   the script as a heredoc so the script is one file) sets the
+   fill's values and each field's `/DA`, deletes `/AP`, adds `/HeOb`
+   to `/DR` and sets `/NeedAppearances`, writing `filled-N.json`;
+   then `qpdf --json-input filled-N.json part-N.pdf`.
+5. Join with `qpdf --empty --pages ... -- OUT.pdf`. For each
+   character, in order: every fill with page 1, in the order
+   written, then every fill with page 2 (the user, 2026-11-12). So
+   Fukiko above is `part-0.pdf 1 part-1.pdf 1 part-0.pdf 2 part-2.pdf
+   2`, and a second character's pages follow in the same way.
+6. Exit 0 on success, and on qpdf's exit 3 (warnings only), passing
+   the warnings on; otherwise exit 1 with qpdf's message.
+
+It doesn't fill the portrait button, which needs its own image stamp,
+and doesn't flatten the form, which stays editable. The script is
+written in the Ada repo first and copied here, as the fixtures are.
+Both repos' `make install` put the same file in `$(PREFIX)/bin`, so
+the copies must stay the same.
+
+A typical use:
+
+    export OVA_SHEET=~/Reference/RPG/OVA/OVA-Blank-Character-Sheet-Form-Fillable.pdf
+    ova_fmt_po -X -o fukiko.json test/data/Fukiko.yaml
+    ova_form.sh fukiko.json
+
+`fukiko.json` has one fill, `"pages": [1, 2]`, since Fukiko's 12
+Abilities, 6 Weaknesses and 4 attacks fit; `fukiko.pdf` is two
+editable pages. With 18 Abilities and a fifth attack, a `[1]` fill
+adds "Fukiko (continued)" as page 2, and her own page 2 becomes page
+3; with linked Abilities, a `[2]` fill adds a last page whose
+Background starts "Fukiko: Linked Abilities". `ova_fmt_po -X
+Party.yaml | ova_form.sh -o party.pdf` gives one PDF, each
+character's pages in turn.
+
 ### Build and tests
 
 - `make sheet`: `build/%.sheet.pdf` from each fixture, by the pipeline
-  above. `make xfdf`: `build/%.fields.json` and `build/%.form.pdf`
-  through jq and `qpdf --json-input`, unflattened. The blank
+  above. `make form`: `build/%.fields.json` and `build/%.form.pdf`
+  through `ova_form.sh`, unflattened. The blank
   sheet's path is a make
   variable (`OVA_SHEET`) that defaults to the Reference copy. **The
   sheet itself is not copied into either repo**: it is Dyskami's.
@@ -673,13 +764,13 @@ with unit tests in `TestText.Mod`.
 The Ada version comes first, as this repo's rule says (the user,
 2026-11-12).
 
-1. Ada first: `Sheet_Map` and `Format_Xfdf`, with golden files, and
-   `make xfdf` there. Then port them here (`OvaSheetMap`, `OvaXfdf`)
+1. Ada first: `Sheet_Map` and `Format_Form`, with golden files, and
+   `make form` there. Then port them here (`OvaSheetMap`, `OvaForm`)
    and check byte for byte.
 2. Ada first: `Format_Sheet`, with the field placement checked against
    rendered pages, then continuation pages and the portrait. Then port
    `OvaSheet` here.
-3. `test/sheet.sh`, `make sheet`/`make xfdf`, and the valgrind runs for
+3. `test/sheet.sh`, `make sheet`/`make form`, and the valgrind runs for
    the new paths.
 
 ## Open questions
@@ -688,7 +779,8 @@ The Ada version comes first, as this repo's rule says (the user,
   starts:
   - ~~Should the overlay be in groff or Lout?~~ groff (the user,
     2026-11-12).
-  - ~~Which option letters?~~ `-S`/`--sheet`, `-X`/`--xfdf` and
+  - ~~Which option letters?~~ `-S`/`--sheet`, `-X`/`--xfdf` (now
+    `--form`, below) and
     `-P`/`--portrait`, and `-R`/`--redraw` for the redrawn sheet (the
     user, 2026-11-12).
   - ~~A third mode that redraws the whole sheet?~~ Yes (the user,
@@ -704,7 +796,8 @@ The Ada version comes first, as this repo's rule says (the user,
     (Frail −2, 10 END)", for every spell (the user, 2026-11-12).
   - ~~XFDF overflow: a line in Other Notes, standard error, or a
     continuation page?~~ A continuation page added with qpdf, as with
-    `-S` (the user, 2026-11-12).
+    `-S` (the user, 2026-11-12), and then a filled copy of page 1
+    (below).
   - ~~Several characters in one file: one PDF, or one each?~~ One PDF
     with a sheet per main character (the user, 2026-11-12).
   - ~~pdftk is Java: skip the checks without it, or fill the form
@@ -717,15 +810,28 @@ The Ada version comes first, as this repo's rule says (the user,
 
   Raised by those answers, still open:
 
-  - The one-column option's letters: `-C`/`--one-column` (proposed;
-    `-C` is free)? And is it only for the redrawn sheet (`-R`), as
-    proposed, since the Dyskami sheet's art has two columns?
-  - `-X`/`--xfdf` no longer writes XFDF, but a JSON field map for qpdf
-    and jq. Keep the letter and rename the long option (`--form`,
-    proposed), or keep both?
-  - How the `-X` continuation page is written: a second run, `-S` with
-    an option that writes only the continuation pages (proposed), or
-    `-X` writing the troff to a second file beside the JSON?
+  - ~~The one-column option's letters?~~ `-C`/`--one-column`, only
+    with `-S -R`, since the Dyskami sheet's art has two columns (the
+    user, 2026-11-12).
+  - ~~`-X`/`--xfdf` no longer writes XFDF: rename it?~~ Keep `-X`,
+    rename the long option `--form`; the module is `OvaForm` (Ada
+    `Format_Form`) and `make xfdf` becomes `make form` (the user,
+    2026-11-12).
+  - ~~How the `-X` continuation page is written?~~ Not by groff: a
+    second, separately filled copy of page 1, appended with qpdf, for
+    rows past the slots and attacks past four (the user's proposal,
+    2026-11-12; tested, "Two ways"). Then:
+    - ~~Who runs qpdf and jq: the program, or a script?~~ A script,
+      `ova_form.sh`, with each character's page-1 copies after its
+      page 1 and before its page 2 (the user, 2026-11-12): "The form
+      script".
+    - ~~What else goes on copies?~~ Linked Abilities and prose too
+      long for page 2 go on a page-2 copy (the user, 2026-11-12). Page
+      2 has no name field and its printed labels can't change, so each
+      field of the copy opens with a label line of the program's own:
+      "Fukiko: Linked Abilities" in Background, "Fukiko: Appearance
+      (continued)" and so on. A Companion's or Vehicle's own boxes go
+      on a page-1 copy named "Arasuni (Karis's Companion)" (proposed).
   - ~~Is the filled form left editable, not flattened?~~ Yes (the
     user, 2026-11-12), and its fields are restyled in Helvetica faces.
   - ~~With `-X`, should a minus be ASCII `-`?~~ Yes (the user,
@@ -735,11 +841,11 @@ The Ada version comes first, as this repo's rule says (the user,
     ("Tools"). ~~Report it to qpdf?~~ Written up in
     `doc/qpdf-update-from-json-dr.md`, not submitted until the user has
     checked qpdf's policy on AI-written reports.
-  - Fitting needs text widths, to know when a row wraps and where the
-    column runs out. Measure them in the program from the groff font
-    description files (deterministic, so golden files fix the
-    page breaks; proposed), or let groff measure with diversions and
-    `\w` (simpler program, but the breaks aren't in the golden files)?
+  - ~~How are text widths measured?~~ In the program, from groff's
+    font description files, so the page breaks are deterministic and
+    the golden files fix them (the user, 2026-11-12).
+    Only `-S` needs this: the form's rows clip, so `-X` fits by
+    counting slots.
 
 - The Ada version's own open questions (direct-to-Lout output, a
   nested-table Markdown mode) are features still to design there; a
