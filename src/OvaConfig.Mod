@@ -37,6 +37,12 @@ VAR
      so that no blank sheet goes under it (OvaSheetDraw). *)
   redraw*: BOOLEAN;             (* -R/--redraw *)
 
+  (* With -S/--sheet and -R/--redraw, page 1 as Acacia's block in the
+     rulebook: one column of Abilities and Weaknesses beside an Attacks
+     & Combat Stats box.  Only with both, since the blank sheet has two
+     columns; OvaFmt refuses it otherwise. *)
+  oneColumn*: BOOLEAN;          (* -C/--one-column *)
+
   (* The directory of the file being read, with its final "/"; NIL (empty)
      for one in the current directory or standard input: a relative
      `portrait:` path is relative to the YAML file.  OvaFmt sets it. *)
@@ -56,7 +62,7 @@ BEGIN
   hmmDepth := 0; hmmCompactLists := FALSE; hmmPlain := FALSE;
   gemtextEmphasis := FALSE;
   outputFile := NIL; hasOutputFile := FALSE;
-  portrait := NIL; hasPortrait := FALSE; redraw := FALSE; sourceDir := NIL;
+  portrait := NIL; hasPortrait := FALSE; redraw := FALSE; oneColumn := FALSE; sourceDir := NIL;
   underliner := "="; subunderliner := 0X;
   unicodeMinus := TRUE;
   showOptions := FALSE

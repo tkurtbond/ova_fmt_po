@@ -238,6 +238,13 @@ BEGIN
     Out.Flush; Platform.Exit(1)
   END;
 
+  (* -C lays out a page the blank sheet doesn't have, so it is only for
+     the sheet drawn by -R.  A command-line mistake: status 2. *)
+  IF OvaConfig.oneColumn & ~((OvaConfig.format = OvaConfig.Sheet) & OvaConfig.redraw) THEN
+    Err.String("ova_fmt: -C/--one-column needs -S/--sheet and -R/--redraw"); Err.Ln;
+    Platform.Exit(2)
+  END;
+
   IF OvaConfig.hasOutputFile THEN
     path := OvaText.Chars(OvaConfig.outputFile);
     e := OvaOut.ToFile(path^);

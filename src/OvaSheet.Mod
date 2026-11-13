@@ -54,6 +54,16 @@ CONST
   WeaknessDiceX = 21610;
   WeaknessNameX = 23830;
 
+  (* -C's page 1 (OvaSheetDraw.Page1OneColumn): one column, its rows on
+     the Abilities column's lines and at its Dice and name positions,
+     but a narrower name; and the Attacks & Combat Stats box beside it,
+     whose attack slots are the sheet's, 39.5 pt apart from 131.616 pt
+     down, narrowed to the box (set up in the module's body).  The rule
+     between the Abilities and the Weaknesses has its top RuleRaise
+     above the baseline of the line it takes. *)
+  OneColumnNameWidth = 11330;
+  RuleRaise = 330;
+
   (* A Sub or Spell row is indented into the name column; any row's
      second and later lines hang further in. *)
   SubIndent = 800;
@@ -100,6 +110,12 @@ TYPE
      notes that don't fit. *)
   OwnerParts = RECORD name, player, abilityNotes, attacks, combatNotes: Rope END;
 
+  (* The attack slots: their name, clause, ROLL, DX and END boxes, for
+     the sheet's AttackSlots or -C's OneColumnAttackSlots. *)
+  AttackRects = RECORD
+    name, clause, roll, dx, end: ARRAY OvaSheetMap.OneColumnAttackSlots OF Rect
+  END;
+
   (* The parts of the continuation pages: a heading, then each line of
      its content a paragraph. *)
   Sections = RECORD labels, contents: OvaText.List END;
@@ -110,7 +126,11 @@ VAR
 
   characterName, playerName, portraitBox, combatNotes: Rect;
   defenseBox, healthBox, enduranceBox, tvBox: Rect;
-  attackName, attackClause, rollBox, dxBox, endBox: ARRAY OvaSheetMap.AttackSlots OF Rect;
+  (* -C's: the NPC type, after the box's title as "(HEROIC)" is after
+     Acacia's, its baseline near the title's; the Combat Notes; the
+     stats. *)
+  oneNpcType, oneCombatNotes, oneDefenseBox, oneHealthBox, oneEnduranceBox, oneTvBox: Rect;
+  sheetAttacks, oneAttacks: AttackRects;
   proseRect: ARRAY ProseFields OF Rect;
 
   itemLook, itemCaps, subLook, subCaps, diceLook, notesLook, proseLook: Look;
@@ -332,17 +352,25 @@ BEGIN
   IF red THEN OvaOut.String("\m[default]") END
 END Troff;
 
-(* Line k of ls, with its baseline y from the top and its left at x. *)
-PROCEDURE Place(y, x: INTEGER; s: Styled; first, last: INTEGER);
+(* Line k of ls, with its baseline y from the top and its left at x;
+   white sets it in white (s has no red), as on -C's box title. *)
+PROCEDURE PlaceColoured(y, x: INTEGER; s: Styled; first, last: INTEGER; white: BOOLEAN);
 BEGIN
   OvaOut.String(".L "); Pt(y); OvaOut.Char(" "); Pt(x); OvaOut.Ln;
-  Troff(s, first, last); OvaOut.Ln
+  IF white THEN OvaOut.String("\m[white]") END;
+  Troff(s, first, last);
+  IF white THEN OvaOut.String("\m[default]") END;
+  OvaOut.Ln
+END PlaceColoured;
+
+PROCEDURE Place(y, x: INTEGER; s: Styled; first, last: INTEGER);
+BEGIN PlaceColoured(y, x, s, first, last, FALSE)
 END Place;
 
 (* text in r's one line, centred or at its left, in face f at size,
    stepping down half a point at a time to floor until it fits; if not
    even then, the words that fit.  FALSE if not all of it fit. *)
-PROCEDURE PutLineIn(text: Rope; f, size, floor: INTEGER; r: Rect; centred, red: BOOLEAN): BOOLEAN;
+PROCEDURE PutLineIn(text: Rope; f, size, floor: INTEGER; r: Rect; centred, red, white: BOOLEAN): BOOLEAN;
   VAR inner, s, w, x, cut: INTEGER; l: Look; st: Styled; ls: Lines;
 BEGIN
   IF Ropes.Length(text) = 0 THEN RETURN TRUE END;
@@ -359,14 +387,14 @@ BEGIN
   IF ls.n = 0 THEN RETURN FALSE END;
   w := Width(st, ls.first[0], ls.last[0]);
   IF centred & (w <= r.w * 100) THEN x := r.x + (r.w * 100 - w) DIV 200 ELSE x := r.x + Pad END;
-  Place(Top(r) + (r.h + Cap(s)) DIV 2, x, st, ls.first[0], ls.last[0]);
+  PlaceColoured(Top(r) + (r.h + Cap(s)) DIV 2, x, st, ls.first[0], ls.last[0], white);
   RETURN cut = st.n
 END PutLineIn;
 
 (* PutLineIn, whether it all fit or not. *)
 PROCEDURE PutIn(text: Rope; f, size, floor: INTEGER; r: Rect; centred: BOOLEAN);
   VAR allFit: BOOLEAN;
-BEGIN allFit := PutLineIn(text, f, size, floor, r, centred, FALSE)
+BEGIN allFit := PutLineIn(text, f, size, floor, r, centred, FALSE, FALSE)
 END PutIn;
 
 (* The most lines of l at leading that r holds, top-aligned. *)
@@ -429,7 +457,8 @@ END RowText;
 PROCEDURE RowBreak(r: OvaSheetMap.Row; s: Styled; VAR ls: Lines);
   VAR first, cut: INTEGER;
 BEGIN
-  first := NameWidth - 2 * Pad - Indent(r);
+  IF OvaConfig.oneColumn THEN first := OneColumnNameWidth ELSE first := NameWidth END;
+  first := first - 2 * Pad - Indent(r);
   Break(s, first, first - Hang, 0, ls, cut)
 END RowBreak;
 
@@ -449,10 +478,13 @@ BEGIN
   lines := Ropes.Cat(lines, line)
 END AddTo;
 
-PROCEDURE PutRows(VAR parts: OwnerParts; rows: OvaSheetMap.Seq; diceX, nameX: INTEGER);
+(* Rows on the ruled lines from line first down; next is the line after
+   them. *)
+PROCEDURE PutRows(VAR parts: OwnerParts; rows: OvaSheetMap.Seq; diceX, nameX, first: INTEGER;
+                  VAR next: INTEGER);
   VAR r: OvaSheetMap.Row; st, dice: Styled; ls: Lines; i, j, k, w, x: INTEGER;
 BEGIN
-  k := 1; ls.first := NIL;
+  k := first; ls.first := NIL;
   FOR i := 0 TO rows.n - 1 DO
     r := rows.items[i](OvaSheetMap.Row);
     st := RowText(r);
@@ -469,7 +501,8 @@ BEGIN
     END;
     k := k + Max(1, ls.n);
     IF r.hasNote THEN AddTo(parts.abilityNotes, OvaCommon.Reflow(r.note)) END
-  END
+  END;
+  next := k
 END PutRows;
 
 (* ---- Attacks ---- *)
@@ -522,16 +555,17 @@ BEGIN
   RETURN cut = n
 END PutClause;
 
-PROCEDURE PutAttacks(VAR parts: OwnerParts; attacks: OvaSheetMap.Seq);
+(* The attacks in the slots of rects. *)
+PROCEDURE PutAttacks(VAR parts: OwnerParts; attacks: OvaSheetMap.Seq; VAR rects: AttackRects);
   VAR a: OvaSheetMap.AttackSlot; n: INTEGER; nameFits, clipped: BOOLEAN; entry: Rope;
 BEGIN
   FOR n := 0 TO attacks.n - 1 DO
     a := attacks.items[n](OvaSheetMap.AttackSlot);
-    nameFits := PutLineIn(a.name, OvaSheetWidths.Bold, 80, 65, attackName[n], FALSE, TRUE);
-    clipped := (Ropes.Length(a.clause) > 0) & ~PutClause(a.clause, attackClause[n]);
-    PutIn(a.roll, OvaSheetWidths.CondensedSemibold, 160, 80, rollBox[n], TRUE);
-    PutIn(a.dx, OvaSheetWidths.CondensedSemibold, 160, 80, dxBox[n], TRUE);
-    PutIn(a.endurance, OvaSheetWidths.CondensedSemibold, 160, 80, endBox[n], TRUE);
+    nameFits := PutLineIn(a.name, OvaSheetWidths.Bold, 80, 65, rects.name[n], FALSE, TRUE, FALSE);
+    clipped := (Ropes.Length(a.clause) > 0) & ~PutClause(a.clause, rects.clause[n]);
+    PutIn(a.roll, OvaSheetWidths.CondensedSemibold, 160, 80, rects.roll[n], TRUE);
+    PutIn(a.dx, OvaSheetWidths.CondensedSemibold, 160, 80, rects.dx[n], TRUE);
+    PutIn(a.endurance, OvaSheetWidths.CondensedSemibold, 160, 80, rects.end[n], TRUE);
     IF a.hasDescription OR clipped OR ~nameFits THEN
       entry := a.name;
       IF clipped THEN
@@ -547,32 +581,62 @@ END PutAttacks;
 
 (* ---- Pages ---- *)
 
+(* With -C, the Abilities and Weaknesses are one column, a faint rule
+   between them when this copy has both, and the NPC type is in the
+   box's title instead of the Combat Notes, if it fits. *)
 PROCEDURE PutPage1(p: OvaSheetMap.Page; VAR parts: OwnerParts);
-  VAR notes, fitted: Rope; stat: INTEGER;
+  VAR notes, fitted, t: Rope; stat, k: INTEGER; one, typePlaced: BOOLEAN;
 BEGIN
   stat := OvaSheetWidths.CondensedSemibold;
+  one := OvaConfig.oneColumn; typePlaced := FALSE;
   Line(".SP p1");
-  IF OvaConfig.redraw THEN Line(OvaSheetDraw.Page1) END;
-  IF ~PutLineIn(p.title, OvaSheetWidths.Regular, 120, 80, characterName, FALSE, FALSE)
+  IF OvaConfig.redraw THEN
+    IF one THEN Line(OvaSheetDraw.Page1OneColumn) ELSE Line(OvaSheetDraw.Page1) END
+  END;
+  IF ~PutLineIn(p.title, OvaSheetWidths.Regular, 120, 80, characterName, FALSE, FALSE, FALSE)
      & (Ropes.Length(parts.name) = 0) THEN
     parts.name := p.title
   END;
   IF p.hasPlayer
-     & ~PutLineIn(p.player, OvaSheetWidths.Regular, 120, 80, playerName, FALSE, FALSE)
+     & ~PutLineIn(p.player, OvaSheetWidths.Regular, 120, 80, playerName, FALSE, FALSE, FALSE)
      & (Ropes.Length(parts.player) = 0) THEN
     parts.player := p.player
   END;
-  PutRows(parts, p.abilities, AbilityDiceX, AbilityNameX);
-  PutRows(parts, p.weaknesses, WeaknessDiceX, WeaknessNameX);
-  PutAttacks(parts, p.attacks);
+  PutRows(parts, p.abilities, AbilityDiceX, AbilityNameX, 1, k);
+  IF ~one THEN
+    PutRows(parts, p.weaknesses, WeaknessDiceX, WeaknessNameX, 1, k);
+    PutAttacks(parts, p.attacks, sheetAttacks)
+  ELSE
+    IF (p.abilities.n > 0) & (p.weaknesses.n > 0) THEN
+      OvaOut.String(OvaSheetDraw.Rule); OvaOut.Char(" "); Pt(RowBaseline(k) - RuleRaise); OvaOut.Ln;
+      INC(k)
+    END;
+    PutRows(parts, p.weaknesses, AbilityDiceX, AbilityNameX, k, k);
+    PutAttacks(parts, p.attacks, oneAttacks);
+    IF Ropes.Length(p.npcType) > 0 THEN
+      t := NIL; t := Ropes.AppendChar(t, "("); t := Ropes.Cat(t, Ropes.UppercaseAscii(p.npcType));
+      t := Ropes.AppendChar(t, ")");
+      typePlaced := PutLineIn(t, OvaSheetWidths.CondensedSemibold, 120, 80, oneNpcType, FALSE, FALSE, TRUE)
+    END
+  END;
   notes := NIL;
-  IF Ropes.Length(p.npcType) > 0 THEN OvaText.Add(notes, "NPC Type: "); notes := Ropes.Cat(notes, p.npcType) END;
+  IF (Ropes.Length(p.npcType) > 0) & ~typePlaced THEN OvaText.Add(notes, "NPC Type: "); notes := Ropes.Cat(notes, p.npcType) END;
   IF p.hasCombatNotes THEN AddTo(notes, OvaCommon.Reflow(p.combatNotes)) END;
   IF Ropes.Length(notes) > 0 THEN
-    FitBlock(notes, notesLook, combatNotes, NotesLeading, fitted, parts.combatNotes);
-    PutBlock(fitted, notesLook, combatNotes, NotesLeading)
+    IF one THEN
+      FitBlock(notes, notesLook, oneCombatNotes, NotesLeading, fitted, parts.combatNotes);
+      PutBlock(fitted, notesLook, oneCombatNotes, NotesLeading)
+    ELSE
+      FitBlock(notes, notesLook, combatNotes, NotesLeading, fitted, parts.combatNotes);
+      PutBlock(fitted, notesLook, combatNotes, NotesLeading)
+    END
   END;
-  IF p.hasStats THEN
+  IF p.hasStats & one THEN
+    PutIn(p.defense, stat, 180, 80, oneDefenseBox, TRUE);
+    PutIn(p.health, stat, 180, 80, oneHealthBox, TRUE);
+    PutIn(p.endurance, stat, 180, 80, oneEnduranceBox, TRUE);
+    PutIn(p.threatValue, stat, 180, 80, oneTvBox, TRUE)
+  ELSIF p.hasStats THEN
     PutIn(p.defense, stat, 180, 80, defenseBox, TRUE);
     PutIn(p.health, stat, 180, 80, healthBox, TRUE);
     PutIn(p.endurance, stat, 180, 80, enduranceBox, TRUE);
@@ -757,7 +821,7 @@ PROCEDURE ProcessEntity*(e: OvaEntities.Entity);
   VAR pages: OvaSheetMap.Seq; page: OvaSheetMap.Page; ss: Sections;
     fitted: ARRAY ProseFields OF Rope; parts: OwnerParts; note: OvaEntities.Note; i: INTEGER;
 BEGIN
-  OvaSheetMap.Fill(e, RowLines, pages);
+  OvaSheetMap.Fill(e, RowLines, OvaConfig.oneColumn, pages);
   OvaText.Clear(ss.labels); OvaText.Clear(ss.contents);
   FOR i := 0 TO ProseFields - 1 DO fitted[i] := NIL END;
   parts.name := NIL; parts.player := NIL;
@@ -765,7 +829,7 @@ BEGIN
 
   IF firstEntity THEN
     PutPreamble;
-    IF OvaConfig.redraw THEN OvaSheetDraw.PutPreamble END;
+    IF OvaConfig.redraw THEN OvaSheetDraw.PutPreamble(OvaConfig.oneColumn) END;
     firstEntity := FALSE
   END;
 
@@ -807,26 +871,58 @@ BEGIN
   SetRect(characterName, 14650, 54130, 12980, 1790);
   SetRect(playerName, 28210, 54130, 12780, 1790);
 
-  SetRect(attackName[0], 14330, 20930, 13710, 1240);
-  SetRect(attackName[1], 14330, 16970, 13710, 1240);
-  SetRect(attackName[2], 14330, 13010, 13710, 1230);
-  SetRect(attackName[3], 14330, 9100, 13710, 1230);
-  SetRect(attackClause[0], 14330, 18290, 13710, 2640);
-  SetRect(attackClause[1], 14330, 14330, 13710, 2640);
-  SetRect(attackClause[2], 14330, 10370, 13710, 2640);
-  SetRect(attackClause[3], 14330, 6460, 13710, 2640);
-  SetRect(rollBox[0], 28270, 18250, 3260, 2690);
-  SetRect(rollBox[1], 28270, 14280, 3260, 2880);
-  SetRect(rollBox[2], 28270, 10380, 3260, 2760);
-  SetRect(rollBox[3], 28270, 6480, 3260, 2760);
-  SetRect(dxBox[0], 31760, 18250, 2980, 2690);
-  SetRect(dxBox[1], 31760, 14280, 2980, 2880);
-  SetRect(dxBox[2], 31760, 10380, 2980, 2760);
-  SetRect(dxBox[3], 31760, 6480, 2980, 2760);
-  SetRect(endBox[0], 34970, 18250, 3310, 2690);
-  SetRect(endBox[1], 34970, 14280, 3310, 2880);
-  SetRect(endBox[2], 34970, 10380, 3310, 2760);
-  SetRect(endBox[3], 34970, 6480, 3310, 2760);
+  SetRect(sheetAttacks.name[0], 14330, 20930, 13710, 1240);
+  SetRect(sheetAttacks.name[1], 14330, 16970, 13710, 1240);
+  SetRect(sheetAttacks.name[2], 14330, 13010, 13710, 1230);
+  SetRect(sheetAttacks.name[3], 14330, 9100, 13710, 1230);
+  SetRect(sheetAttacks.clause[0], 14330, 18290, 13710, 2640);
+  SetRect(sheetAttacks.clause[1], 14330, 14330, 13710, 2640);
+  SetRect(sheetAttacks.clause[2], 14330, 10370, 13710, 2640);
+  SetRect(sheetAttacks.clause[3], 14330, 6460, 13710, 2640);
+  SetRect(sheetAttacks.roll[0], 28270, 18250, 3260, 2690);
+  SetRect(sheetAttacks.roll[1], 28270, 14280, 3260, 2880);
+  SetRect(sheetAttacks.roll[2], 28270, 10380, 3260, 2760);
+  SetRect(sheetAttacks.roll[3], 28270, 6480, 3260, 2760);
+  SetRect(sheetAttacks.dx[0], 31760, 18250, 2980, 2690);
+  SetRect(sheetAttacks.dx[1], 31760, 14280, 2980, 2880);
+  SetRect(sheetAttacks.dx[2], 31760, 10380, 2980, 2760);
+  SetRect(sheetAttacks.dx[3], 31760, 6480, 2980, 2760);
+  SetRect(sheetAttacks.end[0], 34970, 18250, 3310, 2690);
+  SetRect(sheetAttacks.end[1], 34970, 14280, 3310, 2880);
+  SetRect(sheetAttacks.end[2], 34970, 10380, 3310, 2760);
+  SetRect(sheetAttacks.end[3], 34970, 6480, 3310, 2760);
+  (* -C's. *)
+  SetRect(oneAttacks.name[0], 17891, 45126, 10517, 1240);
+  SetRect(oneAttacks.name[1], 17891, 41176, 10517, 1240);
+  SetRect(oneAttacks.name[2], 17891, 37226, 10517, 1240);
+  SetRect(oneAttacks.name[3], 17891, 33276, 10517, 1240);
+  SetRect(oneAttacks.name[4], 17891, 29326, 10517, 1240);
+  SetRect(oneAttacks.clause[0], 17891, 42486, 10517, 2640);
+  SetRect(oneAttacks.clause[1], 17891, 38536, 10517, 2640);
+  SetRect(oneAttacks.clause[2], 17891, 34586, 10517, 2640);
+  SetRect(oneAttacks.clause[3], 17891, 30636, 10517, 2640);
+  SetRect(oneAttacks.clause[4], 17891, 26686, 10517, 2640);
+  SetRect(oneAttacks.roll[0], 28638, 42446, 3260, 2690);
+  SetRect(oneAttacks.roll[1], 28638, 38496, 3260, 2690);
+  SetRect(oneAttacks.roll[2], 28638, 34546, 3260, 2690);
+  SetRect(oneAttacks.roll[3], 28638, 30596, 3260, 2690);
+  SetRect(oneAttacks.roll[4], 28638, 26646, 3260, 2690);
+  SetRect(oneAttacks.dx[0], 32128, 42446, 2980, 2690);
+  SetRect(oneAttacks.dx[1], 32128, 38496, 2980, 2690);
+  SetRect(oneAttacks.dx[2], 32128, 34546, 2980, 2690);
+  SetRect(oneAttacks.dx[3], 32128, 30596, 2980, 2690);
+  SetRect(oneAttacks.dx[4], 32128, 26646, 2980, 2690);
+  SetRect(oneAttacks.end[0], 35338, 42446, 3310, 2690);
+  SetRect(oneAttacks.end[1], 35338, 38496, 3310, 2690);
+  SetRect(oneAttacks.end[2], 35338, 34546, 3310, 2690);
+  SetRect(oneAttacks.end[3], 35338, 30596, 3310, 2690);
+  SetRect(oneAttacks.end[4], 35338, 26646, 3310, 2690);
+  SetRect(oneNpcType, 32330, 46461, 6646, 2000);
+  SetInset(oneCombatNotes, 17847, 8028, 21129, 17100);
+  SetRect(oneDefenseBox, 18047, 3588, 5200, 2850);
+  SetRect(oneHealthBox, 23400, 3588, 4900, 2850);
+  SetRect(oneEnduranceBox, 28400, 3588, 7200, 2850);
+  SetRect(oneTvBox, 35800, 3588, 3000, 2850);
 
   (* The portrait, inside the box's rounded corners. *)
   SetInset(portraitBox, 24040, 27890 + BlockInset, 16280, 28710 - 2 * BlockInset);

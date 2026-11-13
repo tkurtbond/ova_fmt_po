@@ -30,14 +30,24 @@ CONST
   Page1* = ".FR-p1";
   Page2* = ".FR-p2";
 
+  (* -C's page 1 in place of Page1: the sheet's header, then one column
+     for the Abilities and Weaknesses beside an Attacks & Combat Stats
+     box (Acacia's block in the rulebook). *)
+  Page1OneColumn* = ".FR-p1c";
+
+  (* Rule, a blank and Y: -C's faint rule across the column between the
+     Abilities and the Weaknesses, its top Y points from the top. *)
+  Rule* = ".CR";
+
 PROCEDURE Line(s: ARRAY OF CHAR);
 BEGIN OvaOut.String(s); OvaOut.Ln
 END Line;
 
-(* The colours and macros, for the end of OvaSheet's preamble.  Its
-   first line, a comment saying ova-sheet-redrawn, tells ova_sheet.sh
-   not to lay the blank sheet under the pages. *)
-PROCEDURE PutPreamble*;
+(* The colours and macros, for the end of OvaSheet's preamble, and with
+   oneColumn (-C/--one-column) Page1OneColumn's and Rule's.  Its first
+   line, a comment saying ova-sheet-redrawn, tells ova_sheet.sh not to
+   lay the blank sheet under the pages. *)
+PROCEDURE PutPreamble*(oneColumn: BOOLEAN);
 BEGIN
   Line('.\" ova-sheet-redrawn');
   OvaOut.String('.\"'); Line(" -R: the sheet's frames and labels drawn here, not taken from the");
@@ -154,7 +164,66 @@ BEGIN
   Line(".TX 219.76 356.996 NSXCB 16 58 ovasheetred Personality");
   Line(".TX 36 534 NSXCB 16 60.59 ovasheetred Other Notes");
   Line(".TX 285.02 14.996 NSXCB 12 73.74 ovasheetgrey CHARACTER PORTRAIT");
-  Line("..")
+  Line("..");
+
+  (* -C's page 1, in the same terms: the sheet's header, a column of
+     lines for the Abilities and Weaknesses (no Dice boxes and no dots,
+     as in the rulebook), and an Attacks & Combat Stats box built as the
+     sheet's Combat Stats box is, with five attack slots 39.5 pt apart,
+     a Combat Notes space and the four stats along its bottom.  New
+     labels are scaled as the sheet's own are.  CR is the faint rule
+     between the Abilities and the Weaknesses. *)
+  IF oneColumn THEN
+    OvaOut.String('.\"'); Line(" -C: page 1 as one column beside an Attacks & Combat Stats box.");
+    Line(".defcolor ovasheetrule gray 0.75");
+    Line(".de CR");
+    Line(".RF 40.47 \\$1 124 0.6 0 ovasheetrule");
+    Line("..");
+    Line(".de FR-p1c");
+    Line(".RF -8.64 85.866 404.64 490 8 ovasheetgrey");
+    Line(".RF 100.47 31.306 336 34.7 12.3 ovasheetred");
+    Line(".RF 146.47 36 129.778 18 0 white");
+    Line(".RF 282.334 36 127.666 18 0 white");
+    Line(".RF 34.47 103.996 136 462 5.76 white");
+    Line(".RF 176.47 116.996 215.29 449 15 ovasheetred");
+    Line(".RF 178.47 118.996 211.29 445 13 white");
+    Line(".RF 176.47 103.996 215.29 27.62 12 ovasheetred");
+    Line(".RF 176.47 121.996 215.29 9.62 0 ovasheetred");
+    Line(".HR 181.08 170.996 206.1");
+    Line(".HR 181.08 210.496 206.1");
+    Line(".HR 181.08 249.996 206.1");
+    Line(".HR 181.08 289.496 206.1");
+    Line(".HR 181.08 328.996 206.1");
+    Line(".HR 181.08 517.376 206.1");
+    Line(".VR 285.15 134.366 194.63");
+    Line(".VR 320.15 134.366 194.63");
+    Line(".VR 352.15 134.366 194.63");
+    Line(".TX 147.37 61.496 NSXCB 8 36.9 white CHARACTER NAME");
+    Line(".TX 282.3 61.496 NSXCB 8 30.57 white PLAYER NAME");
+    Line(".TX 37.35 99.416 NSXCB 14 87.31 black ABILITIES & WEAKNESSES");
+    Line(".TX 182.08 124.95 NSXCB 20 137.2 white Attacks & Combat Stats");
+    Line(".TX 288.01 143.516 NSR 11 28.14 ovasheetred ROLL");
+    Line(".TX 328.01 143.516 NSR 11 15.16 ovasheetred DX");
+    Line(".TX 358.01 143.516 NSR 11 23.23 ovasheetred END");
+    Line(".TX 288.01 183.016 NSR 11 28.14 ovasheetred ROLL");
+    Line(".TX 328.01 183.016 NSR 11 15.16 ovasheetred DX");
+    Line(".TX 358.01 183.016 NSR 11 23.23 ovasheetred END");
+    Line(".TX 288.01 222.516 NSR 11 28.14 ovasheetred ROLL");
+    Line(".TX 328.01 222.516 NSR 11 15.16 ovasheetred DX");
+    Line(".TX 358.01 222.516 NSR 11 23.23 ovasheetred END");
+    Line(".TX 288.01 262.016 NSR 11 28.14 ovasheetred ROLL");
+    Line(".TX 328.01 262.016 NSR 11 15.16 ovasheetred DX");
+    Line(".TX 358.01 262.016 NSR 11 23.23 ovasheetred END");
+    Line(".TX 288.01 301.516 NSR 11 28.14 ovasheetred ROLL");
+    Line(".TX 328.01 301.516 NSR 11 15.16 ovasheetred DX");
+    Line(".TX 358.01 301.516 NSR 11 23.23 ovasheetred END");
+    Line(".TX 184.47 341.496 NSR 11 85.63 ovasheetred COMBAT NOTES");
+    Line(".TX 182.47 528.126 NSR 11 48.01 ovasheetred DEFENSE");
+    Line(".TX 236 528.126 NSR 11 43.05 ovasheetred HEALTH");
+    Line(".TX 285.85 528.126 NSR 11 68.31 ovasheetred ENDURANCE");
+    Line(".TX 366.2 528.126 NSR 11 13.61 ovasheetred TV");
+    Line("..");
+  END
 END PutPreamble;
 
 END OvaSheetDraw.

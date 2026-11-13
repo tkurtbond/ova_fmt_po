@@ -1,0 +1,123 @@
+# -S -R -C/--one-column with more Abilities than one column holds (35
+# lines): the Weaknesses go on the second copy of page 1, where the
+# Abilities end, below a rule; and more attacks than one copy's five
+# slots, so the sixth goes on the second copy too.
+---
+- name: Edge One Column
+  npc-type: Extra
+  abilities:
+    - name: Ability 01
+      level: 2
+    - name: Ability 02
+      level: 3
+    - name: Ability 03
+      level: 4
+    - name: Ability 04
+      level: 5
+    - name: Ability 05
+      level: 1
+    - name: Ability 06
+      level: 2
+    - name: Ability 07
+      level: 3
+    - name: Ability 08
+      level: 4
+    - name: Ability 09
+      level: 5
+    - name: Ability 10
+      level: 1
+    - name: Ability 11
+      level: 2
+    - name: Ability 12
+      level: 3
+    - name: Ability 13
+      level: 4
+    - name: Ability 14
+      level: 5
+    - name: Ability 15
+      level: 1
+    - name: Ability 16
+      level: 2
+    - name: Ability 17
+      level: 3
+    - name: Ability 18
+      level: 4
+    - name: Ability 19
+      level: 5
+    - name: Ability 20
+      level: 1
+    - name: Ability 21
+      level: 2
+    - name: Ability 22
+      level: 3
+    - name: Ability 23
+      level: 4
+    - name: Ability 24
+      level: 5
+    - name: Ability 25
+      level: 1
+    - name: Ability 26
+      level: 2
+    - name: Ability 27
+      level: 3
+    - name: Ability 28
+      level: 4
+    - name: Ability 29
+      level: 5
+    - name: Ability 30
+      level: 1
+    - name: Ability 31
+      level: 2
+    - name: Ability 32
+      level: 3
+    - name: Ability 33
+      level: 4
+    - name: Ability 34
+      level: 5
+    - name: Ability 35
+      level: 1
+    - name: Ability 36
+      level: 2
+    - name: Ability 37
+      level: 3
+    - name: Ability 38
+      level: 4
+    - name: Ability 39
+      level: 5
+    - name: Ability 40
+      level: 1
+  weaknesses:
+    - name: Weakness A
+      level: -1
+    - name: Weakness B
+      level: -2
+  combat:
+    defense: 2
+    health: 20
+    endurance: 30
+    threat-value: 5
+    attacks:
+      - name: Attack 1
+        roll: 2
+        dx: 2
+        endurance: 5
+      - name: Attack 2
+        roll: 3
+        dx: 2
+        endurance: 5
+      - name: Attack 3
+        roll: 4
+        dx: 2
+        endurance: 5
+      - name: Attack 4
+        roll: 5
+        dx: 2
+        endurance: 5
+      - name: Attack 5
+        roll: 6
+        dx: 2
+        endurance: 5
+      - name: Attack 6
+        roll: 7
+        dx: 2
+        endurance: 5

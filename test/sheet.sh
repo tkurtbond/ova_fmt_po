@@ -109,10 +109,11 @@ check_sheet() {
   fi
   # The blank sheet under each sheet page, told by words printed on
   # only one of its pages, which no character's text runs together.
+  # Blanks are dropped: -C's page 1 sets COMBAT NOTES as two words.
   local want1 want2 got1=0 got2=0 i t
   want1=$(grep -c '^\.SP p1' "$tmp/$name.tr"); want2=$(grep -c '^\.SP p2' "$tmp/$name.tr")
   for ((i = 1; i <= n; i++)); do
-    t=$(text "$tmp/$name.pdf" $i)
+    t=$(text "$tmp/$name.pdf" $i); t=${t// /}
     ! has "$t" COMBATNOTES || got1=$((got1 + 1))
     ! has "$t" CHARACTERPORTRAIT || got2=$((got2 + 1))
   done
@@ -232,6 +233,89 @@ if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
   fi
 else
   echo "skip - R-portrait: no ImageMagick"
+fi
+
+# ---- -S -R -C: page 1 as one column beside an Attacks & Combat Stats box ----
+
+for f in Acacia Miho Karis edge-sheet-overflow edge-sheet-one-column edge-null-name; do
+  if redrawn "C-$f" -C "$data/$f.yaml"; then
+    check_sheet "C-$f"
+  fi
+done
+
+# The frames: the column where -R has the gap between its two, the
+# box's red title bar where -R has the Weaknesses, the box's white
+# inside, and the grey panel where -R has the Combat Stats box's frame.
+if [ -f "$tmp/C-edge-null-name.pdf" ]; then
+  while read -r pg x y want what; do
+    got=$(colour "$tmp/C-edge-null-name.pdf" "$pg" "$x" "$y")
+    if [ "$got" = "$want" ]; then ok "C-edge-null-name: page $pg, $what is $want"
+    else fail "C-edge-null-name: page $pg, $what is $got, not $want"
+    fi
+  done <<'END'
+1 110 45 red the name banner
+1 100 450 white the column
+1 300 110 red the box's title bar
+1 212 300 white the box
+1 173 300 grey the gap between the column and the box
+1 400 300 grey the right panel
+2 250 5 red the portrait's tab
+END
+fi
+
+# column NAME PAGE / box NAME PAGE / title NAME PAGE: the text of the
+# column, the box under its title, or the box's title, on PAGE.
+column() { crop "$tmp/$1.pdf" "$2" 34 104 137 462; }
+box() { crop "$tmp/$1.pdf" "$2" 176 132 216 434; }
+title() { crop "$tmp/$1.pdf" "$2" 176 104 216 27; }
+
+if [ -f "$tmp/C-Acacia.pdf" ]; then
+  t=$(column C-Acacia 1)
+  if [[ $t == *Vigorous*Arrogant*Vulnerability* ]]; then
+    ok "C-Acacia: the Weaknesses in the column, under the Abilities"
+  else
+    fail "C-Acacia: the Weaknesses aren't in the column under the Abilities" "${t:0:300}"
+  fi
+  # Her first copy of page 1's rules: those before the second .SP.
+  n=$(awk '/^\.SP / && ++sp == 2 { exit } /^\.CR / { n++ } END { print n + 0 }' "$tmp/C-Acacia.tr")
+  if [ "$n" -eq 1 ]; then ok "C-Acacia: one rule between them"
+  else fail "C-Acacia: $n rules between them, not 1"
+  fi
+  expect "C-Acacia: the NPC type in the box's title" "$(title C-Acacia 1)" "(HEROIC)"
+  expect_not "C-Acacia: no NPC type in the notes" "$(text "$tmp/C-Acacia.pdf" 1)" "NPC Type"
+  expect "C-Acacia: an attack in the box" "$(box C-Acacia 1)" "Lock Heaven"
+fi
+if [ -f "$tmp/C-Miho.pdf" ]; then
+  expect "C-Miho: the fifth attack on page 1" "$(box C-Miho 1)" "Mode SP: Miho Ray"
+  n=$(grep -c '^\.SP p1' "$tmp/C-Miho.tr")
+  if [ "$n" -eq 1 ]; then ok "C-Miho: one copy of page 1 for five attacks"
+  else fail "C-Miho: $n copies of page 1 for five attacks, not 1"
+  fi
+fi
+if [ -f "$tmp/C-edge-sheet-overflow.pdf" ]; then
+  # The copies of page 1 come first: copy 2 is the PDF's page 2.
+  t1=$(column C-edge-sheet-overflow 1); t2=$(column C-edge-sheet-overflow 2)
+  if [[ $t1 == *"Ability Number 9"*"Weakness 4"* ]] && ! has "$t1" "Weakness 5" &&
+     [[ $t2 == *"Weakness 5"*"Weakness 6"* ]] && ! has "$t2" "Ability Number"; then
+    ok "C-edge-sheet-overflow: the Weaknesses go on from copy 1's column to copy 2's"
+  else
+    fail "C-edge-sheet-overflow: the Weaknesses don't go on from copy 1's column to copy 2's" \
+      "copy 1: ${t1: -200}; copy 2: ${t2:0:200}"
+  fi
+fi
+# More Abilities than a column holds: the Weaknesses start on copy 2,
+# under the last of them, and the sixth attack is there too.
+if [ -f "$tmp/C-edge-sheet-one-column.pdf" ]; then
+  t1=$(column C-edge-sheet-one-column 1); t2=$(column C-edge-sheet-one-column 2)
+  if [[ $t1 == *"Ability 35"* ]] && ! has "$t1" "Weakness" &&
+     [[ $t2 == *"Ability 40"*"Weakness A"*"Weakness B"* ]]; then
+    ok "C-edge-sheet-one-column: the Weaknesses start on copy 2, under the Abilities"
+  else
+    fail "C-edge-sheet-one-column: the Weaknesses don't start on copy 2 under the Abilities" \
+      "copy 1: ${t1: -200}; copy 2: ${t2:0:200}"
+  fi
+  expect "C-edge-sheet-one-column: the sixth attack on copy 2" "$(box C-edge-sheet-one-column 2)" "Attack 6"
+  expect_not "C-edge-sheet-one-column: five attacks on copy 1" "$(box C-edge-sheet-one-column 1)" "Attack 6"
 fi
 
 # ---- The rest needs the blank sheet, qpdf and jq ----

@@ -61,7 +61,7 @@ ifneq ($(if $(MAKECMDGOALS),$(filter-out clean testclean uninstall golden print-
 $(foreach l,$(SHAREDLIBS),$(if $(wildcard $(POCLIBDIR)/*/OC/$(l).library),,$(error the $(l) library is not in $(POCLIBDIR); $(if $(filter polibfyaml,$(l)),run make install in ~/Repos/Oberon/polibfyaml,run make -f pocGNUmakefile install in ~/Repos/Oberon/$(if $(filter ropes,$(l)),Ropes,ArgParser)))))
 endif
 
-.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form sheet redraw fonts widths install uninstall clean testclean
+.PHONY: all test golden valgrind rst pdf gemtext markdown html groff hmm inline form sheet redraw onecol fonts widths install uninstall clean testclean
 .NOTPARALLEL:
 
 all: $(PROGRAM)
@@ -119,16 +119,17 @@ valgrind: $(PROGRAM) | $(OBJ)
 	     || ! grep -q 'are still reachable' $$log; then \
 	    echo "FAIL - valgrind $$*"; sed 's/^/    /' $$log; status=1; fi; }; \
 	for f in test/data/*.yaml; do \
-	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X" "-S" "-S -P x.png" "-S -R"; do vg $$fl $$f </dev/null; done; \
+	  for fl in "" "-g -e" "-M" "-H -O" "-G" "-m -c" "-m -p -L 2" "-i -n -O" "-X" "-S" "-S -P x.png" "-S -R" "-S -R -C"; do vg $$fl $$f </dev/null; done; \
 	done; \
 	vg test/data/*.yaml </dev/null; \
 	vg -X test/data/*.yaml </dev/null; \
 	vg -S test/data/*.yaml </dev/null; \
 	vg -S -R test/data/*.yaml </dev/null; \
+	vg -S -R -C test/data/*.yaml </dev/null; \
 	vg -U '~' <test/data/Options.yaml; \
 	vg </dev/null; \
 	vg -o $(OBJ)/valgrind.out test/data/Karis.yaml </dev/null; \
-	vg -h </dev/null; vg -L x </dev/null; vg -o /nonexistent/out test/data/Karis.yaml </dev/null; \
+	vg -h </dev/null; vg -L x </dev/null; vg -S -C test/data/Karis.yaml </dev/null; vg -o /nonexistent/out test/data/Karis.yaml </dev/null; \
 	vg -o /dev/full test/data/Karis.yaml </dev/null; \
 	echo "valgrind: $$n runs"; \
 	if [ $$status -eq 0 ]; then echo "All checks passed."; else exit 1; fi
@@ -168,6 +169,10 @@ SHEET_OUTPUT      := $(BASES:%=$(BUILD)/%.sheet.pdf)
 # PLAN.md, "Redrawing the sheet"): no OVA_SHEET and no qpdf needed.
 REDRAW_OUTPUT     := $(BASES:%=$(BUILD)/%.redraw.pdf)
 
+# The same with page 1 as the rulebook's NPCs are set (-S -R
+# -C/--one-column; PLAN.md, "One column").
+ONECOL_OUTPUT     := $(BASES:%=$(BUILD)/%.onecol.pdf)
+
 rst: $(TERSE_OUTPUT)
 pdf: rst $(PDF_OUTPUT)
 gemtext: $(GEMTEXT_OUTPUT)
@@ -179,6 +184,7 @@ inline: $(INLINE_OUTPUT)
 form: $(FORM_OUTPUT)
 sheet: fonts $(SHEET_OUTPUT)
 redraw: fonts $(REDRAW_OUTPUT)
+onecol: fonts $(ONECOL_OUTPUT)
 
 fonts: $(SHEET_FONTS)/devpdf/download
 
@@ -228,6 +234,10 @@ $(BUILD)/%.redraw.tr: test/data/%.yaml $(PROGRAM) | $(BUILD)
 	./$(PROGRAM) -S -R $< >$@
 $(BUILD)/%.redraw.pdf: $(BUILD)/%.redraw.tr ova_sheet.sh $(SHEET_FONTS)/devpdf/download
 	./ova_sheet.sh -F $(SHEET_FONTS) -o $@ $<
+$(BUILD)/%.onecol.tr: test/data/%.yaml $(PROGRAM) | $(BUILD)
+	./$(PROGRAM) -S -R -C $< >$@
+$(BUILD)/%.onecol.pdf: $(BUILD)/%.onecol.tr ova_sheet.sh $(SHEET_FONTS)/devpdf/download
+	./ova_sheet.sh -F $(SHEET_FONTS) -o $@ $<
 
 #MS_COLUMNS = -V twocolumns
 $(BUILD)/%.rst.ms.pdf: $(BUILD)/%.gen.rst
@@ -239,7 +249,7 @@ $(BUILD)/%.md.ms.pdf: $(BUILD)/%.md
   $(BUILD)/%.md.ms.pdf $(BUILD)/%.html.gen.rst $(BUILD)/%.html $(BUILD)/%.hmm $(BUILD)/%.compact.hmm \
   $(BUILD)/%.plain.hmm $(BUILD)/%.groff.gen.rst $(BUILD)/%.groff.pdf $(BUILD)/%.inline.md \
   $(BUILD)/%.fields.json $(BUILD)/%.form.pdf $(BUILD)/%.sheet.tr $(BUILD)/%.sheet.pdf \
-  $(BUILD)/%.redraw.tr $(BUILD)/%.redraw.pdf
+  $(BUILD)/%.redraw.tr $(BUILD)/%.redraw.pdf $(BUILD)/%.onecol.tr $(BUILD)/%.onecol.pdf
 
 # ---- Installation ----
 #

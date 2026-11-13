@@ -730,12 +730,51 @@ output, then the filled form, which costs little, since its field
 mapping is the same code. The filled form is the one for a player who
 wants to keep editing it.
 
+### One column [done]
+
+`-C`/`--one-column` sets page 1 as the rulebook's NPCs are, after
+Acacia's block (rulebook p. 134), in the proportions the user chose
+(2026-11-12). Built in the Ada version (its PLAN.md, "`-C`/`--one-column`
+sets page 1 as the rulebook's NPCs are"), then ported (2026-11-12).
+
+- **Only with `-S -R`**, since it draws frames the blank sheet
+  doesn't have. Otherwise `ova_fmt: -C/--one-column needs -S/--sheet
+  and -R/--redraw`, exit 2, checked in `OvaFmt` after the help, so
+  `-h -C` still shows the help and exits 1.
+- **Page 1** is `.FR-p1c`, which `OvaSheetDraw.PutPreamble(TRUE)`
+  adds to `-R`'s macros. It has one narrow column of 35 lines:
+  the Abilities, then a faint rule (`.CR`, written by `OvaSheet` 330
+  units above the next row's baseline) and a blank line, then the
+  Weaknesses, at the Abilities' x. Beside it is a wide "Attacks &
+  Combat Stats" box with 5 attack slots, laid out as the sheet's are
+  (name and clause, ROLL/DX/END). The NPC type goes in the box's
+  title, upper case in parentheses, white, condensed semibold, 12 pt
+  down to 8. When it can't fit, it goes in the notes as "NPC Type:
+  ...", but all four types fit. Then come Combat Notes and
+  Defense/Health/Endurance/TV along the bottom. Page 2 and the
+  continuation pages are `-S -R`'s.
+- **`OvaSheetMap.Fill(e, lines, oneColumn, pages)`.** `Place` takes a
+  `firstUsed`. Under `oneColumn`, the Weaknesses start on the copy
+  where the Abilities end (`wFirst`), one line below them, and a copy
+  holds `OneColumnAttackSlots` (5) attacks, not 4. `OvaForm` passes
+  FALSE.
+- **The port** matches the Ada goldens byte for byte: `sheet-C` (the
+  fixtures with something to show: Acacia, Boss, Karis, Miho, Sheet,
+  Vehicle, `edge-npc-type`, `edge-sheet-overflow` and the new
+  `edge-sheet-one-column`), `sheet-C-all` (Sheet, Fragment and Group in
+  one run, by the long options), and the errors `sheet-C-noR` and
+  `terse-C`. `edge-sheet-one-column.yaml` has 40 Abilities, two
+  Weaknesses and six attacks: copy 1 holds Abilities 01 to 35 and five
+  attacks; copy 2 holds 36 to 40, the rule, both Weaknesses and the
+  sixth attack. No other fixture has Abilities that overflow a copy.
+  `make onecol` builds `build/*.onecol.pdf`.
+
 ### Modules (each in the Ada version first, then ported)
 
 | Oberon module | Ada unit | Writes |
 |---|---|---|
 | `OvaSheetMap` | `Ova_Fmt.Sheet_Map` | Shared: the field table above (name, page, rectangle, size, single/multi-line) as constants, and `Fill(e)`. `Fill` maps an entity onto slots: Abilities and Weaknesses sorted as now (`OvaCommon`), each "Name (detail) [perks/flaws/endurance]" with the level in the Dice column. Built-under content becomes `Sub` and `Spell` rows in blocks kept together ("Sub-Abilities, as the rulebook prints them"). Attacks go to name / "Affinity; perks; flaws" / Roll, DX, End. Defense is `OvaCommon.DefenseText`, and `*` marks overrides, as `raw` does. Prose fields are trimmed and joined (`AllOneLine` where a field is one line). Whatever didn't fit goes on an overflow list. |
-| `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw`, only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). |
+| `OvaSheetDraw` | `Ova_Fmt.Sheet_Draw` | With `-R`/`--redraw`, only with `-S`: the sheet's frames, drawn in groff, written before `OvaSheet`'s text, so no Dyskami background is needed ("Redrawing the sheet"). With `-C` too, the one-column page 1 ("One column"). |
 | `OvaForm` | `Ova_Fmt.Format_Form` | `-X`/`--form`: the page fills for qpdf ("Two ways"), JSON-escaped (`"`, `\`, control characters; a multi-line field's newlines as `\n`). An array per main entity of fills `{"pages": [...], "sub": [...], "fields": {...}}`, which `ova_form.sh` turns into a PDF ("The form script"). The letter `-X` dates from XFDF, which it no longer writes (the user, 2026-11-12). |
 | `OvaSheet` | `Ova_Fmt.Format_Sheet` | `-S`/`--sheet`: raw troff (no macro package, so nothing moves the text) at the sheet's size, every value placed at a point and broken into lines by the program, with the faces' widths built in; the sections the sheet has no place for on plain continuation pages. `-P FILE`/`--portrait FILE` overrides the portrait, which is otherwise the `portrait:` path, relative to the YAML file. As built: "What `-S` puts where". |
 
@@ -1136,7 +1175,7 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
   without qpdf, jq or a readable `OVA_SHEET` it runs only the `-S -R`
   checks and skips the rest. Without the faces (all of them, `NSXCB`
   too) it builds them with `sheet_fonts.sh` if fontforge is there. Its work goes in a
-  `mktemp -d` under `TMPDIR`, removed on exit. 124 checks:
+  `mktemp -d` under `TMPDIR`, removed on exit. 166 checks:
   - `-S -R` (2026-11-12), with no `OVA_SHEET` and a `qpdf` stub first
     on `PATH` that leaves a mark and fails: Fukiko, Karis, Vehicle,
     `edge-sheet-overflow` and `edge-null-name` build without it; the
@@ -1151,6 +1190,27 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
     by a planted bug: `ova_sheet.sh` calling qpdf, no `.FR-p1`, the
     grey defined as white, a portrait on every sheet, and the portrait
     placed twice.
+  - `-S -R -C` (2026-11-12), also with no sheet: Acacia, Miho, Karis,
+    `edge-sheet-overflow`, `edge-sheet-one-column` and
+    `edge-null-name` pass the page, sheet-page and every-line checks
+    (with blanks taken out first, since the drawn label reads
+    `COMBAT NOTES` here). On `edge-null-name`, seven pixels: the name
+    banner; the column, white where `-R` has the gap between its two;
+    the box's red title bar where `-R` has the Weaknesses; the box's
+    white inside; the grey between the column and the box, and right
+    of the box; and page 2's portrait tab. Read from cropped regions
+    (`pdftotext -x -y -W -H`): Acacia's Weaknesses follow her
+    Abilities in the column, after one `.CR` on her own copy;
+    "(HEROIC)" is in the box's title and "NPC Type" is nowhere on
+    page 1; her Combat Notes are in the box. Miho's fifth attack
+    is in the box on page 1, with one `.SP p1`.
+    `edge-sheet-overflow`'s Weakness 4 is on copy 1 and 5 and 6 on
+    copy 2. `edge-sheet-one-column`'s copy 1 ends at Ability 35 with
+    no Weakness; copy 2 has Ability 40, then Weakness A, then B, and
+    the sixth attack, which copy 1 doesn't. Each was proved by a
+    planted bug: the Weaknesses at their two-column x, no rule, no
+    type drawn, 4 attack slots, the Weaknesses always from copy 1
+    (`wFirst := 0`), and `.FR-p1` for `.FR-p1c`.
   - For each of Fukiko, Miho, Karis, Sheet, Vehicle, Fragment, Auren,
     Escaping, `edge-sheet-overflow` and `edge-sheet-sub`, through
     `ova_sheet.sh`: the page count (one per `.SP`, at least one more
@@ -1246,7 +1306,11 @@ The Ada version comes first, as this repo's rule says (the user,
    checks and valgrind runs for `-S -R`. [done, 2026-11-12: "Redrawing
    the sheet", "Build and tests"; `make valgrind` takes `-S -R` too,
    1043 runs, clean.]
-5. `-C`/`--one-column`, only with `-S -R`.
+5. `-C`/`--one-column`, only with `-S -R`. [Ada done, 2026-11-12, then
+   ported, byte for byte, with `test/sheet.sh` checks and valgrind
+   runs for `-S -R -C`: "One column", "Build and tests"; `make
+   valgrind` takes `-S -R -C` too, and `-S -C` refused, 1144 runs,
+   clean.]
 
 ## Open questions
 

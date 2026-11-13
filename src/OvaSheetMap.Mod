@@ -32,6 +32,13 @@ CONST
   WeaknessSlots* = 17;
   AttackSlots* = 4;
 
+  (* -C/--one-column's page 1, drawn by -R: one column of lines, the
+     Abilities, a line for a faint rule, then the Weaknesses, and an
+     Attacks & Combat Stats box beside it with more attack slots
+     (Acacia's block in the rulebook; PLAN.md, "One column"). *)
+  OneColumnSlots* = 35;
+  OneColumnAttackSlots* = 5;
+
   (* A row's kind (the Ada Row_Kind).  Item: an Ability or Weakness of
      the sheet's owner, its level in the Dice column.  Sub: one granted
      by the Item above it (a Transformation's), its level in the name
@@ -221,13 +228,15 @@ BEGIN Append(columns, cur); NEW(cur); Clear(cur.rows); used := 0
 END NextColumn;
 
 (* Blocks into columns of slots lines, one column per copy of page 1,
-   keeping each block together when it can.  left is what is left of
-   the column, never negative: a row taller than the column overfills
-   one. *)
-PROCEDURE Place(blocks: Seq; slots: INTEGER; lines: RowLines; VAR columns: Seq);
+   keeping each block together when it can.  The first column has its
+   first firstUsed lines taken already (-C's Weaknesses, under the
+   Abilities); if its first block doesn't fit what is left, that column
+   is empty.  left is what is left of the column, never negative: a row
+   taller than the column overfills one. *)
+PROCEDURE Place(blocks: Seq; slots: INTEGER; lines: RowLines; firstUsed: INTEGER; VAR columns: Seq);
   VAR cur: Column; b: Block; i, j, used, left, h, first: INTEGER;
 BEGIN
-  Clear(columns); NEW(cur); Clear(cur.rows); used := 0;
+  Clear(columns); NEW(cur); Clear(cur.rows); used := firstUsed;
   FOR i := 0 TO blocks.n - 1 DO
     b := blocks.items[i](Block);
     h := RowsHeight(b.rows, lines);
@@ -242,7 +251,7 @@ BEGIN
          room for the parent and one row under it. *)
       first := Height(b.rows.items[0], lines);
       IF b.rows.n > 1 THEN first := first + Height(b.rows.items[1], lines) END;
-      IF (left < first) & (cur.rows.n > 0) THEN NextColumn(columns, cur, used) END;
+      IF (left < first) & (used > 0) THEN NextColumn(columns, cur, used) END;
       FOR j := 0 TO b.rows.n - 1 DO
         IF used >= slots THEN left := 0 ELSE left := slots - used END;
         IF (Height(b.rows.items[j], lines) > left) & (cur.rows.n > 0) THEN
@@ -285,16 +294,33 @@ BEGIN
 END Min;
 
 (* The owner's copies, appended to pages: the first titled title, the
-   rest title " (continued)".  npcType is NIL for none. *)
+   rest title " (continued)".  npcType is NIL for none.  With
+   oneColumn, the Weaknesses go on from the last copy with Abilities,
+   a line below them: wFirst is how many copies come before their
+   first. *)
 PROCEDURE AddCopies(VAR pages: Seq; owner, title: Rope; hasPlayer: BOOLEAN; player: Rope;
                     abilities, weaknesses: Seq; combat: OvaEntities.Combat; npcType: Rope;
-                    lines: RowLines);
-  VAR aColumns, wColumns: Seq; p: Page; attacks, copies, n, i: INTEGER;
+                    lines: RowLines; oneColumn: BOOLEAN);
+  VAR aColumns, wColumns: Seq; p: Page; attacks, copies, n, i, wFirst, slots: INTEGER;
 BEGIN
-  Place(abilities, AbilitySlots, lines, aColumns);
-  Place(weaknesses, WeaknessSlots, lines, wColumns);
+  wFirst := 0;
+  IF oneColumn THEN
+    Place(abilities, OneColumnSlots, lines, 0, aColumns);
+    IF aColumns.n = 0 THEN
+      Place(weaknesses, OneColumnSlots, lines, 0, wColumns)
+    ELSE
+      wFirst := aColumns.n - 1;
+      Place(weaknesses, OneColumnSlots, lines,
+        RowsHeight(aColumns.items[aColumns.n - 1](Column).rows, lines) + 1, wColumns)
+    END;
+    slots := OneColumnAttackSlots
+  ELSE
+    Place(abilities, AbilitySlots, lines, 0, aColumns);
+    Place(weaknesses, WeaknessSlots, lines, 0, wColumns);
+    slots := AttackSlots
+  END;
   IF combat.hasCombat THEN attacks := combat.attacks.n ELSE attacks := 0 END;
-  copies := Max(1, Max(Max(aColumns.n, wColumns.n), (attacks + AttackSlots - 1) DIV AttackSlots));
+  copies := Max(1, Max(Max(aColumns.n, wFirst + wColumns.n), (attacks + slots - 1) DIV slots));
   FOR n := 1 TO copies DO
     NEW(p);
     p.owner := owner;
@@ -306,8 +332,10 @@ BEGIN
     IF n = 1 THEN p.hasPlayer := hasPlayer; p.player := player END;
     Clear(p.abilities); Clear(p.weaknesses); Clear(p.attacks);
     IF n <= aColumns.n THEN p.abilities := aColumns.items[n - 1](Column).rows END;
-    IF n <= wColumns.n THEN p.weaknesses := wColumns.items[n - 1](Column).rows END;
-    FOR i := (n - 1) * AttackSlots TO Min(n * AttackSlots, attacks) - 1 DO
+    IF (n > wFirst) & (n - wFirst <= wColumns.n) THEN
+      p.weaknesses := wColumns.items[n - wFirst - 1](Column).rows
+    END;
+    FOR i := (n - 1) * slots TO Min(n * slots, attacks) - 1 DO
       Append(p.attacks, AttackOf(combat.attacks.items[i](OvaEntities.Attack)))
     END;
     p.hasStats := FALSE; p.hasCombatNotes := FALSE;
@@ -335,8 +363,11 @@ END AddCopies;
    or Vehicle's, in the order of the Abilities granting them.  The
    numbers are as in raw tables: ASCII "*" for an override.  A column
    holds AbilitySlots lines, each row taking lines(row) of them, or one
-   if lines is NIL. *)
-PROCEDURE Fill*(e: OvaEntities.Entity; lines: RowLines; VAR pages: Seq);
+   if lines is NIL.  With oneColumn, a copy's Abilities and Weaknesses
+   share OneColumnSlots lines: the Weaknesses start on the copy where
+   the Abilities end, a line below them (for the rule), and a copy
+   holds OneColumnAttackSlots attacks. *)
+PROCEDURE Fill*(e: OvaEntities.Entity; lines: RowLines; oneColumn: BOOLEAN; VAR pages: Seq);
   VAR abilities, weaknesses, sAbl, sWk: Seq; a: OvaEntities.Ability; w: OvaEntities.Weakness;
     se: OvaEntities.SubEntity; title: Rope; i, j: INTEGER;
 BEGIN
@@ -348,7 +379,7 @@ BEGIN
       OvaCommon.NameDetail(w.name, w.hasDetail, w.detail), NIL, FALSE, NIL)))
   END;
   AddCopies(pages, e.name, e.name, e.hasPlayer, e.player, abilities, weaknesses, e.combat,
-    OvaCommon.NpcTypeText(e), lines);
+    OvaCommon.NpcTypeText(e), lines, oneColumn);
 
   FOR i := 0 TO e.abilities.n - 1 DO
     a := e.abilities.items[i](OvaEntities.Ability);
@@ -361,7 +392,7 @@ BEGIN
       IF (sAbl.n > 0) OR (sWk.n > 0) OR se.combat.hasCombat THEN
         title := se.name; OvaText.Add(title, " ("); title := Ropes.Cat(title, e.name);
         OvaText.Add(title, "'s "); title := Ropes.Cat(title, se.label); title := Ropes.AppendChar(title, ")");
-        AddCopies(pages, se.name, title, FALSE, NIL, sAbl, sWk, se.combat, NIL, lines)
+        AddCopies(pages, se.name, title, FALSE, NIL, sAbl, sWk, se.combat, NIL, lines, oneColumn)
       END
     END
   END

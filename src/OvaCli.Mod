@@ -74,6 +74,10 @@ PROCEDURE DoRedraw(): BOOLEAN;
 BEGIN OvaConfig.redraw := TRUE; RETURN TRUE
 END DoRedraw;
 
+PROCEDURE DoOneColumn(): BOOLEAN;
+BEGIN OvaConfig.oneColumn := TRUE; RETURN TRUE
+END DoOneColumn;
+
 PROCEDURE DoHtml(): BOOLEAN;
 BEGIN OvaConfig.format := OvaConfig.HtmlInRst; RETURN TRUE
 END DoHtml;
@@ -158,6 +162,9 @@ BEGIN
   Opt(ArgParser.MakeOption("R", "redraw",
     "With -S/--sheet, draw the sheet's frames and labels too, so that ova_sheet.sh needs no blank sheet and lays none under the pages.",
     DoRedraw));
+  Opt(ArgParser.MakeOption("C", "one-column",
+    "With -S/--sheet and -R/--redraw, set page 1 as the rulebook's NPCs are: one column of Abilities and Weaknesses beside an Attacks & Combat Stats box.",
+    DoOneColumn));
   Opt(ArgParser.MakeOption("H", "html",
     "Output reST with nested HTML tables (a `.. raw:: html` block) for Abilities/Weaknesses/Combat/Attacks, instead of terse prose.",
     DoHtml));

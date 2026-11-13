@@ -1,0 +1,290 @@
+.\" ova_fmt -S: the OVA character sheet's values, to be typeset
+.\" with groff -k -Tpdf and laid over the blank sheet (ova_sheet.sh).
+.pl 595.276p
+.po 0
+.nh
+.ad l
+.defcolor ovared rgb 0.47 0.11 0.13
+.nr started 0
+.nr cont 0
+.de L
+.sp |\\$1p-1p
+.in \\$2p
+..
+.de HD
+.if \\n[cont] 'sp |36p
+..
+.wh 0 HD
+.de FT
+'bp
+..
+.de SP
+.ch FT
+.nr cont 0
+.if \\n[started] .bp
+.nr started 1
+.nf
+.vs 1p
+.tm ova-sheet-page \\n% \\$1
+..
+.de CP
+.nr cont 1
+.if \\n[started] .bp
+.nr started 1
+.wh -40p FT
+.fi
+.in 36p
+.ll 383.528p
+.vs 11p
+..
+.de PT
+.if d ova-portrait-\\$1 \\X'pdf: pdfpic \\*[ova-portrait-\\$1] -L \\$2p \\$3p'
+..
+.de SH
+.sp 8p
+.ne 4v
+.ft NSB
+.ps 10
+..
+.de PP
+.br
+.ft NSR
+.ps 9
+.sp 3p
+..
+.SP p1
+.L 49.31 148.50
+\f[NSR]\s[12]Edge One Column
+.L 116.70 39.47
+\f[NSR]\s[8]+2
+.L 116.70 59.20
+\f[NSI]\s[8]Ability 01
+.L 129.70 39.47
+\f[NSR]\s[8]+3
+.L 129.70 59.20
+\f[NSI]\s[8]Ability 02
+.L 142.70 39.47
+\f[NSR]\s[8]+4
+.L 142.70 59.20
+\f[NSI]\s[8]Ability 03
+.L 155.70 39.47
+\f[NSR]\s[8]+5
+.L 155.70 59.20
+\f[NSI]\s[8]Ability 04
+.L 168.70 39.47
+\f[NSR]\s[8]+1
+.L 168.70 59.20
+\f[NSI]\s[8]Ability 05
+.L 181.70 39.47
+\f[NSR]\s[8]+2
+.L 181.70 59.20
+\f[NSI]\s[8]Ability 06
+.L 194.70 39.47
+\f[NSR]\s[8]+3
+.L 194.70 59.20
+\f[NSI]\s[8]Ability 07
+.L 207.70 39.47
+\f[NSR]\s[8]+4
+.L 207.70 59.20
+\f[NSI]\s[8]Ability 08
+.L 220.70 39.47
+\f[NSR]\s[8]+5
+.L 220.70 59.20
+\f[NSI]\s[8]Ability 09
+.L 233.70 39.47
+\f[NSR]\s[8]+1
+.L 233.70 59.20
+\f[NSI]\s[8]Ability 10
+.L 246.70 39.47
+\f[NSR]\s[8]+2
+.L 246.70 59.20
+\f[NSI]\s[8]Ability 11
+.L 259.70 39.47
+\f[NSR]\s[8]+3
+.L 259.70 59.20
+\f[NSI]\s[8]Ability 12
+.L 272.70 39.47
+\f[NSR]\s[8]+4
+.L 272.70 59.20
+\f[NSI]\s[8]Ability 13
+.L 285.70 39.47
+\f[NSR]\s[8]+5
+.L 285.70 59.20
+\f[NSI]\s[8]Ability 14
+.L 298.70 39.47
+\f[NSR]\s[8]+1
+.L 298.70 59.20
+\f[NSI]\s[8]Ability 15
+.L 311.70 39.47
+\f[NSR]\s[8]+2
+.L 311.70 59.20
+\f[NSI]\s[8]Ability 16
+.L 324.70 39.47
+\f[NSR]\s[8]+3
+.L 324.70 59.20
+\f[NSI]\s[8]Ability 17
+.L 116.70 220.66
+\f[NSR]\s[8]−1
+.L 116.70 240.30
+\f[NSI]\s[8]Weakness A
+.L 129.70 220.66
+\f[NSR]\s[8]−2
+.L 129.70 240.30
+\f[NSI]\s[8]Weakness B
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Attack 1\m[default]
+.L 405.04 295.11
+\f[NSCSB]\s[16]2
+.L 405.04 328.61
+\f[NSCSB]\s[16]2
+.L 405.04 362.36
+\f[NSCSB]\s[16]5
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Attack 2\m[default]
+.L 443.79 295.11
+\f[NSCSB]\s[16]3
+.L 443.79 328.61
+\f[NSCSB]\s[16]2
+.L 443.79 362.36
+\f[NSCSB]\s[16]5
+.L 461.88 145.30
+\m[ovared]\f[NSB]\s[8]Attack 3\m[default]
+.L 483.39 295.11
+\f[NSCSB]\s[16]4
+.L 483.39 328.61
+\f[NSCSB]\s[16]2
+.L 483.39 362.36
+\f[NSCSB]\s[16]5
+.L 500.98 145.30
+\m[ovared]\f[NSB]\s[8]Attack 4\m[default]
+.L 522.39 295.11
+\f[NSCSB]\s[16]5
+.L 522.39 328.61
+\f[NSCSB]\s[16]2
+.L 522.39 362.36
+\f[NSCSB]\s[16]5
+.L 395.77 34.10
+\f[NSR]\s[7]NPC Type: Extra
+.L 564.95 168.12
+\f[NSCSB]\s[18]2
+.L 564.95 225.35
+\f[NSCSB]\s[18]20
+.L 564.95 294.85
+\f[NSCSB]\s[18]30
+.L 564.95 358.37
+\f[NSCSB]\s[18]5
+.SP p1
+.L 48.06 148.50
+\f[NSR]\s[8.5]Edge One Column (continued)
+.L 116.70 39.47
+\f[NSR]\s[8]+4
+.L 116.70 59.20
+\f[NSI]\s[8]Ability 18
+.L 129.70 39.47
+\f[NSR]\s[8]+5
+.L 129.70 59.20
+\f[NSI]\s[8]Ability 19
+.L 142.70 39.47
+\f[NSR]\s[8]+1
+.L 142.70 59.20
+\f[NSI]\s[8]Ability 20
+.L 155.70 39.47
+\f[NSR]\s[8]+2
+.L 155.70 59.20
+\f[NSI]\s[8]Ability 21
+.L 168.70 39.47
+\f[NSR]\s[8]+3
+.L 168.70 59.20
+\f[NSI]\s[8]Ability 22
+.L 181.70 39.47
+\f[NSR]\s[8]+4
+.L 181.70 59.20
+\f[NSI]\s[8]Ability 23
+.L 194.70 39.47
+\f[NSR]\s[8]+5
+.L 194.70 59.20
+\f[NSI]\s[8]Ability 24
+.L 207.70 39.47
+\f[NSR]\s[8]+1
+.L 207.70 59.20
+\f[NSI]\s[8]Ability 25
+.L 220.70 39.47
+\f[NSR]\s[8]+2
+.L 220.70 59.20
+\f[NSI]\s[8]Ability 26
+.L 233.70 39.47
+\f[NSR]\s[8]+3
+.L 233.70 59.20
+\f[NSI]\s[8]Ability 27
+.L 246.70 39.47
+\f[NSR]\s[8]+4
+.L 246.70 59.20
+\f[NSI]\s[8]Ability 28
+.L 259.70 39.47
+\f[NSR]\s[8]+5
+.L 259.70 59.20
+\f[NSI]\s[8]Ability 29
+.L 272.70 39.47
+\f[NSR]\s[8]+1
+.L 272.70 59.20
+\f[NSI]\s[8]Ability 30
+.L 285.70 39.47
+\f[NSR]\s[8]+2
+.L 285.70 59.20
+\f[NSI]\s[8]Ability 31
+.L 298.70 39.47
+\f[NSR]\s[8]+3
+.L 298.70 59.20
+\f[NSI]\s[8]Ability 32
+.L 311.70 39.47
+\f[NSR]\s[8]+4
+.L 311.70 59.20
+\f[NSI]\s[8]Ability 33
+.L 324.70 39.47
+\f[NSR]\s[8]+5
+.L 324.70 59.20
+\f[NSI]\s[8]Ability 34
+.L 382.63 145.30
+\m[ovared]\f[NSB]\s[8]Attack 5\m[default]
+.L 405.04 295.11
+\f[NSCSB]\s[16]6
+.L 405.04 328.61
+\f[NSCSB]\s[16]2
+.L 405.04 362.36
+\f[NSCSB]\s[16]5
+.L 422.23 145.30
+\m[ovared]\f[NSB]\s[8]Attack 6\m[default]
+.L 443.79 295.11
+\f[NSCSB]\s[16]7
+.L 443.79 328.61
+\f[NSCSB]\s[16]2
+.L 443.79 362.36
+\f[NSCSB]\s[16]5
+.SP p1
+.L 48.06 148.50
+\f[NSR]\s[8.5]Edge One Column (continued)
+.L 116.70 39.47
+\f[NSR]\s[8]+1
+.L 116.70 59.20
+\f[NSI]\s[8]Ability 35
+.L 129.70 39.47
+\f[NSR]\s[8]+2
+.L 129.70 59.20
+\f[NSI]\s[8]Ability 36
+.L 142.70 39.47
+\f[NSR]\s[8]+3
+.L 142.70 59.20
+\f[NSI]\s[8]Ability 37
+.L 155.70 39.47
+\f[NSR]\s[8]+4
+.L 155.70 59.20
+\f[NSI]\s[8]Ability 38
+.L 168.70 39.47
+\f[NSR]\s[8]+5
+.L 168.70 59.20
+\f[NSI]\s[8]Ability 39
+.L 181.70 39.47
+\f[NSR]\s[8]+1
+.L 181.70 59.20
+\f[NSI]\s[8]Ability 40
+.SP p2

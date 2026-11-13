@@ -59,6 +59,10 @@ ada    sheet-edge  @(bad-*|edge-*)   -S
 ada    sheet-R     @(Sheet|Karis|Vehicle)   -S -R
 ada:all sheet-R-all  @(Sheet|Fragment|Vehicle)   -S --redraw
 ada    terse-R     @(Sheet)   -R
+ada    sheet-C     @(Acacia|Boss|Karis|Miho|Sheet|Vehicle|edge-npc-type|edge-sheet-one-column|edge-sheet-overflow)   -S -R -C
+ada:all sheet-C-all  @(Sheet|Fragment|Group)   -S --redraw --one-column
+ada    sheet-C-noR @(Sheet)   -S -C
+ada    terse-C     @(Sheet)   -C
 
 # ---- Options ----
 ada    terse-O     [A-Z]*   -O

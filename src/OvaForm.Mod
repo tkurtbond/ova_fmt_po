@@ -550,7 +550,7 @@ PROCEDURE ProcessEntity*(e: OvaEntities.Entity);
   VAR pages, fills, sections: OvaSheetMap.Seq; main2: ProseValues; parts, none: OwnerParts;
     page: OvaSheetMap.Page; note: OvaEntities.Note; main: Fill; i: INTEGER;
 BEGIN
-  OvaSheetMap.Fill(e, NIL, pages);
+  OvaSheetMap.Fill(e, NIL, FALSE, pages);
   OvaSheetMap.Clear(fills); OvaSheetMap.Clear(sections);
   FOR i := 0 TO NProse - 1 DO main2[i] := NIL END;
   none.linesInFull := NIL; none.abilityNotes := NIL; none.attacks := NIL; none.combatNotes := NIL;
