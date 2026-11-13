@@ -706,6 +706,12 @@ Built in the Ada version (2026-11-12), then ported (2026-11-12).
   value is measured in it.
 - **Left out**: the OVA logo, the spiral binding down page 2's left
   edge, and the vertical "Character Record" on page 1.
+- **One departure from the sheet**: the white Character Name and
+  Player Name boxes have the Abilities boxes' 5.76 pt corners, not
+  the sheet's square ones, which looked out of place among the
+  rounded frames (the user, 2026-11-12). The text stays clear of
+  them: a line starts about 3 pt inside the box, and at the capitals'
+  height a corner takes less than half a point.
 - **`ova_sheet.sh`** finds the comment line, then needs no sheet (or
   qpdf), checks the font directory has `NSXCB`, and copies groff's PDF
   out as it is.

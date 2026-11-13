@@ -102,8 +102,8 @@ BEGIN
   Line(".RF 23.75 364.846 412.75 201.87 8 ovasheetgrey");
   Line(".RF -8.64 85.866 404.64 250.75 8 ovasheetgrey");
   Line(".RF 100.47 31.306 336 34.7 12.3 ovasheetred");
-  Line(".RF 146.47 36 129.778 18 0 white");
-  Line(".RF 282.334 36 127.666 18 0 white");
+  Line(".RF 146.47 36 129.778 18 5.76 white");
+  Line(".RF 282.334 36 127.666 18 5.76 white");
   Line(".RF 34.47 103.996 18 228.44 5.76 white");
   Line(".RF 56.47 103.996 153.29 228.44 5.76 white");
   Line(".RF 216.47 103.996 18 228.44 5.76 white");
@@ -225,8 +225,8 @@ BEGIN
     Line(".de FR-p1c");
     Line(".RF -8.64 85.866 404.64 490 8 ovasheetgrey");
     Line(".RF 100.47 31.306 336 34.7 12.3 ovasheetred");
-    Line(".RF 146.47 36 129.778 18 0 white");
-    Line(".RF 282.334 36 127.666 18 0 white");
+    Line(".RF 146.47 36 129.778 18 5.76 white");
+    Line(".RF 282.334 36 127.666 18 5.76 white");
     Line(".RF 34.47 103.996 136 462 5.76 white");
     Line(".RF 176.47 116.996 215.29 449 15 ovasheetred");
     Line(".RF 178.47 118.996 211.29 445 13 white");
