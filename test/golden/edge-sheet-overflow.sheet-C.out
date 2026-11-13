@@ -168,6 +168,43 @@
 .TX 36 534 NSXCB 16 60.59 ovasheetred Other Notes
 .TX 285.02 14.996 NSXCB 12 73.74 ovasheetgrey CHARACTER PORTRAIT
 ..
+.\" -R: continuation pages drawn to match the sheet's; HD draws each one.
+.de FR-cp
+.RF 0 0 419.528 595.276 0 ovasheetgrey
+.RF 31.78 37 351.58 540 15 ovasheetred
+.RF 33.78 39 347.58 536 13 white
+.RF 31.78 24 351.58 27.62 12 ovasheetred
+.RF 31.78 42 351.58 9.62 0 ovasheetred
+.TX 37.39 47.65 NSXCB 24 73.83 white Continued
+..
+.nr drawing 0
+.de FT
+.if !\\n[drawing] 'bp
+..
+.de HD
+.if \\n[cont] \{\
+.nr drawing 1
+.ev ova-draw
+.nf
+.vs 1p
+.FR-cp
+.ev
+.nr drawing 0
+'sp |64p
+.\}
+..
+.am CP
+.in 44p
+.ll 371p
+..
+.am SH
+.ft NSCSB
+.ps 12
+.gcolor ovasheetred
+..
+.am PP
+.gcolor default
+..
 .\" -C: page 1 as one column beside an Attacks & Combat Stats box.
 .defcolor ovasheetrule gray 0.75
 .de CR

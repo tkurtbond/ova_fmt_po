@@ -676,7 +676,7 @@ Built in the Ada version (2026-11-12), then ported (2026-11-12).
   draws that page's frames and labels before its text, so the text
   lies over them. Nothing else changes: `-S -R`'s golden files are
   `-S`'s with those lines added, and `-R` without `-S` does nothing,
-  as `-P` doesn't. Continuation pages stay plain.
+  as `-P` doesn't. Continuation pages are drawn too (below).
 - **The measurements** are the blank sheet's own drawing: its content
   streams' paths, read with qpdf's `--qdf` and a throwaway script, and
   its labels' positions from `pdftotext -bbox`. Every coordinate is
@@ -711,6 +711,18 @@ Built in the Ada version (2026-11-12), then ported (2026-11-12).
 - Compared by eye at 100 dpi with the blank sheet: the panels, boxes,
   rules and labels fall where the sheet's do, and Sheet.yaml's values
   sit in them as on the real sheet, a portrait inside the frame.
+- **Continuation pages** [done, 2026-11-12] were plain black on
+  white, stark beside the drawn pages (the user). Now, as in the Ada
+  version (its PLAN.md, "`-R`'s continuation pages match the
+  sheet's"), `FR-cp` draws page 2's grey ground and a white panel
+  framed in red under a red "Continued" title bar, as the Combat Stats
+  box is. The headings are red, in condensed semibold. Only the `-R`
+  preamble changes, by 37 lines: `HD`, the top-of-page trap, draws
+  each continuation page in an environment of its own, so every page
+  groff breaks to is drawn too, and `FT` does nothing while it draws,
+  since the drawing passes the footer trap. 14 golden files changed
+  (`sheet-R`, `sheet-C` and the two `-all` cases), each by those lines
+  alone.
 - **The port** [done, 2026-11-12]. `OvaSheetDraw` is the Ada table's
   116 lines, generated from it, each a `Line` call; the one with both
   quote marks (`.\" -R: the sheet's frames ...`) writes its `.\"`
@@ -1051,7 +1063,8 @@ notes too long for their boxes).
   (continued)" and so on. A box always takes at least one word.
 - **Continuation pages**, unlike `-X`'s page-2 copies, are plain
   pages: half-inch margins, a 10 pt Bold heading per section, its
-  lines 9 pt Regular paragraphs. The sections, in order: each prose
+  lines 9 pt Regular paragraphs (under `-R`, drawn to match the
+  sheet: "Redrawing the sheet"). The sections, in order: each prose
   field's rest; per owner, in copy order, "Name" and "Player Name"
   (when cut), "Ability Notes", "Attacks"
   (as `-X`'s) and "Combat Notes (continued)"; the `notes:` callouts;
@@ -1175,7 +1188,7 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
   without qpdf, jq or a readable `OVA_SHEET` it runs only the `-S -R`
   checks and skips the rest. Without the faces (all of them, `NSXCB`
   too) it builds them with `sheet_fonts.sh` if fontforge is there. Its work goes in a
-  `mktemp -d` under `TMPDIR`, removed on exit. 166 checks:
+  `mktemp -d` under `TMPDIR`, removed on exit. 177 checks:
   - `-S -R` (2026-11-12), with no `OVA_SHEET` and a `qpdf` stub first
     on `PATH` that leaves a mark and fails: Fukiko, Karis, Vehicle,
     `edge-sheet-overflow` and `edge-null-name` build without it; the
@@ -1190,6 +1203,14 @@ Like `ova_form.sh`, it is written in the Ada repo and copied here.
     by a planted bug: `ova_sheet.sh` calling qpdf, no `.FR-p1`, the
     grey defined as white, a portrait on every sheet, and the portrait
     placed twice.
+  - `-S -R`'s continuation pages (2026-11-12): the script writes a
+    YAML file of 30 long notes, which runs to 6 continuation pages,
+    and each one has the grey ground, the red title bar, and the white
+    panel by the text and below it. Proved by planting no drawing, and
+    the prototype's bug, an unguarded `FT` with a second footer trap,
+    which put the frame on one page and the rest on the next. `text`
+    drops the drawn "Continued" that opens a page, since pdftotext
+    puts it in a paragraph that runs over the page break.
   - `-S -R -C` (2026-11-12), also with no sheet: Acacia, Miho, Karis,
     `edge-sheet-overflow`, `edge-sheet-one-column` and
     `edge-null-name` pass the page, sheet-page and every-line checks

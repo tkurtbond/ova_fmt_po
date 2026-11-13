@@ -57,9 +57,12 @@ pages() { pdfinfo "$1" 2>/dev/null | awk '$1 == "Pages:" { print $2 }'; }
 norm() { tr -s ' \t\n\f' '    ' | sed "s/^ //; s/ \$//; s/\xe2\x80\x99/'/g"; }
 
 # text PDF [FIRST [LAST]]: its text, or pages FIRST to LAST's, normalized.
+# -R's continuation pages open with a drawn "Continued", which isn't
+# placed text and would split a paragraph that runs over a page, so a
+# page's first line of just that is dropped.
 text() {
   local f=$1 a=() ; [ $# -lt 2 ] || a=(-f "$2" -l "${3:-$2}")
-  pdftotext -raw "${a[@]}" "$f" - 2>/dev/null | norm
+  pdftotext -raw "${a[@]}" "$f" - 2>/dev/null | sed $'s/\fContinued$/\f/' | norm
   echo
 }
 
@@ -233,6 +236,41 @@ if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
   fi
 else
   echo "skip - R-portrait: no ImageMagick"
+fi
+
+# Continuation pages drawn as the sheet's are, on every one, those
+# groff breaks to as well: notes long enough for several, each page
+# with the grey ground, the red title bar, and the white panel by the
+# text and below it.  A drawing broken across two pages fails these.
+{
+  echo "- name: Long Notes"
+  echo "  notes:"
+  for i in $(seq 1 30); do
+    echo "    - header: Note $i"
+    echo "      text: |"
+    for j in 1 2 3 4 5 6; do
+      echo "        Line $j of note $i runs long enough to wrap across the panel, as notes do."
+    done
+  done
+} >"$tmp/long-notes.yaml"
+if redrawn R-long-notes "$tmp/long-notes.yaml"; then
+  check_sheet R-long-notes
+  sp=$(grep -c '^\.SP ' "$tmp/R-long-notes.tr")
+  np=$(pdfinfo "$tmp/R-long-notes.pdf" | awk '/^Pages:/ {print $2}')
+  if [ "$np" -ge $((sp + 3)) ]; then ok "R-long-notes: $((np - sp)) continuation pages"
+  else fail "R-long-notes: $((np - sp)) continuation pages, not 3 or more"
+  fi
+  for pg in $(seq $((sp + 1)) "$np"); do
+    got=""
+    for p in "5 5 grey" "200 30 red" "38 300 white" "200 568 white"; do
+      set -- $p
+      c=$(colour "$tmp/R-long-notes.pdf" "$pg" "$1" "$2")
+      [ "$c" = "$3" ] || got="$got ($1, $2) is $c, not $3;"
+    done
+    if [ -z "$got" ]; then ok "R-long-notes: page $pg drawn"
+    else fail "R-long-notes: page $pg:$got"
+    fi
+  done
 fi
 
 # ---- -S -R -C: page 1 as one column beside an Attacks & Combat Stats box ----

@@ -166,6 +166,49 @@ BEGIN
   Line(".TX 285.02 14.996 NSXCB 12 73.74 ovasheetgrey CHARACTER PORTRAIT");
   Line("..");
 
+  (* Continuation pages to match: a grey ground, and a white panel
+     framed in red under a red "Continued" title bar, drawn by HD, the
+     top-of-page trap, on each one, in an environment of its own.  FT
+     does nothing while a page is drawn, since the drawing passes the
+     footer trap.  The headings are red, as page 2's are. *)
+  OvaOut.String('.\"'); Line(" -R: continuation pages drawn to match the sheet's; HD draws each one.");
+  Line(".de FR-cp");
+  Line(".RF 0 0 419.528 595.276 0 ovasheetgrey");
+  Line(".RF 31.78 37 351.58 540 15 ovasheetred");
+  Line(".RF 33.78 39 347.58 536 13 white");
+  Line(".RF 31.78 24 351.58 27.62 12 ovasheetred");
+  Line(".RF 31.78 42 351.58 9.62 0 ovasheetred");
+  Line(".TX 37.39 47.65 NSXCB 24 73.83 white Continued");
+  Line("..");
+  Line(".nr drawing 0");
+  Line(".de FT");
+  Line(".if !\\n[drawing] 'bp");
+  Line("..");
+  Line(".de HD");
+  Line(".if \\n[cont] \{\");
+  Line(".nr drawing 1");
+  Line(".ev ova-draw");
+  Line(".nf");
+  Line(".vs 1p");
+  Line(".FR-cp");
+  Line(".ev");
+  Line(".nr drawing 0");
+  Line("'sp |64p");
+  Line(".\}");
+  Line("..");
+  Line(".am CP");
+  Line(".in 44p");
+  Line(".ll 371p");
+  Line("..");
+  Line(".am SH");
+  Line(".ft NSCSB");
+  Line(".ps 12");
+  Line(".gcolor ovasheetred");
+  Line("..");
+  Line(".am PP");
+  Line(".gcolor default");
+  Line("..");
+
   (* -C's page 1, in the same terms: the sheet's header, a column of
      lines for the Abilities and Weaknesses (no Dice boxes and no dots,
      as in the rulebook), and an Attacks & Combat Stats box built as the
