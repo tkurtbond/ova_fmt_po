@@ -1070,9 +1070,14 @@ notes too long for their boxes).
   (when cut), "Ability Notes", "Attacks"
   (as `-X`'s) and "Combat Notes (continued)"; the `notes:` callouts;
   "Character Hooks"; "Fluff" (the user, 2026-11-12), one paragraph,
-  the other formats' comma-joined line (`OvaCommon.FluffLine`) without
-  its bold labels, each value reflowed onto one line, ending in a
-  period (`OvaSheet.FluffPlain`, the Ada `Fluff_Line`). The tagline,
+  the other formats' comma-joined line (`OvaCommon.FluffLine`), its
+  labels in Bold (`\f[NSB]`, then `\f[NSR]`), as theirs are, each
+  value reflowed onto one line, ending in a period. The Ada
+  `Fluff_Line` builds it as a `Raw` section of escaped troff; here
+  `Sections` keeps the entity (`fluff`), and `PutSections` ends with
+  `PutFluff`, which writes the line through `PutRun`, `PutText`'s
+  escaping and dashes, so that only the font escapes go out unescaped.
+  The tagline,
   summary and options are left out; `-X` leaves out the fluff too,
   having no field for it.
 - **Escaping.** `\` is written `\e` and a tab a space. A placed line

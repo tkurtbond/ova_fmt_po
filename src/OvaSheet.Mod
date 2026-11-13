@@ -117,8 +117,12 @@ TYPE
   END;
 
   (* The parts of the continuation pages: a heading, then each line of
-     its content a paragraph. *)
-  Sections = RECORD labels, contents: OvaText.List END;
+     its content a paragraph; then, if fluff isn't NIL, its fluff: block
+     (PutFluff), under fluffLabel. The Ada version's Raw section. *)
+  Sections = RECORD
+    labels, contents: OvaText.List;
+    fluff: OvaEntities.Entity; fluffLabel: Rope
+  END;
 
 VAR
   firstEntity: BOOLEAN;
@@ -651,31 +655,6 @@ BEGIN
   END
 END AddSection;
 
-(* The fluff: block as one paragraph (the Ada Fluff_Line): the
-   comma-joined line every other format writes (OvaCommon.FluffLine),
-   without its bold labels, each value reflowed onto one line, since a
-   line break in a section's content starts a new paragraph. NIL if
-   there's none. *)
-PROCEDURE FluffPlain(e: OvaEntities.Entity): Rope;
-  VAR r, t: Rope; i: INTEGER; first: BOOLEAN;
-BEGIN
-  r := NIL; first := TRUE;
-  FOR i := 0 TO OvaEntities.NFluff - 1 DO
-    IF e.hasFluffField[i] THEN
-      IF ~first THEN OvaText.Add(r, ", ") END;
-      first := FALSE;
-      t := Ropes.AppendChar(OvaCommon.FluffLabel(i), ":");
-      t := Ropes.AppendChar(t, " ");
-      r := Ropes.Cat(r, t);
-      t := OvaCommon.Reflow(e.fluff[i]);
-      t := OvaCommon.AllOneLine(t);
-      r := Ropes.Cat(r, t)
-    END
-  END;
-  IF ~first THEN r := OvaCommon.EndWithPeriod(r) END;
-  RETURN r
-END FluffPlain;
-
 (* owner & s *)
 PROCEDURE Label(owner: Rope; s: ARRAY OF CHAR): Rope;
 BEGIN OvaText.Add(owner, s); RETURN owner
@@ -692,10 +671,10 @@ END AddOwnerSections;
 
 (* r's bytes from .. to - 1 as one filled troff line: "\&" first, so
    that it can't be read as a request. *)
-PROCEDURE PutText(r: Rope; from, to: INTEGER);
+(* r's bytes from .. to - 1 as troff text, each "--" an em dash. *)
+PROCEDURE PutRun(r: Rope; from, to: INTEGER);
   VAR i: INTEGER;
 BEGIN
-  OvaOut.String("\&");
   i := from;
   WHILE i < to DO
     IF (Ropes.Fetch(r, i) = "-") & (i + 1 < to) & (Ropes.Fetch(r, i + 1) = "-") THEN
@@ -703,14 +682,57 @@ BEGIN
     ELSE
       Escape(Ropes.Fetch(r, i)); INC(i)
     END
+  END
+END PutRun;
+
+PROCEDURE PutText(r: Rope; from, to: INTEGER);
+BEGIN
+  OvaOut.String("\&"); PutRun(r, from, to); OvaOut.Ln
+END PutText;
+
+(* Whether e has a fluff: field to write. *)
+PROCEDURE HasFluffField(e: OvaEntities.Entity): BOOLEAN;
+  VAR i: INTEGER;
+BEGIN
+  IF e.hasFluff THEN
+    FOR i := 0 TO OvaEntities.NFluff - 1 DO
+      IF e.hasFluffField[i] THEN RETURN TRUE END
+    END
+  END;
+  RETURN FALSE
+END HasFluffField;
+
+(* e's fluff: block as one paragraph (the Ada Fluff_Line): the
+   comma-joined line every other format writes (OvaCommon.FluffLine),
+   each label in Bold, as theirs are, and each value reflowed onto one
+   line, since the paragraph is one line; the last ends in a period. *)
+PROCEDURE PutFluff(e: OvaEntities.Entity);
+  VAR t: Rope; i, last: INTEGER; first: BOOLEAN;
+BEGIN
+  last := OvaEntities.NFluff - 1;
+  WHILE ~e.hasFluffField[last] DO DEC(last) END;
+  Line(".PP");
+  OvaOut.String("\&"); first := TRUE;
+  FOR i := 0 TO last DO
+    IF e.hasFluffField[i] THEN
+      IF ~first THEN OvaOut.String(", ") END;
+      first := FALSE;
+      t := Ropes.AppendChar(OvaCommon.FluffLabel(i), ":");
+      OvaOut.String("\f[NSB]"); PutRun(t, 0, SHORT(Ropes.Length(t)));
+      OvaOut.String("\f[NSR] ");
+      t := OvaCommon.Reflow(e.fluff[i]);
+      t := OvaCommon.AllOneLine(t);
+      IF i = last THEN t := OvaCommon.EndWithPeriod(t) END;
+      PutRun(t, 0, SHORT(Ropes.Length(t)))
+    END
   END;
   OvaOut.Ln
-END PutText;
+END PutFluff;
 
 PROCEDURE PutSections(ss: Sections);
   VAR i, from, to, n: INTEGER; c: Rope;
 BEGIN
-  IF ss.labels.n = 0 THEN RETURN END;
+  IF (ss.labels.n = 0) & (ss.fluff = NIL) THEN RETURN END;
   Line(".CP");
   FOR i := 0 TO ss.labels.n - 1 DO
     Line(".SH");
@@ -723,6 +745,11 @@ BEGIN
       IF to > from THEN Line(".PP"); PutText(c, from, to) END;
       from := to + 1
     END
+  END;
+  IF ss.fluff # NIL THEN
+    Line(".SH");
+    PutText(ss.fluffLabel, 0, SHORT(Ropes.Length(ss.fluffLabel)));
+    PutFluff(ss.fluff)
   END
 END PutSections;
 
@@ -847,7 +874,7 @@ PROCEDURE ProcessEntity*(e: OvaEntities.Entity);
     fitted: ARRAY ProseFields OF Rope; parts: OwnerParts; note: OvaEntities.Note; i: INTEGER;
 BEGIN
   OvaSheetMap.Fill(e, RowLines, OvaConfig.oneColumn, pages);
-  OvaText.Clear(ss.labels); OvaText.Clear(ss.contents);
+  OvaText.Clear(ss.labels); OvaText.Clear(ss.contents); ss.fluff := NIL;
   FOR i := 0 TO ProseFields - 1 DO fitted[i] := NIL END;
   parts.name := NIL; parts.player := NIL;
   parts.abilityNotes := NIL; parts.attacks := NIL; parts.combatNotes := NIL;
@@ -881,8 +908,8 @@ BEGIN
   IF e.hasCharacterHooks THEN
     AddSection(ss, Label(e.name, ": Character Hooks"), OvaCommon.Reflow(e.characterHooks))
   END;
-  IF e.hasFluff THEN
-    AddSection(ss, Label(e.name, ": Fluff"), FluffPlain(e))
+  IF HasFluffField(e) THEN
+    ss.fluff := e; ss.fluffLabel := Label(e.name, ": Fluff")
   END;
 
   Line(".SP p2");
