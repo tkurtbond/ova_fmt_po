@@ -716,8 +716,9 @@ BEGIN
   END
 END PrintOptionsIfShown;
 
-(* The label of fluff field i, as the text formats write it. *)
-PROCEDURE FluffLabel(i: INTEGER): Rope;
+(* The label of fluff field i, as the text formats write it; OvaSheet's
+   too. *)
+PROCEDURE FluffLabel*(i: INTEGER): Rope;
   VAR s: ARRAY 16 OF CHAR;
 BEGIN
   CASE i OF

@@ -651,6 +651,31 @@ BEGIN
   END
 END AddSection;
 
+(* The fluff: block as one paragraph (the Ada Fluff_Line): the
+   comma-joined line every other format writes (OvaCommon.FluffLine),
+   without its bold labels, each value reflowed onto one line, since a
+   line break in a section's content starts a new paragraph. NIL if
+   there's none. *)
+PROCEDURE FluffPlain(e: OvaEntities.Entity): Rope;
+  VAR r, t: Rope; i: INTEGER; first: BOOLEAN;
+BEGIN
+  r := NIL; first := TRUE;
+  FOR i := 0 TO OvaEntities.NFluff - 1 DO
+    IF e.hasFluffField[i] THEN
+      IF ~first THEN OvaText.Add(r, ", ") END;
+      first := FALSE;
+      t := Ropes.AppendChar(OvaCommon.FluffLabel(i), ":");
+      t := Ropes.AppendChar(t, " ");
+      r := Ropes.Cat(r, t);
+      t := OvaCommon.Reflow(e.fluff[i]);
+      t := OvaCommon.AllOneLine(t);
+      r := Ropes.Cat(r, t)
+    END
+  END;
+  IF ~first THEN r := OvaCommon.EndWithPeriod(r) END;
+  RETURN r
+END FluffPlain;
+
 (* owner & s *)
 PROCEDURE Label(owner: Rope; s: ARRAY OF CHAR): Rope;
 BEGIN OvaText.Add(owner, s); RETURN owner
@@ -855,6 +880,9 @@ BEGIN
   END;
   IF e.hasCharacterHooks THEN
     AddSection(ss, Label(e.name, ": Character Hooks"), OvaCommon.Reflow(e.characterHooks))
+  END;
+  IF e.hasFluff THEN
+    AddSection(ss, Label(e.name, ": Fluff"), FluffPlain(e))
   END;
 
   Line(".SP p2");

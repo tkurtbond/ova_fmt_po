@@ -355,7 +355,8 @@ The slots are fixed: 17 Abilities, 17 Weaknesses, 4 attacks. A
 character with more needs another page. So does one with a Companion,
 Vehicle or Transformation (a linked Ability, which gets its own
 block), a Fragment's parent, or `notes:` callouts. The sheet has no
-place for the tagline, character hooks, fluff or `options`.
+place for the tagline, character hooks, fluff or `options`; `-S`
+puts the hooks and the fluff on its continuation pages.
 
 ### Sub-Abilities, as the rulebook prints them
 
@@ -1068,8 +1069,12 @@ notes too long for their boxes).
   field's rest; per owner, in copy order, "Name" and "Player Name"
   (when cut), "Ability Notes", "Attacks"
   (as `-X`'s) and "Combat Notes (continued)"; the `notes:` callouts;
-  "Character Hooks". The tagline, summary, fluff and options are left
-  out, as for `-X`.
+  "Character Hooks"; "Fluff" (the user, 2026-11-12), one paragraph,
+  the other formats' comma-joined line (`OvaCommon.FluffLine`) without
+  its bold labels, each value reflowed onto one line, ending in a
+  period (`OvaSheet.FluffPlain`, the Ada `Fluff_Line`). The tagline,
+  summary and options are left out; `-X` leaves out the fluff too,
+  having no field for it.
 - **Escaping.** `\` is written `\e` and a tab a space. A placed line
   starts with a font escape and a continuation page's text line with
   `\&`, so neither can be read as a request; only the program writes
