@@ -35,7 +35,7 @@ not a design doc. A change to the Ada program belongs here too.
 | ArgParser (command-line parsing) | `~/Repos/Oberon/ArgParser/`; poc library `argparser` in `$POCLIBDIR` (default `~/.local/lib/poc`) |
 | polibfyaml (YAML) | `~/Repos/Oberon/polibfyaml/` (`AGENTS.md`, `src/`, `test/poc-gc.supp`, `test/vg-reachable.sh`); poc library `polibfyaml` in `$POCLIBDIR` |
 | poc | installed from the Peaseblossom RPM: `/usr/bin/poc`, its runtime library `poc-rtl` under `/usr/lib/poc` |
-| poc source and runtime | `~/Repos/Oberon/Peaseblossom-main` (`doc/users-guide.md`, `doc/reference-guide.md`, `AGENTS.md`; the runtime in `rtl/llvm/`) |
+| poc source and runtime | `~/Repos/Oberon/Peaseblossom` (`doc/users-guide.md`, `doc/reference-guide.md`, `AGENTS.md`; the runtime in `rtl/llvm/`) |
 
 Read the Ropes, polibfyaml and ArgParser `AGENTS.md` files before
 working around any of those libraries.
