@@ -97,6 +97,18 @@ The program is built as `ova_fmt_po`, so it can be installed beside the
 Ada `ova_fmt`; its messages and usage still call it `ova_fmt`, as the
 Ada version's do.
 
+## OVA and the rulebook
+
+OVA, *OVA: The Anime Role-Playing Game*, is © 2015 Wise Turtle. This
+project is not affiliated with or endorsed by Wise Turtle. It formats
+characters you write; it holds none of the rulebook's rules text, and
+you need the rulebook to play.
+
+The test fixtures in `test/data/` record the rulebook's sample
+characters so that the formatter's output can be checked against them;
+their backgrounds and descriptions are paraphrased, and only short
+captions such as attack descriptions follow the book's wording.
+
 ## Documents
 
 - [AGENTS.md](AGENTS.md): working notes on the build, the tests, ropes

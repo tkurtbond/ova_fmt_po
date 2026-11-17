@@ -4,9 +4,9 @@
 # fragment: true marker renders (PLAN.md's optional-vs-required
 # audit). Game-mechanical data (Ability/Weakness names and Levels) is
 # transcribed faithfully; the short one-paragraph descriptions are
-# kept close to the source (they're brief captions, not substantial
-# narrative prose -- see Karis.yaml's header comment for the general
-# copyright-conscious transcription policy this follows).
+# original paraphrases, the same as Shady-Teacher.yaml's and
+# Snobbish-Upperclassman.yaml's (see Karis.yaml's header comment for
+# the general copyright-conscious transcription policy this follows).
 #
 # Two NPC Fragments, both from the "Around Campus" subsection:
 # confirms the Attributes line's Ability-then-Weakness alphabetizing
@@ -17,10 +17,10 @@
 - name: Shady Teacher
   fragment: true
   background: |
-    The **Shady Teacher** is new to the school but seems to be
-    knowledgeable enough. Yet there's something...off about him.
-    Maybe it's because he wears sunglasses even indoors or that
-    students are suspiciously disappearing from his class...
+    The **Shady Teacher** just joined the faculty and seems to know
+    his subject, yet something about him is wrong. Perhaps it's the
+    sunglasses he never takes off, even inside -- or the students who
+    keep vanishing from his class.
   abilities:
     - name: Art of Invisibility
       level: 2
@@ -43,10 +43,9 @@
 - name: Snobbish Upperclassman
   fragment: true
   background: |
-    The **Snobbish Upperclassman** is the school's academic darling,
-    the kendo team's star athlete, and easily the most popular girl
-    on campus -- and she knows it. You'd be lucky if she gave you the
-    time of day...or honored you by allowing you to tell it to her.
+    The **Snobbish Upperclassman** is top of her class, star of the
+    kendo team, and the most popular girl in school, and she's well
+    aware of it. Don't expect her to give you the time of day.
   abilities:
     - name: Agile
       level: 2
