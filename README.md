@@ -9,7 +9,7 @@ tables, an [h-m-m](https://github.com/nadrad/h-m-m) outline, or the
 inline format, a paragraph of Markdown per character, as an adventure's
 cast lists them.
 
-This is the Ada [ova_fmt](../ova_fmt) (`~/Repos/RPG/Tools/ova_fmt`)
+This is the Ada [ova_fmt](https://github.com/tkurtbond/ova_fmt) (`~/Repos/RPG/Tools/ova_fmt`)
 ported to Oberon-2 and built with poc, the
 [Peaseblossom](https://github.com/tkurtbond/peaseblossom) Oberon
 compiler. Every string is a rope, from `~/Repos/Oberon/Ropes`; YAML is
